@@ -1,0 +1,41 @@
+# ===== Binaries / Intermediate / Saved =====
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+
+# ===== Build =====
+Build/
+
+# ===== IDE / エディタ設定 =====
+.vs/
+*.suo
+*.user
+*.userprefs
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.opendb
+
+# ===== Mac / Linux のゴミファイル =====
+.DS_Store
+*.swp
+
+# ===== Unreal Engine 固有 =====
+*.opensdf
+*.sdf
+*.suo
+*.user
+*.userprefs
+*.log
+*.vsconfig
+*.xcodeproj
+*.xcworkspace
+
+# ===== Config =====
+!Config/Default*.ini
+Config/
+
+# ===== Git LFS管理対象 =====
+*.uasset filter=lfs diff=lfs merge=lfs -text
+*.umap   filter=lfs diff=lfs merge=lfs -text
