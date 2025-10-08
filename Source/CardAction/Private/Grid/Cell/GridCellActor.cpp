@@ -1,0 +1,182 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+
+#include "Grid/Cell/GridCellActor.h"
+#include <Character/MyCharacter.h>
+#include <Enemy/EnemyBase.h>
+
+// Sets default values
+AGridCellActor::AGridCellActor()
+{
+    PrimaryActorTick.bCanEverTick = true;
+
+    RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+
+    // メッシュ生成
+    MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
+    if (MeshComp)
+    {
+        MeshComp->SetupAttachment(RootComponent);
+    }
+
+    // コリジョン生成
+    CollisionComp = CreateDefaultSubobject<UBoxComponent>(TEXT("Collision"));
+    if (CollisionComp)
+    {
+        CollisionComp->SetupAttachment(MeshComp);
+    }
+}
+
+void AGridCellActor::OnConstruction(const FTransform& Transform)
+{
+    Super::OnConstruction(Transform);
+
+    if (MeshComp)
+    {
+        // メッシュを非表示
+        if (CellData.GridCellType == EGridCellType::None)
+        {
+            MeshComp->SetVisibility(false, true);
+            CollisionComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        }
+    }
+
+    if (CollisionComp)
+    {
+        CollisionComp->SetCollisionProfileName(TEXT("OverlapAllDynamic"));
+    }
+}
+
+// Called when the game starts or when spawned
+void AGridCellActor::BeginPlay()
+{
+    Super::BeginPlay();
+
+    //// 動的マテリアルを作成
+    //DefaultDynamicMaterial = UMaterialInstanceDynamic::Create(DefaultMaterial, this);
+    //DamegeSignDynamicMaterial = UMaterialInstanceDynamic::Create(DamegeSignMaterial, this);
+}
+
+// Called every frame
+void AGridCellActor::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+}
+
+// セル上のアクターを追加
+void AGridCellActor::AddActorOnCell(AActor* Actor)
+{
+    CellData.Objects.Add(Actor);
+}
+
+// セル上からアクターを除去
+void AGridCellActor::RemoveActorFromCell(AActor* Actor)
+{
+    CellData.Objects.Remove(Actor);
+}
+
+// セル上にアクター存在するか
+bool AGridCellActor::IsExistActorOnCell()
+{
+    return CellData.Objects.IsEmpty() == false;
+}
+
+void AGridCellActor::ChangeDamageSignMaterial()
+{
+    if (MeshComp && CellData.DamegeSignMaterial)
+    {
+        MeshComp->SetMaterial(0, CellData.DamegeSignMaterial);
+    }
+}
+
+void AGridCellActor::ChangeDefaultMaterial()
+{
+    if (MeshComp)
+    {
+        if (CellData.GridCellType == EGridCellType::Normal && CellData.DefaultMaterial)
+        {
+            MeshComp->SetMaterial(0, CellData.DefaultMaterial);
+        }
+        // メッシュを非表示
+        if (CellData.GridCellType == EGridCellType::None)
+        {
+            MeshComp->SetVisibility(false, true);
+            CollisionComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        }
+    }
+}
+
+// セル上のアクターにダメージ処理
+void AGridCellActor::ExecuteAttackToActorOnCell(AActor* AttackedActor, float Damage)
+{
+    if (AttackedActor == nullptr)
+        return;
+
+    // プレイヤーからの攻撃かどうか
+    bool bFromPlayer = Cast<AWeaponActorBase>(AttackedActor) != nullptr;
+
+    // セル上のアクターが複数いる場合は全てにダメージ処理
+    for (AActor* Actor : CellData.Objects)
+    {
+        // 敵にダメージ
+        if (bFromPlayer)
+        {
+            if (AEnemyBase* Enemy = Cast<AEnemyBase>(Actor))
+            {
+                Enemy->OnTakeDamage(Damage);
+            }
+        }
+        // プレイヤーにダメージ
+        else
+        {
+            if (AMyCharacter* Player = Cast<AMyCharacter>(Actor))
+            {
+                Player->OnTakeDamage(Damage);
+            }
+        }
+    }
+}
+
+// セル上に敵が存在するか
+bool AGridCellActor::IsExistEnemyOnCell()
+{
+    for (AActor* Actor : CellData.Objects)
+    {
+        AEnemyBase* Enemy = Cast<AEnemyBase>(Actor);
+        if (Enemy)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+// 攻撃予測の追加
+void AGridCellActor::AddAttackSign()
+{
+    // もともと攻撃予測を表示していないか
+    bool bWasNoSign = AttackSignCount == 0;
+
+    AttackSignCount++;
+
+    // もともと攻撃予測を表示していなかったら、攻撃予測用のマテリアルに変更
+    if (bWasNoSign)
+    {
+        ChangeDamageSignMaterial();
+    }
+}
+
+// 攻撃予測の除去
+void AGridCellActor::RemoveAttackSign()
+{
+    AttackSignCount = FMath::Max(0, AttackSignCount - 1);
+
+    // もしも攻撃予測カウンターがなかったら、デフォルトのメッシュに戻す
+    if (AttackSignCount == 0)
+    {
+        ChangeDefaultMaterial();
+    }
+}
+

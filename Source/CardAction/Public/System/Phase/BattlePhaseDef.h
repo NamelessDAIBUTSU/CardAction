@@ -1,0 +1,11 @@
+#pragma once
+
+#include "CoreMinimal.h"
+#include "BattlePhaseDef.generated.h"
+
+UENUM(BlueprintType)
+enum class EBattlePhase : uint8
+{
+    Action      UMETA(DisplayName = "Action"),      // アクションフェーズ
+    CardSelect  UMETA(DisplayName = "CardSelect"),  // カード選択フェーズ
+};
