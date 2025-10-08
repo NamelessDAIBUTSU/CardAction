@@ -34,6 +34,7 @@ public:
 	TSubclassOf<AGridManager> GridManagerClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Grid")
 	AGridManager* GridManager;
+
 	// ゲーム終了時に発火するデリゲート
 	DECLARE_MULTICAST_DELEGATE(FOnGameEnd);
 	FOnGameEnd OnGameEnd;

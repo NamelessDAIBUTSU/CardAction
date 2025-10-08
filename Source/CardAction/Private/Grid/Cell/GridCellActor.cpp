@@ -14,9 +14,17 @@ AGridCellActor::AGridCellActor()
 
     // メッシュ生成
     MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
+    EdgeLeftComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("EdgeLeft"));
+    EdgeRightComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("EdgeRight"));
+    EdgeTopComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("EdgeTop"));
+    EdgeDownComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("EdgeDown"));
     if (MeshComp)
     {
         MeshComp->SetupAttachment(RootComponent);
+        EdgeLeftComp->SetupAttachment(RootComponent);
+        EdgeRightComp->SetupAttachment(RootComponent);
+        EdgeTopComp->SetupAttachment(RootComponent);
+        EdgeDownComp->SetupAttachment(RootComponent);
     }
 
     // コリジョン生成
@@ -36,7 +44,7 @@ void AGridCellActor::OnConstruction(const FTransform& Transform)
         // メッシュを非表示
         if (CellData.GridCellType == EGridCellType::None)
         {
-            MeshComp->SetVisibility(false, true);
+            //MeshComp->SetVisibility(false, true);
             CollisionComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
         }
     }

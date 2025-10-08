@@ -52,6 +52,15 @@ public:
 	// スタティックメッシュ
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UStaticMeshComponent* MeshComp;
+	// 枠淵メッシュ
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UStaticMeshComponent* EdgeLeftComp;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UStaticMeshComponent* EdgeRightComp;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UStaticMeshComponent* EdgeTopComp;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UStaticMeshComponent* EdgeDownComp;
 
 	// 攻撃との当たり判定用コリジョン
 	UPROPERTY(VisibleAnywhere, Category = "Collision")

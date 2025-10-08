@@ -35,9 +35,9 @@ void APumpkinBomb::Tick(float DeltaTime)
 		UGameplayStatics::SpawnEmitterAtLocation(
 			GetWorld(),
 			ExplosionParticle,
-			GetActorLocation() + FVector(0.f, 0.f, 150.f),
+			GetActorLocation() + FVector(0.f, 0.f, 100.f),
 			FRotator::ZeroRotator,
-			FVector(0.5f),
+			FVector(1.f),
 			true
 		);
 

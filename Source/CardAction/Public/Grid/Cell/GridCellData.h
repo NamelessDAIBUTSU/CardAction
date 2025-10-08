@@ -12,7 +12,7 @@ struct CARDACTION_API FGridCellData
 	GENERATED_BODY()
 
 	// グリッド内の座標
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY()
 	FVector2D GridCoord;
 
 	// セルの種類
@@ -25,7 +25,7 @@ struct CARDACTION_API FGridCellData
 
 	// マテリアル
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Material")
-	UMaterial* DefaultMaterial = nullptr;
+	UMaterialInterface* DefaultMaterial = nullptr;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Material")
-	UMaterial* DamegeSignMaterial = nullptr;
+	UMaterialInterface* DamegeSignMaterial = nullptr;
 };
