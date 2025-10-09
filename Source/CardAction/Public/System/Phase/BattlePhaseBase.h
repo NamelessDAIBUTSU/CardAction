@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include <System/Phase/BattlePhaseDef.h>
+#include "BattlePhaseDef.h"
 #include "BattlePhaseBase.generated.h"
 
 
@@ -23,12 +24,13 @@ public:
 
 public:
 	EBattlePhase GetBattlePhase() const { return BattlePhase; }
+	EBattlePhase GetRequestNextPhase() const { return RequestNextPhase; }
 
-	bool IsRequestChangePhase() const { return bRequestChangePhase; }
+	bool IsRequestChangePhase() const { return RequestNextPhase != EBattlePhase::None; }
 
 protected:
 	EBattlePhase BattlePhase;
 
-	// フェーズを切り替えるか
-	bool bRequestChangePhase = false;
+	// 切り替えたいフェーズ
+	EBattlePhase RequestNextPhase = EBattlePhase::None;
 };

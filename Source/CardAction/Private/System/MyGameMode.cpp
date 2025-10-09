@@ -4,6 +4,10 @@
 #include "GameFramework/PlayerStart.h"
 #include <Camera/GridCamera.h>
 #include <Character/MyCharacter.h>
+#include <System/Phase/BattlePhaseBase.h>
+#include <System/Phase/BattlePhase_CardSelect.h>
+#include <System/Phase/BattlePhase_Action.h>
+#include <System/Phase/BattlePhase_Result.h>
 
 AMyGameMode::AMyGameMode()
 {
@@ -68,24 +72,54 @@ void AMyGameMode::StartPlay()
 			PlayerController->SetViewTargetWithBlend(Camera, 0.0f);
 		}
 	}
+
+	// 最初のフェーズ設定
+	ChangePhase(EBattlePhase::Action);
 }
 
 void AMyGameMode::Tick(float DeltaSeconds)
 {
-	switch (CurrentBattlePhase)
-	{
-		// アクションタイム
-	case EBattlePhase::Action:
-	{
+	if (CurrentBattlePhase == nullptr)
+		return;
 
-		break;
+	// 現在のフェーズの更新
+	CurrentBattlePhase->OnTick(DeltaSeconds);
+
+	// フェーズ切り替えのリクエストがあったらフェーズ切り替え
+	if (CurrentBattlePhase->IsRequestChangePhase())
+	{
+		ChangePhase(CurrentBattlePhase->GetRequestNextPhase());
 	}
-		// カード選択タイム
+}
+
+void AMyGameMode::ChangePhase(EBattlePhase NextPhase)
+{
+	// フェーズ終了時処理
+	if (CurrentBattlePhase)
+	{
+		CurrentBattlePhase->OnExit();
+	}
+
+	// 次のフェーズを生成
+	switch (NextPhase)
+	{
 	case EBattlePhase::CardSelect:
-	{
-
+		CurrentBattlePhase = NewObject<UBattlePhaseBase>(this, UBattlePhase_CardSelect::StaticClass());
+		break;
+	case EBattlePhase::Action:
+		CurrentBattlePhase = NewObject<UBattlePhaseBase>(this, UBattlePhase_Action::StaticClass());
+		break;
+	case EBattlePhase::Result:
+		CurrentBattlePhase = NewObject<UBattlePhaseBase>(this, UBattlePhase_Result::StaticClass());
+		break;
+	default:
 		break;
 	}
+
+	// フェーズ開始時処理
+	if (CurrentBattlePhase)
+	{
+		CurrentBattlePhase->OnBegin();
 	}
 }
 

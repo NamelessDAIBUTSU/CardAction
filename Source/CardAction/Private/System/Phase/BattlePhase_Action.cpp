@@ -8,7 +8,7 @@
 // フェーズ中
 void UBattlePhase_Action::OnTick(float DeltaSec)
 {
-	// 敵が全滅していたらフェーズを切り替えフラグを立てる
+	// フェーズ切り替え判定
 	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this);
 	if (AMyGameMode* MyGameMode = Cast<AMyGameMode>(GameMode))
 	{
@@ -16,6 +16,10 @@ void UBattlePhase_Action::OnTick(float DeltaSec)
 		if (GridManager == nullptr)
 			return;
 
-		bRequestChangePhase = (GridManager->IsExistEnemyOnGrid() == false);
+		// 敵が全滅していたら、リザルトフェーズへの切り替えリクエスト
+		if (GridManager->IsExistEnemyOnGrid() == false)
+		{
+			RequestNextPhase = EBattlePhase::Result;
+		}
 	}
 }

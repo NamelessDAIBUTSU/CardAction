@@ -45,8 +45,8 @@ void UHandCardsWidget::AddToHandCards(UCardData* CardData)
 				if (BoxSlot)
 				{
 					// カード間の余白を追加
-					BoxSlot->SetPadding(FMargin(5.f, 0.f, 50.f, 0.f));
-					BoxSlot->SetVerticalAlignment(VAlign_Bottom);
+					BoxSlot->SetPadding(FMargin(0.f, 0.f, 0.f, 0.f));
+					BoxSlot->SetVerticalAlignment(VAlign_Top);
 				}
 			}
 

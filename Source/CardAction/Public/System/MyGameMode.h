@@ -21,6 +21,9 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 
 public:
+	void ChangePhase(EBattlePhase NextPhase);
+
+public:
 	UFUNCTION()
 	void OnGameOver();
 
@@ -40,8 +43,9 @@ public:
 	FOnGameEnd OnGameEnd;
 
 private:
-	UPROPERTY(VisibleAnywhere, Category = "State")
-	EBattlePhase CurrentBattlePhase = EBattlePhase::CardSelect;
+	// 現在のフェーズ
+	UPROPERTY(VisibleAnywhere, Category = "Phase")
+	class UBattlePhaseBase* CurrentBattlePhase = nullptr;
 
 	// プレイヤー
 	UPROPERTY(VisibleAnywhere, Category = "Player")

@@ -26,5 +26,5 @@ public:
 	float BaseHeight = 800.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Position")
-	float HeightOffset = 10.f;
+	float HeightOffset = 20.f;
 };
