@@ -8,4 +8,5 @@ enum class EBattlePhase : uint8
 {
     Action      UMETA(DisplayName = "Action"),      // アクションフェーズ
     CardSelect  UMETA(DisplayName = "CardSelect"),  // カード選択フェーズ
+    Result      UMETA(DisplayName = "Result"),      // リザルトフェーズ
 };
