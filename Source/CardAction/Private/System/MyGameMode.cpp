@@ -4,6 +4,8 @@
 #include "GameFramework/PlayerStart.h"
 #include <Camera/GridCamera.h>
 #include <Character/MyCharacter.h>
+#include <Grid/GridManager.h>
+#include <Card/DeckManager.h>
 #include <System/Phase/BattlePhaseBase.h>
 #include <System/Phase/BattlePhase_CardSelect.h>
 #include <System/Phase/BattlePhase_Action.h>
@@ -29,11 +31,8 @@ void AMyGameMode::StartPlay()
 		return;
 	}
 
-	// グリッド生成
-	GridManager->GenerateGrid(GridManager->GenerateGridData);
-
-	// グリッド上にエネミー生成
-	GridManager->SpawnEnemies();
+	// グリッド初期化
+	GridManager->Initialize();
 
 	// Pawn を Spawn
 	APawn* PlayerPawn = GetWorld()->SpawnActor<APawn>(PlayerPawnClass, GridManager->GetPlayerSpawnPosition(), FRotator());
@@ -81,6 +80,17 @@ void AMyGameMode::StartPlay()
 		{
 			// デフォルト非表示
 			CardBook->SetActorHiddenInGame(true);
+		}
+	}
+
+	// デッキマネージャー生成
+	if (DeckManagerClass)
+	{
+		DeckManager = GetWorld()->SpawnActor<ADeckManager>(DeckManagerClass, FVector(), FRotator());
+		if (DeckManager)
+		{
+			// デッキの初期化
+			DeckManager->Initialzie(InitDeckData);
 		}
 	}
 

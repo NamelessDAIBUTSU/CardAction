@@ -27,26 +27,17 @@ public:
 
 
 public: /* Callback */
-	// AWSD移動
+	// 武器発動
 	UFUNCTION()
-	void OnMove(const FInputActionValue& Value);
+	void OnUseWeapon(const FInputActionValue& Value);
 
-	// 攻撃
+	// アシスト発動
 	UFUNCTION()
-	void OnAttack(const FInputActionValue& Value);
-
-	// 回避
-	UFUNCTION()
-	void OnEscape(const FInputActionValue& Value);
+	void OnUseAssist(const FInputActionValue& Value);
 
 	// ダメージ処理
 	UFUNCTION()
 	void OnTakeDamage(float Damage);
-
-	// 選択中カード発動
-	UFUNCTION()
-	void OnExecuteCards(const FInputActionValue& Value);
-
 
 public:
 	// 座標設定
@@ -63,13 +54,13 @@ public:
 
 
 public: /* Input */
-	// 攻撃
+	// 武器発動
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
-	UInputAction* AttackAction = nullptr;
+	UInputAction* UseWeaponAction = nullptr;
 
-	// 回避
+	// アシスト発動
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
-	UInputAction* EscapeAction = nullptr;
+	UInputAction* UseAssistAction = nullptr;
 
 	// グリッド移動
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
@@ -78,10 +69,6 @@ public: /* Input */
 	// 回転モード
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* TurnTowardAction = nullptr;
-
-	// 選択中カード発動
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
-	UInputAction* ExecuteCards = nullptr;
 
 
 public: /* Status */

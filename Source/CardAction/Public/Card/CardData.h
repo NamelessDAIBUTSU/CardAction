@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
 #include "Card/CardTypeDef.h"
-#include "Card/CardRarityDef.h"
 #include "Effect/CardEffectBase.h"
 #include "CardData.generated.h"
 

@@ -4,6 +4,7 @@
 #include "System/Phase/BattlePhase_Action.h"
 #include <Kismet/GameplayStatics.h>
 #include <System/MyGameMode.h>
+#include <Grid/GridManager.h>
 
 // フェーズ中
 void UBattlePhase_Action::OnTick(float DeltaSec)

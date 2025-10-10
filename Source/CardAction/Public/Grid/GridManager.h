@@ -25,10 +25,9 @@ public:	/* AActor */
 	
 
 public: /* 生成 */
-	// グリッド生成
-	void GenerateGrid(UGridData* GridData);
-	// エネミーをグリッド上にスポーン
-	void SpawnEnemies();
+	// 初期化
+	void Initialize();
+
 	// プレイヤーをスポーンさせるワールド座標取得
 	FVector GetPlayerSpawnPosition();
 
@@ -73,7 +72,13 @@ public: /* Util */
 	// グリッドサイズの取得
 	FVector2D GetGridSize();
 
+
 private:
+	// グリッド生成
+	void GenerateGrid(UGridData* GridData);
+	// エネミーをグリッド上にスポーン
+	void SpawnEnemies();
+
 	// グリッド座標範囲外チェック
 	bool IsInGrid(FVector2D Coord);
 

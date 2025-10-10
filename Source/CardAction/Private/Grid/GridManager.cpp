@@ -24,6 +24,16 @@ void AGridManager::Tick(float DeltaTime)
 
 }
 
+// 初期化
+void AGridManager::Initialize()
+{
+	// グリッド生成
+	GenerateGrid(GenerateGridData);
+
+	// グリッド上にエネミー生成
+	SpawnEnemies();
+}
+
 // グリッド生成
 void AGridManager::GenerateGrid(UGridData* GridData)
 {

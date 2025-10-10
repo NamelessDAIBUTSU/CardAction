@@ -5,8 +5,13 @@
 
 AWeaponActorBase::AWeaponActorBase()
 {
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
+
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
-	RootComponent = MeshComp;
+	if (MeshComp)
+	{
+		MeshComp->SetupAttachment(RootComponent);
+	}
 }
 
 AWeaponActorBase::~AWeaponActorBase()

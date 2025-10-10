@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameMode.h"
-#include <Grid/GridManager.h>
 #include <System/Phase/BattlePhaseDef.h>
+#include <Card/InitDeckData.h>
 #include <Card/CardBook.h>
 #include "MyGameMode.generated.h"
 
@@ -38,9 +38,18 @@ public:
 
 	// グリッドマネージャー
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grid")
-	TSubclassOf<AGridManager> GridManagerClass;
+	TSubclassOf<class AGridManager> GridManagerClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Grid")
-	AGridManager* GridManager;
+	class AGridManager* GridManager;
+
+	// デッキマネージャー
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
+	TSubclassOf<class ADeckManager> DeckManagerClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Card")
+	class ADeckManager* DeckManager;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
+	UInitDeckData* InitDeckData = nullptr;
 
 	// カード選択フェーズ中のカードブッククラス
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")

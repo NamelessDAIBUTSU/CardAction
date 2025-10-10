@@ -48,10 +48,10 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* InputComp)
 {
 	if (UEnhancedInputComponent* EnhancedInputComp = Cast<UEnhancedInputComponent>(InputComp))
 	{
-		// 攻撃
-		EnhancedInputComp->BindAction(AttackAction, ETriggerEvent::Started, this, &AMyCharacter::OnAttack);
-		// 回避
-		EnhancedInputComp->BindAction(EscapeAction, ETriggerEvent::Started, this, &AMyCharacter::OnEscape);
+		// 武器発動
+		EnhancedInputComp->BindAction(UseWeaponAction, ETriggerEvent::Started, this, &AMyCharacter::OnUseWeapon);
+		// アシスト発動
+		EnhancedInputComp->BindAction(UseAssistAction, ETriggerEvent::Started, this, &AMyCharacter::OnUseAssist);
 
 		if (GridMovementComp)
 		{
@@ -61,35 +61,12 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* InputComp)
 			// 向く
 			EnhancedInputComp->BindAction(TurnTowardAction, ETriggerEvent::Started, GridMovementComp, &UGridMovementComponent::OnChangeTurnMode);
 			EnhancedInputComp->BindAction(TurnTowardAction, ETriggerEvent::Completed, GridMovementComp, &UGridMovementComponent::OnChangeTurnMode);
-			
-			EnhancedInputComp->BindAction(ExecuteCards, ETriggerEvent::Started, this, &AMyCharacter::OnExecuteCards);
 		}
 	}
 }
 
-// AWSD移動
-void AMyCharacter::OnMove(const FInputActionValue& Value)
-{
-	const FVector2D MovementVector = Value.Get<FVector2D>();
-
-	if (Controller != nullptr)
-	{
-		// コントローラのYaw回転を取得
-		const FRotator Rotation = Controller->GetControlRotation();
-		const FRotator YawRotation(0.f, Rotation.Yaw, 0.f);
-
-		// 前方向/右方向を取得
-		const FVector ForwardDir = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-		const FVector RightDir = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-
-		// 移動入力をAddMovementInputで適用
-		AddMovementInput(ForwardDir, MovementVector.Y);
-		AddMovementInput(RightDir, MovementVector.X);
-	}
-}
-
-// 攻撃
-void AMyCharacter::OnAttack(const FInputActionValue& Value)
+// 武器発動
+void AMyCharacter::OnUseWeapon(const FInputActionValue& Value)
 {
 	if (EquippedWeapon == nullptr)
 		return;
@@ -98,21 +75,10 @@ void AMyCharacter::OnAttack(const FInputActionValue& Value)
 	EquippedWeapon->OnAttack();
 }
 
-// 回避
-void AMyCharacter::OnEscape(const FInputActionValue& Value)
+// アシスト発動
+void AMyCharacter::OnUseAssist(const FInputActionValue& Value)
 {
-	if (Controller != nullptr)
-	{
-		AMyPlayerController* PlayerController = Cast<AMyPlayerController>(Controller);
-		if (PlayerController && PlayerController->MainHUDWidget)
-		{
-			auto* HandCardsWidget = PlayerController->MainHUDWidget->HandCardsWidget;
-			if (HandCardsWidget)
-			{
-				HandCardsWidget->AddToHandCards(DefaultCardData);
-			}
-		}
-	}
+	
 }
 
 // ダメージ処理
@@ -129,23 +95,6 @@ void AMyCharacter::OnTakeDamage(float Damage)
 			if (AMyGameMode* MyGameMode = Cast<AMyGameMode>(GameMode))
 			{
 				MyGameMode->OnGameOver();
-			}
-		}
-	}
-}
-
-// 選択中カード発動
-void AMyCharacter::OnExecuteCards(const FInputActionValue& Value)
-{
-	if (Controller != nullptr)
-	{
-		AMyPlayerController* PlayerController = Cast<AMyPlayerController>(Controller);
-		if (PlayerController && PlayerController->MainHUDWidget)
-		{
-			auto* SelectedCardsWidget = PlayerController->MainHUDWidget->SelectedCardsWidget;
-			if (SelectedCardsWidget)
-			{
-				SelectedCardsWidget->OnExecute();
 			}
 		}
 	}
