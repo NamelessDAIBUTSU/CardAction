@@ -5,10 +5,22 @@
 
 
 // フェーズ開始時
-void UBattlePhase_CardSelect::OnBegin() 
-{ 
-	// カード選択ウィジェットとカードブックの非表示
+void UBattlePhase_CardSelect::OnBegin()
+{
+	// カード選択ウィジェットとカードブックの表示
 	SetHidden(false);
+
+	// 表示アニメーション
+	AMyPlayerController* PlayerController = Cast<AMyPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+	if (PlayerController == nullptr)
+		return;
+	if (PlayerController->MainHUDWidget == nullptr)
+		return;
+	UCardSelectWidget* CardSelectWidget = PlayerController->MainHUDWidget->CardSelectWidget;
+	if (CardSelectWidget == nullptr)
+		return;
+
+	CardSelectWidget->PlayInAnimation();
 }
 
 void UBattlePhase_CardSelect::OnTick(float DeltaSec)
@@ -17,12 +29,19 @@ void UBattlePhase_CardSelect::OnTick(float DeltaSec)
 		return;
 
 	// フェーズ切り替え判定
-	// 時間でカード選択へ
-	ElapsedSec += DeltaSec;
-	if (ElapsedSec >= PhaseEndSec)
+	AMyPlayerController* PlayerController = Cast<AMyPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+	if (PlayerController == nullptr)
+		return;
+	if (PlayerController->MainHUDWidget == nullptr)
+		return;
+	UCardSelectWidget* CardSelectWidget = PlayerController->MainHUDWidget->CardSelectWidget;
+	if (CardSelectWidget == nullptr)
+		return;
+
+	// 決定ボタンが押されたら、終了アニメーションを待ってからアクションフェーズへリクエスト
+	if (CardSelectWidget->GetIsDecided())
 	{
 		RequestNextPhase = EBattlePhase::Action;
-		return;
 	}
 }
 
@@ -47,16 +66,6 @@ void UBattlePhase_CardSelect::SetHidden(bool bHidden)
 
 	ESlateVisibility Visibility = bHidden ? ESlateVisibility::Hidden : ESlateVisibility::Visible;
 	CardSelectWidget->SetVisibility(Visibility);
-
-	// アニメーション再生
-	if (Visibility == ESlateVisibility::Visible)
-	{
-		CardSelectWidget->PlayAnimation(CardSelectWidget->InAnim);
-	}
-	if (Visibility == ESlateVisibility::Hidden)
-	{
-		CardSelectWidget->PlayAnimation(CardSelectWidget->OutAnim);
-	}
 
 	// カードブックの非表示
 	AGameModeBase* GM = UGameplayStatics::GetGameMode(this);
