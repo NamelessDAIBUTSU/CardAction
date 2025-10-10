@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "UI/HUD/HPGauge.h"
-#include "UI/HUD/HandCardsWidget.h"
 #include "Components/CanvasPanel.h"
 #include "UI/HUD/SelectedCardsWidget.h"
+#include "UI/HUD/HPGauge.h"
+#include "UI/HUD/HandCardsWidget.h"
+#include "CardSelectWidget.h"
 #include "Card/SelectCardDelegate.h"
 
 #include "MainHUDWidget.generated.h"
@@ -59,6 +60,10 @@ public: /* 生成するWidgetクラス */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
     TSubclassOf<UUserWidget> SelectedCardsWidgetClass;
 
+    // カード選択
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
+    TSubclassOf<UUserWidget> CardSelectWidgetClass;
+
 
 public: /* インスタンスのポインタ */
     // ゲームクリア
@@ -76,6 +81,9 @@ public: /* インスタンスのポインタ */
     // 選択中カード
     UPROPERTY()
     USelectedCardsWidget* SelectedCardsWidget = nullptr;
+    // カード選択
+    UPROPERTY()
+    UCardSelectWidget* CardSelectWidget = nullptr;
 
 
 public: /* Delegate */

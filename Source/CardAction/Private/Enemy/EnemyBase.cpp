@@ -90,6 +90,20 @@ void AEnemyBase::BeginPlay()
 // Called every frame
 void AEnemyBase::Tick(float DeltaTime)
 {
+	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this);
+	AMyGameMode* MyGameMode = Cast<AMyGameMode>(GameMode);
+	if (MyGameMode == nullptr)
+		return;
+
+	// アクションフェーズ以外では時間停止
+	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
+	{
+		this->CustomTimeDilation = 0.f;
+		return;
+	}
+
+	this->CustomTimeDilation = 1.f;
+
 	Super::Tick(DeltaTime);
 
 	// HPバーの更新

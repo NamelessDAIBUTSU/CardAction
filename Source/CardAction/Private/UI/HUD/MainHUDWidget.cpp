@@ -1,11 +1,11 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "UI/HUD/MainHUDWidget.h"
 #include "Components/CanvasPanelSlot.h"
 #include <Components/WidgetComponent.h>
 
-// ‰Šú‰»
+// åˆæœŸåŒ–
 void UMainHUDWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
@@ -13,46 +13,52 @@ void UMainHUDWidget::NativeConstruct()
     SelectCardDelegate.BindUObject(this, &UMainHUDWidget::OnAddToSelectedCards);
     UnSelectCardDelegate.BindUObject(this, &UMainHUDWidget::OnRemoveFromSelectedCards);
 
-    // ƒEƒBƒWƒFƒbƒg‚Ì¶¬
+    // ãƒ¡ã‚¤ãƒ³ã‚­ãƒ£ãƒ³ãƒã‚¹ã®è¨­å®š
+    if (MainCanvas)
     {
-        // ƒQ[ƒ€ƒNƒŠƒA
+
+    }
+
+    // ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®ç”Ÿæˆ
+    {
+        // ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢
         if (GameClearWidgetClass)
         {
             GameClearWidget = CreateWidget<UUserWidget>(GetWorld(), GameClearWidgetClass);
 
-            // ƒLƒƒƒ“ƒoƒX‚É’Ç‰Á
+            // ã‚­ãƒ£ãƒ³ãƒã‚¹ã«è¿½åŠ 
             if (MainCanvas)
             {
                 MainCanvas->AddChild(GameClearWidget);
             }
         }
 
-        // ƒQ[ƒ€ƒI[ƒo[
+        // ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼
         if (GameOverWidgetClass)
         {
             GameOverWidget = CreateWidget<UUserWidget>(GetWorld(), GameOverWidgetClass);
 
-            // ƒLƒƒƒ“ƒoƒX‚É’Ç‰Á
+            // ã‚­ãƒ£ãƒ³ãƒã‚¹ã«è¿½åŠ 
             if (MainCanvas)
             {
                 MainCanvas->AddChild(GameOverWidget);
             }
         }
 
-        // HPƒQ[ƒW
+        // HPã‚²ãƒ¼ã‚¸
         if (HPGaugeWidgetClass)
         {
             UUserWidget* widget = CreateWidget<UUserWidget>(GetWorld(), HPGaugeWidgetClass);
             HPGaugeWidget = Cast<UHPGauge>(widget);
 
-            // ƒLƒƒƒ“ƒoƒX‚É’Ç‰Á
+            // ã‚­ãƒ£ãƒ³ãƒã‚¹ã«è¿½åŠ 
             if (MainCanvas)
             {
                 MainCanvas->AddChild(HPGaugeWidget);
             }
         }
 
-        // èD
+        // æ‰‹æœ­
         if (HandCardsWidgetClass)
         {
             HandCardsWidget = CreateWidget<UHandCardsWidget>(GetWorld(), HandCardsWidgetClass);
@@ -60,29 +66,29 @@ void UMainHUDWidget::NativeConstruct()
             {
                 HandCardsWidget->SetSelectCardDelegate(SelectCardDelegate, UnSelectCardDelegate);
 
-                // ƒLƒƒƒ“ƒoƒX‚É’Ç‰Á
+                // ã‚­ãƒ£ãƒ³ãƒã‚¹ã«è¿½åŠ 
                 if (MainCanvas)
                 {
                     MainCanvas->AddChild(HandCardsWidget);
 
-                    // ¶‰º‚É”z’u
+                    // å·¦ä¸‹ã«é…ç½®
                     UCanvasPanelSlot* CanvasSlot = Cast<UCanvasPanelSlot>(HandCardsWidget->Slot);
                     if (CanvasSlot)
                     {
-                        CanvasSlot->SetAnchors(FAnchors(0.f, 0.f));           //¶ã
-                        CanvasSlot->SetAlignment(FVector2D(0.f, 0.f));       // ¶ãŠî€
-                        CanvasSlot->SetPosition(FVector2D(0.f, 0.f));     // 50px‰EA50px‰º
+                        CanvasSlot->SetAnchors(FAnchors(0.f, 0.f));           //å·¦ä¸Š
+                        CanvasSlot->SetAlignment(FVector2D(0.f, 0.f));       // å·¦ä¸ŠåŸºæº–
+                        CanvasSlot->SetPosition(FVector2D(0.f, 0.f));     // 50pxå³ã€50pxä¸‹
                     }
                     HandCardsWidget->SetRenderScale(FVector2D(1.f, 1.f));
                 }
             }
         }
 
-        // ‘I‘ğ’†ƒJ[ƒh
+        // é¸æŠä¸­ã‚«ãƒ¼ãƒ‰
         if (SelectedCardsWidgetClass)
         {
             SelectedCardsWidget = CreateWidget<USelectedCardsWidget>(GetWorld(), SelectedCardsWidgetClass);
-            // ƒLƒƒƒ“ƒoƒX‚É’Ç‰Á
+            // ã‚­ãƒ£ãƒ³ãƒã‚¹ã«è¿½åŠ 
             if (MainCanvas)
             {
                 MainCanvas->AddChild(SelectedCardsWidget);
@@ -90,18 +96,37 @@ void UMainHUDWidget::NativeConstruct()
                 UCanvasPanelSlot* CanvasSlot = Cast<UCanvasPanelSlot>(SelectedCardsWidget->Slot);
                 if (CanvasSlot)
                 {
-                    // ^‚ñ’†‰º
+                    // çœŸã‚“ä¸­ä¸‹
                     CanvasSlot->SetAnchors(FAnchors(0.5f, 1.f));
                     CanvasSlot->SetAlignment(FVector2D(0.5f, 1.f));
                 }
                 //SelectedCardsWidget->SetRenderScale(FVector2D(0.75f, 0.75f));
             }
         }
+
+        // ã‚«ãƒ¼ãƒ‰é¸æŠ
+        if (CardSelectWidgetClass)
+        {
+            CardSelectWidget = CreateWidget<UCardSelectWidget>(GetWorld(), CardSelectWidgetClass);
+            if (MainCanvas)
+            {
+                MainCanvas->AddChild(CardSelectWidget);
+                UCanvasPanelSlot* CanvasSlot = Cast<UCanvasPanelSlot>(CardSelectWidget->Slot);
+                if (CanvasSlot)
+                {
+                    CanvasSlot->SetAnchors(FAnchors(0.f, 0.f, 1.f, 1.f));
+                    CanvasSlot->SetOffsets(FMargin(0.f));
+                }
+            }
+
+            // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆéè¡¨ç¤º
+            CardSelectWidget->SetVisibility(ESlateVisibility::Hidden);
+        }
     }
 
 }
 
-// XV
+// æ›´æ–°
 void UMainHUDWidget::OnTick(float InDeltaTime)
 {
     if (HPGaugeWidget)
@@ -110,7 +135,7 @@ void UMainHUDWidget::OnTick(float InDeltaTime)
     }
 }
 
-// ‘I‘ğ’†ƒJ[ƒh‚É’Ç‰Á
+// é¸æŠä¸­ã‚«ãƒ¼ãƒ‰ã«è¿½åŠ 
 void UMainHUDWidget::OnAddToSelectedCards(UCardData* CardData)
 {
     if (SelectedCardsWidget)

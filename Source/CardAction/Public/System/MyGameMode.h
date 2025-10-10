@@ -6,6 +6,7 @@
 #include "GameFramework/GameMode.h"
 #include <Grid/GridManager.h>
 #include <System/Phase/BattlePhaseDef.h>
+#include <Card/CardBook.h>
 #include "MyGameMode.generated.h"
 
 UCLASS()
@@ -22,6 +23,9 @@ public:
 
 public:
 	void ChangePhase(EBattlePhase NextPhase);
+	EBattlePhase GetCurrentButtlePhase() const;
+
+	ACardBook* GetCardBook() { return CardBook; }
 
 public:
 	UFUNCTION()
@@ -37,6 +41,10 @@ public:
 	TSubclassOf<AGridManager> GridManagerClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Grid")
 	AGridManager* GridManager;
+
+	// カード選択フェーズ中のカードブッククラス
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
+	TSubclassOf<ACardBook> CardBookClass;
 
 	// ゲーム終了時に発火するデリゲート
 	DECLARE_MULTICAST_DELEGATE(FOnGameEnd);
@@ -54,4 +62,7 @@ private:
 	// プレイヤーコントローラー
 	UPROPERTY(VisibleAnywhere, Category = "Player")
 	APlayerController* PlayerController = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Card")
+	ACardBook* CardBook;
 };

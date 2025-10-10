@@ -8,7 +8,19 @@
 // フェーズ中
 void UBattlePhase_Action::OnTick(float DeltaSec)
 {
+	if (RequestNextPhase != EBattlePhase::None)
+		return;
+
 	// フェーズ切り替え判定
+	// 時間でカード選択へ
+	ElapsedSec += DeltaSec;
+	if (ElapsedSec >= PhaseEndSec)
+	{
+		RequestNextPhase = EBattlePhase::CardSelect;
+		return;
+	}
+
+	// 敵殲滅でリザルトへ
 	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this);
 	if (AMyGameMode* MyGameMode = Cast<AMyGameMode>(GameMode))
 	{
@@ -20,6 +32,7 @@ void UBattlePhase_Action::OnTick(float DeltaSec)
 		if (GridManager->IsExistEnemyOnGrid() == false)
 		{
 			RequestNextPhase = EBattlePhase::Result;
+			return;
 		}
 	}
 }

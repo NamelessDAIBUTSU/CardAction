@@ -25,4 +25,7 @@ public: /* UBattlePhaseBase */
 	// フェーズ終了時
 	virtual void OnExit() override{}
 
+private:
+	float PhaseEndSec = 5.f;
+	float ElapsedSec = 0.f;
 };

@@ -73,6 +73,17 @@ void AMyGameMode::StartPlay()
 		}
 	}
 
+	// カードブック生成
+	if (CardBookClass)
+	{
+		CardBook = GetWorld()->SpawnActor<ACardBook>(CardBookClass, GridManager->GetPlayerSpawnPosition(), FRotator());
+		if (CardBook)
+		{
+			// デフォルト非表示
+			CardBook->SetActorHiddenInGame(true);
+		}
+	}
+
 	// 最初のフェーズ設定
 	ChangePhase(EBattlePhase::Action);
 }
@@ -121,6 +132,14 @@ void AMyGameMode::ChangePhase(EBattlePhase NextPhase)
 	{
 		CurrentBattlePhase->OnBegin();
 	}
+}
+
+EBattlePhase AMyGameMode::GetCurrentButtlePhase() const
+{
+	if (CurrentBattlePhase == nullptr)
+		return EBattlePhase();
+
+	return CurrentBattlePhase->GetBattlePhase();
 }
 
 void AMyGameMode::OnGameOver()

@@ -2,6 +2,8 @@
 
 
 #include "Enemy/EnemyAttackBase.h"
+#include <Kismet/GameplayStatics.h>
+#include <System/MyGameMode.h>
 
 AEnemyAttackBase::AEnemyAttackBase()
 {
@@ -26,7 +28,20 @@ void AEnemyAttackBase::BeginPlay()
 
 void AEnemyAttackBase::Tick(float DeltaTime)
 {
-	Super::Tick(DeltaTime);
+	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this);
+	AMyGameMode* MyGameMode = Cast<AMyGameMode>(GameMode);
+	if (MyGameMode == nullptr)
+		return;
 
+	// アクションフェーズ以外では時間停止
+	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
+	{
+		this->CustomTimeDilation = 0.f;
+		return;
+	}
+
+	this->CustomTimeDilation = 1.f;
+
+	Super::Tick(DeltaTime);
 }
 

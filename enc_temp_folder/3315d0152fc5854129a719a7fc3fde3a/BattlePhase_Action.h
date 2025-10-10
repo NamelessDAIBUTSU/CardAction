@@ -4,29 +4,26 @@
 
 #include "CoreMinimal.h"
 #include "System/Phase/BattlePhaseBase.h"
-#include "BattlePhase_CardSelect.generated.h"
+#include "BattlePhase_Action.generated.h"
 
 /**
- *
+ * 
  */
 UCLASS()
-class CARDACTION_API UBattlePhase_CardSelect : public UBattlePhaseBase
+class CARDACTION_API UBattlePhase_Action : public UBattlePhaseBase
 {
 	GENERATED_BODY()
-
+	
 public:
-	UBattlePhase_CardSelect() { BattlePhase = EBattlePhase::CardSelect; }
+	UBattlePhase_Action() { BattlePhase = EBattlePhase::Action; }
 
 public: /* UBattlePhaseBase */
 	// フェーズ開始時
-	virtual void OnBegin() override;
+	virtual void OnBegin() override { UE_LOG(LogTemp, Warning, TEXT("Begin ActionPhase")); }
 	// フェーズ中
 	virtual void OnTick(float DeltaSec) override;
 	// フェーズ終了時
-	virtual void OnExit() override;
-
-private:
-	void SetHidden(bool bHidden);
+	virtual void OnExit() override{}
 
 private:
 	float PhaseEndSec = 15.f;
