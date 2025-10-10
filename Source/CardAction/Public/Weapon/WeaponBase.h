@@ -30,18 +30,17 @@ public: /* Status */
 	// ダメージ
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Status")
 	int Damage = 0;
-
 	// クールダウン
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Status")
 	float CoolTime = 0.f;
 
-	// 制限時間
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status")
-	float LimitSec = 0.f;
-
-public: /* Component */
+public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Mesh")
 	UStaticMeshComponent* MeshComp = nullptr;
+
+	// 攻撃時に再生するプレイヤーのモンタージュ
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animation")
+	UAnimMontage* AttackMontage = nullptr;
 
 protected:
 	UPROPERTY(VisibleAnywhere)

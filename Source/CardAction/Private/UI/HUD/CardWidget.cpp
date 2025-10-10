@@ -97,9 +97,9 @@ void UCardWidget::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
 // Œø‰Ê”­“®
 void UCardWidget::ExecuteEffect()
 {
-    if (CardData && CardData->Effect)
+    if (CardData && CardData->EffectClass)
     {
-        UCardEffectBase* Effect = NewObject<UCardEffectBase>(this, CardData->Effect);
+        UCardEffectBase* Effect = NewObject<UCardEffectBase>(this, CardData->EffectClass);
         if (Effect)
         {
             Effect->ExecuteEffect();

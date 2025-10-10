@@ -38,15 +38,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	ECardRarity Rarity;
 
-	// 種類
+	// カード種
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	ECardType CardType;
 
-	// ゲーム終了後、獲得可能か
+	// 効果クラス
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
-	bool bCanGet = true;
-
-	// 効果
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
-	TSubclassOf<UCardEffectBase> Effect;
+	TSubclassOf<UCardEffectBase> EffectClass;
 };
