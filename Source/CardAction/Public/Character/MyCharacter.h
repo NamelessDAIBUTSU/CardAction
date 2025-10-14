@@ -29,11 +29,19 @@ public:
 public: /* Callback */
 	// 武器発動
 	UFUNCTION()
-	void OnUseWeapon(const FInputActionValue& Value);
+	void OnUseCard(const FInputActionValue& Value);
 
-	// アシスト発動
+	// カード選択
 	UFUNCTION()
-	void OnUseAssist(const FInputActionValue& Value);
+	void OnSelectFirstCard(const FInputActionValue& Value);
+	UFUNCTION()
+	void OnSelectSecondCard(const FInputActionValue& Value);
+	UFUNCTION()
+	void OnSelectThirdCard(const FInputActionValue& Value);
+	UFUNCTION()
+	void OnSelectFourthCard(const FInputActionValue& Value);
+	UFUNCTION()
+	void OnScrollSelectCard(const FInputActionValue& Value);
 
 	// ダメージ処理
 	UFUNCTION()
@@ -44,23 +52,32 @@ public:
 	void SetCurrentCoord(FVector2D Coord);
 	FVector2D GetCurrentCoord() const;
 
-	// 武器を装備する
-	void EquipWeapon(AWeaponActorBase* Weapon);
-	// 現在武器を装備中か
-	bool IsEquippedWeapon() { return EquippedWeapon != nullptr; }
-
 	// ゲッタ
 	UGridMovementComponent* GetGridMovementComponent() { return GridMovementComp; }
 
+	// 手札にカードを追加
+	void AddToHandCards(UCardData* CardData);
+	// 手札からカードを除去
+	void RemoveFromHandCards(UCardData* CardData);
+
 
 public: /* Input */
-	// 武器発動
+	// カード発動
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
-	UInputAction* UseWeaponAction = nullptr;
+	UInputAction* UseCardAction = nullptr;
 
-	// アシスト発動
+	// 手札の選択
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
-	UInputAction* UseAssistAction = nullptr;
+	UInputAction* SelectFirstCardAction = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputAction* SelectSecondCardAction = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputAction* SelectThirdCardAction = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputAction* SelectFourthCardAction = nullptr;
+	// 手札の選択（ホイールスクロール）
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputAction* ScrollSelectCardAction = nullptr;
 
 	// グリッド移動
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
@@ -69,7 +86,6 @@ public: /* Input */
 	// 回転モード
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* TurnTowardAction = nullptr;
-
 
 public: /* Status */
 	// HP
@@ -83,28 +99,21 @@ public: /* Status */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Status")
 	int32 MaxEnergy = 10;
 
-
 public: /* 武器 */
 	// マズルオフセット
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Weapon")
 	FVector MazzleOffset = FVector(0.f, 0.f, 50.f);
 
-	// 装備武器
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Weapon")
-	AWeaponActorBase* EquippedWeapon = nullptr;
-
-
-public: /* カード */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
-	UCardData* DefaultCardData = nullptr;
-
-
-private: /* Component */
-	// グリッド移動コンポーネント
-	class UGridMovementComponent* GridMovementComp = nullptr;
 
 private:
-	// 座標
-	FVector2D CurrentCoord = FVector2D::Zero();
+	// 手札カード
+	UPROPERTY(VisibleAnywhere, Category = "Card")
+	TArray<UCardData*> HandCards;
+	// 手札の選択中インデックス
+	UPROPERTY(VisibleAnywhere, Category = "Card")
+	int SelectHandCardsIndex = 0;
+
+	// グリッド移動コンポーネント
+	class UGridMovementComponent* GridMovementComp = nullptr;
 };
 

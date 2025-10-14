@@ -17,8 +17,12 @@ void UCardEffectSummonWeapon::ExecuteEffect()
 	if (Player)
 	{
 		// 武器を生成
-		AWeaponActorBase* WeaponActor = GetWorld()->SpawnActor<AWeaponActorBase>(Weapon);
-		// プレイヤーに装備
-		Player->EquipWeapon(WeaponActor);
+		AWeaponActorBase* WeaponActor = GetWorld()->SpawnActor<AWeaponActorBase>(Weapon, Player->GetActorLocation(), Player->GetActorRotation());
+
+		// 所有者を設定
+		if (WeaponActor)
+		{
+			WeaponActor->SetWeaponOwner(Player);
+		}
 	}
 }

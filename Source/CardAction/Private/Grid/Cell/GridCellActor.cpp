@@ -28,48 +28,34 @@ AGridCellActor::AGridCellActor()
     }
 
     // コリジョン生成
-    CollisionComp = CreateDefaultSubobject<UBoxComponent>(TEXT("Collision"));
-    if (CollisionComp)
+    AttackCollisionComp = CreateDefaultSubobject<UBoxComponent>(TEXT("Collision"));
+    if (AttackCollisionComp)
     {
-        CollisionComp->SetupAttachment(MeshComp);
+        AttackCollisionComp->SetupAttachment(MeshComp);
+        AttackCollisionComp->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+        AttackCollisionComp->SetCollisionObjectType(ECC_WorldDynamic);
+        AttackCollisionComp->SetCollisionResponseToAllChannels(ECR_Ignore);
+        AttackCollisionComp->SetCollisionResponseToChannel(ECC_GameTraceChannel1, ECR_Overlap);
+
+        //AttackCollisionComp->OnComponentBeginOverlap.AddDynamic(this, &AGridCell::OnCellBeginOverlap);
     }
 }
 
 void AGridCellActor::OnConstruction(const FTransform& Transform)
 {
     Super::OnConstruction(Transform);
-
-    if (MeshComp)
-    {
-        // メッシュを非表示
-        if (CellData.GridCellType == EGridCellType::None)
-        {
-            //MeshComp->SetVisibility(false, true);
-            CollisionComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-        }
-    }
-
-    if (CollisionComp)
-    {
-        CollisionComp->SetCollisionProfileName(TEXT("OverlapAllDynamic"));
-    }
 }
 
 // Called when the game starts or when spawned
 void AGridCellActor::BeginPlay()
 {
     Super::BeginPlay();
-
-    //// 動的マテリアルを作成
-    //DefaultDynamicMaterial = UMaterialInstanceDynamic::Create(DefaultMaterial, this);
-    //DamegeSignDynamicMaterial = UMaterialInstanceDynamic::Create(DamegeSignMaterial, this);
 }
 
 // Called every frame
 void AGridCellActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // セル上のアクターを追加
@@ -110,7 +96,6 @@ void AGridCellActor::ChangeDefaultMaterial()
         if (CellData.GridCellType == EGridCellType::None)
         {
             MeshComp->SetVisibility(false, true);
-            CollisionComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
         }
     }
 }

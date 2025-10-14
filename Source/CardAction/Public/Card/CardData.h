@@ -35,7 +35,7 @@ public:
 
 	// レア度
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
-	ECardRarity Rarity;
+	ECardRarityType Rarity;
 
 	// カード種
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")

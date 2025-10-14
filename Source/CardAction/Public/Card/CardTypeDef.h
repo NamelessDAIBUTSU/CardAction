@@ -3,6 +3,9 @@
 #include "CoreMinimal.h"
 #include "CardTypeDef.generated.h"
 
+// 手札の最大数
+#define MAX_HAND_CARDS_NUM 4
+
 // カードの種類
 UENUM(BlueprintType)
 enum class ECardType : uint8
@@ -30,7 +33,7 @@ enum class EAttackElementType : uint8
 
 // レアリティ
 UENUM(BlueprintType)
-enum class ECardRarity : uint8
+enum class ECardRarityType : uint8
 {
     Common     UMETA(DisplayName = "Common"),
     Rare       UMETA(DisplayName = "Rare"),

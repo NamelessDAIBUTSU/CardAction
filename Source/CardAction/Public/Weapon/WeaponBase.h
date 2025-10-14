@@ -20,10 +20,10 @@ public:
 
 public:
 	// プレイヤーによる攻撃アクション時
-	virtual void OnAttack() PURE_VIRTUAL(OnAttack,);
+	virtual void OnAttack() {};
 
 	// 所有者の設定
-	void SetOwner(class AMyCharacter* Player) { WeaponOwner = Player; }
+	void SetWeaponOwner(class AMyCharacter* Player) { WeaponOwner = Player; }
 
 
 public: /* Status */

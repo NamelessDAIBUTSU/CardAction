@@ -41,6 +41,9 @@ void AMyCharacter::Tick(float DeltaSeconds)
 void AMyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// 手札カードの配列のサイズ確保
+	HandCards.Reserve(MAX_HAND_CARDS_NUM);
 }
 
 // 入力バインド設定
@@ -48,10 +51,14 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* InputComp)
 {
 	if (UEnhancedInputComponent* EnhancedInputComp = Cast<UEnhancedInputComponent>(InputComp))
 	{
-		// 武器発動
-		EnhancedInputComp->BindAction(UseWeaponAction, ETriggerEvent::Started, this, &AMyCharacter::OnUseWeapon);
-		// アシスト発動
-		EnhancedInputComp->BindAction(UseAssistAction, ETriggerEvent::Started, this, &AMyCharacter::OnUseAssist);
+		// カード発動
+		EnhancedInputComp->BindAction(UseCardAction, ETriggerEvent::Started, this, &AMyCharacter::OnUseCard);
+		// カード選択
+		EnhancedInputComp->BindAction(SelectFirstCardAction, ETriggerEvent::Started, this, &AMyCharacter::OnSelectFirstCard);
+		EnhancedInputComp->BindAction(SelectSecondCardAction, ETriggerEvent::Started, this, &AMyCharacter::OnSelectSecondCard);
+		EnhancedInputComp->BindAction(SelectThirdCardAction, ETriggerEvent::Started, this, &AMyCharacter::OnSelectThirdCard);
+		EnhancedInputComp->BindAction(SelectFourthCardAction, ETriggerEvent::Started, this, &AMyCharacter::OnSelectFourthCard);
+		EnhancedInputComp->BindAction(ScrollSelectCardAction, ETriggerEvent::Started, this, &AMyCharacter::OnScrollSelectCard);
 
 		if (GridMovementComp)
 		{
@@ -65,20 +72,54 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* InputComp)
 	}
 }
 
-// 武器発動
-void AMyCharacter::OnUseWeapon(const FInputActionValue& Value)
+// カード発動
+void AMyCharacter::OnUseCard(const FInputActionValue& Value)
 {
-	if (EquippedWeapon == nullptr)
-		return;
 
-	// 装備武器の攻撃処理を呼び出す
-	EquippedWeapon->OnAttack();
 }
 
-// アシスト発動
-void AMyCharacter::OnUseAssist(const FInputActionValue& Value)
+// カード選択
+void AMyCharacter::OnSelectFirstCard(const FInputActionValue& Value)
 {
-	
+	SelectHandCardsIndex = 0;
+	// ウィジェットに反映
+}
+
+void AMyCharacter::OnSelectSecondCard(const FInputActionValue& Value)
+{
+	SelectHandCardsIndex = 1;
+
+	// ウィジェットに反映
+}
+
+void AMyCharacter::OnSelectThirdCard(const FInputActionValue& Value)
+{
+	SelectHandCardsIndex = 2;
+
+	// ウィジェットに反映
+}
+
+void AMyCharacter::OnSelectFourthCard(const FInputActionValue& Value)
+{
+	SelectHandCardsIndex = 3;
+
+	// ウィジェットに反映
+
+}
+
+void AMyCharacter::OnScrollSelectCard(const FInputActionValue& Value)
+{
+	float AxisValue = Value.Get<float>();
+	if (AxisValue > 0.f)
+	{
+		SelectHandCardsIndex = FMath::Min(MAX_HAND_CARDS_NUM - 1, SelectHandCardsIndex + 1);
+	}
+	else if (AxisValue < 0.f)
+	{
+		SelectHandCardsIndex = FMath::Max(0, SelectHandCardsIndex - 1);
+	}
+
+	// ウィジェットに反映
 }
 
 // ダメージ処理
@@ -118,17 +159,21 @@ FVector2D AMyCharacter::GetCurrentCoord() const
 	return FVector2D::Zero();
 }
 
-// 武器を装備する
-void AMyCharacter::EquipWeapon(AWeaponActorBase* Weapon)
+// 手札にカードを追加
+void AMyCharacter::AddToHandCards(UCardData* CardData)
 {
-	if (Weapon == nullptr)
+	// いっぱいなので追加できませーん
+	if (HandCards.Num() == MAX_HAND_CARDS_NUM)
 		return;
 
-	EquippedWeapon = Weapon;
+	HandCards.Add(CardData);
+}
 
-	// 所有者の設定
-	EquippedWeapon->SetOwner(this);
+// 手札からカードを除去
+void AMyCharacter::RemoveFromHandCards(UCardData* CardData)
+{
+	HandCards.Remove(CardData);
 
-	// 武器の見た目をプレイヤーの手に追従させる
-	EquippedWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("hand_r"));
+	// 順番を詰める
+
 }

@@ -64,7 +64,7 @@ public:
 
 	// 攻撃との当たり判定用コリジョン
 	UPROPERTY(VisibleAnywhere, Category = "Collision")
-	UBoxComponent* CollisionComp = nullptr;
+	UBoxComponent* AttackCollisionComp = nullptr;
 
 	// このセルが保持する情報
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Cell")
