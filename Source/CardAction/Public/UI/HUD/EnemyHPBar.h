@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include <Components/ProgressBar.h>
 #include <Enemy/EnemyBase.h>
+#include <Components/TextBlock.h>
 #include "EnemyHPBar.generated.h"
 
 /**
@@ -31,6 +32,9 @@ public:
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	UProgressBar* HPBar = nullptr;
+
+	UPROPERTY(meta = (BindWidget))
+	UTextBlock* HPText = nullptr;
 
 private:
 	// 所有エネミー

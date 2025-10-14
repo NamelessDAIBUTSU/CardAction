@@ -28,6 +28,7 @@ AWeapon_ThrowKnife::AWeapon_ThrowKnife()
     SphereCollisionComp = CreateDefaultSubobject<USphereComponent>(TEXT("Sphere Collision Component"));
     if (SphereCollisionComp)
     {
+        SphereCollisionComp->SetupAttachment(MeshComp);
         SphereCollisionComp->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
         SphereCollisionComp->SetCollisionObjectType(ECC_GameTraceChannel1);
         SphereCollisionComp->SetCollisionResponseToChannel(ECC_WorldDynamic, ECR_Overlap);
@@ -61,19 +62,28 @@ void AWeapon_ThrowKnife::OnOverlap(UPrimitiveComponent* OverlappedComp,
 {
     if (OtherActor == nullptr)
         return;
+    AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this));
+    if (MyGM == nullptr)
+        return;
+    AGridManager* GridManager = MyGM->GridManager;
+    if (GridManager == nullptr)
+        return;
 
     // 発射位置のグリッドマスとの当たり判定は無視
-    AGameModeBase* GM = UGameplayStatics::GetGameMode(this);
-    if (AMyGameMode* MyGM = Cast<AMyGameMode>(GM))
+    FVector2D Coord = GridManager->ConvertToGridCoord(OtherActor->GetActorLocation());
+    if (Coord == GeneratedCoord)
+        return;
+
+    // 敵がいるマスか先に取得しておく
+    bool bIsExistEnemyOnGridCell = GridManager->IsExistEnemyOnGridCell(Coord);
+
+    // ダメージ判定追加
+    GridManager->ExecuteAttackToGridCell(this, Damage, Coord);
+    UE_LOG(LogTemp, Warning, TEXT("Overlap(%f, %f)"),Coord.X, Coord.Y);
+
+    // 敵マスの場合、自身の削除
+    if (bIsExistEnemyOnGridCell)
     {
-        if (MyGM->GridManager == nullptr)
-            return;
-
-        FVector2D Coord = MyGM->GridManager->ConvertToGridCoord(OtherActor->GetActorLocation());
-        if (Coord == GeneratedCoord)
-            return;
+        Destroy();
     }
-
-    // 自身の削除
-    Destroy();
 }

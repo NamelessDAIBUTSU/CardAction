@@ -25,3 +25,11 @@ void ADeckManager::RemoveFromDeck(UCardData* RemoveCard)
 {
 	Deck.Remove(RemoveCard);
 }
+
+UCardData* ADeckManager::DrawCardFromTop()
+{
+	if (Deck.IsEmpty())
+		return nullptr;
+
+	return *Deck.begin();
+}

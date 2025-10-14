@@ -9,6 +9,7 @@
 #include <Kismet/GameplayStatics.h>
 #include <System/MyGameMode.h>
 #include "Character/MyPlayerController.h"
+#include "Card/DeckManager.h"
 
 AMyCharacter::AMyCharacter()
 {
@@ -75,14 +76,41 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* InputComp)
 // カード発動
 void AMyCharacter::OnUseCard(const FInputActionValue& Value)
 {
+	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	AMyPlayerController* MyPlayerController = Cast<AMyPlayerController>(PlayerController);
+	if (MyPlayerController == nullptr)
+		return;
 
+	if (MyPlayerController->MainHUDWidget && MyPlayerController->MainHUDWidget->HandCardsWidget)
+	{
+		MyPlayerController->MainHUDWidget->HandCardsWidget->ExecuteEffect(SelectHandCardsIndex);
+	}
 }
 
 // カード選択
 void AMyCharacter::OnSelectFirstCard(const FInputActionValue& Value)
 {
 	SelectHandCardsIndex = 0;
+
+	AGameModeBase* GM = UGameplayStatics::GetGameMode(this);
+	if (AMyGameMode* MyGM = Cast<AMyGameMode>(GM))
+	{
+		if (MyGM->DeckManager)
+		{
+			APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+			AMyPlayerController* MyPlayerController = Cast<AMyPlayerController>(PlayerController);
+			if (MyPlayerController == nullptr)
+				return;
+
+			if (MyPlayerController->MainHUDWidget && MyPlayerController->MainHUDWidget->HandCardsWidget)
+			{
+				MyPlayerController->MainHUDWidget->HandCardsWidget->AddToHandCards(SelectHandCardsIndex, MyGM->DeckManager->DrawCardFromTop());
+			}
+		}
+	}
+
 	// ウィジェットに反映
+	RefleshHandCards();
 }
 
 void AMyCharacter::OnSelectSecondCard(const FInputActionValue& Value)
@@ -90,6 +118,7 @@ void AMyCharacter::OnSelectSecondCard(const FInputActionValue& Value)
 	SelectHandCardsIndex = 1;
 
 	// ウィジェットに反映
+	RefleshHandCards();
 }
 
 void AMyCharacter::OnSelectThirdCard(const FInputActionValue& Value)
@@ -97,6 +126,7 @@ void AMyCharacter::OnSelectThirdCard(const FInputActionValue& Value)
 	SelectHandCardsIndex = 2;
 
 	// ウィジェットに反映
+	RefleshHandCards();
 }
 
 void AMyCharacter::OnSelectFourthCard(const FInputActionValue& Value)
@@ -104,7 +134,7 @@ void AMyCharacter::OnSelectFourthCard(const FInputActionValue& Value)
 	SelectHandCardsIndex = 3;
 
 	// ウィジェットに反映
-
+	RefleshHandCards();
 }
 
 void AMyCharacter::OnScrollSelectCard(const FInputActionValue& Value)
@@ -120,6 +150,7 @@ void AMyCharacter::OnScrollSelectCard(const FInputActionValue& Value)
 	}
 
 	// ウィジェットに反映
+	RefleshHandCards();
 }
 
 // ダメージ処理
@@ -176,4 +207,18 @@ void AMyCharacter::RemoveFromHandCards(UCardData* CardData)
 
 	// 順番を詰める
 
+}
+
+// 手札ウィジェットに反映
+void AMyCharacter::RefleshHandCards()
+{
+	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	AMyPlayerController* MyPlayerController = Cast<AMyPlayerController>(PlayerController);
+	if (MyPlayerController == nullptr)
+		return;
+
+	if (MyPlayerController->MainHUDWidget && MyPlayerController->MainHUDWidget->HandCardsWidget)
+	{
+		MyPlayerController->MainHUDWidget->HandCardsWidget->SelectCard(SelectHandCardsIndex);
+	}
 }

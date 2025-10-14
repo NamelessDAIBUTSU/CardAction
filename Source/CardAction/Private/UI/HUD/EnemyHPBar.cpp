@@ -36,5 +36,13 @@ void UEnemyHPBar::OnUpdateHPBar()
 		// ゲージ更新
 		float Rate = Owner->CurrentHP / (float)Owner->MaxHP;
 		HPBar->SetPercent(Rate);
+
+		// テキスト更新
+		if (HPText)
+		{
+			FFormatNamedArguments Args;
+			Args.Add(TEXT("HP"), Owner->CurrentHP);
+			HPText->SetText(FText::Format(FTextFormat::FromString("{HP}"), Args));
+		}
 	}
 }

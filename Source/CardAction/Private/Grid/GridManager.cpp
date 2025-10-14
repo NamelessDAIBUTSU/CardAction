@@ -256,6 +256,17 @@ bool AGridManager::IsExistEnemyOnGrid()
 	return false;
 }
 
+// グリッドマス上に敵が存在するか
+bool AGridManager::IsExistEnemyOnGridCell(FVector2D Coord)
+{
+	if (AGridCellActor* TargetCell = GetGridCellActor(Coord))
+	{
+		return TargetCell->IsExistEnemyOnCell();
+	}
+
+	return false;
+}
+
 // グリッド座標 → ワールド座標に変換
 FVector AGridManager::ConvertToWorldPosition(FVector2D Coord)
 {

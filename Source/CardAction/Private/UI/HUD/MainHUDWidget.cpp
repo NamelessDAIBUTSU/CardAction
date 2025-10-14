@@ -71,15 +71,19 @@ void UMainHUDWidget::NativeConstruct()
                 {
                     MainCanvas->AddChild(HandCardsWidget);
 
-                    // 左下に配置
+                    // 真ん中下に配置
                     UCanvasPanelSlot* CanvasSlot = Cast<UCanvasPanelSlot>(HandCardsWidget->Slot);
                     if (CanvasSlot)
                     {
-                        CanvasSlot->SetAnchors(FAnchors(0.f, 0.f));           //左上
-                        CanvasSlot->SetAlignment(FVector2D(0.f, 0.f));       // 左上基準
-                        CanvasSlot->SetPosition(FVector2D(0.f, 0.f));     // 50px右、50px下
+                        CanvasSlot->SetAnchors(FAnchors(0.5f, 1.f));
+                        CanvasSlot->SetAlignment(FVector2D(0.5f, 1.f));
+                        CanvasSlot->SetOffsets(FMargin(5.f, 0.f, 10.f, 0.f));
+
+                        // 中央に配置（オフセットは任意）
+                        CanvasSlot->SetPosition(FVector2D(0.0f, -30.0f));
+                        // 中身のサイズに合わせる
+                        CanvasSlot->SetAutoSize(true);
                     }
-                    HandCardsWidget->SetRenderScale(FVector2D(1.f, 1.f));
                 }
             }
         }

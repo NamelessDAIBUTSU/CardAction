@@ -51,6 +51,8 @@ public: /* 敵 */
 
 	// グリッド上に敵が存在するか
 	bool IsExistEnemyOnGrid();
+	// グリッドマス上に敵が存在するか
+	bool IsExistEnemyOnGridCell(FVector2D Coord);
 
 public: /* Util */
 	// グリッド座標 → ワールド座標に変換

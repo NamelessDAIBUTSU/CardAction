@@ -10,6 +10,7 @@
 #include <Character/MyCharacter.h>
 #include "BehaviorTree/BlackboardComponent.h"
 #include <UI/HUD/EnemyHPBar.h>
+#include "Grid/GridManager.h"
 
 // Sets default values
 AEnemyBase::AEnemyBase()
@@ -50,6 +51,10 @@ void AEnemyBase::BeginPlay()
 	{
 		// 移動コンポーネントを無効化
 		MyGM->OnGameEnd.AddLambda([this, MyGM]() {
+			// 死んでいる場合は無視
+			if (IsValid(this) == false)
+				return;
+
 			if (auto* MovementComp = GetCharacterMovement())
 			{
 				MovementComp->DisableMovement();
@@ -125,15 +130,24 @@ void AEnemyBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 void AEnemyBase::OnTakeDamage(int TakeDamage)
 {
 	// ダメージを受ける
-	CurrentHP = FMath::Max(CurrentHP - TakeDamage, 0.f);
+ 	CurrentHP = FMath::Max(CurrentHP - TakeDamage, 0.f);
 
 	if (CurrentHP <= 0)
 	{
 		// 死亡時処理
 		OnDead();
 
+		UE_LOG(LogTemp, Warning, TEXT("Dead"));
+
 		// 破棄
-		Destroy();
+		GetWorld()->GetTimerManager().SetTimerForNextTick([this]()
+			{
+				if (IsValid(this))
+				{
+					Destroy();
+					UE_LOG(LogTemp, Warning, TEXT("Destroy"));
+				}
+			});
 	}
 }
 

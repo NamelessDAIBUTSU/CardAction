@@ -60,6 +60,9 @@ public:
 	// 手札からカードを除去
 	void RemoveFromHandCards(UCardData* CardData);
 
+private:
+	// 手札ウィジェットに反映
+	void RefleshHandCards();
 
 public: /* Input */
 	// カード発動

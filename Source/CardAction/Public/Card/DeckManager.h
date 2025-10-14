@@ -22,6 +22,9 @@ public:
 	// カードの除去
 	void RemoveFromDeck(UCardData* RemoveCard);
 
+	// カードを上から一枚引く
+	UCardData* DrawCardFromTop();
+
 private:
 	UPROPERTY(VisibleAnywhere, Category = "Card")
 	TArray<UCardData*> Deck;

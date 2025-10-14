@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include <UI/HUD/CardWidget.h>
+#include <UI/HUD/CardSlotWidget.h>
 #include <Components/HorizontalBox.h>
 #include "Card/SelectCardDelegate.h"
 
@@ -19,20 +20,26 @@ class CARDACTION_API UHandCardsWidget : public UUserWidget
 	GENERATED_BODY()
 	
 public:
+	// 初期化
+	virtual void NativeConstruct() override;
+
+public:
 	// カード選択デリゲートを設定
 	void SetSelectCardDelegate(FOnSelectCard SelectDelegate, FOnUnSelectCard UnSelectDelegate);
 
 	// 手札にカードを追加
-	void AddToHandCards(UCardData* CardData);
+	void AddToHandCards(int Index, UCardData* CardData);
+
+	// カード選択
+	void SelectCard(int SelectIndex);
+
+	// カードの効果発動
+	void ExecuteEffect(int Index);
 
 public:
-	// 手札の最大数
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HandCards")
-	int MaxHandCardsNum = 5;
-
-	// カードクラス
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
-	TSubclassOf<UUserWidget> CardsWidgetClass;
+	// カードスロットクラス
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UUserWidget> CardSlotWidgetClass;
 
 	// 手札のボックス
 	UPROPERTY(meta = (BindWidget))
@@ -40,8 +47,8 @@ public:
 
 private:
 	// 手札
-	UPROPERTY()
-	TArray<UCardWidget*> HandCards;
+	UPROPERTY(VisibleAnywhere)
+	TArray<UCardSlotWidget*> HandCards;
 
 	// 選択中カードに追加するデリゲート
 	FOnSelectCard SelectCardDelegate;

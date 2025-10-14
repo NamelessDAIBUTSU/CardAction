@@ -36,8 +36,6 @@ AGridCellActor::AGridCellActor()
         AttackCollisionComp->SetCollisionObjectType(ECC_WorldDynamic);
         AttackCollisionComp->SetCollisionResponseToAllChannels(ECR_Ignore);
         AttackCollisionComp->SetCollisionResponseToChannel(ECC_GameTraceChannel1, ECR_Overlap);
-
-        //AttackCollisionComp->OnComponentBeginOverlap.AddDynamic(this, &AGridCell::OnCellBeginOverlap);
     }
 }
 
@@ -67,7 +65,13 @@ void AGridCellActor::AddActorOnCell(AActor* Actor)
 // セル上からアクターを除去
 void AGridCellActor::RemoveActorFromCell(AActor* Actor)
 {
-    CellData.Objects.Remove(Actor);
+    for (int i = CellData.Objects.Num() - 1; i >= 0; --i)
+    {
+        if (CellData.Objects[i] == Actor)
+        {
+            CellData.Objects.RemoveAt(i);
+        }
+    }
 }
 
 // セル上にアクター存在するか
@@ -110,12 +114,12 @@ void AGridCellActor::ExecuteAttackToActorOnCell(AActor* AttackedActor, float Dam
     bool bFromPlayer = Cast<AWeaponActorBase>(AttackedActor) != nullptr;
 
     // セル上のアクターが複数いる場合は全てにダメージ処理
-    for (AActor* Actor : CellData.Objects)
+    for (int i = CellData.Objects.Num() - 1; 0 <= i ; --i)
     {
         // 敵にダメージ
         if (bFromPlayer)
         {
-            if (AEnemyBase* Enemy = Cast<AEnemyBase>(Actor))
+            if (AEnemyBase* Enemy = Cast<AEnemyBase>(CellData.Objects[i]))
             {
                 Enemy->OnTakeDamage(Damage);
             }
@@ -123,7 +127,7 @@ void AGridCellActor::ExecuteAttackToActorOnCell(AActor* AttackedActor, float Dam
         // プレイヤーにダメージ
         else
         {
-            if (AMyCharacter* Player = Cast<AMyCharacter>(Actor))
+            if (AMyCharacter* Player = Cast<AMyCharacter>(CellData.Objects[i]))
             {
                 Player->OnTakeDamage(Damage);
             }
