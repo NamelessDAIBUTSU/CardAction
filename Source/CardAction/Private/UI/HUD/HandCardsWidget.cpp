@@ -30,7 +30,7 @@ void UHandCardsWidget::NativeConstruct()
 				if (BoxSlot)
 				{
 					// カード間の余白を追加
-					BoxSlot->SetPadding(FMargin(0.f, 0.f, 0.f, 0.f));
+					BoxSlot->SetPadding(FMargin(10.f, 0.f, 10.f, 0.f));
 					BoxSlot->SetVerticalAlignment(VAlign_Bottom);
 				}
 			}

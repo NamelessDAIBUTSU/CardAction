@@ -40,7 +40,7 @@ void UCardSlotWidget::SetupCardSlot(UCardData* Data)
 // カード選択アニメーション再生
 void UCardSlotWidget::PlaySelectAnim()
 {
-	if (SelectAnim)
+	if (bIsSelected == false && SelectAnim)
 	{
 		PlayAnimation(SelectAnim);
 		bIsSelected = true;
@@ -49,7 +49,7 @@ void UCardSlotWidget::PlaySelectAnim()
 // カード選択解除アニメーション再生
 void UCardSlotWidget::PlayUnSelectAnim()
 {
-	if (UnSelectAnim)
+	if (bIsSelected && UnSelectAnim)
 	{
 		PlayAnimation(UnSelectAnim);
 		bIsSelected = false;
