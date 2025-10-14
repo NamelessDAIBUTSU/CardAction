@@ -97,6 +97,12 @@ void UCardWidget::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
 // Œø‰Ê”­“®
 void UCardWidget::ExecuteEffect()
 {
+    if (IsValid(this) == false)
+    {
+        UE_LOG(LogTemp, Error, TEXT("this is not valid"));
+        return;
+    }
+
     if (CardData && CardData->EffectClass)
     {
         UCardEffectBase* Effect = NewObject<UCardEffectBase>(this, CardData->EffectClass);
