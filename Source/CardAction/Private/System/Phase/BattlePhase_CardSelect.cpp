@@ -2,6 +2,7 @@
 #include <Kismet/GameplayStatics.h>
 #include <System/MyGameMode.h>
 #include <Character/MyPlayerController.h>
+#include "Card/DeckManager.h"
 
 
 // フェーズ開始時
@@ -10,7 +11,6 @@ void UBattlePhase_CardSelect::OnBegin()
 	// カード選択ウィジェットとカードブックの表示
 	SetHidden(false);
 
-	// 表示アニメーション
 	AMyPlayerController* PlayerController = Cast<AMyPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
 	if (PlayerController == nullptr)
 		return;
@@ -20,7 +20,20 @@ void UBattlePhase_CardSelect::OnBegin()
 	if (CardSelectWidget == nullptr)
 		return;
 
+	// 表示アニメーション
 	CardSelectWidget->PlayInAnimation();
+
+	// デッキマネージャーからドロー
+	if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
+	{
+		ADeckManager* DeckManager = MyGM->DeckManager;
+		if (DeckManager == nullptr)
+			return;
+
+		// カードウィジェットの追加
+		TArray<UCardData*> DrawCards = DeckManager->DrawCards();
+		CardSelectWidget->CreateCardWidgets(DrawCards);
+	}
 }
 
 void UBattlePhase_CardSelect::OnTick(float DeltaSec)

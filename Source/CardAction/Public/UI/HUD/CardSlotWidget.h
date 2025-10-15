@@ -15,7 +15,11 @@ UCLASS()
 class CARDACTION_API UCardSlotWidget : public UUserWidget
 {
 	GENERATED_BODY()
-	
+
+public:
+	// ‰Šú‰»
+	virtual void NativeConstruct() override;
+
 public:
 	// ƒXƒƒbƒg”Ô†‚Ìİ’è
 	void SetupSlotNum(int Num);

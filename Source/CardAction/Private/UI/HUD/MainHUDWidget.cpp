@@ -77,10 +77,9 @@ void UMainHUDWidget::NativeConstruct()
                     {
                         CanvasSlot->SetAnchors(FAnchors(0.5f, 1.f));
                         CanvasSlot->SetAlignment(FVector2D(0.5f, 1.f));
-                        CanvasSlot->SetOffsets(FMargin(5.f, 0.f, 10.f, 0.f));
 
                         // 中央に配置（オフセットは任意）
-                        CanvasSlot->SetPosition(FVector2D(0.0f, -30.0f));
+                        CanvasSlot->SetPosition(FVector2D(0.0f, -15.0f));
                         // 中身のサイズに合わせる
                         CanvasSlot->SetAutoSize(true);
                     }

@@ -72,17 +72,6 @@ void AMyGameMode::StartPlay()
 		}
 	}
 
-	// カードブック生成
-	if (CardBookClass)
-	{
-		CardBook = GetWorld()->SpawnActor<ACardBook>(CardBookClass, GridManager->GetPlayerSpawnPosition(), FRotator());
-		if (CardBook)
-		{
-			// デフォルト非表示
-			CardBook->SetActorHiddenInGame(true);
-		}
-	}
-
 	// デッキマネージャー生成
 	if (DeckManagerClass)
 	{
@@ -95,7 +84,7 @@ void AMyGameMode::StartPlay()
 	}
 
 	// 最初のフェーズ設定
-	ChangePhase(EBattlePhase::Action);
+	ChangePhase(EBattlePhase::CardSelect);
 }
 
 void AMyGameMode::Tick(float DeltaSeconds)

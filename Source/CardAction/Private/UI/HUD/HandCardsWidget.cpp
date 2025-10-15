@@ -30,7 +30,7 @@ void UHandCardsWidget::NativeConstruct()
 				if (BoxSlot)
 				{
 					// カード間の余白を追加
-					BoxSlot->SetPadding(FMargin(10.f, 0.f, 10.f, 0.f));
+					BoxSlot->SetPadding(FMargin(5.f, 0.f, 5.f, 0.f));
 					BoxSlot->SetVerticalAlignment(VAlign_Bottom);
 				}
 			}
@@ -47,15 +47,31 @@ void UHandCardsWidget::SetSelectCardDelegate(FOnSelectCard SelectDelegate, FOnUn
 
 void UHandCardsWidget::AddToHandCards(int Index, UCardData* CardData)
 {
-	if (CardData == nullptr)
-		return;
-
 	if (Index >= MAX_HAND_CARDS_NUM)
 		return;
 
 	if (HandCards[Index])
 	{
 		HandCards[Index]->SetupCardSlot(CardData);
+	}
+}
+
+// 手札カードをリセット
+void UHandCardsWidget::ResetHandCards()
+{
+	for (int i = 0; i < HandCards.Num(); ++i)
+	{
+		ResetHandCards(i);
+	}
+}
+void UHandCardsWidget::ResetHandCards(int Index)
+{
+	if (HandCards.Num() <= Index)
+		return;
+
+	if (HandCards[Index])
+	{
+		HandCards[Index]->SetupCardSlot(nullptr);
 	}
 }
 

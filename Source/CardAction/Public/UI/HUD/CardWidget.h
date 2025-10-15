@@ -9,9 +9,26 @@
 
 #include "CardWidget.generated.h"
 
-/**
- * 
- */
+// 表示箇所によって処理が違うのでオプション構造体
+USTRUCT()
+struct CARDACTION_API FCardWidgetOption
+{
+	GENERATED_BODY()
+
+public:
+	// 選択時の処理デリゲート
+	FOnSelectCard SelectCardDelegate;
+	// 選択解除時の処理デリゲート
+	FOnUnSelectCard UnSelectCardDelegate;
+
+	// マウスオーバー可能か
+	bool bCanMouseOver = true;
+	// マウスオーバーで拡大するか
+	bool bChangeScale = true;
+	// マウスオーバーでツールチップを表示するか
+	bool bShowToolTip = false;
+};
+
 UCLASS()
 class CARDACTION_API UCardWidget : public UUserWidget
 {
@@ -23,9 +40,10 @@ protected: /* UUserWidget */
 
 public:
 	// 初期化
-	void Initialize(UCardData* Data, FOnSelectCard SelectDelegate, FOnUnSelectCard UnSelectDelegate);
-	// ウィジェットのみ初期化
-	void InitializeWidget(UCardData* Data);
+	void Initialize(UCardData* Data, const FCardWidgetOption& WidgetOption);
+
+	// カードデータの設定
+	void SetupCardData(UCardData* Data);
 
 	// カードデータの取得
 	UCardData* GetCardData() const { return CardData; }
@@ -43,10 +61,7 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Data")
 	UCardData* CardData = nullptr;
 
-	// 選択中カードに追加するデリゲート
-	FOnSelectCard SelectCardDelegate;
-	// 選択中カードから除去するデリゲート
-	FOnUnSelectCard UnSelectCardDelegate;
+	FCardWidgetOption Option;
 
 	// 選択中か
 	bool bSelected = false;

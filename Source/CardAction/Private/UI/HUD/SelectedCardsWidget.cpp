@@ -13,7 +13,7 @@ void USelectedCardsWidget::AddToSelectedCards(UCardData* Data)
 	UCardWidget* NewSelectedCard = CreateWidget<UCardWidget>(GetWorld(), CardsWidgetClass);
 	if (NewSelectedCard)
 	{
-		NewSelectedCard->InitializeWidget(Data);
+		NewSelectedCard->SetupCardData(Data);
 
 		if (CardsHorizontalBox)
 		{

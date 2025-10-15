@@ -30,6 +30,10 @@ public:
 	// 手札にカードを追加
 	void AddToHandCards(int Index, UCardData* CardData);
 
+	// 手札カードをリセット
+	void ResetHandCards();
+	void ResetHandCards(int Index);
+
 	// カード選択
 	void SelectCard(int SelectIndex);
 

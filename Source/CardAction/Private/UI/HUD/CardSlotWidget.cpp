@@ -6,6 +6,25 @@
 #include <UI/HUD/CardWidget.h>
 #include <Components/SizeBoxSlot.h>
 
+void UCardSlotWidget::NativeConstruct()
+{
+	// カードウィジェットの生成
+	if (CardWidgetClass)
+	{
+		CardWidget = CreateWidget<UCardWidget>(GetWorld(), CardWidgetClass);
+		CardWidget->SetVisibility(ESlateVisibility::Hidden);
+
+		// カードをボックスに配置
+		if (CardBox)
+		{
+			if (USizeBoxSlot* BoxSlot = Cast<USizeBoxSlot>(CardBox->AddChild(CardWidget)))
+			{
+
+			}
+		}
+	}
+}
+
 // スロット番号の設定
 void UCardSlotWidget::SetupSlotNum(int Num)
 {
@@ -17,22 +36,22 @@ void UCardSlotWidget::SetupSlotNum(int Num)
 	SlotNum->SetText(FText::Format(FTextFormat::FromString("{Num}"), Args));
 }
 
-// スロットにカードを設定
+// スロットにカード情報を設定
 void UCardSlotWidget::SetupCardSlot(UCardData* Data)
 {
-	// カードウィジェットの生成
-	if (CardWidgetClass)
+	if (CardWidget)
 	{
-		CardWidget = CreateWidget<UCardWidget>(GetWorld(), CardWidgetClass);
-		if (CardWidget)
-		{
-			CardWidget->InitializeWidget(Data);
-		}
+		// カードデータを渡す
+		CardWidget->SetupCardData(Data);
 
-		// カードをボックスに配置
-		if (CardBox)
+		// 表示設定
+		if (Data == nullptr)
 		{
-			USizeBoxSlot* BoxSlot = Cast<USizeBoxSlot>(CardBox->AddChild(CardWidget));
+			CardWidget->SetVisibility(ESlateVisibility::Hidden);
+		}
+		else
+		{
+			CardWidget->SetVisibility(ESlateVisibility::Visible);
 		}
 	}
 }

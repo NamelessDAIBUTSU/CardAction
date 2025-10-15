@@ -22,10 +22,26 @@ public:
 	// カードの除去
 	void RemoveFromDeck(UCardData* RemoveCard);
 
-	// カードを上から一枚引く
-	UCardData* DrawCardFromTop();
+	// カードを引く
+	TArray<UCardData*> DrawCards();
+
+	// シャッフルされたデッキを作成
+	void CreateShuffledDeck();
 
 private:
+	// シャッフル
+	void ShuffleArray(TArray<UCardData*>& Array);
+
+private:
+	// デッキ
 	UPROPERTY(VisibleAnywhere, Category = "Card")
 	TArray<UCardData*> Deck;
+
+	// 引くためにシャッフルしたデッキ
+	UPROPERTY(VisibleAnywhere, Category = "Card")
+	TArray<UCardData*> ShuffledDeck;
+
+	// 現在のドローインデックス
+	UPROPERTY(VisibleAnywhere, Category = "Card")
+	int DrawIndex = 0;
 };

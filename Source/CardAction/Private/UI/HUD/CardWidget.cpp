@@ -9,12 +9,12 @@ void UCardWidget::NativeConstruct()
 {
 }
 
-void UCardWidget::InitializeWidget(UCardData* Data)
+void UCardWidget::SetupCardData(UCardData* Data)
 {
-    if (Data == nullptr)
-        return;
-
     CardData = Data;
+
+    if (CardData == nullptr)
+        return;
 
     // テキストの設定
     // 名前
@@ -35,26 +35,29 @@ void UCardWidget::InitializeWidget(UCardData* Data)
     }
 }
 
-void UCardWidget::Initialize(UCardData* Data, FOnSelectCard SelectDelegate, FOnUnSelectCard UnSelectDelegate)
+void UCardWidget::Initialize(UCardData* Data, const FCardWidgetOption& WidgetOption)
 {
     // ウィジェットの初期化
-    InitializeWidget(Data);
+    SetupCardData(Data);
 
-    // デリゲートの設定
-    SelectCardDelegate = SelectDelegate;
-    UnSelectCardDelegate = UnSelectDelegate;
+    // 表示オプションの設定
+    Option = WidgetOption;
 }
 
+// クリック時
 FReply UCardWidget::NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
 {
+    if (Option.bCanMouseOver == false)
+        return FReply::Unhandled();
+
     if (InMouseEvent.GetEffectingButton() == EKeys::LeftMouseButton)
     {
-        // 未選択の場合、選択中カードに追加
+        // 選択
         if (bSelected == false)
         {
-            if (SelectCardDelegate.IsBound())
+            if (Option.SelectCardDelegate.IsBound())
             {
-                SelectCardDelegate.Execute(CardData);
+                Option.SelectCardDelegate.Execute(CardData);
 
                 // 選択中にする
                 bSelected = true;
@@ -63,10 +66,10 @@ FReply UCardWidget::NativeOnMouseButtonDown(const FGeometry& InGeometry, const F
 
             }
         }
-        // 選択中の場合、選択中カードから外し再度選択可能にする
+        // 選択解除
         else
         {
-            UnSelectCardDelegate.Execute(CardData);
+            Option.UnSelectCardDelegate.Execute(CardData);
 
             // 未選択にする
             bSelected = false;
@@ -80,18 +83,42 @@ FReply UCardWidget::NativeOnMouseButtonDown(const FGeometry& InGeometry, const F
     return FReply::Unhandled();
 }
 
+// マウスオーバー時
 void UCardWidget::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
 {
-    // 選択中のカードは選択できないよう示す
-    if (bSelected)
+    if (Option.bCanMouseOver == false)
         return;
- 
-    this->SetRenderScale(FVector2D(1.2f, 1.2f));
+
+    // スケール変更
+    if (Option.bChangeScale)
+    {
+        this->SetRenderScale(FVector2D(1.2f, 1.2f));
+    }
+
+    // ツールチップ表示
+    if (Option.bShowToolTip)
+    {
+
+    }
 }
 
+// マウスオーバーから離れた時
 void UCardWidget::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
 {
-    this->SetRenderScale(FVector2D(1.f, 1.f));
+    if (Option.bCanMouseOver == false)
+        return;
+
+    // スケール変更
+    if (Option.bChangeScale)
+    {
+        this->SetRenderScale(FVector2D(1.f, 1.f));
+    }
+
+    // ツールチップ非表示
+    if (Option.bShowToolTip)
+    {
+
+    }
 }
 
 // 効果発動

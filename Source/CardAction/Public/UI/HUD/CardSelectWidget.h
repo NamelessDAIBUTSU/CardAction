@@ -5,11 +5,10 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 #include <Components/Button.h>
+#include "Components/SizeBox.h"
 #include "CardSelectWidget.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class CARDACTION_API UCardSelectWidget : public UUserWidget
 {
@@ -36,6 +35,9 @@ public:
 	// Inアニメーションの再生
 	void PlayInAnimation();
 
+	// カードウィジェットの生成
+	void CreateCardWidgets(const TArray<class UCardData*>& CardDataArray);
+
 public:
 	// アニメーション
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
@@ -46,6 +48,32 @@ public:
 	// 決定ボタン
 	UPROPERTY(meta = (BindWidget))
 	UButton* DecideButton;
+
+	// カードボックス
+	UPROPERTY(meta = (BindWidget))
+	USizeBox* CardBox0;
+	UPROPERTY(meta = (BindWidget))
+	USizeBox* CardBox1;
+	UPROPERTY(meta = (BindWidget))
+	USizeBox* CardBox2;
+	UPROPERTY(meta = (BindWidget))
+	USizeBox* CardBox3;
+	UPROPERTY(meta = (BindWidget))
+	USizeBox* CardBox4;
+	UPROPERTY(meta = (BindWidget))
+	USizeBox* CardBox5;
+	UPROPERTY(meta = (BindWidget))
+	USizeBox* CardBox6;
+	UPROPERTY(meta = (BindWidget))
+	USizeBox* CardBox7;
+	TArray<USizeBox*> CardBoxArray;
+
+	// カードウィジェットクラス
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<UUserWidget> CardWidgetClass;
+
+	// 選択中のカード
+	TArray<UCardData*> SelectCards;
 
 private:
 	// 確定させたか

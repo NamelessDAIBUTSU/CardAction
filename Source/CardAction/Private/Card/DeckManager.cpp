@@ -26,10 +26,47 @@ void ADeckManager::RemoveFromDeck(UCardData* RemoveCard)
 	Deck.Remove(RemoveCard);
 }
 
-UCardData* ADeckManager::DrawCardFromTop()
+// カードを引く
+TArray<UCardData*> ADeckManager::DrawCards()
 {
-	if (Deck.IsEmpty())
-		return nullptr;
+	TArray<UCardData*> DrawCards;
+	DrawCards.Reserve(DRAW_CARDS_NUM);
 
-	return *Deck.begin();
+	for (int i = 0; i < DRAW_CARDS_NUM; ++i)
+	{
+		// デッキ最後まできたら、シャッフルして再度引き直す
+		if (DrawIndex == ShuffledDeck.Num())
+		{
+			DrawIndex = 0;
+
+			CreateShuffledDeck();
+		}
+
+		if (ShuffledDeck.IsEmpty())
+			break;
+
+		DrawCards.Add(ShuffledDeck[DrawIndex]);
+
+		DrawIndex++;
+	}
+
+	return DrawCards;
+}
+
+// シャッフルされたデッキを作成
+void ADeckManager::CreateShuffledDeck()
+{
+	ShuffledDeck = Deck;
+
+	ShuffleArray(ShuffledDeck);
+}
+
+// シャッフル
+void ADeckManager::ShuffleArray(TArray<UCardData*>& Array)
+{
+	for (int32 i = Array.Num() - 1; i > 0; --i)
+	{
+		int32 j = FMath::RandRange(0, i);
+		Array.Swap(i, j);
+	}
 }

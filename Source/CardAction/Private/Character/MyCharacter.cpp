@@ -92,23 +92,6 @@ void AMyCharacter::OnSelectFirstCard(const FInputActionValue& Value)
 {
 	SelectHandCardsIndex = 0;
 
-	AGameModeBase* GM = UGameplayStatics::GetGameMode(this);
-	if (AMyGameMode* MyGM = Cast<AMyGameMode>(GM))
-	{
-		if (MyGM->DeckManager)
-		{
-			APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
-			AMyPlayerController* MyPlayerController = Cast<AMyPlayerController>(PlayerController);
-			if (MyPlayerController == nullptr)
-				return;
-
-			if (MyPlayerController->MainHUDWidget && MyPlayerController->MainHUDWidget->HandCardsWidget)
-			{
-				MyPlayerController->MainHUDWidget->HandCardsWidget->AddToHandCards(SelectHandCardsIndex, MyGM->DeckManager->DrawCardFromTop());
-			}
-		}
-	}
-
 	// ウィジェットに反映
 	RefleshHandCards();
 }

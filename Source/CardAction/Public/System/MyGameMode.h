@@ -51,10 +51,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	UInitDeckData* InitDeckData = nullptr;
 
-	// カード選択フェーズ中のカードブッククラス
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
-	TSubclassOf<ACardBook> CardBookClass;
-
 	// ゲーム終了時に発火するデリゲート
 	DECLARE_MULTICAST_DELEGATE(FOnGameEnd);
 	FOnGameEnd OnGameEnd;

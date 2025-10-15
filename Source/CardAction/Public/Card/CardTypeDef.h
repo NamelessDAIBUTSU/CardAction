@@ -5,6 +5,8 @@
 
 // 手札の最大数
 #define MAX_HAND_CARDS_NUM 4
+// デッキから引いてくるカードの枚数
+#define DRAW_CARDS_NUM 8
 
 // カードの種類
 UENUM(BlueprintType)
