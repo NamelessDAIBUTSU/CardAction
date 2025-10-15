@@ -21,8 +21,6 @@ public:
 	virtual void NativeConstruct() override;
 
 public:
-	// スロット番号の設定
-	void SetupSlotNum(int Num);
 	// スロットにカードを設定
 	void SetupCardSlot(class UCardData* Data);
 
@@ -45,10 +43,6 @@ public:
 	// 配置用サイズボックス
 	UPROPERTY(meta = (BindWidget))
 	USizeBox* CardBox;
-
-	// スロットナンバーテキスト
-	UPROPERTY(meta = (BindWidget))
-	UTextBlock* SlotNum;
 
 	// アニメーション
 	UPROPERTY(meta = (BindWidgetAnim), Transient)

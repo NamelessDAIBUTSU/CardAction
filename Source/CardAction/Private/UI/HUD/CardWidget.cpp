@@ -7,6 +7,12 @@
 
 void UCardWidget::NativeConstruct()
 {
+    Super::NativeConstruct();
+
+    if (CardButton)
+    {
+        CardButton->OnClicked.AddDynamic(this, &UCardWidget::OnCardClicked);
+    }
 }
 
 void UCardWidget::SetupCardData(UCardData* Data)
@@ -45,54 +51,57 @@ void UCardWidget::Initialize(UCardData* Data, const FCardWidgetOption& WidgetOpt
 }
 
 // クリック時
-FReply UCardWidget::NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
+void UCardWidget::OnCardClicked()
 {
     if (Option.bCanMouseOver == false)
-        return FReply::Unhandled();
+        return;
 
-    if (InMouseEvent.GetEffectingButton() == EKeys::LeftMouseButton)
+    // 選択
+    if (bSelected == false)
     {
-        // 選択
-        if (bSelected == false)
+        if (Option.SelectCardDelegate.IsBound())
         {
-            if (Option.SelectCardDelegate.IsBound())
+            Option.SelectCardDelegate.Execute(CardData);
+
+            // 選択中にする
+            bSelected = true;
+
+            // 選択中用のホバー画像を表示
+            if (SelectAnim)
             {
-                Option.SelectCardDelegate.Execute(CardData);
-
-                // 選択中にする
-                bSelected = true;
-
-                // 選択中用のホバー画像を表示
-
+                PlayAnimation(SelectAnim);
             }
         }
-        // 選択解除
-        else
-        {
-            Option.UnSelectCardDelegate.Execute(CardData);
-
-            // 未選択にする
-            bSelected = false;
-
-            // 選択中用のホバー画像を非表示
-            
-        }
-
-        return FReply::Handled();
     }
-    return FReply::Unhandled();
+    // 選択解除
+    else
+    {
+        Option.UnSelectCardDelegate.Execute(CardData);
+
+        // 未選択にする
+        bSelected = false;
+
+        // 選択中用のホバー画像を非表示
+        if (UnSelectAnim)
+        {
+            PlayAnimation(UnSelectAnim);
+        }
+    }
 }
 
 // マウスオーバー時
 void UCardWidget::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
 {
+    UE_LOG(LogTemp, Warning, TEXT("Over"));
+
     if (Option.bCanMouseOver == false)
         return;
 
     // スケール変更
-    if (Option.bChangeScale)
+    if (Option.bChangeScale && MouseOverAnim)
     {
-        this->SetRenderScale(FVector2D(1.2f, 1.2f));
+        StopAnimation(MouseReleaseAnim);
+        PlayAnimation(MouseOverAnim);
     }
 
     // ツールチップ表示
@@ -105,13 +114,16 @@ void UCardWidget::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointer
 // マウスオーバーから離れた時
 void UCardWidget::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
 {
+    UE_LOG(LogTemp, Warning, TEXT("Leave"));
+
     if (Option.bCanMouseOver == false)
         return;
 
     // スケール変更
-    if (Option.bChangeScale)
+    if (Option.bChangeScale && MouseReleaseAnim)
     {
-        this->SetRenderScale(FVector2D(1.f, 1.f));
+        StopAnimation(MouseOverAnim);
+        PlayAnimation(MouseReleaseAnim);
     }
 
     // ツールチップ非表示

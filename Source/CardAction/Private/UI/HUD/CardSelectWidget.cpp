@@ -146,8 +146,6 @@ void UCardSelectWidget::CreateCardWidgets(const TArray<UCardData*>& CardDataArra
         // カードデータを初期化
         {
             FCardWidgetOption Option;
-            Option.bChangeScale = false;
-
             // デリゲートに選択カード配列の更新の処理を入れる
             Option.SelectCardDelegate.BindLambda([this](UCardData* CardData)
                 {

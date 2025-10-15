@@ -20,9 +20,6 @@ void UHandCardsWidget::NativeConstruct()
 		UCardSlotWidget* NewCardSlot = CreateWidget<UCardSlotWidget>(GetWorld(), CardSlotWidgetClass);
 		if (NewCardSlot)
 		{
-			// ƒXƒƒbƒg”Ô†Ý’è
-			NewCardSlot->SetupSlotNum(i);
-
 			HandCards.Add(NewCardSlot);
 			if (CardsHorizontalBox)
 			{

@@ -12,28 +12,27 @@ void UCardSlotWidget::NativeConstruct()
 	if (CardWidgetClass)
 	{
 		CardWidget = CreateWidget<UCardWidget>(GetWorld(), CardWidgetClass);
-		CardWidget->SetVisibility(ESlateVisibility::Hidden);
-
-		// カードをボックスに配置
-		if (CardBox)
+		if (CardWidget)
 		{
-			if (USizeBoxSlot* BoxSlot = Cast<USizeBoxSlot>(CardBox->AddChild(CardWidget)))
-			{
+			// 初期化
+			FCardWidgetOption Option;
+			// スケールアップなし
+			Option.bChangeScale = false;
+			CardWidget->Initialize(nullptr, Option);
 
+			// 初期非表示
+			CardWidget->SetVisibility(ESlateVisibility::Hidden);
+
+			// カードをボックスに配置
+			if (CardBox)
+			{
+				if (USizeBoxSlot* BoxSlot = Cast<USizeBoxSlot>(CardBox->AddChild(CardWidget)))
+				{
+
+				}
 			}
 		}
 	}
-}
-
-// スロット番号の設定
-void UCardSlotWidget::SetupSlotNum(int Num)
-{
-	if (SlotNum == nullptr)
-		return;
-
-	FFormatNamedArguments Args;
-	Args.Add(TEXT("Num"), Num);
-	SlotNum->SetText(FText::Format(FTextFormat::FromString("{Num}"), Args));
 }
 
 // スロットにカード情報を設定

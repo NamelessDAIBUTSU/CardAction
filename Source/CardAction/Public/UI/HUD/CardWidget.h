@@ -6,7 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include <Card/CardData.h>
 #include "Card/SelectCardDelegate.h"
-
+#include <Components/Button.h>
 #include "CardWidget.generated.h"
 
 // 表示箇所によって処理が違うのでオプション構造体
@@ -26,7 +26,7 @@ public:
 	// マウスオーバーで拡大するか
 	bool bChangeScale = true;
 	// マウスオーバーでツールチップを表示するか
-	bool bShowToolTip = false;
+	bool bShowToolTip = true;
 };
 
 UCLASS()
@@ -49,7 +49,8 @@ public:
 	UCardData* GetCardData() const { return CardData; }
 
 	// マウスイベント
-	FReply NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
+	UFUNCTION()
+	void OnCardClicked();
 	void NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
 	void NativeOnMouseLeave(const FPointerEvent& InMouseEvent) override;
 
@@ -61,7 +62,22 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Data")
 	UCardData* CardData = nullptr;
 
+	// 表示オプション
 	FCardWidgetOption Option;
+
+	// アニメーション
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	UWidgetAnimation* SelectAnim;
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	UWidgetAnimation* UnSelectAnim;
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	UWidgetAnimation* MouseOverAnim;
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	UWidgetAnimation* MouseReleaseAnim;
+
+	// 当たり判定用ボタン
+	UPROPERTY(meta = (BindWidget))
+	UButton* CardButton = nullptr;
 
 	// 選択中か
 	bool bSelected = false;
