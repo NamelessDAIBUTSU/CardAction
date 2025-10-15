@@ -55,6 +55,10 @@ public:
 	DECLARE_MULTICAST_DELEGATE(FOnGameEnd);
 	FOnGameEnd OnGameEnd;
 
+	// アクションフェーズ開始時に発火するデリゲート
+	DECLARE_MULTICAST_DELEGATE(FOnStartActionPhase);
+	FOnStartActionPhase OnStartActionPhase;
+
 private:
 	// 現在のフェーズ
 	UPROPERTY(VisibleAnywhere, Category = "Phase")

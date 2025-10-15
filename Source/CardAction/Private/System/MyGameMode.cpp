@@ -117,8 +117,14 @@ void AMyGameMode::ChangePhase(EBattlePhase NextPhase)
 		CurrentBattlePhase = NewObject<UBattlePhaseBase>(this, UBattlePhase_CardSelect::StaticClass());
 		break;
 	case EBattlePhase::Action:
+	{
 		CurrentBattlePhase = NewObject<UBattlePhaseBase>(this, UBattlePhase_Action::StaticClass());
+
+		// アクションフェーズ開始時の処理
+		OnStartActionPhase.Broadcast();
+
 		break;
+	}
 	case EBattlePhase::Result:
 		CurrentBattlePhase = NewObject<UBattlePhaseBase>(this, UBattlePhase_Result::StaticClass());
 		break;

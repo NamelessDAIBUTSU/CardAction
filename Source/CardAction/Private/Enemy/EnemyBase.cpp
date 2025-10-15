@@ -5,6 +5,7 @@
 #include <Kismet/GameplayStatics.h>
 #include <System/MyGameMode.h>
 #include "Components/CapsuleComponent.h"
+#include "BrainComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include <AIController.h>
 #include <Character/MyCharacter.h>
@@ -45,16 +46,15 @@ void AEnemyBase::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ゲーム終了時のコールバック登録
-	AGameModeBase* GM = UGameplayStatics::GetGameMode(this);
-	if (AMyGameMode* MyGM = Cast<AMyGameMode>(GM))
+	if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
 	{
-		// 移動コンポーネントを無効化
+		// ゲーム終了時のコールバック登録
 		MyGM->OnGameEnd.AddLambda([this, MyGM]() {
 			// 死んでいる場合は無視
 			if (IsValid(this) == false)
 				return;
 
+			// 移動コンポーネントを無効化
 			if (auto* MovementComp = GetCharacterMovement())
 			{
 				MovementComp->DisableMovement();
@@ -70,9 +70,28 @@ void AEnemyBase::BeginPlay()
 			}
 			});
 
+		// アクションフェーズ開始時のコールバック登録
+		MyGM->OnStartActionPhase.AddLambda([this, MyGM]() {
+			// 死んでいる場合は無視
+			if (IsValid(this) == false)
+				return;
 
+			// AIが止まっていたら再開
+			AAIController* AIController = Cast<AAIController>(GetController());
+			if (AIController)
+			{
+				if (AIController && AIController->BrainComponent)
+				{
+					AIController->BrainComponent->StartLogic();
+				}
+			}
+
+			// Tick再開
+			this->CustomTimeDilation = 1.f;
+			});
 	}
 
+	// TargetActorにプレイヤーを登録
 	if (AAIController* AIController = Cast<AAIController>(GetController()))
 	{
 		UBlackboardComponent* BBComp = AIController->GetBlackboardComponent();
@@ -82,7 +101,7 @@ void AEnemyBase::BeginPlay()
 		}
 	}
 
-	// HPバーに自身を渡す
+	// HPバーに所有者を登録
 	if (WidgetComp)
 	{
 		if (UEnemyHPBar* HPWidget = Cast<UEnemyHPBar>(WidgetComp->GetUserWidgetObject()))
@@ -104,10 +123,21 @@ void AEnemyBase::Tick(float DeltaTime)
 	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
 	{
 		this->CustomTimeDilation = 0.f;
+
+		// AIも止める
+		AAIController* AIController = Cast<AAIController>(GetController());
+		if (AIController)
+		{
+			if (AIController && AIController->BrainComponent)
+			{
+				// BrainComponent に対して BT 停止
+				AIController->BrainComponent->StopLogic("ExternalStop");
+			}
+		}
+
 		return;
 	}
 
-	this->CustomTimeDilation = 1.f;
 
 	Super::Tick(DeltaTime);
 

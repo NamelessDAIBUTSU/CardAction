@@ -11,8 +11,4 @@ void AEnemyAIController::BeginPlay()
     {
         RunBehaviorTree(BehaviorTreeAsset);
     }
-    else
-    {
-        UE_LOG(LogTemp, Warning, TEXT("BehaviorTreeAsset is null!"));
-    }
 }
