@@ -14,10 +14,10 @@ void UCardEffectSummonWeapon::ExecuteEffect()
 
 	// プレイヤーキャラクターに装備させる
 	AMyCharacter* Player = Cast<AMyCharacter>(Pawn);
-	if (Player)
+	if (Player && WeaponClass)
 	{
 		// 武器を生成
-		AWeaponActorBase* WeaponActor = GetWorld()->SpawnActor<AWeaponActorBase>(Weapon, Player->GetActorLocation(), Player->GetActorRotation());
+		AWeaponActorBase* WeaponActor = GetWorld()->SpawnActor<AWeaponActorBase>(WeaponClass, Player->GetActorLocation(), Player->GetActorRotation());
 
 		// 所有者を設定
 		if (WeaponActor)

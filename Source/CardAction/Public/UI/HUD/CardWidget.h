@@ -8,6 +8,7 @@
 #include "Card/SelectCardDelegate.h"
 #include <Components/Button.h>
 #include <Components/TextBlock.h>
+#include <Components/Image.h>
 #include "CardWidget.generated.h"
 
 // 表示箇所によって処理が違うのでオプション構造体
@@ -29,8 +30,6 @@ public:
 	// マウスオーバーでツールチップを表示するか
 	bool bShowToolTip = true;
 };
-
-DECLARE_MULTICAST_DELEGATE(FOnCardAnimationFinished);
 
 UCLASS()
 class CARDACTION_API UCardWidget : public UUserWidget
@@ -67,17 +66,40 @@ public:
 	void PlayDefaultAnimation();
 
 public:
-	FOnCardAnimationFinished OnCardAnimFinished;
 
-private:
-	// カードデータ
-	UPROPERTY(VisibleAnywhere, Category = "Data")
-	UCardData* CardData = nullptr;
 
-	// 表示オプション
-	FCardWidgetOption Option;
+private: /* Widget */
+	// 当たり判定用ボタン
+	UPROPERTY(meta = (BindWidget))
+	UButton* CardButton = nullptr;
 
-	// アニメーション
+	// カードベース
+	UPROPERTY(meta = (BindWidget))
+	UImage* CardBase = nullptr;
+	// カードイラスト
+	UPROPERTY(meta = (BindWidget))
+	UImage* CardImage = nullptr;
+
+	// カードタイプアイコン
+	UPROPERTY(meta = (BindWidget))
+	UImage* CardTypeIcon = nullptr;
+	// 属性タイプアイコン
+	UPROPERTY(meta = (BindWidget))
+	UImage* ElementTypeIcon = nullptr;
+
+	// 名前テキスト
+	UPROPERTY(meta = (BindWidget))
+	UTextBlock* NameText = nullptr;
+
+	// ダメージテキスト
+	UPROPERTY(meta = (BindWidget))
+	UTextBlock* DamageText = nullptr;
+
+	// 選択番号テキスト
+	UPROPERTY(meta = (BindWidget))
+	UTextBlock* SelectNum = nullptr;
+
+private: /* アニメーション */
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
 	UWidgetAnimation* SelectAnim;
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
@@ -91,13 +113,13 @@ private:
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
 	UWidgetAnimation* DefaultAnim;
 
-	// 当たり判定用ボタン
-	UPROPERTY(meta = (BindWidget))
-	UButton* CardButton = nullptr;
+private:
+	// カードデータ
+	UPROPERTY(VisibleAnywhere, Category = "Data")
+	UCardData* CardData = nullptr;
 
-	// 選択番号テキスト
-	UPROPERTY(meta = (BindWidget))
-	UTextBlock* SelectNum = nullptr;
+	// 表示オプション
+	FCardWidgetOption Option;
 
 	// 選択中か
 	bool bSelected = false;

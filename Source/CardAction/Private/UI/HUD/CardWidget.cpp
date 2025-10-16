@@ -7,6 +7,9 @@
 #include <Character/MyPlayerController.h>
 #include <Kismet/GameplayStatics.h>
 #include "Animation/UMGSequencePlayer.h"
+#include <Card/Effect/CardEffectSummonWeapon.h>
+#include <Weapon/Weapon_ThrowKnife.h>
+#include <Card/CardUtil.h>
 
 void UCardWidget::NativeConstruct()
 {
@@ -25,22 +28,75 @@ void UCardWidget::SetupCardData(UCardData* Data)
     if (CardData == nullptr)
         return;
 
-    // テキストの設定
+    UCardUtil* CardUtil = GetGameInstance()->GetSubsystem<UCardUtil>();
+    if (CardUtil == nullptr)
+        return;
+
+    // 各ウィジェットの設定
     // 名前
-    UTextBlock* NameText = Cast<UTextBlock>(GetWidgetFromName(TEXT("Name")));
     if (NameText)
     {
         NameText->SetText(FText::FromName(CardData->Name));
     }
-    // 説明
-    UTextBlock* DescText = Cast<UTextBlock>(GetWidgetFromName(TEXT("Description")));
-    if (DescText)
+    // ダメージ
+    if (DamageText)
     {
-        DescText->SetText(FText::FromString(CardData->Description));
-
-        // 自動改行を有効化
-        DescText->SetAutoWrapText(true);      
-        USizeBox* SizeBox = Cast<USizeBox>(GetWidgetFromName(TEXT("TextBox")));
+        // エフェクトからデフォルトオブジェクトを取得してダメージを取得
+        if (CardData->EffectClass)
+        {
+            UCardEffectSummonWeapon* Effect = CardData->EffectClass->GetDefaultObject<UCardEffectSummonWeapon>();
+            if (Effect && Effect->WeaponClass)
+            {
+                AWeaponActorBase* WeaponActor = Effect->WeaponClass->GetDefaultObject<AWeaponActorBase>();
+                if (WeaponActor)
+                {
+                    FFormatNamedArguments Args;
+                    Args.Add(TEXT("Damage"), WeaponActor->Damage);
+                    DamageText->SetText(FText::Format(FTextFormat::FromString("{Damage}"), Args));
+                }
+            }
+            
+        }
+    }
+    // カードベース
+    if (CardBase)
+    {
+        FSlateBrush Brush;
+        Brush.SetResourceObject(CardUtil->GetCardBaseTexture(CardData->Rarity));
+        CardBase->SetBrush(Brush);
+    }
+    // テクスチャ
+    if (CardImage)
+    {
+        FSlateBrush Brush;
+        Brush.SetResourceObject(CardData->CardTexture);
+        CardImage->SetBrush(Brush);
+    }
+    // カードタイプのアイコン設定
+    if (CardTypeIcon)
+    {
+        FSlateBrush Brush;
+        Brush.SetResourceObject(CardUtil->GetCardTypeIconTexture(CardData->CardType));
+        CardTypeIcon->SetBrush(Brush);
+    }
+    // 属性タイプのアイコン設定
+    if (ElementTypeIcon)
+    {
+        // エフェクトからデフォルトオブジェクトを取得してダメージを取得
+        if (CardData->EffectClass)
+        {
+            UCardEffectSummonWeapon* Effect = CardData->EffectClass->GetDefaultObject<UCardEffectSummonWeapon>();
+            if (Effect && Effect->WeaponClass)
+            {
+                AWeapon_ThrowKnife* WeaponActor = Effect->WeaponClass->GetDefaultObject<AWeapon_ThrowKnife>();
+                if (WeaponActor)
+                {
+                    FSlateBrush Brush;
+                    Brush.SetResourceObject(CardUtil->GetElementTypeIconTexture(WeaponActor->ElementType));
+                    ElementTypeIcon->SetBrush(Brush);
+                }
+            }
+        }
     }
 }
 

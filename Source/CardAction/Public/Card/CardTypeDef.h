@@ -12,8 +12,9 @@
 UENUM(BlueprintType)
 enum class ECardType : uint8
 {
-    Weapon    UMETA(DisplayName = "Weapon"),    // 武器カード
-    Assist    UMETA(DisplayName = "Assist"),    // アシストカード
+    Weapon      UMETA(DisplayName = "Weapon"),    // 武器カード
+    Assist      UMETA(DisplayName = "Assist"),    // アシストカード
+    Guardian    UMETA(DisplayName = "Guardian"),  // ガーディアンカード
 };
 
 // 武器の種類
@@ -31,14 +32,16 @@ enum class EAttackElementType : uint8
     None        UMETA(DisplayName = "None"),    // 無属性
     Fire        UMETA(DisplayName = "Fire"),    // 火属性
     Thunder     UMETA(DisplayName = "Thunder"), // 雷属性
+    Water       UMETA(DisplayName = "Water"),   // 水属性
 };
 
 // レアリティ
 UENUM(BlueprintType)
 enum class ECardRarityType : uint8
 {
-    Common     UMETA(DisplayName = "Common"),
-    Rare       UMETA(DisplayName = "Rare"),
-    Epic       UMETA(DisplayName = "Epic"),
-    Legendary  UMETA(DisplayName = "Legendary")
+    Common      UMETA(DisplayName = "Common"),
+    Rare        UMETA(DisplayName = "Rare"),
+    Epic        UMETA(DisplayName = "Epic"),
+    Legendary   UMETA(DisplayName = "Legendary"),
+    Mithic      UMETA(DisplayName = "Mithic")
 };

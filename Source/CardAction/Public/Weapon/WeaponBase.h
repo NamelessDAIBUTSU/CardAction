@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "../Card/CardTypeDef.h"
 #include "WeaponBase.generated.h"
 
 /**
@@ -33,6 +34,9 @@ public: /* Status */
 	// クールダウン
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Status")
 	float CoolTime = 0.f;
+	// 攻撃属性
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Status")
+	EAttackElementType ElementType = EAttackElementType::None;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Mesh")
