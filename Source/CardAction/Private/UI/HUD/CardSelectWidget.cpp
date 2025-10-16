@@ -54,8 +54,6 @@ void UCardSelectWidget::OnDecide()
         FWidgetAnimationDynamicEvent Delegate;
         Delegate.BindUFunction(this, FName("OnChangeIsDecided"));
         BindToAnimationFinished(OutAnim, Delegate);
-
-        UE_LOG(LogTemp, Warning, TEXT("OnDecide"));
     }
 }
 
@@ -165,7 +163,7 @@ void UCardSelectWidget::CreateCardWidgets(const TArray<UCardData*>& CardDataArra
                     if (CardData == nullptr)
                         return;
 
-                    SelectCards.Remove(CardData);
+                    SelectCards.RemoveSingle(CardData);
                 });
 
             CardWidget->Initialize(CardDataArray[i], Option);
@@ -175,6 +173,39 @@ void UCardSelectWidget::CreateCardWidgets(const TArray<UCardData*>& CardDataArra
         CardBoxArray[i]->RemoveChildAt(0);
         if (USizeBoxSlot* BoxSlot = Cast<USizeBoxSlot>(CardBoxArray[i]->AddChild(CardWidget)))
         {
+        }
+    }
+}
+
+// 最大まで選択しているか
+bool UCardSelectWidget::IsSelectMax() const 
+{
+    return SelectCards.Num() == MAX_HAND_CARDS_NUM; 
+}
+
+// 該当カードの順番取得
+int UCardSelectWidget::GetSelectIndex(const FName& ID)
+{
+    for (int index = 0; index < SelectCards.Num(); ++index)
+    {
+        if (SelectCards[index]->UniqueID == ID)
+            return index;
+    }
+
+    return -1;
+}
+
+// 選択中カードの選択番号テキストをリフレッシュする
+void UCardSelectWidget::OnRefleshSelectNumText(UUMGSequencePlayer& Player)
+{
+    for (auto* CardBox : CardBoxArray)
+    {
+        if (CardBox == nullptr)
+            continue;
+
+        if (UCardWidget* CardWidget = Cast<UCardWidget>(CardBox->GetChildAt(0)))
+        {
+            CardWidget->SetupSelectNum();
         }
     }
 }

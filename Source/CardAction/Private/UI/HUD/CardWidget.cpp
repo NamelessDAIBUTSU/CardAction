@@ -4,6 +4,9 @@
 #include "UI/HUD/CardWidget.h"
 #include <Components/TextBlock.h>
 #include <Components/SizeBox.h>
+#include <Character/MyPlayerController.h>
+#include <Kismet/GameplayStatics.h>
+#include "Animation/UMGSequencePlayer.h"
 
 void UCardWidget::NativeConstruct()
 {
@@ -56,9 +59,22 @@ void UCardWidget::OnCardClicked()
     if (Option.bCanMouseOver == false)
         return;
 
+    AMyPlayerController* PlayerController = Cast<AMyPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+    if (PlayerController == nullptr)
+        return;
+    if (PlayerController->MainHUDWidget == nullptr)
+        return;
+    UCardSelectWidget* CardSelectWidget = PlayerController->MainHUDWidget->CardSelectWidget;
+    if (CardSelectWidget == nullptr)
+        return;
+
     // 選択
     if (bSelected == false)
     {
+        // 手札がマックスの場合、選択できないようにする
+        if (CardSelectWidget->IsSelectMax())
+            return;
+
         if (Option.SelectCardDelegate.IsBound())
         {
             Option.SelectCardDelegate.Execute(CardData);
@@ -71,20 +87,31 @@ void UCardWidget::OnCardClicked()
             {
                 PlayAnimation(SelectAnim);
             }
+
+            // 選択番号テキストの更新
+            SetupSelectNum();
         }
     }
     // 選択解除
     else
     {
-        Option.UnSelectCardDelegate.Execute(CardData);
-
-        // 未選択にする
-        bSelected = false;
-
-        // 選択中用のホバー画像を非表示
-        if (UnSelectAnim)
+        if (Option.UnSelectCardDelegate.IsBound())
         {
-            PlayAnimation(UnSelectAnim);
+            Option.UnSelectCardDelegate.Execute(CardData);
+
+            // 未選択にする
+            bSelected = false;
+
+            if (UnSelectAnim)
+            {
+                // 選択中用のホバー画像を非表示
+                UUMGSequencePlayer* SequencePlayer = PlayAnimation(UnSelectAnim);
+                // アニメーション終了後、ほかの選択中のカードの選択番号を更新する
+                if (SequencePlayer)
+                {
+                    SequencePlayer->OnSequenceFinishedPlaying().AddUObject(CardSelectWidget, &UCardSelectWidget::OnRefleshSelectNumText);
+                }
+            }
         }
     }
 }
@@ -149,5 +176,34 @@ void UCardWidget::ExecuteEffect()
         {
             Effect->ExecuteEffect();
         }
+    }
+
+    // アニメーション
+    if (UseCardAnim)
+    {
+        PlayAnimation(UseCardAnim);
+    }
+}
+
+// 選択番号テキストの設定
+void UCardWidget::SetupSelectNum()
+{
+    AMyPlayerController* PlayerController = Cast<AMyPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+    if (PlayerController == nullptr)
+        return;
+    if (PlayerController->MainHUDWidget == nullptr)
+        return;
+    UCardSelectWidget* CardSelectWidget = PlayerController->MainHUDWidget->CardSelectWidget;
+    if (CardSelectWidget == nullptr)
+        return;
+
+    // 選択番号更新
+    if (SelectNum && CardData)
+    {
+        int Index = CardSelectWidget->GetSelectIndex(CardData->UniqueID);
+
+        FFormatNamedArguments Args;
+        Args.Add(TEXT("Num"), Index);
+        SelectNum->SetText(FText::Format(FTextFormat::FromString("{Num}"), Args));
     }
 }

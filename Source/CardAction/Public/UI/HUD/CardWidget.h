@@ -7,6 +7,7 @@
 #include <Card/CardData.h>
 #include "Card/SelectCardDelegate.h"
 #include <Components/Button.h>
+#include <Components/TextBlock.h>
 #include "CardWidget.generated.h"
 
 // 表示箇所によって処理が違うのでオプション構造体
@@ -29,11 +30,13 @@ public:
 	bool bShowToolTip = true;
 };
 
+DECLARE_MULTICAST_DELEGATE(FOnCardAnimationFinished);
+
 UCLASS()
 class CARDACTION_API UCardWidget : public UUserWidget
 {
 	GENERATED_BODY()
-	
+
 protected: /* UUserWidget */
 	virtual void NativeConstruct() override;
 
@@ -57,6 +60,12 @@ public:
 	// 効果発動
 	void ExecuteEffect();
 
+	// 選択番号テキストの設定
+	void SetupSelectNum();
+
+public:
+	FOnCardAnimationFinished OnCardAnimFinished;
+
 private:
 	// カードデータ
 	UPROPERTY(VisibleAnywhere, Category = "Data")
@@ -74,10 +83,16 @@ private:
 	UWidgetAnimation* MouseOverAnim;
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
 	UWidgetAnimation* MouseReleaseAnim;
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	UWidgetAnimation* UseCardAnim;
 
 	// 当たり判定用ボタン
 	UPROPERTY(meta = (BindWidget))
 	UButton* CardButton = nullptr;
+
+	// 選択番号テキスト
+	UPROPERTY(meta = (BindWidget))
+	UTextBlock* SelectNum = nullptr;
 
 	// 選択中か
 	bool bSelected = false;

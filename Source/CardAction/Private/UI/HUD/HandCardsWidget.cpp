@@ -108,4 +108,7 @@ void UHandCardsWidget::ExecuteEffect(int Index)
 
 	// Œø‰Ê”­“®
 	HandCards[Index]->ExecuteEffect();
+
+	// ŠY“–ƒXƒƒbƒg‚ðnullptr‚É‚·‚é
+	HandCards[Index]->SetupCardSlot(nullptr);
 }

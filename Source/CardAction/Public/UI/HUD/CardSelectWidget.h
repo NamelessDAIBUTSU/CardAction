@@ -38,6 +38,15 @@ public:
 	// カードウィジェットの生成
 	void CreateCardWidgets(const TArray<class UCardData*>& CardDataArray);
 
+	// 最大まで選択しているか
+	bool IsSelectMax() const;
+
+	// 該当カードの順番取得
+	int GetSelectIndex(const FName& ID);
+
+	// 選択中カードの選択番号テキストをリフレッシュする
+	void OnRefleshSelectNumText(UUMGSequencePlayer& Player);
+
 public:
 	// アニメーション
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
@@ -72,10 +81,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UUserWidget> CardWidgetClass;
 
+private:
 	// 選択中のカード
 	TArray<UCardData*> SelectCards;
 
-private:
 	// 確定させたか
 	bool bIsDecided = false;
 	// Outアニメーション中か

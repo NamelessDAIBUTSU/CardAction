@@ -17,6 +17,10 @@ class CARDACTION_API UCardData : public UDataAsset
 	GENERATED_BODY()
 	
 public:
+	// ユニークID
+	UPROPERTY(VisibleAnywhere, Category = "Card")
+	FName UniqueID;
+
 	// カード名
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	FName Name;

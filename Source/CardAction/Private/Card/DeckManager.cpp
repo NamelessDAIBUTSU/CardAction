@@ -17,7 +17,15 @@ void ADeckManager::Initialzie(UInitDeckData* InitDeckData)
 // カードの追加
 void ADeckManager::AddToDeck(UCardData* NewCard)
 {
-	Deck.Add(NewCard);
+	if (NewCard == nullptr)
+		return;
+
+	// DataAssetを複製して独立したインスタンスにする
+	UCardData* Instance = DuplicateObject<UCardData>(NewCard, GetTransientPackage());
+
+	// ユニークIDの生成
+	Instance->UniqueID = FName(*FGuid::NewGuid().ToString());
+	Deck.Add(Instance);
 }
 
 // カードの除去
