@@ -63,6 +63,9 @@ public:
 	// 選択番号テキストの設定
 	void SetupSelectNum();
 
+	// デフォルトアニメーションに戻す
+	void PlayDefaultAnimation();
+
 public:
 	FOnCardAnimationFinished OnCardAnimFinished;
 
@@ -85,6 +88,8 @@ private:
 	UWidgetAnimation* MouseReleaseAnim;
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
 	UWidgetAnimation* UseCardAnim;
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	UWidgetAnimation* DefaultAnim;
 
 	// 当たり判定用ボタン
 	UPROPERTY(meta = (BindWidget))

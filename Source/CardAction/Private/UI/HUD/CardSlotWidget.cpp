@@ -82,3 +82,12 @@ void UCardSlotWidget::ExecuteEffect()
 		CardWidget->ExecuteEffect();
 	}
 }
+
+// カードウィジェットのアニメーションをデフォルトに戻す
+void UCardSlotWidget::PlayDefaultAnimation()
+{
+	if (CardWidget)
+	{
+		CardWidget->PlayDefaultAnimation();
+	}
+}

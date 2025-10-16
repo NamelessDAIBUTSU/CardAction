@@ -169,10 +169,18 @@ void UCardWidget::ExecuteEffect()
         return;
     }
 
-    if (CardData && CardData->EffectClass)
+    // データ無しなら発動無効
+    if (CardData == nullptr)
+        return;
+
+    // すでに発動中は発動無効
+    if (IsAnimationPlaying(UseCardAnim))
+        return;
+
+    // 効果発動
+    if (CardData->EffectClass)
     {
-        UCardEffectBase* Effect = NewObject<UCardEffectBase>(this, CardData->EffectClass);
-        if (Effect)
+        if (UCardEffectBase* Effect = NewObject<UCardEffectBase>(this, CardData->EffectClass))
         {
             Effect->ExecuteEffect();
         }
@@ -181,7 +189,20 @@ void UCardWidget::ExecuteEffect()
     // アニメーション
     if (UseCardAnim)
     {
-        PlayAnimation(UseCardAnim);
+        UUMGSequencePlayer* SequencePlayer = PlayAnimation(UseCardAnim);
+
+        // アニメーション終了後
+        if (SequencePlayer)
+        {
+            SequencePlayer->OnSequenceFinishedPlaying().AddLambda([this, &SequencePlayer](UUMGSequencePlayer& SeqPlayer)
+                {
+                    if (IsValid(this) == false)
+                        return;
+
+                    // カードデータをリセット
+                    SetupCardData(nullptr);
+                });
+        }
     }
 }
 
@@ -205,5 +226,14 @@ void UCardWidget::SetupSelectNum()
         FFormatNamedArguments Args;
         Args.Add(TEXT("Num"), Index);
         SelectNum->SetText(FText::Format(FTextFormat::FromString("{Num}"), Args));
+    }
+}
+
+// デフォルトアニメーションに戻す
+void UCardWidget::PlayDefaultAnimation()
+{
+    if (DefaultAnim)
+    {
+        PlayAnimation(DefaultAnim);
     }
 }

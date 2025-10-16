@@ -108,7 +108,17 @@ void UHandCardsWidget::ExecuteEffect(int Index)
 
 	// 効果発動
 	HandCards[Index]->ExecuteEffect();
+}
 
-	// 該当スロットをnullptrにする
-	HandCards[Index]->SetupCardSlot(nullptr);
+// カードウィジェットのアニメーションをデフォルトに戻す
+void UHandCardsWidget::PlayDefaultAnimation(int Index)
+{
+	if (Index >= MAX_HAND_CARDS_NUM)
+		return;
+
+	if (HandCards[Index] == nullptr)
+		return;
+
+	// 効果発動
+	HandCards[Index]->PlayDefaultAnimation();
 }

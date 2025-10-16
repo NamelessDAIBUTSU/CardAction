@@ -40,6 +40,9 @@ public:
 	// カードの効果発動
 	void ExecuteEffect(int Index);
 
+	// カードウィジェットのアニメーションをデフォルトに戻す
+	void PlayDefaultAnimation(int Index);
+
 public:
 	// カードスロットクラス
 	UPROPERTY(EditAnywhere)

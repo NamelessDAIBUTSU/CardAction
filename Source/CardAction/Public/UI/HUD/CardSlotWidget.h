@@ -32,6 +32,9 @@ public:
 	// 効果発動
 	void ExecuteEffect();
 
+	// カードウィジェットのアニメーションをデフォルトに戻す
+	void PlayDefaultAnimation();
+
 public:
 	// カードクラス
 	UPROPERTY(EditAnywhere)

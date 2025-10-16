@@ -102,9 +102,13 @@ void UCardSelectWidget::OnChangeIsDecided()
         if (HandCardsWidget == nullptr)
             return;
 
+        // 手札に加える
         for (int i = 0; i < SelectCards.Num(); ++i)
         {
             HandCardsWidget->AddToHandCards(i, SelectCards[i]);
+
+            // 加えたカードのウィジェットの状態をデフォルトに戻す
+            HandCardsWidget->PlayDefaultAnimation(i);
         }
 
         // 空があればnullptrを設定
