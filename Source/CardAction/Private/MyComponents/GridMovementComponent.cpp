@@ -5,6 +5,7 @@
 #include <EnhancedInputComponent.h>
 #include <Kismet/GameplayStatics.h>
 #include <System/MyGameMode.h>
+#include "Grid\GridManager.h"
 
 // Sets default values for this component's properties
 UGridMovementComponent::UGridMovementComponent()
@@ -32,11 +33,16 @@ void UGridMovementComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 
 void UGridMovementComponent::MoveToDirection(FVector Direction)
 {
-	AActor* Owner = GetOwner();
-	if (Owner == nullptr)
+	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this);
+	AMyGameMode* MyGameMode = Cast<AMyGameMode>(GameMode);
+	if (MyGameMode == nullptr)
 		return;
 
-	APawn* PawnOwner = Cast<APawn>(Owner);
+	// アクションフェーズ以外では処理をしない
+	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
+		return;
+
+	APawn* PawnOwner = Cast<APawn>(GetOwner());
 	if (PawnOwner == nullptr)
 		return;
 
@@ -69,48 +75,42 @@ void UGridMovementComponent::MoveToDirection(FVector Direction)
 	}
 
 	// 到着地点を計算
-	TargetLocation = Owner->GetActorLocation() + MoveDirection * GridUnit;
+	TargetLocation = PawnOwner->GetActorLocation() + MoveDirection * GridUnit;
 
 	// 前回の進行方向と同じであれば抜ける
 	if (DirectionCache.Equals(MoveDirection))
 		return;
 
 	// 進行方向に回転
-	FRotator NextRotation = (TargetLocation - Owner->GetActorLocation()).Rotation();
-	Owner->SetActorRotation(NextRotation);
+	FRotator NextRotation = (TargetLocation - PawnOwner->GetActorLocation()).Rotation();
+	PawnOwner->SetActorRotation(NextRotation);
 
 	// 向き変更フラグが立っていないなら、グリッド移動
 	if (bIsTurningMode == false)
 	{
-		if (AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this))
+		AGridManager* GridManager = MyGameMode->GridManager;
+		if (GridManager == nullptr)
+			return;
+
+		// 進行方向のグリッドが進行可能状態か
+		if (GridManager->IsAccessableGridCell(TargetLocation) == false)
 		{
-			if (AMyGameMode* MyGameMode = Cast<AMyGameMode>(GameMode))
-			{
-				auto* GridManager = MyGameMode->GridManager;
-				if (GridManager == nullptr)
-					return;
-
-				// 進行方向のグリッドが進行可能状態か
-				if (GridManager->IsAccessableGridCell(TargetLocation) == false)
-				{
-					return;
-				}
-
-				// 移動中フラグを立てる
-				bIsMoving = true;
-
-				// グリッドマネージャーのアクターの位置情報を更新
-				FVector2D FromCell = GridManager->ConvertToGridCoord(Owner->GetActorLocation());
-				FVector2D ToCell = GridManager->ConvertToGridCoord(TargetLocation);
-				GridManager->RefleshActorInfoOnCell(Owner, FromCell, ToCell);
-
-				// 位置設定
-				Owner->SetActorLocation(TargetLocation);
-
-				// 座標設定
-				SetCoord(ToCell);
-			}
+			return;
 		}
+
+		// 移動中フラグを立てる
+		bIsMoving = true;
+
+		// グリッドマネージャーのアクターの位置情報を更新
+		FVector2D FromCell = GridManager->ConvertToGridCoord(PawnOwner->GetActorLocation());
+		FVector2D ToCell = GridManager->ConvertToGridCoord(TargetLocation);
+		GridManager->RefleshActorInfoOnCell(PawnOwner, FromCell, ToCell);
+
+		// 位置設定
+		PawnOwner->SetActorLocation(TargetLocation);
+
+		// 座標設定
+		SetCoord(ToCell);
 	}
 
 	// キャッシュの更新

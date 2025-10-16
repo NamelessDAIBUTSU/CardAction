@@ -6,6 +6,13 @@
 #include <System/MyGameMode.h>
 #include <Grid/GridManager.h>
 
+
+// フェーズ開始時
+void UBattlePhase_Action::OnBegin() 
+{ 
+	UE_LOG(LogTemp, Warning, TEXT("Begin ActionPhase"));
+}
+
 // フェーズ中
 void UBattlePhase_Action::OnTick(float DeltaSec)
 {

@@ -36,6 +36,20 @@ AMyCharacter::AMyCharacter()
 
 void AMyCharacter::Tick(float DeltaSeconds)
 {
+	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this);
+	AMyGameMode* MyGameMode = Cast<AMyGameMode>(GameMode);
+	if (MyGameMode == nullptr)
+		return;
+
+	// アクションフェーズ以外では時間停止
+	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
+	{
+		this->CustomTimeDilation = 0.f;
+		return;
+	}
+
+	this->CustomTimeDilation = 1.f;
+
     Super::Tick(DeltaSeconds);
 }
 
@@ -45,6 +59,9 @@ void AMyCharacter::BeginPlay()
 
 	// 手札カードの配列のサイズ確保
 	HandCards.Reserve(MAX_HAND_CARDS_NUM);
+
+	// ウィジェットに反映
+	RefleshHandCards();
 }
 
 // 入力バインド設定
@@ -76,6 +93,15 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* InputComp)
 // カード発動
 void AMyCharacter::OnUseCard(const FInputActionValue& Value)
 {
+	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this);
+	AMyGameMode* MyGameMode = Cast<AMyGameMode>(GameMode);
+	if (MyGameMode == nullptr)
+		return;
+
+	// アクションフェーズ以外では処理をしない
+	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
+		return;
+
 	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	AMyPlayerController* MyPlayerController = Cast<AMyPlayerController>(PlayerController);
 	if (MyPlayerController == nullptr)
@@ -90,6 +116,15 @@ void AMyCharacter::OnUseCard(const FInputActionValue& Value)
 // カード選択
 void AMyCharacter::OnSelectFirstCard(const FInputActionValue& Value)
 {
+	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this);
+	AMyGameMode* MyGameMode = Cast<AMyGameMode>(GameMode);
+	if (MyGameMode == nullptr)
+		return;
+
+	// アクションフェーズ以外では処理をしない
+	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
+		return;
+
 	SelectHandCardsIndex = 0;
 
 	// ウィジェットに反映
@@ -98,6 +133,15 @@ void AMyCharacter::OnSelectFirstCard(const FInputActionValue& Value)
 
 void AMyCharacter::OnSelectSecondCard(const FInputActionValue& Value)
 {
+	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this);
+	AMyGameMode* MyGameMode = Cast<AMyGameMode>(GameMode);
+	if (MyGameMode == nullptr)
+		return;
+
+	// アクションフェーズ以外では処理をしない
+	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
+		return;
+
 	SelectHandCardsIndex = 1;
 
 	// ウィジェットに反映
@@ -106,6 +150,15 @@ void AMyCharacter::OnSelectSecondCard(const FInputActionValue& Value)
 
 void AMyCharacter::OnSelectThirdCard(const FInputActionValue& Value)
 {
+	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this);
+	AMyGameMode* MyGameMode = Cast<AMyGameMode>(GameMode);
+	if (MyGameMode == nullptr)
+		return;
+
+	// アクションフェーズ以外では処理をしない
+	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
+		return;
+
 	SelectHandCardsIndex = 2;
 
 	// ウィジェットに反映
@@ -114,6 +167,15 @@ void AMyCharacter::OnSelectThirdCard(const FInputActionValue& Value)
 
 void AMyCharacter::OnSelectFourthCard(const FInputActionValue& Value)
 {
+	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this);
+	AMyGameMode* MyGameMode = Cast<AMyGameMode>(GameMode);
+	if (MyGameMode == nullptr)
+		return;
+
+	// アクションフェーズ以外では処理をしない
+	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
+		return;
+
 	SelectHandCardsIndex = 3;
 
 	// ウィジェットに反映
@@ -122,6 +184,15 @@ void AMyCharacter::OnSelectFourthCard(const FInputActionValue& Value)
 
 void AMyCharacter::OnScrollSelectCard(const FInputActionValue& Value)
 {
+	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this);
+	AMyGameMode* MyGameMode = Cast<AMyGameMode>(GameMode);
+	if (MyGameMode == nullptr)
+		return;
+
+	// アクションフェーズ以外では処理をしない
+	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
+		return;
+
 	float AxisValue = Value.Get<float>();
 	if (AxisValue > 0.f)
 	{
