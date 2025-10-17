@@ -3,16 +3,21 @@
 
 #include "Card/CardUtil.h"
 
-void UCardUtil::Initialize(FSubsystemCollectionBase& Collection)
+UCardUtil::UCardUtil()
 {
-	Super::Initialize(Collection);
-
 	// C++でDataAssetをロードして設定
 	static ConstructorHelpers::FObjectFinder<UCardUtilData> CardDataAsset(TEXT("/Game/CardAction/Card/UtilData/DA_CardUtilData.DA_CardUtilData"));
 	if (CardDataAsset.Succeeded())
 	{
 		CardUtilData = CardDataAsset.Object;
 	}
+}
+
+void UCardUtil::Initialize(FSubsystemCollectionBase& Collection)
+{
+	Super::Initialize(Collection);
+
+	
 }
 
 // レアリティに紐づくカードベース画像を取得

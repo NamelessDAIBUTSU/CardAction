@@ -19,10 +19,10 @@ public:
 
 public: /* UBattlePhaseBase */
 	// フェーズ開始時
-	virtual void OnBegin() override { UE_LOG(LogTemp, Warning, TEXT("Begin ResultPhase")); }
+	virtual void OnBegin() override;
 	// フェーズ中
 	virtual void OnTick(float DeltaSec) override;
 	// フェーズ終了時
-	virtual void OnExit() override {}
+	virtual void OnExit() override;
 
 };

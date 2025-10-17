@@ -8,6 +8,7 @@
 #include "UI/HUD/SelectedCardsWidget.h"
 #include "UI/HUD/HPGauge.h"
 #include "UI/HUD/HandCardsWidget.h"
+#include "UI/HUD/StageClearWidget.h"
 #include "CardSelectWidget.h"
 #include "Card/SelectCardDelegate.h"
 
@@ -41,9 +42,10 @@ public: /* 生成するWidgetクラス */
     UPROPERTY(meta = (BindWidget))
     UCanvasPanel* MainCanvas;
 
-    // ゲームクリア
+    // ステージクリア
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
-    TSubclassOf<UUserWidget> GameClearWidgetClass;
+    TSubclassOf<UUserWidget> StageClearWidgetClass;
+
     // ゲームオーバー
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
     TSubclassOf<UUserWidget> GameOverWidgetClass;
@@ -66,9 +68,9 @@ public: /* 生成するWidgetクラス */
 
 
 public: /* インスタンスのポインタ */
-    // ゲームクリア
+    // ステージクリア
     UPROPERTY()
-    UUserWidget* GameClearWidget = nullptr;
+    UStageClearWidget* StageClearWidget = nullptr;
     // ゲームオーバー
     UPROPERTY()
     UUserWidget* GameOverWidget = nullptr;

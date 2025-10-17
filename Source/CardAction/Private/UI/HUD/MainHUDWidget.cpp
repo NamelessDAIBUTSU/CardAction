@@ -13,23 +13,25 @@ void UMainHUDWidget::NativeConstruct()
     SelectCardDelegate.BindUObject(this, &UMainHUDWidget::OnAddToSelectedCards);
     UnSelectCardDelegate.BindUObject(this, &UMainHUDWidget::OnRemoveFromSelectedCards);
 
-    // メインキャンバスの設定
-    if (MainCanvas)
-    {
-
-    }
-
     // ウィジェットの生成
     {
-        // ゲームクリア
-        if (GameClearWidgetClass)
+        // ステージクリア
+        if (StageClearWidgetClass)
         {
-            GameClearWidget = CreateWidget<UUserWidget>(GetWorld(), GameClearWidgetClass);
+            StageClearWidget = CreateWidget<UStageClearWidget>(GetWorld(), StageClearWidgetClass);
 
             // キャンバスに追加
             if (MainCanvas)
             {
-                MainCanvas->AddChild(GameClearWidget);
+                MainCanvas->AddChild(StageClearWidget);
+
+                // 中央に配置
+                UCanvasPanelSlot* CanvasSlot = Cast<UCanvasPanelSlot>(StageClearWidget->Slot);
+                if (CanvasSlot)
+                {
+                    CanvasSlot->SetAnchors(FAnchors(0.5f, 0.5f));
+                    CanvasSlot->SetAlignment(FVector2D(0.5f, 0.5f));
+                }
             }
         }
 
@@ -42,6 +44,8 @@ void UMainHUDWidget::NativeConstruct()
             if (MainCanvas)
             {
                 MainCanvas->AddChild(GameOverWidget);
+                // デフォルト非表示
+                GameOverWidget->SetVisibility(ESlateVisibility::Hidden);
             }
         }
 

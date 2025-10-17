@@ -1,0 +1,27 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "Blueprint/UserWidget.h"
+#include "StageClearWidget.generated.h"
+
+/**
+ * 
+ */
+UCLASS()
+class CARDACTION_API UStageClearWidget : public UUserWidget
+{
+	GENERATED_BODY()
+	
+public:
+	void PlayInAnimation();
+	void PlayOutAnimation();
+
+private:
+	// アニメーション
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	UWidgetAnimation* InAnim;
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	UWidgetAnimation* OutAnim;
+};

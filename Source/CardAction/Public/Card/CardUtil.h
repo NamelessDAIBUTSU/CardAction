@@ -20,6 +20,9 @@ public:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 
 public:
+	UCardUtil();
+
+public:
 	// レアリティに紐づくカードベース画像を取得
 	UTexture2D* GetCardBaseTexture(ECardRarityType Rarity);
 
