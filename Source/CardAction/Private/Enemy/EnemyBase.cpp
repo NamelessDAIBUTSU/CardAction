@@ -138,8 +138,13 @@ void AEnemyBase::Tick(float DeltaTime)
 		return;
 	}
 
-
 	Super::Tick(DeltaTime);
+
+	// 死亡していたら自身を消す
+	if (bIsDead)
+	{
+		Destroy();
+	}
 
 	// HPバーの更新
 	UpdateHPBarWidget();
@@ -167,23 +172,43 @@ void AEnemyBase::OnTakeDamage(int TakeDamage)
 		// 死亡時処理
 		OnDead();
 
-		UE_LOG(LogTemp, Warning, TEXT("Dead"));
+		// 死亡アニメーション再生
+		if (GetMesh() && GetMesh()->GetAnimInstance())
+		{
+			auto* AnimInstance = GetMesh()->GetAnimInstance();
+			AnimInstance->Montage_Play(DeadAnimMontage);
 
-		// 破棄
-		GetWorld()->GetTimerManager().SetTimerForNextTick([this]()
-			{
-				if (IsValid(this))
-				{
-					Destroy();
-					UE_LOG(LogTemp, Warning, TEXT("Destroy"));
-				}
-			});
+			// モンタージュが終了したら死亡フラグを立てる
+			FOnMontageEnded EndDelegate;
+			EndDelegate.BindUObject(this, &AEnemyBase::OnEndDeadMontage);
+			AnimInstance->Montage_SetEndDelegate(EndDelegate, DeadAnimMontage);
+		}
 	}
 }
 
 // 死亡時のコールバック
 void AEnemyBase::OnDead()
 {
+	// BTを停止
+	if (AAIController* AIController = Cast<AAIController>(GetController()))
+	{
+		if (AIController->BrainComponent)
+		{
+			AIController->BrainComponent->StopLogic(TEXT("Dead"));
+		}
+	}
+
+	OnEnemyDied.Broadcast(this);
+}
+
+void AEnemyBase::OnEndDeadMontage(UAnimMontage* Montage, bool bInterrupted)
+{
+	bIsDead = true;
+
+	// アニメーション終了後は完全停止
+	GetMesh()->bPauseAnims = true;
+	GetMesh()->bNoSkeletonUpdate = true;
+
 	// 現在の座標のグリッドセルから情報を削除
 	AGameModeBase* GM = UGameplayStatics::GetGameMode(this);
 	if (AMyGameMode* MyGM = Cast<AMyGameMode>(GM))
@@ -194,7 +219,7 @@ void AEnemyBase::OnDead()
 		}
 	}
 
-	OnEnemyDied.Broadcast(this);
+	Destroy();
 }
 
 // HPバーの更新

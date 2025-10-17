@@ -45,6 +45,9 @@ public:
 	// グリッド移動コンポーネント
 	UGridMovementComponent* GetGridMovementComponent() { return GridMovementComp; }
 
+	// 死亡モンタージュ終了後処理
+	void OnEndDeadMontage(UAnimMontage* Montage, bool bInterrupted);
+	bool IsDead() const { return bIsDead; }
 
 private:
 	// HPバーの更新
@@ -72,6 +75,10 @@ public: /* Anim */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim")
 	bool bIsPlayedEntryAnim = false;
 
+	// 死亡モンタージュ
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim")
+	UAnimMontage* DeadAnimMontage = nullptr;
+
 public: /* Callback */
 	UPROPERTY(BlueprintAssignable, Category = "Event")
 	FOnEnemyDead OnEnemyDied;
@@ -86,4 +93,9 @@ protected: /* Component */
 	// グリッド移動
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component")
 	UGridMovementComponent* GridMovementComp = nullptr;
+
+protected:
+	// 死んだか
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Status")
+	bool bIsDead = false;
 };
