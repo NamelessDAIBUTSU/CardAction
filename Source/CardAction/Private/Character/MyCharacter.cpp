@@ -10,6 +10,7 @@
 #include <System/MyGameMode.h>
 #include "Character/MyPlayerController.h"
 #include "Card/DeckManager.h"
+#include <UI/HUD/HPBar.h>
 
 AMyCharacter::AMyCharacter()
 {
@@ -29,6 +30,19 @@ AMyCharacter::AMyCharacter()
 
 	// グリッド移動コンポーネント
 	GridMovementComp = CreateDefaultSubobject<UGridMovementComponent>(TEXT("GridMovement"));
+
+	// HPバー用ウィジェットコンポーネント
+	WidgetComp = CreateDefaultSubobject<UWidgetComponent>(TEXT("WidgetComponent"));
+	if (WidgetComp)
+	{
+		WidgetComp->SetupAttachment(RootComponent);
+		// シャドウを落とさない
+		WidgetComp->SetCastShadow(false);
+		// デカールも受けない
+		WidgetComp->bReceivesDecals = false;
+		// 当たり判定も不要
+		WidgetComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	}
 
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
@@ -62,6 +76,36 @@ void AMyCharacter::BeginPlay()
 
 	// ウィジェットに反映
 	RefleshHandCards();
+
+	// HPバーに所有者を登録
+	if (WidgetComp)
+	{
+		if (UHPBar* HPWidget = Cast<UHPBar>(WidgetComp->GetUserWidgetObject()))
+		{
+			// HP取得用の関数設定
+			FOnGetMaxHP GetMaxHPFunc;
+			GetMaxHPFunc.BindLambda([this]()
+				{
+					if (IsValid(this) == false)
+						return 0;
+
+					return MaxHP;
+				});
+
+			FOnGetCurrentHP GetCurrentHPFunc;
+			GetCurrentHPFunc.BindLambda([this]()
+				{
+					if (IsValid(this) == false)
+						return 0;
+
+					return CurrentHP;
+				});
+			HPWidget->Setup(WidgetComp, GetMaxHPFunc, GetCurrentHPFunc);
+
+			// エネミー用のレイアウトに変更
+			HPWidget->ChangeLayout(EHPBarType::Player);
+		}
+	}
 }
 
 // 入力バインド設定

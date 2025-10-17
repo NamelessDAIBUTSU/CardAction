@@ -58,8 +58,6 @@ public:
 	void SetIsReady(bool IsReady) { bIsReady = IsReady; }
 
 private:
-	// HPバーの更新
-	void UpdateHPBarWidget();
 	// プレイヤーの方向を向く
 	void LookAtPlayer();
 

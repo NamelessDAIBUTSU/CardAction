@@ -8,6 +8,7 @@
 #include <Weapon/WeaponBase.h>
 #include <Card/CardData.h>
 #include "MyComponents/GridMovementComponent.h"
+#include <Components/WidgetComponent.h>
 #include "MyCharacter.generated.h"
 
 UCLASS(Blueprintable)
@@ -117,6 +118,10 @@ private:
 	int SelectHandCardsIndex = 0;
 
 	// グリッド移動コンポーネント
-	class UGridMovementComponent* GridMovementComp = nullptr;
+	UPROPERTY(VisibleAnywhere, Category = "Component")
+	UGridMovementComponent* GridMovementComp = nullptr;
+	// HPバー用コンポーネント
+	UPROPERTY(VisibleAnywhere, Category = "Component")
+	UWidgetComponent* WidgetComp = nullptr;
 };
 

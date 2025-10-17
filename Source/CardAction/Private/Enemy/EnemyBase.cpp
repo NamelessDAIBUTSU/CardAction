@@ -10,7 +10,7 @@
 #include <AIController.h>
 #include <Character/MyCharacter.h>
 #include "BehaviorTree/BlackboardComponent.h"
-#include <UI/HUD/EnemyHPBar.h>
+#include <UI/HUD/HPBar.h>
 #include "Grid/GridManager.h"
 #include "Enemy/EnemyManager.h"
 
@@ -102,12 +102,33 @@ void AEnemyBase::BeginPlay()
 		}
 	}
 
-	// HPバーに所有者を登録
+	// HPバーの設定
 	if (WidgetComp)
 	{
-		if (UEnemyHPBar* HPWidget = Cast<UEnemyHPBar>(WidgetComp->GetUserWidgetObject()))
+		if (UHPBar* HPWidget = Cast<UHPBar>(WidgetComp->GetUserWidgetObject()))
 		{
-			HPWidget->SetOwner(this);
+			// HP取得用の関数設定
+			FOnGetMaxHP GetMaxHPFunc;
+			GetMaxHPFunc.BindLambda([this]()
+				{
+					if (IsValid(this) == false)
+						return 0;
+
+					return MaxHP;
+				});
+
+			FOnGetCurrentHP GetCurrentHPFunc;
+			GetCurrentHPFunc.BindLambda([this]()
+				{
+					if (IsValid(this) == false)
+						return 0;
+
+					return CurrentHP;
+				});
+			HPWidget->Setup(WidgetComp, GetMaxHPFunc, GetCurrentHPFunc);
+
+			// エネミー用のレイアウトに変更
+			HPWidget->ChangeLayout(EHPBarType::Enemy);
 		}
 	}
 
@@ -169,9 +190,6 @@ void AEnemyBase::Tick(float DeltaTime)
 	{
 		Destroy();
 	}
-
-	// HPバーの更新
-	UpdateHPBarWidget();
 
 	// 自動でプレイヤーの方向へ回転
 	if (bIsAutoLookAtPlayer)
@@ -255,18 +273,6 @@ bool AEnemyBase::IsPlayingDeadMontage()
 		return false;
 
 	return GetMesh()->GetAnimInstance()->Montage_IsPlaying(DeadAnimMontage);
-}
-
-// HPバーの更新
-void AEnemyBase::UpdateHPBarWidget()
-{
-	if (WidgetComp == nullptr)
-		return;
-
-	// 常にカメラが正面になるように回転させる
-	FRotator LookAtRotation = (FVector::XAxisVector * -1.f).Rotation();
-
-	WidgetComp->SetWorldRotation(LookAtRotation);
 }
 
 // プレイヤーの方向を向く

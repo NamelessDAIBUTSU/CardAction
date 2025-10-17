@@ -3,25 +3,20 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
+#include "UI/HUD/HUDBase.h"
 #include "StageClearWidget.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class CARDACTION_API UStageClearWidget : public UUserWidget
+class CARDACTION_API UStageClearWidget : public UHUDBase
 {
 	GENERATED_BODY()
-	
-public:
-	void PlayInAnimation();
-	void PlayOutAnimation();
 
-private:
-	// アニメーション
-	UPROPERTY(meta = (BindWidgetAnim), Transient)
-	UWidgetAnimation* InAnim;
-	UPROPERTY(meta = (BindWidgetAnim), Transient)
-	UWidgetAnimation* OutAnim;
+public: /* UHUDBase */
+	virtual void PlayInAnimation() override;
+	virtual void PlayOutAnimation() override;
+
+	virtual void OnUpdate(float DeltaSec) override {}
 };
