@@ -3,20 +3,24 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
+#include "UI/HUD/HUDBase.h"
 #include <Components/Button.h>
 #include "Components/SizeBox.h"
 #include "CardSelectWidget.generated.h"
 
 
 UCLASS()
-class CARDACTION_API UCardSelectWidget : public UUserWidget
+class CARDACTION_API UCardSelectWidget : public UHUDBase
 {
 	GENERATED_BODY()
 	
 public:
 	// 初期化
 	virtual bool Initialize() override;
+
+public: /* UHUDBase */
+	// Inアニメーションの再生
+	virtual void PlayInAnimation() override;
 
 public:
 	// 決定時のコールバック
@@ -32,9 +36,6 @@ public:
 	// アクションフェーズへの遷移判定
 	bool GetIsDecided() const { return bIsDecided; }
 
-	// Inアニメーションの再生
-	void PlayInAnimation();
-
 	// カードウィジェットの生成
 	void CreateCardWidgets(const TArray<class UCardData*>& CardDataArray);
 
@@ -48,12 +49,6 @@ public:
 	void OnRefleshSelectNumText(UUMGSequencePlayer& Player);
 
 public:
-	// アニメーション
-	UPROPERTY(meta = (BindWidgetAnim), Transient)
-	UWidgetAnimation* InAnim;
-	UPROPERTY(meta = (BindWidgetAnim), Transient)
-	UWidgetAnimation* OutAnim;
-
 	// 決定ボタン
 	UPROPERTY(meta = (BindWidget))
 	UButton* DecideButton;

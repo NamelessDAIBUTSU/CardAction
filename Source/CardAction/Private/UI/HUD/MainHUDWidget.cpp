@@ -10,9 +10,6 @@ void UMainHUDWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-    SelectCardDelegate.BindUObject(this, &UMainHUDWidget::OnAddToSelectedCards);
-    UnSelectCardDelegate.BindUObject(this, &UMainHUDWidget::OnRemoveFromSelectedCards);
-
     // ウィジェットの生成
     {
         // ステージクリア
@@ -49,19 +46,6 @@ void UMainHUDWidget::NativeConstruct()
             }
         }
 
-        // HPゲージ
-        if (HPGaugeWidgetClass)
-        {
-            UUserWidget* widget = CreateWidget<UUserWidget>(GetWorld(), HPGaugeWidgetClass);
-            HPGaugeWidget = Cast<UHPGauge>(widget);
-
-            // キャンバスに追加
-            if (MainCanvas)
-            {
-                MainCanvas->AddChild(HPGaugeWidget);
-            }
-        }
-
         // 手札
         if (HandCardsWidgetClass)
         {
@@ -91,26 +75,6 @@ void UMainHUDWidget::NativeConstruct()
             }
         }
 
-        // 選択中カード
-        if (SelectedCardsWidgetClass)
-        {
-            SelectedCardsWidget = CreateWidget<USelectedCardsWidget>(GetWorld(), SelectedCardsWidgetClass);
-            // キャンバスに追加
-            if (MainCanvas)
-            {
-                MainCanvas->AddChild(SelectedCardsWidget);
-
-                UCanvasPanelSlot* CanvasSlot = Cast<UCanvasPanelSlot>(SelectedCardsWidget->Slot);
-                if (CanvasSlot)
-                {
-                    // 真ん中下
-                    CanvasSlot->SetAnchors(FAnchors(0.5f, 1.f));
-                    CanvasSlot->SetAlignment(FVector2D(0.5f, 1.f));
-                }
-                //SelectedCardsWidget->SetRenderScale(FVector2D(0.75f, 0.75f));
-            }
-        }
-
         // カード選択
         if (CardSelectWidgetClass)
         {
@@ -136,25 +100,5 @@ void UMainHUDWidget::NativeConstruct()
 // 更新
 void UMainHUDWidget::OnTick(float InDeltaTime)
 {
-    if (HPGaugeWidget)
-    {
-        HPGaugeWidget->OnUpdateHPGauge();
-    }
-}
-
-// 選択中カードに追加
-void UMainHUDWidget::OnAddToSelectedCards(UCardData* CardData)
-{
-    if (SelectedCardsWidget)
-    {
-        SelectedCardsWidget->AddToSelectedCards(CardData);
-    }
-}
-
-void UMainHUDWidget::OnRemoveFromSelectedCards(UCardData* CardData)
-{
-    if (SelectedCardsWidget)
-    {
-        SelectedCardsWidget->RemoveFromSelectedCards(CardData);
-    }
+   
 }

@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
+#include "UI/HUD/HUDBase.h"
 #include <Card/CardData.h>
 #include "Card/SelectCardDelegate.h"
 #include <Components/Button.h>
@@ -32,7 +32,7 @@ public:
 };
 
 UCLASS()
-class CARDACTION_API UCardWidget : public UUserWidget
+class CARDACTION_API UCardWidget : public UHUDBase
 {
 	GENERATED_BODY()
 
