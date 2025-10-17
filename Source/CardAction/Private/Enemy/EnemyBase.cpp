@@ -201,7 +201,7 @@ void AEnemyBase::OnTakeDamage(int TakeDamage)
 		{
 			auto* AnimInstance = GetMesh()->GetAnimInstance();
 			AnimInstance->Montage_Play(DeadAnimMontage);
-
+		
 			// モンタージュが終了したら死亡フラグを立てる
 			FOnMontageEnded EndDelegate;
 			EndDelegate.BindUObject(this, &AEnemyBase::OnEndDeadMontage);
@@ -244,6 +244,17 @@ void AEnemyBase::OnEndDeadMontage(UAnimMontage* Montage, bool bInterrupted)
 	}
 
 	Destroy();
+}
+
+// 死亡モンタージュ再生中か
+bool AEnemyBase::IsPlayingDeadMontage()
+{
+	if (GetMesh() == nullptr)
+		return false;
+	if (GetMesh()->GetAnimInstance() == nullptr)
+		return false;
+
+	return GetMesh()->GetAnimInstance()->Montage_IsPlaying(DeadAnimMontage);
 }
 
 // HPバーの更新

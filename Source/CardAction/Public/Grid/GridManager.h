@@ -54,6 +54,9 @@ public: /* 敵 */
 	// グリッドマス上に敵が存在するか
 	bool IsExistEnemyOnGridCell(FVector2D Coord);
 
+	// グリッドセル上にいるエネミーを取得
+	AEnemyBase* GetEnemyOnGridCell(FVector2D Coord);
+
 public: /* Util */
 	// グリッド座標 → ワールド座標に変換
 	FVector ConvertToWorldPosition(FVector2D Coord);

@@ -48,7 +48,10 @@ public:
 
 	// 死亡モンタージュ終了後処理
 	void OnEndDeadMontage(UAnimMontage* Montage, bool bInterrupted);
+	// 死んだか
 	bool IsDead() const { return bIsDead; }
+	// 死亡モンタージュ再生中か
+	bool IsPlayingDeadMontage();
 
 	// 開始準備ができているか
 	bool IsReady() const { return bIsReady; }

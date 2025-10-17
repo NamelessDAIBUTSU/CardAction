@@ -7,6 +7,7 @@
 #include <Kismet/GameplayStatics.h>
 #include <System/MyGameMode.h>
 #include "Grid/GridManager.h"
+#include "Enemy/EnemyBase.h"
 
 AWeapon_ThrowKnife::AWeapon_ThrowKnife()
 {
@@ -76,6 +77,12 @@ void AWeapon_ThrowKnife::OnOverlap(UPrimitiveComponent* OverlappedComp,
 
     // 敵がいるマスか先に取得しておく
     bool bIsExistEnemyOnGridCell = GridManager->IsExistEnemyOnGridCell(Coord);
+    // 敵が死亡モーション中なら消さない
+    AEnemyBase* Enemy = GridManager->GetEnemyOnGridCell(Coord);
+    if (Enemy)
+    {
+        bIsExistEnemyOnGridCell &= (Enemy->IsPlayingDeadMontage() == false);
+    }
 
     // ダメージ判定追加
     GridManager->ExecuteAttackToGridCell(this, Damage, Coord);

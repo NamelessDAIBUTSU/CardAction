@@ -42,6 +42,9 @@ public:
 	// セル上に敵が存在するか
 	bool IsExistEnemyOnCell();
 
+	// セル上のエネミーを取得
+	class AEnemyBase* GetEnemyOnCell();
+
 public: /* 攻撃予測 */
 	// 攻撃予測の追加
 	void AddAttackSign();

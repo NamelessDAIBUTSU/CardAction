@@ -8,14 +8,14 @@
 
 void UBattlePhase_Entry::OnTick(float DeltaSec)
 {
-	// 敵ステージじゃない場合はすぐにアクションフェーズへリクエスト
+	// 敵ステージじゃない場合はアクションフェーズへリクエスト
 	if (false)
 	{
 		RequestNextPhase = EBattlePhase::Action;
 		return;
 	}
 
-	// グリッド上にいる全敵がエントリーモーションを行ったらカード選択フェーズへリクエスト
+	// 全敵が開始準備を整えたらカード選択フェーズへリクエスト
 	if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
 	{
 		if (MyGM->EnemyManager && MyGM->EnemyManager->IsAllEnemyReady())

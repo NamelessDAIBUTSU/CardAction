@@ -150,6 +150,21 @@ bool AGridCellActor::IsExistEnemyOnCell()
     return false;
 }
 
+// セル上のエネミーを取得
+AEnemyBase* AGridCellActor::GetEnemyOnCell()
+{
+    for (AActor* Actor : CellData.Objects)
+    {
+        AEnemyBase* Enemy = Cast<AEnemyBase>(Actor);
+        if (Enemy)
+        {
+            return Enemy;
+        }
+    }
+
+    return nullptr;
+}
+
 // 攻撃予測の追加
 void AGridCellActor::AddAttackSign()
 {

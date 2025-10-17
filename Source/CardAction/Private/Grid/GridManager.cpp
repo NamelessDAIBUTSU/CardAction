@@ -267,6 +267,17 @@ bool AGridManager::IsExistEnemyOnGridCell(FVector2D Coord)
 	return false;
 }
 
+// グリッドセル上にいるエネミーを取得
+AEnemyBase* AGridManager::GetEnemyOnGridCell(FVector2D Coord)
+{
+	if (AGridCellActor* TargetCell = GetGridCellActor(Coord))
+	{
+		return TargetCell->GetEnemyOnCell();
+	}
+
+	return nullptr;
+}
+
 // グリッド座標 → ワールド座標に変換
 FVector AGridManager::ConvertToWorldPosition(FVector2D Coord)
 {
