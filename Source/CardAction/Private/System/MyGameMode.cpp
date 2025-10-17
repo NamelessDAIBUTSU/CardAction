@@ -5,8 +5,10 @@
 #include <Camera/GridCamera.h>
 #include <Character/MyCharacter.h>
 #include <Grid/GridManager.h>
+#include "Enemy/EnemyManager.h"
 #include <Card/DeckManager.h>
 #include <System/Phase/BattlePhaseBase.h>
+#include <System/Phase/BattlePhase_Entry.h>
 #include <System/Phase/BattlePhase_CardSelect.h>
 #include <System/Phase/BattlePhase_Action.h>
 #include <System/Phase/BattlePhase_Result.h>
@@ -18,6 +20,12 @@ AMyGameMode::AMyGameMode()
 void AMyGameMode::StartPlay()
 {
 	Super::StartPlay();
+
+	// エネミーマネージャー生成
+	if (EnemyManagerClass)
+	{
+		EnemyManager = GetWorld()->SpawnActor<AEnemyManager>(EnemyManagerClass, FVector(), FRotator());
+	}
 
 	// グリッドマネージャー生成
 	if (GridManagerClass)
@@ -84,7 +92,7 @@ void AMyGameMode::StartPlay()
 	}
 
 	// 最初のフェーズ設定
-	ChangePhase(EBattlePhase::CardSelect);
+	ChangePhase(EBattlePhase::Entry);
 }
 
 void AMyGameMode::Tick(float DeltaSeconds)
@@ -113,6 +121,9 @@ void AMyGameMode::ChangePhase(EBattlePhase NextPhase)
 	// 次のフェーズを生成
 	switch (NextPhase)
 	{
+	case EBattlePhase::Entry:
+		CurrentBattlePhase = NewObject<UBattlePhaseBase>(this, UBattlePhase_Entry::StaticClass());
+		break;
 	case EBattlePhase::CardSelect:
 		CurrentBattlePhase = NewObject<UBattlePhaseBase>(this, UBattlePhase_CardSelect::StaticClass());
 		break;

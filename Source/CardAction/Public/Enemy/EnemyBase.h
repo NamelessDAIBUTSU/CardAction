@@ -21,6 +21,7 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+	virtual void BeginDestroy() override;
 
 public:	
 	virtual void Tick(float DeltaTime) override;
@@ -32,7 +33,7 @@ public: /* Callback */
 
 	// 死亡時のコールバック
 	UFUNCTION()
-	virtual void OnDead();
+	virtual void OnBeforeDead();
 
 public:
 	// 回転可能か
@@ -48,6 +49,10 @@ public:
 	// 死亡モンタージュ終了後処理
 	void OnEndDeadMontage(UAnimMontage* Montage, bool bInterrupted);
 	bool IsDead() const { return bIsDead; }
+
+	// 開始準備ができているか
+	bool IsReady() const { return bIsReady; }
+	void SetIsReady(bool IsReady) { bIsReady = IsReady; }
 
 private:
 	// HPバーの更新
@@ -71,10 +76,6 @@ public: /* Status */
 	bool bIsAutoLookAtPlayer = true;
 
 public: /* Anim */
-	// 登場アニメーションを再生したか
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim")
-	bool bIsPlayedEntryAnim = false;
-
 	// 死亡モンタージュ
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim")
 	UAnimMontage* DeadAnimMontage = nullptr;
@@ -98,4 +99,8 @@ protected:
 	// 死んだか
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Status")
 	bool bIsDead = false;
+
+	// 開始準備ができたか
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Status")
+	bool bIsReady = false;
 };

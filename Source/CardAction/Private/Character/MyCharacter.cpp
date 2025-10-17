@@ -42,7 +42,7 @@ void AMyCharacter::Tick(float DeltaSeconds)
 		return;
 
 	// アクションフェーズ以外では時間停止
-	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
+	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Entry && MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
 	{
 		this->CustomTimeDilation = 0.f;
 		return;

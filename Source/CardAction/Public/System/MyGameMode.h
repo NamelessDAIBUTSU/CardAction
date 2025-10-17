@@ -9,6 +9,12 @@
 #include <Card/CardBook.h>
 #include "MyGameMode.generated.h"
 
+class AGridManager;
+class ADeckManager;
+class AEnemyManager;
+class UBattlePhaseBase;
+class AMyCharacter;
+
 UCLASS()
 class CARDACTION_API AMyGameMode : public AGameMode
 {
@@ -38,15 +44,21 @@ public:
 
 	// グリッドマネージャー
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grid")
-	TSubclassOf<class AGridManager> GridManagerClass;
+	TSubclassOf<AGridManager> GridManagerClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Grid")
-	class AGridManager* GridManager;
+	AGridManager* GridManager;
 
 	// デッキマネージャー
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
-	TSubclassOf<class ADeckManager> DeckManagerClass;
+	TSubclassOf<ADeckManager> DeckManagerClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Card")
-	class ADeckManager* DeckManager;
+	ADeckManager* DeckManager;
+
+	// エネミーマネージャー
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy")
+	TSubclassOf<AEnemyManager> EnemyManagerClass;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Enemy")
+	AEnemyManager* EnemyManager;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	UInitDeckData* InitDeckData = nullptr;
@@ -62,11 +74,11 @@ public:
 private:
 	// 現在のフェーズ
 	UPROPERTY(VisibleAnywhere, Category = "Phase")
-	class UBattlePhaseBase* CurrentBattlePhase = nullptr;
+	UBattlePhaseBase* CurrentBattlePhase = nullptr;
 
 	// プレイヤー
 	UPROPERTY(VisibleAnywhere, Category = "Player")
-	class AMyCharacter* Player = nullptr;
+	AMyCharacter* Player = nullptr;
 
 	// プレイヤーコントローラー
 	UPROPERTY(VisibleAnywhere, Category = "Player")

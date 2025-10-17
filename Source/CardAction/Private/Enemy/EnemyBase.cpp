@@ -12,6 +12,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include <UI/HUD/EnemyHPBar.h>
 #include "Grid/GridManager.h"
+#include "Enemy/EnemyManager.h"
 
 // Sets default values
 AEnemyBase::AEnemyBase()
@@ -109,6 +110,29 @@ void AEnemyBase::BeginPlay()
 			HPWidget->SetOwner(this);
 		}
 	}
+
+	// エネミーマネージャーに自身を登録
+	if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
+	{
+		if (MyGM->EnemyManager)
+		{
+			MyGM->EnemyManager->RegistEnemy(this);
+		}
+	}
+}
+
+void AEnemyBase::BeginDestroy()
+{
+	Super::BeginDestroy();
+
+	// エネミーマネージャーから自身を解除
+	if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
+	{
+		if (MyGM->EnemyManager)
+		{
+			MyGM->EnemyManager->UnRegistEnemy(this);
+		}
+	}
 }
 
 // Called every frame
@@ -119,8 +143,8 @@ void AEnemyBase::Tick(float DeltaTime)
 	if (MyGameMode == nullptr)
 		return;
 
-	// アクションフェーズ以外では時間停止
-	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
+	// 開始/アクション フェーズ以外では時間停止
+	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Entry && MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
 	{
 		this->CustomTimeDilation = 0.f;
 
@@ -170,7 +194,7 @@ void AEnemyBase::OnTakeDamage(int TakeDamage)
 	if (CurrentHP <= 0)
 	{
 		// 死亡時処理
-		OnDead();
+		OnBeforeDead();
 
 		// 死亡アニメーション再生
 		if (GetMesh() && GetMesh()->GetAnimInstance())
@@ -187,7 +211,7 @@ void AEnemyBase::OnTakeDamage(int TakeDamage)
 }
 
 // 死亡時のコールバック
-void AEnemyBase::OnDead()
+void AEnemyBase::OnBeforeDead()
 {
 	// BTを停止
 	if (AAIController* AIController = Cast<AAIController>(GetController()))
