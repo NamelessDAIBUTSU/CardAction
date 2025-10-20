@@ -3,6 +3,7 @@
 
 #include "UI/HUD/StageClearWidget.h"
 #include <Kismet/GameplayStatics.h>
+#include <System/FadeSystem.h>
 
 bool UStageClearWidget::Initialize()
 {
@@ -52,10 +53,12 @@ void UStageClearWidget::OnDecide()
 // アニメーション終了時のコールバック
 void UStageClearWidget::OnFinishOutAnim()
 {
-    // フェードリクエスト
-    APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
-    if (PC && PC->PlayerCameraManager)
-    {
-        PC->PlayerCameraManager->StartCameraFade(0.0f, 1.0f, 1.0f, FLinearColor::Black, false, true);
-    }
+    if (GetGameInstance() == nullptr)
+        return;
+
+    UFadeSystem* FadeSystem = GetGameInstance()->GetSubsystem<UFadeSystem>();
+    if (FadeSystem == nullptr)
+        return;
+
+    FadeSystem->FadeOut();
 }

@@ -28,6 +28,9 @@ void UCardWidget::SetupCardData(UCardData* Data)
     if (CardData == nullptr)
         return;
 
+    if (GetGameInstance() == nullptr)
+        return;
+
     UCardUtil* CardUtil = GetGameInstance()->GetSubsystem<UCardUtil>();
     if (CardUtil == nullptr)
         return;
