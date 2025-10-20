@@ -12,6 +12,7 @@
 #include <System/Phase/BattlePhase_CardSelect.h>
 #include <System/Phase/BattlePhase_Action.h>
 #include <System/Phase/BattlePhase_Result.h>
+#include <Character/MyPlayerController.h>
 
 AMyGameMode::AMyGameMode()
 {

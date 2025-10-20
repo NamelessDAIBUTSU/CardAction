@@ -15,11 +15,14 @@ class CARDACTION_API UHUDBase : public UUserWidget
 	GENERATED_BODY()
 	
 public:
-	virtual void PlayInAnimation() {}
-	virtual void PlayOutAnimation() {}
+	virtual void PlayInAnimation();
+	virtual void PlayOutAnimation();
 
 	// エンジンから独立した更新クラス
 	virtual void OnUpdate(float DeltaSec) {}
+
+	// アクションフェーズ以外でも表示するか
+	virtual bool IsVisibleExceptActionPhase() { return true; }
 
 protected:
 	// アニメーション

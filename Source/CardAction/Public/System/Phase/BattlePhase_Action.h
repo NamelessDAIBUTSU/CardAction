@@ -23,7 +23,7 @@ public: /* UBattlePhaseBase */
 	// フェーズ中
 	virtual void OnTick(float DeltaSec) override;
 	// フェーズ終了時
-	virtual void OnExit() override{}
+	virtual void OnExit() override;
 
 private:
 	float PhaseEndSec = 30.f;

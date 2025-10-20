@@ -51,7 +51,7 @@ public:
 public:
 	// 決定ボタン
 	UPROPERTY(meta = (BindWidget))
-	UButton* DecideButton;
+	UButton* DecideSelectButton;
 
 	// カードボックス
 	UPROPERTY(meta = (BindWidget))

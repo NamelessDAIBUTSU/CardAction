@@ -25,7 +25,10 @@ protected: /* UUserWidget */
     virtual void NativeConstruct() override;
 
 public:
-    void OnTick(float DeltaTime);
+    void OnUpdate(float DeltaSec);
+
+    // アクションフェーズ以外で非表示にするUIの表示制御
+    void SetVisibleExceptActionPhase(bool Visible);
 
 
 public: /* 生成するWidgetクラス */
@@ -50,6 +53,9 @@ public: /* 生成するWidgetクラス */
     TSubclassOf<UUserWidget> CardSelectWidgetClass;
 
 public: /* インスタンスのポインタ */
+    // インスタンス化させたHUDのリスト
+    TArray<UHUDBase*> HUDList;
+
     // ステージクリア
     UPROPERTY()
     UStageClearWidget* StageClearWidget = nullptr;

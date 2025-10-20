@@ -23,6 +23,10 @@ public:
 	// 初期化
 	virtual void NativeConstruct() override;
 
+public: /* UHUDBase */
+	// アクションフェーズ以外で非表示
+	virtual bool IsVisibleExceptActionPhase() override{ return false; }
+
 public:
 	// カード選択デリゲートを設定
 	void SetSelectCardDelegate(FOnSelectCard SelectDelegate, FOnUnSelectCard UnSelectDelegate);

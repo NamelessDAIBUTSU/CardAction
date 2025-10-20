@@ -16,9 +16,9 @@ bool UCardSelectWidget::Initialize()
         return false;
 
     // 決定時のコールバック登録
-    if (DecideButton)
+    if (DecideSelectButton)
     {
-        DecideButton->OnClicked.AddDynamic(this, &UCardSelectWidget::OnDecide);
+        DecideSelectButton->OnClicked.AddDynamic(this, &UCardSelectWidget::OnDecide);
     }
 
     // Hidden→Visibleに変わったときにフラグを初期化する

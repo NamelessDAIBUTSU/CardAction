@@ -17,7 +17,7 @@ void AMyPlayerController::Tick(float DeltaSeconds)
 {
 	if (MainHUDWidget)
 	{
-		MainHUDWidget->OnTick(DeltaSeconds);
+		MainHUDWidget->OnUpdate(DeltaSeconds);
 	}
 }
 

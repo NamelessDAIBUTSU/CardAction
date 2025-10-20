@@ -16,6 +16,7 @@ void UMainHUDWidget::NativeConstruct()
         if (StageClearWidgetClass)
         {
             StageClearWidget = CreateWidget<UStageClearWidget>(GetWorld(), StageClearWidgetClass);
+            HUDList.Add(StageClearWidget);
 
             // キャンバスに追加
             if (MainCanvas)
@@ -50,8 +51,14 @@ void UMainHUDWidget::NativeConstruct()
         if (HandCardsWidgetClass)
         {
             HandCardsWidget = CreateWidget<UHandCardsWidget>(GetWorld(), HandCardsWidgetClass);
+            HUDList.Add(HandCardsWidget);
+
             if (HandCardsWidget)
             {
+                // デフォルト非表示
+                HandCardsWidget->SetVisibility(ESlateVisibility::Hidden);
+
+                // 選択時のデリゲート設定
                 HandCardsWidget->SetSelectCardDelegate(SelectCardDelegate, UnSelectCardDelegate);
 
                 // キャンバスに追加
@@ -79,6 +86,8 @@ void UMainHUDWidget::NativeConstruct()
         if (CardSelectWidgetClass)
         {
             CardSelectWidget = CreateWidget<UCardSelectWidget>(GetWorld(), CardSelectWidgetClass);
+            HUDList.Add(CardSelectWidget);
+
             if (MainCanvas)
             {
                 MainCanvas->AddChild(CardSelectWidget);
@@ -94,11 +103,40 @@ void UMainHUDWidget::NativeConstruct()
             CardSelectWidget->SetVisibility(ESlateVisibility::Hidden);
         }
     }
-
 }
 
 // 更新
-void UMainHUDWidget::OnTick(float InDeltaTime)
+void UMainHUDWidget::OnUpdate(float DeltaSec)
 {
-   
+    for (UHUDBase* HUDWidget : HUDList)
+    {
+        if (HUDWidget == nullptr)
+            continue;
+
+        HUDWidget->OnUpdate(DeltaSec);
+    }
+}
+
+// アクションフェーズ以外で表示にするUIの表示制御
+void UMainHUDWidget::SetVisibleExceptActionPhase(bool Visible)
+{
+    for (UHUDBase* HUDWidget : HUDList)
+    {
+        if (HUDWidget == nullptr)
+            continue;
+        // アクションフェーズ以外でも表示するUIは、制御対象外
+        if (HUDWidget->IsVisibleExceptActionPhase() == true)
+            continue;
+
+        if (Visible)
+        {
+            HUDWidget->SetVisibility(ESlateVisibility::Visible);
+            HUDWidget->PlayInAnimation();
+        }
+        else
+        {
+            HUDWidget->PlayOutAnimation();
+        }
+    }
+
 }

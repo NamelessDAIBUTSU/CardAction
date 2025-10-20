@@ -5,12 +5,20 @@
 #include <Kismet/GameplayStatics.h>
 #include <System/MyGameMode.h>
 #include <Grid/GridManager.h>
+#include <Character/MyPlayerController.h>
 
 
 // フェーズ開始時
 void UBattlePhase_Action::OnBegin() 
 { 
-	UE_LOG(LogTemp, Warning, TEXT("Begin ActionPhase"));
+	AMyPlayerController* PlayerController = Cast<AMyPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+	if (PlayerController == nullptr)
+		return;
+	if (PlayerController->MainHUDWidget == nullptr)
+		return;
+
+	// アクションフェーズ以外で非表示にするウィジェットを表示
+	PlayerController->MainHUDWidget->SetVisibleExceptActionPhase(true);
 }
 
 // フェーズ中
@@ -43,4 +51,16 @@ void UBattlePhase_Action::OnTick(float DeltaSec)
 			return;
 		}
 	}
+}
+
+void UBattlePhase_Action::OnExit()
+{
+	AMyPlayerController* PlayerController = Cast<AMyPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+	if (PlayerController == nullptr)
+		return;
+	if (PlayerController->MainHUDWidget == nullptr)
+		return;
+
+	// アクションフェーズ以外で非表示にするウィジェットを消す
+	PlayerController->MainHUDWidget->SetVisibleExceptActionPhase(false);
 }

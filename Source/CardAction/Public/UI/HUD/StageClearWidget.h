@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "UI/HUD/HUDBase.h"
+#include <Components/Button.h>
 #include "StageClearWidget.generated.h"
 
 /**
@@ -14,9 +15,30 @@ class CARDACTION_API UStageClearWidget : public UHUDBase
 {
 	GENERATED_BODY()
 
+public:
+	// 初期化
+	virtual bool Initialize() override;
+
 public: /* UHUDBase */
 	virtual void PlayInAnimation() override;
 	virtual void PlayOutAnimation() override;
 
 	virtual void OnUpdate(float DeltaSec) override {}
+
+public:
+	// 決定ボタン押下時のコールバック
+	UFUNCTION()
+	void OnDecide();
+
+	// アニメーション終了時のコールバック
+	UFUNCTION()
+	void OnFinishOutAnim();
+
+
+private:
+	// 決定ボタン
+	UPROPERTY(meta = (BindWidget))
+	UButton* DecideButton;
+
+	bool bIsPlayingOutAnim = false;
 };
