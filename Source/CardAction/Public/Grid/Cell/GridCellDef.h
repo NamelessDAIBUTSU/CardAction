@@ -6,6 +6,7 @@
 
 // グリッドセルサイズ
 #define GRID_CELL_UNIT 200 
+#define GRID_CELL_HEIGHT_UNIT 150 
 
 // グリッドセルの種類
 UENUM(BlueprintType)

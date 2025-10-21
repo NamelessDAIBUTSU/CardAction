@@ -20,9 +20,6 @@ void UBattlePhase_CardSelect::OnBegin()
 	if (CardSelectWidget == nullptr)
 		return;
 
-	// 表示アニメーション
-	CardSelectWidget->PlayInAnimation();
-
 	// デッキマネージャーからドロー
 	if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
 	{
@@ -34,6 +31,10 @@ void UBattlePhase_CardSelect::OnBegin()
 		TArray<UCardData*> DrawCards = DeckManager->DrawCards();
 		CardSelectWidget->CreateCardWidgets(DrawCards);
 	}
+
+	// 表示アニメーション
+	CardSelectWidget->PlayInAnimation();
+
 }
 
 void UBattlePhase_CardSelect::OnTick(float DeltaSec)

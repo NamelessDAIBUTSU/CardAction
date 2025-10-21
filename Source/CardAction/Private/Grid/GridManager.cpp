@@ -5,6 +5,7 @@
 #include <Kismet/GameplayStatics.h>
 #include <Character/MyCharacter.h>
 #include "Grid/Cell/GridCellActor.h"
+#include "Components/CapsuleComponent.h"
 
 AGridManager::AGridManager()
 {
@@ -142,7 +143,7 @@ void AGridManager::SpawnEnemies()
 		// スポーンする位置を決定
 		int RandomIndex = FMath::RandRange(0, SpawnableCoords.Num() - 1);
 		FVector2D SpawnCoord = SpawnableCoords[RandomIndex];
-		FVector SpawnPosition = FVector(SpawnCoord.Y * GRID_CELL_UNIT * -1.f, SpawnCoord.X * GRID_CELL_UNIT, 150.f);
+		FVector SpawnPosition = FVector(SpawnCoord.Y * GRID_CELL_UNIT * -1.f, SpawnCoord.X * GRID_CELL_UNIT, GRID_CELL_HEIGHT_UNIT * 0.5f);
 
 		// スポーン
 		AEnemyBase* NewEnemy = GetWorld()->SpawnActor<AEnemyBase>(Enemy, SpawnPosition, FRotator(0.f, 180.f, 0.f));
@@ -150,10 +151,21 @@ void AGridManager::SpawnEnemies()
 		{
 			// スポーンさせたセルにアクターを追加
 			AddActorOnCell(NewEnemy, SpawnCoord);
+
+			// Z位置を補正
+			UCapsuleComponent* Capsule = NewEnemy->GetCapsuleComponent();
+			if (Capsule)
+			{
+				FVector AdjustedPos = NewEnemy->GetActorLocation();
+				float HalfHeight = Capsule->GetUnscaledCapsuleHalfHeight();
+				AdjustedPos.Z += HalfHeight * 1.1f;
+				NewEnemy->SetActorLocation(AdjustedPos);
+			}
 		
 			// 座標の設定
 			NewEnemy->SetCurrentCoord(SpawnCoord);
 		}
+		
 
 		// スポーン可能位置を減らす
 		SpawnableCoords.RemoveAt(RandomIndex);
@@ -282,7 +294,7 @@ AEnemyBase* AGridManager::GetEnemyOnGridCell(FVector2D Coord)
 FVector AGridManager::ConvertToWorldPosition(FVector2D Coord)
 {
 	// 上方向がX軸のため、Coord.XとCoord.Yを逆に使用
-	FVector Position = FVector(Coord.Y * GRID_CELL_UNIT * -1.f, Coord.X * GRID_CELL_UNIT, 0.f);
+	FVector Position = FVector(Coord.Y * GRID_CELL_UNIT * -1.f, Coord.X * GRID_CELL_UNIT, GRID_CELL_HEIGHT_UNIT * 0.5f);
 
 	return Position;
 }

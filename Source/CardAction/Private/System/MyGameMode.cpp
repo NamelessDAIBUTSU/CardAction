@@ -13,6 +13,7 @@
 #include <System/Phase/BattlePhase_Action.h>
 #include <System/Phase/BattlePhase_Result.h>
 #include <Character/MyPlayerController.h>
+#include "Components/CapsuleComponent.h"
 
 AMyGameMode::AMyGameMode()
 {
@@ -43,18 +44,27 @@ void AMyGameMode::StartPlay()
 	// グリッド初期化
 	GridManager->Initialize();
 
-	// Pawn を Spawn
-	APawn* PlayerPawn = GetWorld()->SpawnActor<APawn>(PlayerPawnClass, GridManager->GetPlayerSpawnPosition(), FRotator());
+	// プレイヤーを生成
+	ACharacter* PlayerPawn = GetWorld()->SpawnActor<ACharacter>(PlayerPawnClass, GridManager->GetPlayerSpawnPosition(), FRotator());
 	if (PlayerPawn == nullptr)
 	{
 		UE_LOG(LogTemp, Error, TEXT("Failed to spawn player pawn!"));
 		return;
 	}
+	// 落下しないようにZ位置を補正
+	UCapsuleComponent* Capsule = PlayerPawn->GetCapsuleComponent();
+	if (Capsule)
+	{
+		FVector AdjustedPos = PlayerPawn->GetActorLocation();
+		float HalfHeight = Capsule->GetUnscaledCapsuleHalfHeight();
+		AdjustedPos.Z += HalfHeight;
+		PlayerPawn->SetActorLocation(AdjustedPos);
+	}
 
 	// 生成したセル上にプレイヤーを登録
 	GridManager->AddActorOnCell(PlayerPawn, GridManager->ConvertToGridCoord(PlayerPawn->GetActorLocation()));
 
-	// プレイヤーの座標設定
+	// プレイヤーのグリッド座標設定
 	Player = Cast<AMyCharacter>(PlayerPawn);
 	if(Player)
 	{
