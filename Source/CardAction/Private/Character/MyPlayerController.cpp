@@ -51,4 +51,18 @@ void AMyPlayerController::BeginPlay()
 			MainHUDWidget->AddToViewport();
 		}
 	}
+
+	// ­‚µ’x‚ç‚¹‚ÄUI“ü—Í‚ğ—LŒø‚É‚·‚é
+	FTimerHandle TimerHandle;
+	GetWorldTimerManager().SetTimer(TimerHandle, this, &AMyPlayerController::SetupUIInputMode, 0.1f, false);
+}
+
+void AMyPlayerController::SetupUIInputMode()
+{
+	bShowMouseCursor = true;
+
+	FInputModeGameAndUI InputMode;
+	InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+
+	SetInputMode(InputMode);
 }

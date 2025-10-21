@@ -21,6 +21,9 @@ class CARDACTION_API UFadeWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	
+protected:
+	virtual void NativeConstruct() override;
+
 public:
 	// フェード処理
 	void FadeIn(float InFadeSec = 1.f);
@@ -33,6 +36,10 @@ public:
 	bool IsFade();
 	bool IsFadeIn();
 	bool IsFadeOut();
+
+	// フェード終了時のコールバック登録
+	void SetOnFadeOutFinished(TFunction<void()> Func);
+
 
 private:
 	// フェードするウィジェット
@@ -47,4 +54,7 @@ private:
 
 	// 現在のフェードタイプ
 	EFadeType CurrentFadeType = EFadeType::None;
+
+	// フェードアウト終了時のコールバック
+	TFunction<void()> OnFadeOutFinished;
 };

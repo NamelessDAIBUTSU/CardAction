@@ -21,6 +21,16 @@ void UCardWidget::NativeConstruct()
     }
 }
 
+void UCardWidget::NativeOnInitialized()
+{
+    Super::NativeOnInitialized();
+
+    if (CardButton)
+    {
+        CardButton->IsFocusable = false;
+    }
+}
+
 void UCardWidget::SetupCardData(UCardData* Data)
 {
     CardData = Data;
@@ -178,8 +188,6 @@ void UCardWidget::OnCardClicked()
 // マウスオーバー時
 void UCardWidget::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
 {
-    UE_LOG(LogTemp, Warning, TEXT("Over"));
-
     if (Option.bCanMouseOver == false)
         return;
 
@@ -200,8 +208,6 @@ void UCardWidget::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointer
 // マウスオーバーから離れた時
 void UCardWidget::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
 {
-    UE_LOG(LogTemp, Warning, TEXT("Leave"));
-
     if (Option.bCanMouseOver == false)
         return;
 

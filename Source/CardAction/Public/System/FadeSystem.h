@@ -19,7 +19,7 @@ public:
 	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
 
 public:
-	void FadeOutAndOpenLevel(FName LevelName);
+	void FadeOutAndOpenLevel(FName LevelName, float FadeSec = 1.f);
 	void FadeIn(float FadeSec = 1.f);
 	void FadeOut(float FadeSec = 1.f);
 
@@ -31,10 +31,17 @@ public:
 	// フェード更新
 	void UpdateFade(float DeltaSec);
 
+	// レベル読み込み後のコールバック
+	UFUNCTION()
+	void OnPostLoadLevel(UWorld* LoadedWorld);
+
 private:
 	UPROPERTY();
 	UFadeWidget* FadeWidget;
 
 	// 毎フレーム更新用のデリゲートハンドル
 	FDelegateHandle TickHandle;
+
+	// レベル切り替え時用のデリゲート
+	FCoreUObjectDelegates WorldDelegate;
 };

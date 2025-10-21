@@ -17,7 +17,7 @@ void UCardSlotWidget::NativeConstruct()
 			// 初期化
 			FCardWidgetOption Option;
 			// スケールアップなし
-			Option.bChangeScale = false;
+			Option.bCanMouseOver = false;
 			CardWidget->Initialize(nullptr, Option);
 
 			// 初期非表示

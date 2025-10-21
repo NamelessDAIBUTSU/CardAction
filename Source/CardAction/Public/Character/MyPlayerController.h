@@ -33,6 +33,9 @@ protected:
 	virtual void BeginPlay();
 
 public:
+	void SetupUIInputMode();
+
+public:
 	// 入力マッピング
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputMappingContext* DefaultMappingContext = nullptr;

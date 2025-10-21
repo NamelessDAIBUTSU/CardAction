@@ -60,5 +60,5 @@ void UStageClearWidget::OnFinishOutAnim()
     if (FadeSystem == nullptr)
         return;
 
-    FadeSystem->FadeOut();
+    FadeSystem->FadeOutAndOpenLevel(FName("StageSelectLevel"));
 }

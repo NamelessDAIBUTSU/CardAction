@@ -2,6 +2,7 @@
 
 
 #include "System/FadeSystem.h"
+#include <Kismet/GameplayStatics.h>
 
 void UFadeSystem::Initialize(FSubsystemCollectionBase& Collection)
 {
@@ -41,6 +42,26 @@ void UFadeSystem::Initialize(FSubsystemCollectionBase& Collection)
 				return true; // trueを返すと継続実行
 			})
 	);
+}
+
+void UFadeSystem::FadeOutAndOpenLevel(FName LevelName, float FadeSec)
+{
+	if (FadeWidget == nullptr)
+		return;
+
+	// フェードアウト
+	FadeWidget->FadeOut(FadeSec);
+
+	// 遷移先のレベルの読み込みをフェード後にするよう設定
+	FadeWidget->SetOnFadeOutFinished(
+		[this, LevelName]() {
+			UGameplayStatics::OpenLevel(GetWorld(), LevelName);
+
+			FadeIn();
+		});
+
+	// マップロード完了イベント登録
+	WorldDelegate.PostLoadMapWithWorld.AddUObject(this, &UFadeSystem::OnPostLoadLevel);
 }
 
 void UFadeSystem::FadeIn(float FadeSec)
@@ -92,5 +113,26 @@ void UFadeSystem::UpdateFade(float DeltaSec)
 	if (FadeWidget)
 	{
 		FadeWidget->UpdateFade(DeltaSec);
+	}
+}
+
+// レベル読み込み後のコールバック
+void UFadeSystem::OnPostLoadLevel(UWorld* LoadedWorld)
+{
+	// Viewport再登録
+	if (FadeWidget)
+	{
+		FadeWidget->AddToViewport(100);
+	}
+
+	APlayerController* PC = UGameplayStatics::GetPlayerController(LoadedWorld, 0);
+	if (PC && FadeWidget)
+	{
+		PC->bShowMouseCursor = true;
+
+		FInputModeGameAndUI InputMode;
+		InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+		InputMode.SetWidgetToFocus(FadeWidget->TakeWidget());
+		PC->SetInputMode(InputMode);
 	}
 }

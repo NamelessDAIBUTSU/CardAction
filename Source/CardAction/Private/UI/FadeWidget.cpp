@@ -3,6 +3,13 @@
 
 #include "UI/FadeWidget.h"
 
+void UFadeWidget::NativeConstruct()
+{
+	Super::NativeConstruct();
+
+	SetVisibility(ESlateVisibility::HitTestInvisible);
+}
+
 // フェード処理
 void UFadeWidget::FadeIn(float InFadeSec)
 {
@@ -67,6 +74,7 @@ void UFadeWidget::UpdateFade(float DeltaSec)
 	case EFadeType::FadeIn:
 		Color.A -= FadeSpeed * DeltaSec;
 		Color.A = FMath::Max(0.f, Color.A);
+
 		// フェード終了
 		if (FMath::IsNearlyZero(Color.A))
 		{
@@ -77,20 +85,24 @@ void UFadeWidget::UpdateFade(float DeltaSec)
 	case EFadeType::FadeOut:
 		Color.A += FadeSpeed * DeltaSec;
 		Color.A = FMath::Min(Color.A, 1.f);
+
 		// フェード終了
 		if (FMath::IsNearlyEqual(Color.A, 1.f))
 		{
 			CurrentFadeType = EFadeType::None;
-		}
 
+			// フェード終了後のコールバック処理
+			if (OnFadeOutFinished)
+			{
+				OnFadeOutFinished();
+			}
+		}
 		break;
 	default:
 		break;
 	}
 
 	FadeMask->SetColorAndOpacity(Color);
-
-	UE_LOG(LogTemp, Warning, TEXT("Alpha : %f"), Color.A);
 }
 
 // フェード中か
@@ -105,5 +117,11 @@ bool UFadeWidget::IsFadeIn()
 bool UFadeWidget::IsFadeOut() 
 {
 	return CurrentFadeType == EFadeType::FadeOut; 
+}
+
+// フェード終了時のコールバック登録
+void UFadeWidget::SetOnFadeOutFinished(TFunction<void()> Func)
+{
+	OnFadeOutFinished = Func;
 }
 

@@ -38,7 +38,7 @@ class CARDACTION_API UCardWidget : public UHUDBase
 
 protected: /* UUserWidget */
 	virtual void NativeConstruct() override;
-
+	virtual void NativeOnInitialized() override;
 
 public:
 	// ‰Šú‰»
