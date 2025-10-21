@@ -25,23 +25,23 @@ void AEnemyManager::Tick(float DeltaTime)
 void AEnemyManager::RegistEnemy(AEnemyBase* Enemy)
 {
 	// 登録済みの場合は抜ける
-	if (Enemies.Find(Enemy) != INDEX_NONE)
+	if (EnemyList.Find(Enemy) != INDEX_NONE)
 		return;
 
-	Enemies.Add(Enemy);
+	EnemyList.Add(Enemy);
 }
 void AEnemyManager::UnRegistEnemy(AEnemyBase* Enemy)
 {
 	// 登録されていない場合は抜ける
-	if (Enemies.Find(Enemy) == INDEX_NONE)
+	if (EnemyList.Find(Enemy) == INDEX_NONE)
 		return;
 
 	// どこかのループで引っかかると厄介なので逆順で
-	for (int i = Enemies.Num() - 1; i >= 0; --i)
+	for (int i = EnemyList.Num() - 1; i >= 0; --i)
 	{
-		if (Enemies[i] == Enemy)
+		if (EnemyList[i] == Enemy)
 		{
-			Enemies.RemoveAt(i);
+			EnemyList.RemoveAt(i);
 			return;
 		}
 	}
@@ -50,15 +50,15 @@ void AEnemyManager::UnRegistEnemy(AEnemyBase* Enemy)
 // エネミーの全解除
 void AEnemyManager::UnRegistAllEnemies()
 {
-	Enemies.Empty();
+	EnemyList.Empty();
 }
 
 // エネミーが1人でも生きているか
 bool AEnemyManager::IsAliveAnyEnemy()
 {
-	for (int i = Enemies.Num() - 1; i >= 0; --i)
+	for (int i = EnemyList.Num() - 1; i >= 0; --i)
 	{
-		if (Enemies[i]->IsDead() == false)
+		if (EnemyList[i]->IsDead() == false)
 			return true;
 	}
 
@@ -68,9 +68,9 @@ bool AEnemyManager::IsAliveAnyEnemy()
 // 全エネミーが開始可能状態か
 bool AEnemyManager::IsAllEnemyReady()
 {
-	for (int i = Enemies.Num() - 1; i >= 0; --i)
+	for (int i = EnemyList.Num() - 1; i >= 0; --i)
 	{
-		if (Enemies[i]->IsReady() == false)
+		if (EnemyList[i]->IsReady() == false)
 			return false;
 	}
 

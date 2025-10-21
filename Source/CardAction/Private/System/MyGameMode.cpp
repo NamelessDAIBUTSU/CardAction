@@ -66,18 +66,20 @@ void AMyGameMode::StartPlay()
 
 	// プレイヤーのグリッド座標設定
 	Player = Cast<AMyCharacter>(PlayerPawn);
-	if(Player)
+	if (Player)
 	{
 		FVector2D SpawnCoord = GridManager->ConvertToGridCoord(GridManager->GetPlayerSpawnPosition());
 		Player->SetCurrentCoord(SpawnCoord);
 	}
 
 	// プレイヤーコントローラーを取得してPossess
-	PlayerController = GetWorld()->GetFirstPlayerController();
-	if (PlayerController)
+	AMyPlayerController* MyPC = Cast<AMyPlayerController>(GetWorld()->GetFirstPlayerController());
+	if (MyPC == nullptr)
 	{
-		PlayerController->Possess(PlayerPawn);
+		UE_LOG(LogTemp, Error, TEXT("Failed to Cast AMyPlayerController!"));
+		return;
 	}
+	MyPC->Possess(PlayerPawn);
 
 	// カメラ生成
 	if (AGridCamera* Camera = GetWorld()->SpawnActor<AGridCamera>())
@@ -85,10 +87,7 @@ void AMyGameMode::StartPlay()
 		Camera->AdjustCameraToGrid();
 
 		// プレイヤーのビューをこのカメラに固定
-		if (PlayerController)
-		{
-			PlayerController->SetViewTargetWithBlend(Camera, 0.0f);
-		}
+		MyPC->SetViewTargetWithBlend(Camera, 0.0f);
 	}
 
 	// デッキマネージャー生成
@@ -100,6 +99,12 @@ void AMyGameMode::StartPlay()
 			// デッキの初期化
 			DeckManager->Initialzie(InitDeckData);
 		}
+	}
+
+	// 各種Widgetの初期化
+	if (MyPC->MainHUDWidget)
+	{
+		MyPC->MainHUDWidget->InitializeWidgets();
 	}
 
 	// 最初のフェーズ設定

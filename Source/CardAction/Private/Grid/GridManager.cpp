@@ -101,9 +101,6 @@ FVector AGridManager::GetPlayerSpawnPosition()
 	// グリッドデータのプレイヤースポーン位置からワールド座標を取得
 	FVector PlayerSpawnPosition = ConvertToWorldPosition(GenerateGridData->PlayerSpawnCoord);
 
-	// 埋まっちゃうので少し上にずらす
-	PlayerSpawnPosition.Z = 300.f;
-
 	return PlayerSpawnPosition;
 }
 

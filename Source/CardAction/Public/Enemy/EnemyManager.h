@@ -35,7 +35,10 @@ public:
 	// 全エネミーが開始可能状態か
 	bool IsAllEnemyReady();
 
+	// 全エネミーの取得
+	TArray<AEnemyBase*> GetEnemyList() const { return EnemyList; }
+
 private:
 	UPROPERTY(VisibleAnywhere)
-	TArray<AEnemyBase*> Enemies;
+	TArray<AEnemyBase*> EnemyList;
 };

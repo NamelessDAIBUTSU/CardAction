@@ -7,6 +7,7 @@ void UFadeWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
 
+	// ƒ}ƒEƒX‚Æ‚Ì“–‚½‚è”»’è‚ğØ‚é
 	SetVisibility(ESlateVisibility::HitTestInvisible);
 }
 

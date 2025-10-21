@@ -61,6 +61,11 @@ private:
 	// プレイヤーの方向を向く
 	void LookAtPlayer();
 
+public: /* Info */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Info")
+	FName Name;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Info")
+	FString Description;
 
 public: /* Status */
 	// ダメージ
@@ -75,6 +80,11 @@ public: /* Status */
 	// 自動でプレイヤーの方向を向くか
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Status")
 	bool bIsAutoLookAtPlayer = true;
+
+public: /* UI */
+	// アイコン画像
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UI")
+	UTexture2D* IconTexture = nullptr;
 
 public: /* Anim */
 	// 死亡モンタージュ

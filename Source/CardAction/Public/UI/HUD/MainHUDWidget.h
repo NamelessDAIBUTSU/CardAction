@@ -9,7 +9,8 @@
 #include "UI/HUD/StageClearWidget.h"
 #include "CardSelectWidget.h"
 #include "Card/SelectCardDelegate.h"
-
+#include "EnemyCharaBannerListWidget.h"
+#include "Components/SizeBox.h"
 #include "MainHUDWidget.generated.h"
 
 /**
@@ -29,6 +30,13 @@ public:
 
     // アクションフェーズ以外で非表示にするUIの表示制御
     void SetVisibleExceptActionPhase(bool Visible);
+
+    // 各Widgetの初期化
+    void InitializeWidgets();
+
+private:
+    // 各Widgetの生成 & 配置
+    void CreateWidgets();
 
 
 public: /* 生成するWidgetクラス */
@@ -52,6 +60,10 @@ public: /* 生成するWidgetクラス */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
     TSubclassOf<UUserWidget> CardSelectWidgetClass;
 
+    // エネミーキャラバナー
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
+    TSubclassOf<UUserWidget> EnemyCharaBannerWidgetClass;
+
 public: /* インスタンスのポインタ */
     // インスタンス化させたHUDのリスト
     TArray<UHUDBase*> HUDList;
@@ -68,6 +80,11 @@ public: /* インスタンスのポインタ */
     // カード選択
     UPROPERTY()
     UCardSelectWidget* CardSelectWidget = nullptr;
+    // エネミーキャラバナー
+    UPROPERTY(meta = (BindWidget))
+    USizeBox* EnemyCharaBannerBox;
+    UPROPERTY()
+    UEnemyCharaBannerListWidget* EnemyCharaBannerWidget = nullptr;
 
 public: /* Delegate */
     // カード選択用デリゲート
