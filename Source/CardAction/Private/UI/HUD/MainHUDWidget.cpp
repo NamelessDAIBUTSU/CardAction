@@ -168,11 +168,11 @@ void UMainHUDWidget::SetVisibleExceptActionPhase(bool Visible)
         if (Visible)
         {
             HUDWidget->SetVisibility(ESlateVisibility::Visible);
-            HUDWidget->PlayInAnimation();
+            HUDWidget->PlayInAnim();
         }
         else
         {
-            HUDWidget->PlayOutAnimation();
+            HUDWidget->PlayOutAnim();
         }
     }
 

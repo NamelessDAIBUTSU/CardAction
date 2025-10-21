@@ -33,7 +33,7 @@ void UBattlePhase_CardSelect::OnBegin()
 	}
 
 	// 表示アニメーション
-	CardSelectWidget->PlayInAnimation();
+	CardSelectWidget->PlayInAnim();
 
 }
 

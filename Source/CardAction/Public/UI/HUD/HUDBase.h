@@ -15,8 +15,11 @@ class CARDACTION_API UHUDBase : public UUserWidget
 	GENERATED_BODY()
 	
 public:
-	virtual void PlayInAnimation();
-	virtual void PlayOutAnimation();
+	virtual void PlayInAnim();
+	virtual void PlayOutAnim();
+
+	bool IsPlayingInAnim();
+	bool IsPlayingOutAnim();
 
 	// エンジンから独立した更新クラス
 	virtual void OnUpdate(float DeltaSec) {}

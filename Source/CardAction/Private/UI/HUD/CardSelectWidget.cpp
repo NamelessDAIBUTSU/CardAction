@@ -119,7 +119,7 @@ void UCardSelectWidget::OnChangeIsDecided()
     }
 }
 
-void UCardSelectWidget::PlayInAnimation()
+void UCardSelectWidget::PlayInAnim()
 {
     if (InAnim)
     {

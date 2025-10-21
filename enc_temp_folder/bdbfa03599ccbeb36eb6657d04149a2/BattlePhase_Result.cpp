@@ -53,5 +53,5 @@ void UBattlePhase_Result::OnExit()
 	if (FadeSystem == nullptr)
 		return;
 
-	FadeSystem->FadeOutAndOpenLevel(FName("SelectStageLevel"));
+	FadeSystem->FadeOutAndOpenLevel(FName("ActionMap"));
 }

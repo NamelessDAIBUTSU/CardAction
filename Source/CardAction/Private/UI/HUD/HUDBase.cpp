@@ -3,7 +3,7 @@
 
 #include "UI/HUD/HUDBase.h"
 
-void UHUDBase::PlayInAnimation()
+void UHUDBase::PlayInAnim()
 {
     if (InAnim)
     {
@@ -11,10 +11,20 @@ void UHUDBase::PlayInAnimation()
     }
 }
 
-void UHUDBase::PlayOutAnimation()
+void UHUDBase::PlayOutAnim()
 {
     if (OutAnim)
     {
         PlayAnimation(OutAnim);
     }
+}
+
+bool UHUDBase::IsPlayingInAnim()
+{
+   return IsAnimationPlaying(InAnim);
+}
+
+bool UHUDBase::IsPlayingOutAnim()
+{
+    return IsAnimationPlaying(OutAnim);
 }

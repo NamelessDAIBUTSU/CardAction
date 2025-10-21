@@ -20,7 +20,6 @@ void UFadeWidget::FadeIn(float InFadeSec)
 	CurrentFadeType = EFadeType::FadeIn;
 
 	// 現在のアルファ値
-	FadeMask->ColorAndOpacity.A = 1.f;
 	float CurrentAlpha = FadeMask->ColorAndOpacity.A;
 	// α変化量
 	float AmountOfAlpha = CurrentAlpha - 0.f;
@@ -42,10 +41,18 @@ void UFadeWidget::FadeOut(float OutFadeSec)
 		return;
 
 	CurrentFadeType = EFadeType::FadeOut;
-	SetVisibility(ESlateVisibility::Visible);
+
+	// 初回フェードでHiddenだった場合、α値を0 / Visibleにする
+	if (GetVisibility() == ESlateVisibility::Hidden)
+	{
+		FLinearColor Color = FadeMask->GetColorAndOpacity();
+		Color.A = 0.f;
+		FadeMask->SetColorAndOpacity(Color);
+
+		SetVisibility(ESlateVisibility::Visible);
+	}
 
 	// 現在のアルファ値
-	FadeMask->ColorAndOpacity.A = 0.f;
 	float CurrentAlpha = FadeMask->ColorAndOpacity.A;
 	// α変化量
 	float AmountOfAlpha = 1.f - CurrentAlpha;

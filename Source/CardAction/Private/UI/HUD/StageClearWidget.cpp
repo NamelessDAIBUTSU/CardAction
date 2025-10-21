@@ -19,13 +19,13 @@ bool UStageClearWidget::Initialize()
     return true;
 }
 
-void UStageClearWidget::PlayInAnimation()
+void UStageClearWidget::PlayInAnim()
 {
 	PlayAnimation(InAnim);
 }
 
 
-void UStageClearWidget::PlayOutAnimation()
+void UStageClearWidget::PlayOutAnim()
 {
 	PlayAnimation(OutAnim);
 }
@@ -34,8 +34,6 @@ void UStageClearWidget::OnDecide()
 {
     if (OutAnim)
     {
-        bIsPlayingOutAnim = true;
-
         // バインド解除
         UnbindAllFromAnimationFinished(OutAnim);
 
@@ -53,12 +51,6 @@ void UStageClearWidget::OnDecide()
 // アニメーション終了時のコールバック
 void UStageClearWidget::OnFinishOutAnim()
 {
-    if (GetGameInstance() == nullptr)
-        return;
-
-    UFadeSystem* FadeSystem = GetGameInstance()->GetSubsystem<UFadeSystem>();
-    if (FadeSystem == nullptr)
-        return;
-
-    FadeSystem->FadeOutAndOpenLevel(FName("StageSelectLevel"));
+    // 遷移用のフラグ立て
+    bIsOutAnimFinished = true;
 }

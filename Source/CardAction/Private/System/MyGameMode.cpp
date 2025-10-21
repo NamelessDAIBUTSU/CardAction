@@ -149,11 +149,13 @@ void AMyGameMode::ChangePhase(EBattlePhase NextPhase)
 
 		// アクションフェーズ開始時の処理
 		OnStartActionPhase.Broadcast();
-
 		break;
 	}
 	case EBattlePhase::Result:
 		CurrentBattlePhase = NewObject<UBattlePhaseBase>(this, UBattlePhase_Result::StaticClass());
+		break;
+	case EBattlePhase::End:
+		CurrentBattlePhase = nullptr;
 		break;
 	default:
 		break;

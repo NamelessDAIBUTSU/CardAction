@@ -38,7 +38,7 @@ void UEnemyCharaBannerListWidget::InitializeBanner()
 				CharaBannerWidgets.Add(BannerWidget);
 
 				// ŽžŠÔ·‚ÅInAnim‚ðÄ¶
-				BannerWidget->PlayInAnimation();
+				BannerWidget->PlayInAnim();
 			
 				USizeBox* SizeBox = WidgetTree->ConstructWidget<USizeBox>(USizeBox::StaticClass());
 				SizeBox->SetHeightOverride(140.f);

@@ -20,8 +20,8 @@ public:
 	virtual bool Initialize() override;
 
 public: /* UHUDBase */
-	virtual void PlayInAnimation() override;
-	virtual void PlayOutAnimation() override;
+	virtual void PlayInAnim() override;
+	virtual void PlayOutAnim() override;
 
 	virtual void OnUpdate(float DeltaSec) override {}
 
@@ -34,11 +34,14 @@ public:
 	UFUNCTION()
 	void OnFinishOutAnim();
 
+	// アウトアニメが終了したか
+	bool IsOutAnimFinished() const { return bIsOutAnimFinished; }
 
 private:
 	// 決定ボタン
 	UPROPERTY(meta = (BindWidget))
 	UButton* DecideButton;
 
-	bool bIsPlayingOutAnim = false;
+	// 遷移用フラグ
+	bool bIsOutAnimFinished = false;
 };

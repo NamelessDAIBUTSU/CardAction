@@ -20,7 +20,7 @@ public:
 
 public: /* UHUDBase */
 	// Inアニメーションの再生
-	virtual void PlayInAnimation() override;
+	virtual void PlayInAnim() override;
 
 public:
 	// 決定時のコールバック
