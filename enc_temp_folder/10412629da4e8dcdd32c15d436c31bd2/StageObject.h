@@ -32,9 +32,6 @@ public:
 	EStageCondition GetStageCondition() const { return Condition; }
 	void SetStageCondition(EStageCondition Cond) { Condition = Cond; }
 
-	// レベル名の取得
-	FName GetLevelName();
-
 private:
 	// ステージデータ
 	UPROPERTY();

@@ -5,6 +5,7 @@
 #include <NiagaraFunctionLibrary.h>
 #include <Kismet/GameplayStatics.h>
 #include <System/MyGameMode.h>
+#include "Grid/GridManager.h"
 
 APumpkinBomb::APumpkinBomb()
 {

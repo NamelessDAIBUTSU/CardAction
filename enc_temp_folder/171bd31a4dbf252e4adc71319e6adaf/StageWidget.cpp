@@ -2,7 +2,6 @@
 
 
 #include "UI/HUD/StageWidget.h"
-#include <System/FadeSystem.h>
 
 void UStageWidget::NativeConstruct()
 {
@@ -53,14 +52,7 @@ void UStageWidget::OnClicked()
 		return;
 
 	// 選択したステージへの遷移処理
-	if (GetWorld()->GetGameInstance() == nullptr)
-		return;
 
-	UFadeSystem* FadeSystem = GetWorld()->GetGameInstance()->GetSubsystem<UFadeSystem>();
-	if (FadeSystem == nullptr)
-		return;
-
-	FadeSystem->FadeOutAndOpenLevel(Stage->);
 }
 
 void UStageWidget::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
