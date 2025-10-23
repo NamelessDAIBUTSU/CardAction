@@ -4,6 +4,7 @@
 #include "System/StageSelectGameMode.h"
 #include <Map/MapManager.h>
 #include "Map/MapData.h"
+#include <Controller/StageSelectController.h>
 
 AStageSelectGameMode::AStageSelectGameMode()
 {
@@ -18,15 +19,31 @@ void AStageSelectGameMode::StartPlay()
 		return;
 
 	MapManager = GetWorld()->GetGameInstance()->GetSubsystem<UMapManager>();
-	if (MapManager)
-	{
-		// マップマネージャーの初期化
-		MapManager->Initialize(GenerateMapData);
+	if (MapManager == nullptr)
+		return;
 
-		// マップが未生成なら生成する
-		if (MapManager->GetCurrentMap() == nullptr)
+	// マップマネージャーの初期化
+	MapManager->Initialize(GenerateMapData);
+
+	// マップが未生成なら生成する
+	if (MapManager->GetCurrentMap() == nullptr)
+	{
+		MapManager->GenerateMap();
+	}
+
+	AStageSelectController* PC = Cast<AStageSelectController>(GetWorld()->GetFirstPlayerController());
+	if (PC && PC->GetMapWidget())
+	{
+		// ステージウィジェット生成用の初期設定
+		PC->GetMapWidget()->SetupInfo();
+
+		// ステージウィジェットの生成
+		if (UMapObject* Map = MapManager->GetCurrentMap())
 		{
-			MapManager->GenerateMap();
+			for (UStageObject* Stage : Map->GetStageList())
+			{
+				PC->GetMapWidget()->CreateStageWidget(Stage);
+			}
 		}
 	}
 }

@@ -7,6 +7,12 @@
 #define MIN_STAGE_CHAIN_NUM 1
 #define MAX_STAGE_CHAIN_NUM 3
 
+// ステージウィジェットの1辺のサイズ
+#define STAGE_WIDGET_SIZE 64
+// ステージウィジェットの水平方向のマージンサイズ
+#define STAGE_WIDGET_VERTICAL_MERGIN 32
+
+
 // ステージの種類
 UENUM(BlueprintType)
 enum class EStageType : uint8

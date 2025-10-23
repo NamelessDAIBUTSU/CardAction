@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include <UI/HUD/MapWidget.h>
 #include "StageSelectGameMode.generated.h"
 
 UCLASS()
