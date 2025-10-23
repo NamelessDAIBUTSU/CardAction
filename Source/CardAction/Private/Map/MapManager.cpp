@@ -96,7 +96,15 @@ void UMapManager::RefleshStageCondition()
 	if (CurrentMap == nullptr)
 		return;
 
-	// 現在のステージが存在する場合
+	// 一旦選択可能ステージをすべて選択不可に変更
+	for (UStageObject* Stage : CurrentMap->GetStageList())
+	{
+		if (Stage->GetStageCondition() == EStageCondition::CanSelect)
+		{
+			Stage->SetStageCondition(EStageCondition::NotSelect);
+		}
+	}
+
 	if (UStageObject* CurrentStage = CurrentMap->GetCurrentStage())
 	{
 		// クリア済みに変更
@@ -108,4 +116,13 @@ void UMapManager::RefleshStageCondition()
 			ChainedStage->SetStageCondition(EStageCondition::CanSelect);
 		}
 	}
+}
+
+// レベル名の取得
+FName UMapManager::GetCurrentLevelName()
+{
+	if (GenerateMapData == nullptr)
+		return FName();
+
+	return GenerateMapData->LevelName;
 }

@@ -13,10 +13,3 @@ void UStageObject::AddPreStage(UStageObject* PreStage)
 	PreStageList.Add(PreStage);
 }
 
-FName UStageObject::GetLevelName()
-{
-	if (StageData)
-	{
-		return StageData->
-	}
-}

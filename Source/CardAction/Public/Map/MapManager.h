@@ -33,6 +33,9 @@ public:
 	// ステージ状況の更新
 	void RefleshStageCondition();
 
+	// レベル名の取得
+	FName GetCurrentLevelName();
+
 private:
 	// ステージジェネレータ
 	UPROPERTY()

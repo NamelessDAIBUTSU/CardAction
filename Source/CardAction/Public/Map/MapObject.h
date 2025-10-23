@@ -28,6 +28,7 @@ public:
 	// ステージの取得
 	const TArray<UStageObject*>& GetStageList() const { return StageList; }
 
+	// ステージリストに追加
 	void AddStageList(class UStageObject* Stage);
 
 	// 現在のステージ

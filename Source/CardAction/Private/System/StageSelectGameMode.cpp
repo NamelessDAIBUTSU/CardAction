@@ -34,8 +34,6 @@ void AStageSelectGameMode::StartPlay()
 		MapManager->GenerateMap();
 	}
 
-
-
 	AStageSelectController* PC = Cast<AStageSelectController>(GetWorld()->GetFirstPlayerController());
 	if (PC && PC->GetMapWidget())
 	{

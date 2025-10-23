@@ -3,6 +3,7 @@
 
 #include "UI/HUD/StageWidget.h"
 #include <System/FadeSystem.h>
+#include <Map/MapManager.h>
 
 void UStageWidget::NativeConstruct()
 {
@@ -52,7 +53,6 @@ void UStageWidget::OnClicked()
 	if (Stage == nullptr || Stage->GetStageCondition() != EStageCondition::CanSelect)
 		return;
 
-	// 選択したステージへの遷移処理
 	if (GetWorld()->GetGameInstance() == nullptr)
 		return;
 
@@ -60,7 +60,16 @@ void UStageWidget::OnClicked()
 	if (FadeSystem == nullptr)
 		return;
 
-	FadeSystem->FadeOutAndOpenLevel(Stage->);
+	UMapManager* MapManager = GetWorld()->GetGameInstance()->GetSubsystem<UMapManager>();
+	if (MapManager == nullptr)
+		return;
+
+	// 現在のステージの更新
+	if (UMapObject* CurrentMap = MapManager->GetCurrentMap())
+		CurrentMap->SetCurrentStage(Stage);
+
+	// 選択したステージへの遷移処理
+	FadeSystem->FadeOutAndOpenLevel(MapManager->GetCurrentLevelName());
 }
 
 void UStageWidget::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)

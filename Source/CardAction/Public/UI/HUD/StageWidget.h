@@ -43,6 +43,7 @@ private: /* アニメーション */
 private:
 	// ステージオブジェクト
 	UStageObject* Stage = nullptr;
+
 	// 矢印ウィジェット
 	UPROPERTY(meta = (BindWidget))
 	UStageArrowWidget* ArrowWidget = nullptr;
