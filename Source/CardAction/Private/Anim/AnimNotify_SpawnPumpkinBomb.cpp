@@ -8,6 +8,7 @@
 #include <System/MyGameMode.h>
 #include "Particles/ParticleSystemComponent.h"
 #include "Grid/Cell/GridCellActor.h"
+#include "Grid/GridManager.h"
 
 void UAnimNotify_SpawnPumpkinBomb::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation)
 {

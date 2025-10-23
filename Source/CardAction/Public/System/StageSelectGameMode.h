@@ -16,6 +16,13 @@ public:
 
 public:
 	virtual void StartPlay() override;
-	virtual void Tick(float DeltaSeconds) override;
+	virtual void Tick(float DeltaSec) override;
 
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UMapData* GenerateMapData = nullptr;
+
+private:
+	UPROPERTY()
+	class UMapManager* MapManager = nullptr;
 };
