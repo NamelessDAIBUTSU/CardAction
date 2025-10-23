@@ -30,14 +30,18 @@ public:
 
 	void AddStageList(class UStageObject* Stage);
 
-public:
+	// 現在のステージ
+	void SetCurrentStage(UStageObject* Stage) { CurrentStage = Stage; }
+	UStageObject* GetCurrentStage() { return CurrentStage; }
+
+private:
 	// マップデータ
 	UPROPERTY();
 	class UMapData* MapData = nullptr;
 
 	// 現在のステージ
 	UPROPERTY();
-	class UStageObject* StartStage = nullptr;
+	class UStageObject* CurrentStage = nullptr;
 
 	// 全ステージ
 	UPROPERTY();

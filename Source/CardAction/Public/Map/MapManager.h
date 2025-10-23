@@ -30,6 +30,9 @@ public:
 	// マップの取得
 	UMapObject* GetCurrentMap() const { return CurrentMap; }
 
+	// ステージ状況の更新
+	void RefleshStageCondition();
+
 private:
 	// ステージジェネレータ
 	UPROPERTY()

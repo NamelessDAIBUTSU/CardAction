@@ -44,7 +44,6 @@ void UMapWidget::CreateStageWidget(UStageObject* Stage)
 	if (StageWidgetClass == nullptr || Stage == nullptr)
 		return;
 
-
 	FVector2D StagePos = Stage->GetPos();
 
 	FVector2D Position = FVector2D::Zero();
@@ -58,6 +57,10 @@ void UMapWidget::CreateStageWidget(UStageObject* Stage)
 	if (NewStage == nullptr)
 		return;
 
+	// ステージ情報の設定
+	NewStage->SetStageObject(Stage);
+
+	// 配置設定
 	UCanvasPanelSlot* CanvasSlot = StageCanvas->AddChildToCanvas(NewStage);
 	if (CanvasSlot)
 	{
@@ -68,4 +71,7 @@ void UMapWidget::CreateStageWidget(UStageObject* Stage)
 		// スロットの中心合わせ
 		CanvasSlot->SetAlignment(FVector2D(0.5f, 0.5f));
 	}
+
+	// ステージ状況に合わせたアニメーション再生
+	NewStage->PlayConditionAnim();
 }

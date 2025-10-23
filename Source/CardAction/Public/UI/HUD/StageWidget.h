@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "UI/HUD/HUDBase.h"
+#include "Map/Stage/StageObject.h"
 #include "StageWidget.generated.h"
 
 /**
@@ -14,4 +15,20 @@ class CARDACTION_API UStageWidget : public UHUDBase
 {
 	GENERATED_BODY()
 	
+public:
+	void PlayConditionAnim();
+
+	void SetStageObject(UStageObject* S) { Stage = S; }
+	
+private: /* アニメーション */
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	UWidgetAnimation* Clear;
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	UWidgetAnimation* NotSelect;
+	UPROPERTY(meta = (BindWidgetAnim), Transient)
+	UWidgetAnimation* CanSelect;
+
+private:
+	// ステージオブジェクト
+	UStageObject* Stage = nullptr;
 };

@@ -25,11 +25,16 @@ void AStageSelectGameMode::StartPlay()
 	// マップマネージャーの初期化
 	MapManager->Initialize(GenerateMapData);
 
+	// ステージの状況を更新
+	MapManager->RefleshStageCondition();
+
 	// マップが未生成なら生成する
 	if (MapManager->GetCurrentMap() == nullptr)
 	{
 		MapManager->GenerateMap();
 	}
+
+
 
 	AStageSelectController* PC = Cast<AStageSelectController>(GetWorld()->GetFirstPlayerController());
 	if (PC && PC->GetMapWidget())

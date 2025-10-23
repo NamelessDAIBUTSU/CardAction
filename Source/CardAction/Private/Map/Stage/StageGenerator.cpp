@@ -37,6 +37,10 @@ bool UStageGenerator::GenerateChainedStage(UStageObject* PreStage)
 
 			// マップにステージ追加
 			TargetMap->AddStageList(FirstStage);
+
+			// 現在のステージに設定
+			TargetMap->SetCurrentStage(FirstStage);
+			FirstStage->SetStageCondition(EStageCondition::CanSelect);
 		}
 	}
 
@@ -129,6 +133,8 @@ bool UStageGenerator::GenerateChainedStage(UStageObject* PreStage)
 
 				// マップにステージ追加
 				TargetMap->AddStageList(ChainedStage);
+			
+				ChainedStage->SetStageCondition(EStageCondition::NotSelect);
 			}
 		}
 	}

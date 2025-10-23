@@ -21,3 +21,12 @@ enum class EStageType : uint8
     Boss     UMETA(DisplayName = "Boss"), 
     Bonus    UMETA(DisplayName = "Bonus"),
 };
+
+// ステージ状況
+UENUM(BlueprintType)
+enum class EStageCondition : uint8
+{
+    NotSelect   UMETA(DisplayName = "NotSelect"),
+    CanSelect   UMETA(DisplayName = "CanSelect"),
+    Clear       UMETA(DisplayName = "Clear"),
+};

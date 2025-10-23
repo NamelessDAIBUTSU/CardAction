@@ -28,6 +28,10 @@ public:
 	void AddChainedStage(UStageObject* ChainedStage);
 	void AddPreStage(UStageObject* PreStage);
 
+	// ステージ状況の取得
+	EStageCondition GetStageCondition() const { return Condition; }
+	void SetStageCondition(EStageCondition Cond) { Condition = Cond; }
+
 private:
 	// ステージデータ
 	UPROPERTY();
@@ -37,9 +41,9 @@ private:
 	UPROPERTY();
 	UCardData* FixedRewardCard = nullptr;
 
-	// クリア済みか
+	// ステージ状況
 	UPROPERTY();
-	bool bIsCleared = false;
+	EStageCondition Condition;
 
 	// ステージの高さ・幅
 	UPROPERTY();

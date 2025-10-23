@@ -89,3 +89,23 @@ void UMapManager::GenerateMap()
 	bool bIsSuccess = StageGenerator->GenerateChainedStage(nullptr);
 	UE_LOG(LogTemp, Warning, TEXT("Map Generate is %hs"), bIsSuccess ? "Success." : "Failed.");
 }
+
+// ステージ状況の更新
+void UMapManager::RefleshStageCondition()
+{
+	if (CurrentMap == nullptr)
+		return;
+
+	// 現在のステージが存在する場合
+	if (UStageObject* CurrentStage = CurrentMap->GetCurrentStage())
+	{
+		// クリア済みに変更
+		CurrentStage->SetStageCondition(EStageCondition::Clear);
+
+		// 繋がっているステージを選択可能に変更
+		for (UStageObject* ChainedStage : CurrentStage->GetChainedStageList())
+		{
+			ChainedStage->SetStageCondition(EStageCondition::CanSelect);
+		}
+	}
+}
