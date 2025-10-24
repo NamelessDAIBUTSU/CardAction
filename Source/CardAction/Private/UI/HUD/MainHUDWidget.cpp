@@ -139,17 +139,6 @@ void UMainHUDWidget::CreateWidgets()
 
                 }
             }
-
-            //if (MainCanvas)
-            //{
-            //    MainCanvas->AddChild(EnemyCharaBannerWidget);
-            //    UCanvasPanelSlot* CanvasSlot = Cast<UCanvasPanelSlot>(EnemyCharaBannerWidget->Slot);
-            //    if (CanvasSlot)
-            //    {
-            //        CanvasSlot->SetAnchors(FAnchors(0.5f, 0.5f));
-            //        CanvasSlot->SetAlignment(FVector2D(0.5f, 0.5f));
-            //    }
-            //}
         }
     }
 }

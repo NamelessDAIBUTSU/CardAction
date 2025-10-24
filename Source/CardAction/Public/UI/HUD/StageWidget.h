@@ -7,6 +7,7 @@
 #include "Map/Stage/StageObject.h"
 #include <UI/StageArrowWidget.h>
 #include <Components/Button.h>
+#include <Components/TextBlock.h>
 #include "StageWidget.generated.h"
 
 /**
@@ -31,6 +32,10 @@ public:
 	void PlayConditionAnim();
 
 	void SetStageObject(UStageObject* S) { Stage = S; }
+	UStageObject* GetStageObject() const { return Stage; }
+
+	// エンジンから独立した更新クラス
+	virtual void OnUpdate(float DeltaSec) override;
 	
 private: /* アニメーション */
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
@@ -51,4 +56,8 @@ private:
 	// ボタン
 	UPROPERTY(meta = (BindWidget))
 	UButton* StageButton = nullptr;
+
+	// テキスト
+	UPROPERTY(meta = (BindWidget))
+	UTextBlock* CoordText = nullptr;
 };

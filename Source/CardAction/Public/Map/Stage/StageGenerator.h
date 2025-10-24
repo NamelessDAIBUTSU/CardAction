@@ -23,7 +23,13 @@ public:
 	// 繋げるステージ生成
 	bool GenerateChainedStage(UStageObject* PreStage);
 
+	// ボスステージ生成
+	void GenerateBossStage();
+
 private:
 	UPROPERTY()
 	UMapObject* TargetMap = nullptr;
+
+	UPROPERTY()
+	UStageObject* BossStage = nullptr;
 };

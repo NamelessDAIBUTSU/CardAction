@@ -34,4 +34,8 @@ void AStageSelectController::Tick(float DeltaSec)
 {
 	Super::Tick(DeltaSec);
 
+	if (MapWidget)
+	{
+		MapWidget->OnUpdate(DeltaSec);
+	}
 }

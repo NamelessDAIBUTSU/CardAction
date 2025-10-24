@@ -52,12 +52,20 @@ bool UStageGenerator::GenerateChainedStage(UStageObject* PreStage)
 	if (PreStage->GetChainedStageList().IsEmpty() == false)
 		return false;
 
-	// マップ幅-1まで来た場合は抜ける (ボスステージがあるから-1)
+	// マップ幅-1まで来た場合はボスステージに繋げて抜ける
+	// #MEMO : 0オリジンで、ボスステージがあるから-2する
 	int PrePosX = PreStage->GetPos().X;
 	int MapSizeX = TargetMap->GetSize().X;
+	if (PrePosX == (MapSizeX - 2))
+	{
+		if (BossStage)
+		{
+			PreStage->AddChainedStage(BossStage);
+			BossStage->AddPreStage(PreStage);
+		}
 
-	if (PrePosX == (MapSizeX - 1))
 		return true;
+	}
 
 	// 繋げるステージ数をランダムに取得
 	int32 Min = MIN_STAGE_CHAIN_NUM;
@@ -133,8 +141,6 @@ bool UStageGenerator::GenerateChainedStage(UStageObject* PreStage)
 
 				// マップにステージ追加
 				TargetMap->AddStageList(ChainedStage);
-			
-				ChainedStage->SetStageCondition(EStageCondition::NotSelect);
 			}
 		}
 	}
@@ -146,5 +152,25 @@ bool UStageGenerator::GenerateChainedStage(UStageObject* PreStage)
 	}
 
 	return bIsSuccess;
+}
+
+// ボスステージ生成
+void UStageGenerator::GenerateBossStage()
+{
+	if (TargetMap == nullptr)
+		return;
+
+	// 生成
+	FName UniqueName = MakeUniqueObjectName(this, UStageObject::StaticClass());
+	BossStage = NewObject<UStageObject>(this, UStageObject::StaticClass(), UniqueName);
+	if (BossStage)
+	{
+		BossStage->SetStageType(EStageType::Boss);
+
+		// 0オリジンのため-1
+		BossStage->SetPos(FVector2D(TargetMap->GetSize().X - 1, 0.f));
+
+		TargetMap->AddStageList(BossStage);
+	}
 }
 

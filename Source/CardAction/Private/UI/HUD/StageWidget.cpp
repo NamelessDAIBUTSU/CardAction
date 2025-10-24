@@ -47,6 +47,17 @@ void UStageWidget::PlayConditionAnim()
 	}
 }
 
+void UStageWidget::OnUpdate(float DeltaSec)
+{
+	if (CoordText)
+	{
+		FFormatNamedArguments Args;
+		Args.Add(TEXT("X"), Stage->GetPos().X);
+		Args.Add(TEXT("Y"), Stage->GetPos().Y);
+		CoordText->SetText(FText::Format(FTextFormat::FromString("({X},{Y})"), Args));
+	}
+}
+
 
 void UStageWidget::OnClicked()
 {

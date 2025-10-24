@@ -60,7 +60,10 @@ void UMapManager::GenerateMap()
 	// ステージジェネレータの初期化
 	StageGenerator->Initialize(CurrentMap);
 
-	// 全ステージの作成
+	// ボスステージの作成
+	StageGenerator->GenerateBossStage();
+
+	// 他ステージの作成と繋ぎ処理
 	bool bIsSuccess = StageGenerator->GenerateChainedStage(nullptr);
 	UE_LOG(LogTemp, Warning, TEXT("Map Generate is %hs"), bIsSuccess ? "Success." : "Failed.");
 }

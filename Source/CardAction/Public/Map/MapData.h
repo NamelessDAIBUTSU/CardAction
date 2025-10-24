@@ -20,8 +20,7 @@ public:
 	// マップ名
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FName MapName;
-
-	// 使用レベル名
+	// レベル名
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FName LevelName;
 
@@ -44,6 +43,14 @@ public:
 	// このマップで使うグリッドセルのデフォルトマテリアル
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UMaterialInterface* DefaultMaterial = nullptr;
+
+	// ヘッダー / フッター / ベース画像
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UTexture2D* HeaderImage = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UTexture2D* FooterImage = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UTexture2D* BaseImage = nullptr;
 };
 
 UCLASS()

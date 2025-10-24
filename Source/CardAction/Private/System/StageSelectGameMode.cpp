@@ -66,17 +66,23 @@ void AStageSelectGameMode::StartPlay()
 	AStageSelectController* PC = Cast<AStageSelectController>(GetWorld()->GetFirstPlayerController());
 	if (PC && PC->GetMapWidget())
 	{
+		UMapWidget* MapWidget = PC->GetMapWidget();
+
+		UMapObject* Map = MapManager->GetCurrentMap();
+		if (Map == nullptr)
+			return;
+
 		// ステージウィジェット生成用の初期設定
-		PC->GetMapWidget()->SetupInfo();
+		MapWidget->SetupInfo(Map->GetMapData());
 
 		// ステージウィジェットの生成
-		if (UMapObject* Map = MapManager->GetCurrentMap())
+		for (UStageObject* Stage : Map->GetStageList())
 		{
-			for (UStageObject* Stage : Map->GetStageList())
-			{
-				PC->GetMapWidget()->CreateStageWidget(Stage);
-			}
+			MapWidget->CreateStageWidget(Stage);
 		}
+
+		// ステージラインウィジェットの生成
+		MapWidget->CreateStageLineWidget();
 	}
 }
 

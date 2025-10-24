@@ -17,9 +17,6 @@ class CARDACTION_API UStageObject : public UObject
 	GENERATED_BODY()
 	
 public:
-	// ステージデータの設定
-	void SetStageData(UStageData* Data) { StageData = Data; }
-
 	FVector2D GetPos() const { return Pos; }
 	void SetPos(FVector2D P) { Pos = P; }
 
@@ -36,12 +33,13 @@ public:
 	void SetStageCondition(EStageCondition Cond) { Condition = Cond; }
 
 	// ステージタイプ
-	EStageType GetStageType() const;
+	EStageType GetStageType() const { return StageType; }
+	void SetStageType(EStageType Type) { StageType = Type; }
 
 private:
-	// ステージデータ
-	UPROPERTY();
-	UStageData* StageData = nullptr;
+	// ステージタイプ
+	UPROPERTY()
+	EStageType StageType;
 
 	// 確定報酬カード
 	UPROPERTY();
@@ -49,7 +47,7 @@ private:
 
 	// ステージ状況
 	UPROPERTY();
-	EStageCondition Condition;
+	EStageCondition Condition = EStageCondition::NotSelect;
 
 	// ステージの高さ・幅
 	UPROPERTY();
