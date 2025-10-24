@@ -7,6 +7,7 @@
 #include <Components/CanvasPanel.h>
 #include "StageWidget.h"
 #include "Map/Stage/StageObject.h"
+#include <Components/TextBlock.h>
 #include "MapWidget.generated.h"
 
 /**
@@ -37,6 +38,9 @@ public:
 private:
 	UPROPERTY(meta = (BindWidget))
 	UCanvasPanel* StageCanvas = nullptr;
+
+	UPROPERTY(meta = (BindWidget))
+	UTextBlock* MapName = nullptr;
 
 	// ステージ間の距離
 	float StageDistX = 0.f;

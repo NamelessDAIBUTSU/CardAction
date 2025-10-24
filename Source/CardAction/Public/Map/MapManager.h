@@ -19,7 +19,7 @@ public:
 
 public:
 	// 初期化
-	void Initialize(UMapData* GenMapData);
+	void Initialize();
 
 	// 更新
 	void Update(float DeltaSec);
@@ -27,8 +27,12 @@ public:
 	// マップ生成
 	void GenerateMap();
 
+	// マップを進める
+	void GoNextMap();
+
 	// マップの取得
 	UMapObject* GetCurrentMap() const { return CurrentMap; }
+	void ResetCurrentMap() { CurrentMap = nullptr; }
 
 	// ステージ状況の更新
 	void RefleshStageCondition();
@@ -36,16 +40,43 @@ public:
 	// レベル名の取得
 	FName GetCurrentLevelName();
 
+	// マップ名の取得
+	FName GetCurrentMapName();
+
+	// クリア判定
+	bool IsClearCurrentMap();
+	bool IsClearAllMap() const { return bIsClearAllMap; }
+
+private:
+	// 生成マップのデータをランダムに設定
+	void SetupGenerateMapData();
+
+
 private:
 	// ステージジェネレータ
 	UPROPERTY()
 	UStageGenerator* StageGenerator = nullptr;
 
-	// 生成するマップの情報
+	// 生成可能マップデータリスト
 	UPROPERTY()
-	UMapData* GenerateMapData = nullptr;
+	UGenerateMapDataList* GenMapDataListAsset = nullptr;
+
+	// 生成するマップデータリス
+	UPROPERTY()
+	TArray<UMapData*> GenMapDataList;
 
 	// 現在のマップ
 	UPROPERTY()
 	UMapObject* CurrentMap = nullptr;
+
+	// 初期化済みか
+	UPROPERTY()
+	bool bIsInitialized = false;
+	
+	// 現在のマップインデックス
+	UPROPERTY()
+	int32 CurrentMapIndex = 0;
+
+	// 全マップクリアしたか
+	bool bIsClearAllMap = false;
 };

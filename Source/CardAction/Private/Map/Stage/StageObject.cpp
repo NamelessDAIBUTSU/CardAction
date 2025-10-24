@@ -13,3 +13,12 @@ void UStageObject::AddPreStage(UStageObject* PreStage)
 	PreStageList.Add(PreStage);
 }
 
+// ステージタイプの取得
+EStageType UStageObject::GetStageType() const
+{
+	if (StageData == nullptr)
+		return EStageType();
+
+	return StageData->StageType;
+}
+

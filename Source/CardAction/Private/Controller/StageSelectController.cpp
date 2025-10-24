@@ -23,6 +23,11 @@ void AStageSelectController::BeginPlay()
 			MapWidget->PlayInAnim();
 		}
 	}
+
+	FInputModeGameAndUI InputMode;
+	InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+
+	SetInputMode(InputMode);
 }
 
 void AStageSelectController::Tick(float DeltaSec)

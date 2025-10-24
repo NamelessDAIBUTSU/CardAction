@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "Map/MapData.h"
 #include "MapObject.generated.h"
 
 /**
@@ -15,12 +16,14 @@ class CARDACTION_API UMapObject : public UObject
 	GENERATED_BODY()
 	
 public:
+	// 初期化
+	void Initialize(UMapData* Data);
+
 	// マップをクリアしたか
 	bool IsClear() { return false; }
 
 	// マップサイズ
 	FVector2D GetSize() const { return Size; }
-	void SetSize(FVector2D S) { Size = S; }
 
 	// 指定位置のステージを取得
 	class UStageObject* GetStage(FVector2D Pos);
@@ -35,10 +38,13 @@ public:
 	void SetCurrentStage(UStageObject* Stage) { CurrentStage = Stage; }
 	UStageObject* GetCurrentStage() { return CurrentStage; }
 
+	// マップデータ
+	UMapData* GetMapData() { return MapData; }
+
 private:
 	// マップデータ
 	UPROPERTY();
-	class UMapData* MapData = nullptr;
+	UMapData* MapData = nullptr;
 
 	// 現在のステージ
 	UPROPERTY();

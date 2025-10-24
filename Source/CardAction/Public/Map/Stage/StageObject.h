@@ -17,6 +17,9 @@ class CARDACTION_API UStageObject : public UObject
 	GENERATED_BODY()
 	
 public:
+	// ステージデータの設定
+	void SetStageData(UStageData* Data) { StageData = Data; }
+
 	FVector2D GetPos() const { return Pos; }
 	void SetPos(FVector2D P) { Pos = P; }
 
@@ -31,6 +34,9 @@ public:
 	// ステージ状況の取得
 	EStageCondition GetStageCondition() const { return Condition; }
 	void SetStageCondition(EStageCondition Cond) { Condition = Cond; }
+
+	// ステージタイプ
+	EStageType GetStageType() const;
 
 private:
 	// ステージデータ

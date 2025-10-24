@@ -6,18 +6,27 @@
 
 UMapManager::UMapManager()
 {
+	// DataAssetをロードして設定
+	static ConstructorHelpers::FObjectFinder<UGenerateMapDataList> GenMapDataAsset(TEXT("/Game/CardAction/Map/DA_GenMapDataList.DA_GenMapDataList"));
+	if (GenMapDataAsset.Succeeded())
+	{
+		GenMapDataListAsset = GenMapDataAsset.Object;
+	}
 }
 
 // 初期化
-void UMapManager::Initialize(UMapData* GenMapData)
+void UMapManager::Initialize()
 {
-	// ステージジェネレーターの生成
-	if (StageGenerator == nullptr)
-	{
-		StageGenerator = NewObject<UStageGenerator>(this, UStageGenerator::StaticClass());
-	}
+	if (bIsInitialized)
+		return;
 
-	GenerateMapData = GenMapData;
+	// 生成するマップの生成データを初期化
+	SetupGenerateMapData();
+
+	// ステージジェネレーターの生成
+	StageGenerator = NewObject<UStageGenerator>(this, UStageGenerator::StaticClass());
+
+	bIsInitialized = true;
 }
 
 // 更新
@@ -25,69 +34,47 @@ void UMapManager::Update(float DeltaSec)
 {
 	if (CurrentMap == nullptr)
 		return;
-	const auto& Stages = CurrentMap->GetStageList();
-	for (int i = 0;i < Stages.Num();++i)
-	{
-		auto Pos = Stages[i]->GetPos();
-
-		// 球体の中心座標
-		FVector Center = FVector(100.f * Pos.X, 100.f * Pos.Y, 50.f);
-
-		// 半径
-		float Radius = 30.f;
-
-		// セグメント数（滑らかさ）
-		int32 Segments = 4;
-
-		// 球の色
-		FColor Color = FColor::Red;
-
-		// デバッグ描画の存続時間（秒）
-		// 0なら1フレームだけ、負なら永続
-		float Duration = 2.f;
-
-		// 深度テストを行うか（falseにすると壁越しでも見える）
-		bool bPersistentLines = false;
-
-		DrawDebugSphere(GetWorld(), Center, Radius, Segments, Color, bPersistentLines, Duration);
-
-		// 繋がっている部分に
-		const auto& ChainedStages = Stages[i]->GetChainedStageList();
-		for (int j = 0;j < ChainedStages.Num(); ++j)
-		{
-			auto Offset = (ChainedStages[j]->GetPos() - Pos) * 0.5f;
-			auto StageCenter = ChainedStages[j]->GetPos() - Offset;
-
-			FVector NextCenter = FVector(100.f * StageCenter.X, 100.f * StageCenter.Y + 10.f * j - 1, 50.f);
-			Radius = 15.f;
-
-			Color = FColor::Blue;
-			DrawDebugSphere(GetWorld(), NextCenter, Radius, Segments, Color, bPersistentLines, Duration);
-		}
-	}
+	
 }
 
 // マップ生成
 void UMapManager::GenerateMap()
 {
-	if (StageGenerator == nullptr || GenerateMapData == nullptr)
+	if (StageGenerator == nullptr || GenMapDataList.Num() <= CurrentMapIndex)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Map Generate is Failed."));
 		return;
+	}
 
 	// マップの生成
 	CurrentMap = NewObject<UMapObject>(this, UMapObject::StaticClass());
 	if (CurrentMap == nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Map Generate is Failed."));
 		return;
+	}
+
+	// マップの初期化
+	CurrentMap->Initialize(GenMapDataList[CurrentMapIndex]);
 
 	// ステージジェネレータの初期化
 	StageGenerator->Initialize(CurrentMap);
 
-	// マップサイズを決める
-	int Width = FMath::RandRange(GenerateMapData->MinWidth, GenerateMapData->MaxWidth);
-	CurrentMap->SetSize(FVector2D(Width, GenerateMapData->Height));
-
 	// 全ステージの作成
 	bool bIsSuccess = StageGenerator->GenerateChainedStage(nullptr);
 	UE_LOG(LogTemp, Warning, TEXT("Map Generate is %hs"), bIsSuccess ? "Success." : "Failed.");
+}
+
+// マップを進める
+void UMapManager::GoNextMap()
+{
+	CurrentMapIndex++;
+
+	// 最終マップをクリアしたか判定
+	if (CurrentMapIndex >= NEED_CLEAR_MAP_NUM)
+	{
+		bIsClearAllMap = true;
+	}
 }
 
 // ステージ状況の更新
@@ -121,8 +108,59 @@ void UMapManager::RefleshStageCondition()
 // レベル名の取得
 FName UMapManager::GetCurrentLevelName()
 {
-	if (GenerateMapData == nullptr)
+	if (CurrentMap == nullptr || CurrentMap->GetMapData() == nullptr)
 		return FName();
 
-	return GenerateMapData->LevelName;
+	return CurrentMap->GetMapData()->LevelName;
+}
+
+// マップ名の取得
+FName UMapManager::GetCurrentMapName()
+{
+	if (CurrentMap == nullptr || CurrentMap->GetMapData() == nullptr)
+		return FName();
+
+	return CurrentMap->GetMapData()->MapName;
+}
+
+// クリア判定
+bool UMapManager::IsClearCurrentMap()
+{
+	if (CurrentMap == nullptr)
+		return false;
+
+	UStageObject* CurrentStage = CurrentMap->GetCurrentStage();
+	if (CurrentStage == nullptr)
+		return false;
+
+	return CurrentStage->GetStageCondition() == EStageCondition::Clear && CurrentStage->GetChainedStageList().IsEmpty();
+}
+
+// 生成マップのデータをランダムに設定
+void UMapManager::SetupGenerateMapData() 
+{
+	if (GenMapDataListAsset == nullptr)
+		return;
+
+	const auto& MapDataList = GenMapDataListAsset->MapDataList;
+
+	TArray<int32> IndexBuffer;
+	for (int i = 0;i < NEED_CLEAR_MAP_NUM;++i)
+	{
+		int32 RandomIndex = FMath::RandRange(0, MapDataList.Num() - 1);
+
+		bool bCanGenerate = MapDataList[RandomIndex]->MinMapNum <= i && i <= MapDataList[RandomIndex]->MaxMapNum;
+
+		// すでに抽選済みであれば再抽選
+		while (IndexBuffer.Find(RandomIndex) != INDEX_NONE || bCanGenerate == false)
+		{
+			RandomIndex = FMath::RandRange(0, MapDataList.Num() - 1);
+			bCanGenerate = MapDataList[RandomIndex]->MinMapNum <= i && i <= MapDataList[RandomIndex]->MaxMapNum;
+		}
+
+		// 生成するマップデータリストに追加
+		GenMapDataList.Add(MapDataList[RandomIndex]);
+
+		IndexBuffer.Add(RandomIndex);
+	}
 }

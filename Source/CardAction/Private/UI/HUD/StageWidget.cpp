@@ -11,6 +11,7 @@ void UStageWidget::NativeConstruct()
 
 	if (StageButton)
 	{
+		StageButton->IsFocusable = false;
 		StageButton->OnClicked.AddDynamic(this, &UStageWidget::OnClicked);
 	}
 }

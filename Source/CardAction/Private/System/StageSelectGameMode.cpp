@@ -5,6 +5,7 @@
 #include <Map/MapManager.h>
 #include "Map/MapData.h"
 #include <Controller/StageSelectController.h>
+#include <System/FadeSystem.h>
 
 AStageSelectGameMode::AStageSelectGameMode()
 {
@@ -23,10 +24,38 @@ void AStageSelectGameMode::StartPlay()
 		return;
 
 	// マップマネージャーの初期化
-	MapManager->Initialize(GenerateMapData);
+	MapManager->Initialize();
 
 	// ステージの状況を更新
+	// #MEMO : マップ生成前に呼ぶ必要あり
 	MapManager->RefleshStageCondition();
+
+	// マップのクリア判定
+	if (MapManager->IsClearCurrentMap())
+	{
+		// マップインデックスを進めて現在のマップをリセット
+		MapManager->GoNextMap();
+		MapManager->ResetCurrentMap();
+
+		// 次のマップが存在するなら、フェードして再度ステージ選択レベルへ
+		if(MapManager->IsClearAllMap() == false)
+		{
+			if (GetWorld()->GetGameInstance() == nullptr)
+				return;
+
+			UFadeSystem* FadeSystem = GetWorld()->GetGameInstance()->GetSubsystem<UFadeSystem>();
+			if (FadeSystem == nullptr)
+				return;
+
+			FadeSystem->FadeOutAndOpenLevel(FName("SelectStageLevel"));
+		}
+		else
+		{
+
+		}
+
+		return;
+	}
 
 	// マップが未生成なら生成する
 	if (MapManager->GetCurrentMap() == nullptr)

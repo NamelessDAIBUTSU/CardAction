@@ -8,12 +8,19 @@
 
 void UMapWidget::SetupInfo()
 {
-	// マップのサイズを取得
 	if (GetWorld() == nullptr || GetWorld()->GetGameInstance() == nullptr)
 		return;
 	UMapManager* MapManager = GetWorld()->GetGameInstance()->GetSubsystem<UMapManager>();
 	if (MapManager == nullptr || MapManager->GetCurrentMap() == nullptr)
 		return;
+
+	// マップ名を設定
+	if (MapName)
+	{
+		MapName->SetText(FText::FromName(MapManager->GetCurrentMapName()));
+	}
+
+	// マップのサイズを取得
 	FVector2D MapSize = MapManager->GetCurrentMap()->GetSize();
 
 	// 解像度取得

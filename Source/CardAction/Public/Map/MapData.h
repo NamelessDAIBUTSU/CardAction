@@ -7,9 +7,6 @@
 #include "Map/MapDef.h"
 #include "MapData.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class CARDACTION_API UMapData : public UDataAsset
 {
@@ -37,8 +34,24 @@ public:
 	int MinWidth;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int MaxWidth;
+
+	// 何マップ目として生成可能か
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int MinMapNum;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int MaxMapNum;
 	
 	// このマップで使うグリッドセルのデフォルトマテリアル
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UMaterialInterface* DefaultMaterial = nullptr;
+};
+
+UCLASS()
+class CARDACTION_API UGenerateMapDataList : public UDataAsset
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<UMapData*> MapDataList;
 };
