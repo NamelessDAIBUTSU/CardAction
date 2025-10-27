@@ -4,6 +4,7 @@
 #include "Grid/Cell/GridCellActor.h"
 #include <Character/MyCharacter.h>
 #include <Enemy/EnemyBase.h>
+#include <Map/MapManager.h>
 
 // Sets default values
 AGridCellActor::AGridCellActor()
@@ -48,6 +49,15 @@ void AGridCellActor::OnConstruction(const FTransform& Transform)
 void AGridCellActor::BeginPlay()
 {
     Super::BeginPlay();
+
+    // デフォルトマテリアルを現在のマップ指定のものに変更
+    UMapManager* MapManager = GetWorld()->GetGameInstance()->GetSubsystem<UMapManager>();
+    if (MapManager == nullptr || MapManager->GetCurrentMap() == nullptr)
+        return;
+    auto* MapData = MapManager->GetCurrentMap()->GetMapData();
+    UMaterialInterface* DefaultMaterial = MapData != nullptr ? MapData->DefaultMaterial : nullptr;
+    
+    MeshComp->SetMaterial(0, DefaultMaterial);
 }
 
 // Called every frame

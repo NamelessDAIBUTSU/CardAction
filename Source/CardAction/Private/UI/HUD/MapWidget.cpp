@@ -176,6 +176,12 @@ void UMapWidget::CreateStageLineWidget()
 
 				NewLine->SetRenderTransformAngle(AngleDeg);
 			}
+
+			// 後ろのステージを設定
+			NewLine->SetPostStage(ChainedStage);
+
+			// アニメーション設定
+			NewLine->SetupAnim();
 		}
 	}
 }
