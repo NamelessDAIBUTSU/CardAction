@@ -28,6 +28,9 @@ public:
 		bool bFromSweep,
 		const FHitResult& SweepResult);
 
+protected:
+	virtual void BeginPlay() override;
+
 public:
 	// 移動制御コンポーネント
 	UPROPERTY(VisibleAnywhere, Category = "Components")

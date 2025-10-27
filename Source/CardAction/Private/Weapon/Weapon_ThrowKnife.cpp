@@ -36,16 +36,6 @@ AWeapon_ThrowKnife::AWeapon_ThrowKnife()
 
         SphereCollisionComp->OnComponentBeginOverlap.AddDynamic(this, &AWeapon_ThrowKnife::OnOverlap);
     }
-
-    // ê∂ê¨éûÇÃç¿ïWÇï€ë∂
-    AGameModeBase* GM = UGameplayStatics::GetGameMode(this);
-    if (AMyGameMode* MyGM = Cast<AMyGameMode>(GM))
-    {
-        if (MyGM->GridManager == nullptr)
-            return;
-
-        GeneratedCoord = MyGM->GridManager->ConvertToGridCoord(GetActorLocation());
-    }
 }
 
 void AWeapon_ThrowKnife::Tick(float DeltaSec)
@@ -92,5 +82,19 @@ void AWeapon_ThrowKnife::OnOverlap(UPrimitiveComponent* OverlappedComp,
     if (bIsExistEnemyOnGridCell)
     {
         Destroy();
+    }
+}
+
+void AWeapon_ThrowKnife::BeginPlay()
+{
+    Super::BeginPlay();
+
+    // ê∂ê¨éûÇÃç¿ïWÇï€ë∂
+    if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
+    {
+        if (MyGM->GridManager == nullptr)
+            return;
+
+        GeneratedCoord = MyGM->GridManager->ConvertToGridCoord(GetActorLocation());
     }
 }

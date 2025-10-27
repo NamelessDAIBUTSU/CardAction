@@ -37,3 +37,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grid")
 	TArray<FVector2D> EnemySpawnableCoords;
 };
+
+// グリッドデータリスト
+UCLASS(BlueprintType)
+class CARDACTION_API UGridDataList : public UDataAsset
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grid")
+	TArray<UGridData*> GridDataList;
+};

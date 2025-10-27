@@ -77,6 +77,13 @@ bool UStageGenerator::GenerateChainedStage(UStageObject* PreStage)
 	{
 		Max = MAX_STAGE_CHAIN_NUM - 1;
 	}
+
+	// 最初のステージであれば、最低を2個にする
+	if (PreStage->GetPos().IsZero())
+	{
+		Min = 2;
+	}
+
 	int ChainNum = FMath::RandRange(Min, Max);
 
 	TArray<int32> IndexBuffer;

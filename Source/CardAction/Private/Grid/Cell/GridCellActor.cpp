@@ -6,7 +6,6 @@
 #include <Enemy/EnemyBase.h>
 #include <Map/MapManager.h>
 
-// Sets default values
 AGridCellActor::AGridCellActor()
 {
     PrimaryActorTick.bCanEverTick = true;
@@ -45,7 +44,6 @@ void AGridCellActor::OnConstruction(const FTransform& Transform)
     Super::OnConstruction(Transform);
 }
 
-// Called when the game starts or when spawned
 void AGridCellActor::BeginPlay()
 {
     Super::BeginPlay();
@@ -58,7 +56,15 @@ void AGridCellActor::BeginPlay()
     UMaterialInterface* DefaultMaterial = MapData != nullptr ? MapData->DefaultMaterial : nullptr;
     CellData.DefaultMaterial = DefaultMaterial;
 
-    MeshComp->SetMaterial(0, CellData.DefaultMaterial);
+    // ƒƒbƒVƒ…Ý’è
+    if (CellData.GridCellType == EGridCellType::Normal)
+    {
+        MeshComp->SetMaterial(0, CellData.DefaultMaterial);
+    }
+    if (CellData.GridCellType == EGridCellType::None)
+    {
+        MeshComp->SetVisibility(false, true);
+    }
 }
 
 // Called every frame

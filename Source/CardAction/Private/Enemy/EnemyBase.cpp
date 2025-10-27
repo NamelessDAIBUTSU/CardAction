@@ -14,12 +14,10 @@
 #include "Grid/GridManager.h"
 #include "Enemy/EnemyManager.h"
 
-// Sets default values
 AEnemyBase::AEnemyBase()
 {
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 42.f);
 
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	// 配置・スポーン時に自動でAIに制御されるよう指定
@@ -42,7 +40,6 @@ AEnemyBase::AEnemyBase()
 	GridMovementComp = CreateDefaultSubobject<UGridMovementComponent>(TEXT("GridMovementComponent"));
 }
 
-// Called when the game starts or when spawned
 void AEnemyBase::BeginPlay()
 {
 	Super::BeginPlay();

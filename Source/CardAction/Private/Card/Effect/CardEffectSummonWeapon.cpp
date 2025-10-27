@@ -19,6 +19,8 @@ void UCardEffectSummonWeapon::ExecuteEffect()
 		// •Ší‚ğ¶¬
 		AWeaponActorBase* WeaponActor = GetWorld()->SpawnActor<AWeaponActorBase>(WeaponClass, Player->GetActorLocation(), Player->GetActorRotation());
 
+		UE_LOG(LogTemp, Warning, TEXT("Projectile Spawn Location: %s"), *WeaponActor->GetActorLocation().ToString());
+
 		// Š—LÒ‚ğİ’è
 		if (WeaponActor)
 		{
