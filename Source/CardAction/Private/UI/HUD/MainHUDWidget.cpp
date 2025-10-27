@@ -141,6 +141,31 @@ void UMainHUDWidget::CreateWidgets()
             }
         }
     }
+
+    // 制限時間
+    if (ActionTimeWidgetClass)
+    {
+        ActionTimeWidget = CreateWidget<UActionTimeWidget>(GetWorld(), ActionTimeWidgetClass);
+        if (ActionTimeWidget)
+        {
+            HUDList.Add(ActionTimeWidget);
+
+            // 配置
+            if (MainCanvas)
+            {
+                MainCanvas->AddChild(ActionTimeWidget);
+                UCanvasPanelSlot* CanvasSlot = Cast<UCanvasPanelSlot>(ActionTimeWidget->Slot);
+                if (CanvasSlot)
+                {
+                    CanvasSlot->SetAnchors(FAnchors(0.5f, 0.5f));
+                    CanvasSlot->SetAlignment(FVector2D(0.5f, 0.5f));
+                }
+            }
+        }
+    }
+
+    // アクションフェーズ以外で非表示にするウィジェットを消す
+    SetVisibleExceptActionPhase(false);
 }
 
 // アクションフェーズ以外で表示にするUIの表示制御

@@ -176,6 +176,18 @@ EBattlePhase AMyGameMode::GetCurrentButtlePhase() const
 	return CurrentBattlePhase->GetBattlePhase();
 }
 
+// アクションフェーズの場合、残り時間を取得
+int AMyGameMode::GetRemainSec()
+{
+	UBattlePhase_Action* ActionPhase = Cast<UBattlePhase_Action>(CurrentBattlePhase);
+	if (ActionPhase)
+	{
+		return ActionPhase->GetCurrentRemainSec();
+	}
+
+	return 0;
+}
+
 void AMyGameMode::OnGameOver()
 {
 	// ゲームオーバー処理を呼ぶ

@@ -33,6 +33,9 @@ public:
 
 	ACardBook* GetCardBook() { return CardBook; }
 
+	// アクションフェーズの場合、残り時間を取得
+	int GetRemainSec();
+
 public:
 	UFUNCTION()
 	void OnGameOver();

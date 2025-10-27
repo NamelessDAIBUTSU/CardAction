@@ -25,6 +25,10 @@ public: /* UBattlePhaseBase */
 	// フェーズ終了時
 	virtual void OnExit() override;
 
+public:
+	// 残り時間を整数で取得
+	int GetCurrentRemainSec();
+
 private:
 	float PhaseEndSec = 30.f;
 	float ElapsedSec = 0.f;

@@ -64,3 +64,11 @@ void UBattlePhase_Action::OnExit()
 	// アクションフェーズ以外で非表示にするウィジェットを消す
 	PlayerController->MainHUDWidget->SetVisibleExceptActionPhase(false);
 }
+
+// 残り時間を整数で取得
+int UBattlePhase_Action::GetCurrentRemainSec()
+{
+	float RemainSec = PhaseEndSec - ElapsedSec;
+
+	return FMath::FloorToInt(RemainSec);
+}

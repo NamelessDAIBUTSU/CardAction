@@ -11,6 +11,7 @@
 #include "Card/SelectCardDelegate.h"
 #include "EnemyCharaBannerListWidget.h"
 #include "Components/SizeBox.h"
+#include "ActionTimeWidget.h"
 #include "MainHUDWidget.generated.h"
 
 /**
@@ -64,6 +65,10 @@ public: /* 生成するWidgetクラス */
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
     TSubclassOf<UUserWidget> EnemyCharaBannerWidgetClass;
 
+    // 制限時間
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
+    TSubclassOf<UUserWidget> ActionTimeWidgetClass;
+
 public: /* インスタンスのポインタ */
     // インスタンス化させたHUDのリスト
     TArray<UHUDBase*> HUDList;
@@ -85,6 +90,9 @@ public: /* インスタンスのポインタ */
     USizeBox* EnemyCharaBannerBox;
     UPROPERTY()
     UEnemyCharaBannerListWidget* EnemyCharaBannerWidget = nullptr;
+    // 制限時間
+    UPROPERTY()
+    UActionTimeWidget* ActionTimeWidget;
 
 public: /* Delegate */
     // カード選択用デリゲート

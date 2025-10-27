@@ -289,7 +289,7 @@ void UCardWidget::SetupSelectNum()
         int Index = CardSelectWidget->GetSelectIndex(CardData->UniqueID);
 
         FFormatNamedArguments Args;
-        Args.Add(TEXT("Num"), Index);
+        Args.Add(TEXT("Num"), Index + 1);
         SelectNum->SetText(FText::Format(FTextFormat::FromString("{Num}"), Args));
     }
 }

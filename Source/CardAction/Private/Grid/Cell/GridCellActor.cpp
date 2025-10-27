@@ -56,8 +56,9 @@ void AGridCellActor::BeginPlay()
         return;
     auto* MapData = MapManager->GetCurrentMap()->GetMapData();
     UMaterialInterface* DefaultMaterial = MapData != nullptr ? MapData->DefaultMaterial : nullptr;
-    
-    MeshComp->SetMaterial(0, DefaultMaterial);
+    CellData.DefaultMaterial = DefaultMaterial;
+
+    MeshComp->SetMaterial(0, CellData.DefaultMaterial);
 }
 
 // Called every frame
