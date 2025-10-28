@@ -34,6 +34,9 @@ public:
 	UMapObject* GetCurrentMap() const { return CurrentMap; }
 	void ResetCurrentMap() { CurrentMap = nullptr; }
 
+	// ステージの取得
+	UStageObject* GetCurrentStage() const;
+
 	// ステージ状況の更新
 	void RefleshStageCondition();
 
@@ -51,15 +54,15 @@ private:
 	// 生成マップのデータをランダムに設定
 	void SetupGenerateMapData();
 
+private: /* アセット */
+	// 生成可能マップデータリスト
+	UPROPERTY()
+	UGenerateMapDataList* GenMapDataListAsset = nullptr;
 
 private:
 	// ステージジェネレータ
 	UPROPERTY()
 	UStageGenerator* StageGenerator = nullptr;
-
-	// 生成可能マップデータリスト
-	UPROPERTY()
-	UGenerateMapDataList* GenMapDataListAsset = nullptr;
 
 	// 生成するマップデータリス
 	UPROPERTY()

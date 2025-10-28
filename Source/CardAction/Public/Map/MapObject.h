@@ -41,6 +41,10 @@ public:
 	// マップデータ
 	UMapData* GetMapData() { return MapData; }
 
+	// マップ番号
+	int GetMapNum() const { return MapNum; }
+	void SetMapNum(int Num) { MapNum = Num; }
+
 private:
 	// マップデータ
 	UPROPERTY();

@@ -80,7 +80,7 @@ public: /* Util */
 
 private:
 	// グリッド生成
-	void GenerateGrid(UGridData* GridData);
+	void GenerateGrid();
 	// エネミーをグリッド上にスポーン
 	void SpawnEnemies();
 
@@ -89,10 +89,6 @@ private:
 
 
 public:
-	// 生成するグリッドデータ
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grid")
-	UGridData* GenerateGridData = nullptr;
-
 	// スポーンさせるエネミー情報
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy")
 	TArray<TSubclassOf<AEnemyBase>> SpawnEnemyArray;
@@ -100,4 +96,8 @@ public:
 private:
 	// グリッド情報
 	TArray<TArray<AGridCellActor*>> Grid;
+
+	// 生成するグリッドデータ
+	UPROPERTY()
+	UGridData* GenerateGridData = nullptr;
 };

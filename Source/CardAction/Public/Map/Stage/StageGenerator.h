@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "StageObject.h"
+#include <Grid/GridData.h>
 #include "StageGenerator.generated.h"
 
 // ステージの内部情報を生成するジェネレータ
@@ -26,10 +27,17 @@ public:
 	// ボスステージ生成
 	void GenerateBossStage();
 
+	// グリッド情報生成
+	void GenerateGridData(UStageObject* TargetStage);
+
 private:
 	UPROPERTY()
 	UMapObject* TargetMap = nullptr;
 
 	UPROPERTY()
 	UStageObject* BossStage = nullptr;
+
+	// 生成可能グリッドデータリスト
+	UPROPERTY()
+	UGridDataList* GenGridDataList = nullptr;
 };

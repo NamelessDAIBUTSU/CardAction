@@ -7,7 +7,12 @@
 
 UStageGenerator::UStageGenerator()
 {
-
+	// 生成可能グリッドデータの取得
+	static ConstructorHelpers::FObjectFinder<UGridDataList> GridDataAsset(TEXT("/Game/CardAction/Grid/DA_GridDataList.DA_GridDataList"));
+	if (GridDataAsset.Succeeded())
+	{
+		GenGridDataList = GridDataAsset.Object;
+	}
 }
 
 void UStageGenerator::Initialize(UMapObject* Map)
@@ -41,6 +46,9 @@ bool UStageGenerator::GenerateChainedStage(UStageObject* PreStage)
 			// 現在のステージに設定
 			TargetMap->SetCurrentStage(FirstStage);
 			FirstStage->SetStageCondition(EStageCondition::CanSelect);
+
+			// ステージ情報をランダムに設定
+			GenerateGridData(FirstStage);
 		}
 	}
 
@@ -148,6 +156,9 @@ bool UStageGenerator::GenerateChainedStage(UStageObject* PreStage)
 
 				// マップにステージ追加
 				TargetMap->AddStageList(ChainedStage);
+
+				// ステージ情報をランダムに設定
+				GenerateGridData(ChainedStage);
 			}
 		}
 	}
@@ -178,6 +189,30 @@ void UStageGenerator::GenerateBossStage()
 		BossStage->SetPos(FVector2D(TargetMap->GetSize().X - 1, 0.f));
 
 		TargetMap->AddStageList(BossStage);
+
+		// ステージ情報をランダムに設定
+		GenerateGridData(BossStage);
 	}
+}
+
+// グリッド情報生成
+void UStageGenerator::GenerateGridData(UStageObject* TargetStage)
+{
+	if (GenGridDataList == nullptr || TargetMap == nullptr || TargetStage == nullptr)
+		return;
+
+	const auto& GridDataList = GenGridDataList->GridDataList;
+	if (GridDataList.IsEmpty())
+		return;
+
+	// 生成できるグリッドが取得できるまでインデックスをランダム取得
+	int Index = FMath::RandRange(0, GridDataList.Num() - 1);
+	while (TargetMap->GetMapNum() < GridDataList[Index]->MinGenMapNum || GridDataList[Index]->MaxGenMapNum < TargetMap->GetMapNum())
+	{
+		Index = FMath::RandRange(0, GridDataList.Num() - 1);
+	}
+
+	// ステージに設定
+	TargetStage->SetGridData(GridDataList[Index]);
 }
 

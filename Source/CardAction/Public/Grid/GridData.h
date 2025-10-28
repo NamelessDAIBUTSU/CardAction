@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
 #include "Grid/Cell/GridCellActor.h"
+#include "Map/MapDef.h"
 #include "GridData.generated.h"
 
 // 1行のグリッドデータ
@@ -36,6 +37,12 @@ public:
 	// エネミースポーン可能の座標配列
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grid")
 	TArray<FVector2D> EnemySpawnableCoords;
+
+	// 何マップ目で生成可能か
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grid")
+	int MinGenMapNum = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grid")
+	int MaxGenMapNum = NEED_CLEAR_MAP_NUM - 1;
 };
 
 // グリッドデータリスト

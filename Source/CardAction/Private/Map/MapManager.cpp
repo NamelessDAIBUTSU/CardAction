@@ -167,3 +167,12 @@ void UMapManager::SetupGenerateMapData()
 		IndexBuffer.Add(RandomIndex);
 	}
 }
+
+// ステージの取得
+UStageObject* UMapManager::GetCurrentStage() const
+{
+	if (CurrentMap == nullptr)
+		return nullptr;
+
+	return CurrentMap->GetCurrentStage();
+}

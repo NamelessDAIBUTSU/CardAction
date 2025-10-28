@@ -6,6 +6,7 @@
 #include <Character/MyCharacter.h>
 #include "Grid/Cell/GridCellActor.h"
 #include "Components/CapsuleComponent.h"
+#include <Map/MapManager.h>
 
 AGridManager::AGridManager()
 {
@@ -29,19 +30,23 @@ void AGridManager::Tick(float DeltaTime)
 void AGridManager::Initialize()
 {
 	// グリッド生成
-	GenerateGrid(GenerateGridData);
+	GenerateGrid();
 
 	// グリッド上にエネミー生成
 	SpawnEnemies();
 }
 
 // グリッド生成
-void AGridManager::GenerateGrid(UGridData* GridData)
+void AGridManager::GenerateGrid()
 {
-	if (GridData == nullptr)
+	// 生成するグリッドデータの取得
+	UMapManager* MapManager = GetWorld()->GetGameInstance()->GetSubsystem<UMapManager>();
+	if (MapManager == nullptr || MapManager->GetCurrentStage() == nullptr)
 		return;
 
-	GenerateGridData = GridData;
+	GenerateGridData = MapManager->GetCurrentStage()->GetGridData();
+	if (GenerateGridData == nullptr)
+		return;
 
 	// グリッドセルのスポーン位置
 	FVector SpawnPosition = FVector::Zero();

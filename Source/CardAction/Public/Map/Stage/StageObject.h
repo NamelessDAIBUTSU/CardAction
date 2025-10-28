@@ -6,6 +6,7 @@
 #include "UObject/NoExportTypes.h"
 #include "Map/Stage/StageData.h"
 #include "Card/CardData.h"
+#include <Grid/GridData.h>
 #include "StageObject.generated.h"
 
 /**
@@ -36,6 +37,10 @@ public:
 	EStageType GetStageType() const { return StageType; }
 	void SetStageType(EStageType Type) { StageType = Type; }
 
+	// グリッド情報
+	UGridData* GetGridData() const { return GenerateGridData; }
+	void SetGridData(UGridData* Data) { GenerateGridData = Data; }
+
 private:
 	// ステージタイプ
 	UPROPERTY()
@@ -62,7 +67,7 @@ private:
 
 	// グリッド情報
 	UPROPERTY();
-	class UGridData* GenerateGridData = nullptr;
+	UGridData* GenerateGridData = nullptr;
 
 	// 出現する敵のリスト
 	UPROPERTY();
