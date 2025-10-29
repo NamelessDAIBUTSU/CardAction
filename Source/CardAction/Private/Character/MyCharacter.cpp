@@ -65,8 +65,6 @@ void AMyCharacter::Tick(float DeltaSeconds)
 	this->CustomTimeDilation = 1.f;
 
     Super::Tick(DeltaSeconds);
-
-	UE_LOG(LogTemp, Warning, TEXT("%f"), GetActorLocation().Z);
 }
 
 void AMyCharacter::BeginPlay()
@@ -256,6 +254,10 @@ void AMyCharacter::OnScrollSelectCard(const FInputActionValue& Value)
 // ダメージ処理
 void AMyCharacter::OnTakeDamage(float Damage)
 {
+	// 無敵中なら無視
+	if (bIsInvincible)
+		return;
+
 	// ダメージを受ける
 	CurrentHP = FMath::Max(CurrentHP - Damage, 0.f);
 
@@ -270,6 +272,9 @@ void AMyCharacter::OnTakeDamage(float Damage)
 			}
 		}
 	}
+
+	// 無敵時間の開始
+	StartInvincible();
 }
 
 void AMyCharacter::SetCurrentCoord(FVector2D Coord)
@@ -304,9 +309,6 @@ void AMyCharacter::AddToHandCards(UCardData* CardData)
 void AMyCharacter::RemoveFromHandCards(UCardData* CardData)
 {
 	HandCards.Remove(CardData);
-
-	// 順番を詰める
-
 }
 
 // 手札ウィジェットに反映
@@ -322,3 +324,58 @@ void AMyCharacter::RefleshHandCards()
 		MyPlayerController->MainHUDWidget->HandCardsWidget->SelectCard(SelectHandCardsIndex);
 	}
 }
+
+// ダメージによる点滅
+void AMyCharacter::StartBlinkEffect()
+{
+	GetWorldTimerManager().SetTimer(BlinkTimer, this, &AMyCharacter::ToggleBlink, 0.1f, true);
+}
+
+void AMyCharacter::ToggleBlink()
+{
+	if (auto* MeshComp = GetMesh())
+	{
+		MeshComp->SetVisibility(!MeshComp->GetVisibleFlag());
+	}
+}
+
+void AMyCharacter::EndInvincible()
+{
+	if (auto* MeshComp = GetMesh())
+	{
+		bIsInvincible = false;
+		GetWorldTimerManager().ClearTimer(BlinkTimer);
+
+		MeshComp->SetVisibility(true);
+	}
+}
+
+// 無敵時間の開始
+void AMyCharacter::StartInvincible()
+{
+	bIsInvincible = true;
+
+	// 点滅演出開始
+	StartBlinkEffect();
+
+	// 終了時のコールバック設定
+	GetWorldTimerManager().SetTimer(InvincibleTimer, this, &AMyCharacter::EndInvincible, 2.0f, false);
+}
+
+//// 無敵時間の更新
+//void AMyCharacter::UpdateInvincible(float DeltaSec)
+//{
+//	if (bIsInvincible == false)
+//		return;
+//
+//	ElapsedSec += DeltaSec;
+//
+//	// 無敵時間終了
+//	if (ElapsedSec >= InvincibleSec)
+//	{
+//		bIsInvincible = false;
+//
+//		// 点滅演出終了
+//		StopBlinkEffect();
+//	}
+//}

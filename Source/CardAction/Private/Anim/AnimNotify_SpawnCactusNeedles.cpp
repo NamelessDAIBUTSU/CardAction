@@ -50,10 +50,12 @@ void UAnimNotify_SpawnCactusNeedles::Notify(USkeletalMeshComponent* MeshComp, UA
         // ¶¬‚·‚éˆÊ’u‚ðŽæ“¾
         FVector SpawnLocation = GridManager->ConvertToWorldPosition(SpawnCoord);
 
+        // ¶¬
         ACactusNeedle* CactusNeedle = GetWorld()->SpawnActor<ACactusNeedle>(Enemy->AttackClass, SpawnLocation, FRotator(0.f, 0.f, 0.f), Params);
         if (CactusNeedle == nullptr)
             return;
 
+        // ‰ŠúÝ’è
         CactusNeedle->Setup();
     }
 }

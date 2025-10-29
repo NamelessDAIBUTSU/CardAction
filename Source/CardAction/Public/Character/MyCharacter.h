@@ -65,6 +65,17 @@ private:
 	// 手札ウィジェットに反映
 	void RefleshHandCards();
 
+	// ダメージによる点滅
+	void StartBlinkEffect();
+
+	// 無敵時間の開始
+	void StartInvincible();
+
+	// 点滅演出関連
+	void ToggleBlink();
+	void EndInvincible();
+
+
 public: /* Input */
 	// カード発動
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
@@ -103,11 +114,14 @@ public: /* Status */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Status")
 	int32 MaxEnergy = 10;
 
-public: /* 武器 */
+public:
 	// マズルオフセット
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Weapon")
 	FVector MazzleOffset = FVector(0.f, 0.f, 50.f);
-
+	
+	// 無敵時間
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Invincible")
+	float InvincibleSec = 1.5f;
 
 private:
 	// 手札カード
@@ -123,5 +137,16 @@ private:
 	// HPバー用コンポーネント
 	UPROPERTY(VisibleAnywhere, Category = "Component")
 	UWidgetComponent* WidgetComp = nullptr;
+
+private: /* 無敵 */
+	// 無敵時間中か
+	UPROPERTY(VisibleAnywhere, Category = "Invincible")
+	bool bIsInvincible = false;
+	// 無敵経過時間
+	UPROPERTY(VisibleAnywhere, Category = "Invincible")
+	float ElapsedSec = 0.f;
+
+	FTimerHandle BlinkTimer;
+	FTimerHandle InvincibleTimer;
 };
 
