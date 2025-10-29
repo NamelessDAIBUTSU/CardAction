@@ -22,10 +22,7 @@ protected: /* UObject */
 public:	/* UActorComponent */
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-
-public:
-	void MoveToDirection(FVector Direction);
-	
+public: /* プレイヤー用 */
 	// グリッド移動
 	UFUNCTION()
 	void OnMoveToDirection(const FInputActionValue& Value);
@@ -38,40 +35,61 @@ public:
 	UFUNCTION()
 	void OnChangeTurnMode(const FInputActionValue& Value);
 
+public:
+	// 移動リクエスト
+	void RequestMoveToDirection(FVector2D Direction, float GoalSecond);
+
 	// 座標
+	UFUNCTION()
 	FVector2D GetCurrentCoord() const { return CurrentCoord; }
 	void SetCoord(FVector2D Coord) { CurrentCoord = Coord; }
 
+	// 移動中
+	UFUNCTION(BlueprintCallable)
+	bool IsMoving() const { return bIsMoving; }
 
 private:
 	// グリッド移動が終了したか
 	bool IsFinishGridMove();
 
-public:
-	// 1移動のグリッド単位
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Move")
-	float GridUnit = 200.f;
+	// 移動更新
+	void UpdateGridMove(float DeltaSec);
+
+
+private: /* プレイヤー用 */
+	// 連続移動制御用の移動方向キャッシュ
+	UPROPERTY(VisibleAnywhere, Category = "GridMove")
+	FVector2D DirectionCache = FVector2D::Zero();
 
 private:
 	// 回転だけのモードか
 	UPROPERTY(VisibleAnywhere, Category = "GridMove")
 	bool bIsTurningMode = false;
 
+	// 現在の座標
+	UPROPERTY(VisibleAnywhere, Category = "GridMove")
+	FVector2D CurrentCoord = FVector2D::Zero();
+
+private: /* 移動更新関連 */
 	// 移動中か
 	UPROPERTY(VisibleAnywhere, Category = "GridMove")
 	bool bIsMoving = false;
 
-	// 移動方向のキャッシュ
+	// 1秒の移動量
 	UPROPERTY(VisibleAnywhere, Category = "GridMove")
-	FVector DirectionCache = FVector::Zero();
+	FVector MoveSpeed = FVector::Zero();
 
-	// グリッド移動用の移動量
-	UPROPERTY(VisibleAnywhere, Category = "GridMove")
-	FVector MoveGridVector = FVector::Zero();
-	// グリッド移動の移動先位置
+	// 移動先位置
 	UPROPERTY(VisibleAnywhere, Category = "GridMove")
 	FVector TargetLocation = FVector::Zero();
 
-	// 現在の座標
-	FVector2D CurrentCoord = FVector2D::Zero();
+	// 移動前の座標
+	UPROPERTY(VisibleAnywhere, Category = "GridMove")
+	FVector2D FromCoord = FVector2D::Zero();
+
+	// 移動時間
+	UPROPERTY(VisibleAnywhere, Category = "GridMove")
+	float GoalSec = 0.f;
+	UPROPERTY(VisibleAnywhere, Category = "GridMove")
+	float ElapsedSec = 0.f;
 };

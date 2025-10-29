@@ -1,0 +1,89 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+
+#include "AI/Task/BTTask_GridMove.h"
+#include "AIController.h"
+#include <Enemy/EnemyBase.h>
+#include <System/MyGameMode.h>
+#include <Kismet/GameplayStatics.h>
+#include "Grid/GridManager.h"
+
+EBTNodeResult::Type UBTTask_GridMove::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+{
+	AAIController* AIController = OwnerComp.GetAIOwner();
+	if (AIController == nullptr)
+		return EBTNodeResult::Failed;
+
+	AEnemyBase* Enemy = Cast<AEnemyBase>(AIController->GetPawn());
+	if (Enemy == nullptr)
+		return EBTNodeResult::Failed;
+
+	UGridMovementComponent* GridMoveComp = Enemy->GetGridMovementComponent();
+	if (GridMoveComp == nullptr)
+		return EBTNodeResult::Failed;
+
+	AMyGameMode* MyGameMode = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this));
+	if (MyGameMode == nullptr)
+		return EBTNodeResult::Failed;
+
+	AGridManager* GridManager = MyGameMode->GridManager;
+	if (GridManager == nullptr)
+		return EBTNodeResult::Failed;
+
+
+	// 移動先をランダムに取得
+	int Min = 0;
+	int Max = 3;
+	// 斜め移動もOKなら抽選対象に含める
+	if (bCanMoveDiagonal)
+	{
+		Max = 7;
+	}
+
+	// 移動先セルの抽選
+	FVector2D Dir = FVector2D::Zero();
+	FVector2D TargetCoord = FVector2D::Zero();
+	int Count = 0;
+	do {
+		// 経路を見つけられなかったので失敗
+		if(Count > 10)
+			return EBTNodeResult::Failed;
+
+		// 抽選
+		int RandomDir = FMath::RandRange(Min, Max);
+		switch (RandomDir)
+		{
+		case 0:
+			Dir = FVector2D(0, 1); break;
+		case 1:
+			Dir = FVector2D(0, -1); break;
+		case 2:
+			Dir = FVector2D(1, 0); break;
+		case 3:
+			Dir = FVector2D(-1, 0); break;
+		case 4:
+			Dir = FVector2D(1, 1); break;
+		case 5:
+			Dir = FVector2D(-1, 1); break;
+		case 6:
+			Dir = FVector2D(1, -1); break;
+		case 7:
+			Dir = FVector2D(-1, -1); break;
+		}
+		TargetCoord = GridMoveComp->GetCurrentCoord() + Dir;
+
+		// ループ回避用のカウント
+		Count++;
+
+	} while (GridManager->IsAccessableGridCell(TargetCoord) == false);
+
+	// グリッド移動命令
+	GridMoveComp->RequestMoveToDirection(TargetCoord, GoalSec);
+
+	return EBTNodeResult::Succeeded;
+}
+
+void UBTTask_GridMove::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted, UBehaviorTreeComponent* OwnerComp)
+{
+
+}

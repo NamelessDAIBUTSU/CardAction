@@ -167,6 +167,21 @@ bool AGridCellActor::IsExistEnemyOnCell()
     return false;
 }
 
+// セル上にプレイヤーが存在するか
+bool AGridCellActor::IsExistPlayerOnCell()
+{
+    for (AActor* Actor : CellData.Objects)
+    {
+        AMyCharacter* Player = Cast<AMyCharacter>(Actor);
+        if (Player)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 // セル上のエネミーを取得
 AEnemyBase* AGridCellActor::GetEnemyOnCell()
 {

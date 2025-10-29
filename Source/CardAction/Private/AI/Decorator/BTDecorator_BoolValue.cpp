@@ -5,8 +5,10 @@
 
 UBTDecorator_BoolValue::UBTDecorator_BoolValue()
 {
-	bNotifyTick = true;               // TickNode を呼んでもらう
-	bAllowAbortChildNodes = true;     // 条件が変わったら子ノードを中断
+	// TickNode を呼んでもらう
+	bNotifyTick = true;
+	// 条件が変わったら子ノードを中断
+	bAllowAbortChildNodes = true;
 }
 
 bool UBTDecorator_BoolValue::CalculateRawConditionValue(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) const

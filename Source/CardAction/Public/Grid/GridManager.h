@@ -35,7 +35,7 @@ public: /* セル関連処理 */
 	// セル上にアクターを登録
 	void AddActorOnCell(AActor* Actor, FVector2D Coord);
 	// セル上からアクターを除去
-	void RemoveActorFromGrid(AActor* Actor, FVector2D Coord);
+	void RemoveActorFromCell(AActor* Actor, FVector2D Coord);
 
 	// セル上のアクターにダメージ判定
 	void ExecuteAttackToGridCell(AActor* AttackedActor, float Damage, FVector2D Coord);
@@ -57,6 +57,9 @@ public: /* 敵 */
 	// グリッドセル上にいるエネミーを取得
 	AEnemyBase* GetEnemyOnGridCell(FVector2D Coord);
 
+	// セル上にプレイヤーが存在するか
+	bool IsExistPlayerOnGridCell(FVector2D Coord);
+
 public: /* Util */
 	// グリッド座標 → ワールド座標に変換
 	FVector ConvertToWorldPosition(FVector2D Coord);
@@ -69,6 +72,7 @@ public: /* Util */
 	bool IsPlayerSameLine(FVector2D Coord);
 	// アクセス可能なグリッドセルか
 	bool IsAccessableGridCell(FVector CheckPosition);
+	bool IsAccessableGridCell(FVector2D Coord);
 
 	// グリッドセルを取得
 	AGridCellActor* GetGridCellActor(FVector2D Coord);

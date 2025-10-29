@@ -41,6 +41,9 @@ public:
 
 	// セル上に敵が存在するか
 	bool IsExistEnemyOnCell();
+	
+	// セル上にプレイヤーが存在するか
+	bool IsExistPlayerOnCell();
 
 	// セル上のエネミーを取得
 	class AEnemyBase* GetEnemyOnCell();

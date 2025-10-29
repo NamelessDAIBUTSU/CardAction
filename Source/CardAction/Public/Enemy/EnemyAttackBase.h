@@ -14,11 +14,16 @@ class CARDACTION_API AEnemyAttackBase : public AActor
 public:	
 	AEnemyAttackBase();
 
+public:	
+	virtual void Tick(float DeltaTime) override;
+
 protected:
 	virtual void BeginPlay() override;
 
-public:	
-	virtual void Tick(float DeltaTime) override;
+public:
+	void SetCurrentCoord(FVector2D Coord) { CurrentCoord = Coord; }
+	FVector2D GetCurrentCoord() const { return CurrentCoord; }
+
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status")

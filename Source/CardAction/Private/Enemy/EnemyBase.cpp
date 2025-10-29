@@ -75,7 +75,14 @@ void AEnemyBase::BeginPlay()
 				return;
 
 			// AIが止まっていたら再開
-			AAIController* AIController = Cast<AAIController>(GetController());
+			auto* Contoller = GetController();
+			if (Contoller == nullptr)
+			{
+				UE_LOG(LogTemp, Error, TEXT("Controller is nullptr"));
+				return;
+			}
+
+			AAIController* AIController = Cast<AAIController>(Contoller);
 			if (AIController)
 			{
 				if (AIController && AIController->BrainComponent)
@@ -212,7 +219,7 @@ void AEnemyBase::OnTakeDamage(int TakeDamage)
 		OnBeforeDead();
 
 		// 死亡アニメーション再生
-		if (GetMesh() && GetMesh()->GetAnimInstance())
+		if (GetMesh() && GetMesh()->GetAnimInstance() && DeadAnimMontage)
 		{
 			auto* AnimInstance = GetMesh()->GetAnimInstance();
 			AnimInstance->Montage_Play(DeadAnimMontage);
@@ -221,6 +228,11 @@ void AEnemyBase::OnTakeDamage(int TakeDamage)
 			FOnMontageEnded EndDelegate;
 			EndDelegate.BindUObject(this, &AEnemyBase::OnEndDeadMontage);
 			AnimInstance->Montage_SetEndDelegate(EndDelegate, DeadAnimMontage);
+		}
+		// 削除
+		else
+		{
+			SelfDestroy();
 		}
 	}
 }
@@ -248,17 +260,8 @@ void AEnemyBase::OnEndDeadMontage(UAnimMontage* Montage, bool bInterrupted)
 	GetMesh()->bPauseAnims = true;
 	GetMesh()->bNoSkeletonUpdate = true;
 
-	// 現在の座標のグリッドセルから情報を削除
-	AGameModeBase* GM = UGameplayStatics::GetGameMode(this);
-	if (AMyGameMode* MyGM = Cast<AMyGameMode>(GM))
-	{
-		if (MyGM->GridManager)
-		{
-			MyGM->GridManager->RemoveActorFromGrid(this, GetCurrentCoord());
-		}
-	}
-
-	Destroy();
+	// 削除
+	SelfDestroy();
 }
 
 // 死亡モンタージュ再生中か
@@ -307,6 +310,21 @@ void AEnemyBase::LookAtPlayer()
 	FRotator Rotation = FRotator(0.f, Direction.Rotation().Yaw, 0.f);
 
 	this->SetActorRotation(Rotation);
+}
+
+// 自身の削除
+void AEnemyBase::SelfDestroy()
+{
+	// 現在の座標のグリッドセルから情報を削除
+	if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
+	{
+		if (MyGM->GridManager)
+		{
+			MyGM->GridManager->RemoveActorFromCell(this, GetCurrentCoord());
+		}
+	}
+
+	Destroy();
 }
 
 

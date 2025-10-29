@@ -35,6 +35,13 @@ public: /* Callback */
 	UFUNCTION()
 	virtual void OnBeforeDead();
 
+public: /* AI */
+	void SetCanMove(bool Value) { bCanMove = Value; }
+	bool CanMove() const { return bCanMove; }
+
+	void SetMoveCount(int Count) { MoveCount = Count; }
+	int GetMoveCount() { return MoveCount; }
+
 public:
 	// 回転可能か
 	virtual bool CanRotate() { return true; }
@@ -60,6 +67,9 @@ public:
 private:
 	// プレイヤーの方向を向く
 	void LookAtPlayer();
+	// 自身の削除
+	void SelfDestroy();
+
 
 public: /* Info */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Info")
@@ -68,9 +78,6 @@ public: /* Info */
 	FString Description;
 
 public: /* Status */
-	// ダメージ
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Status")
-	int Damage = 0;
 	// 体力
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Status")
 	int CurrentHP = 100;
@@ -80,6 +87,11 @@ public: /* Status */
 	// 自動でプレイヤーの方向を向くか
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Status")
 	bool bIsAutoLookAtPlayer = true;
+
+public: /* AI */
+	// 何回の移動で攻撃をするか
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
+	int AttackSpan = 0;
 
 public: /* UI */
 	// アイコン画像
@@ -105,6 +117,14 @@ protected: /* Component */
 	// グリッド移動
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component")
 	UGridMovementComponent* GridMovementComp = nullptr;
+
+protected: /* AI */
+	// 現在の移動回数
+	UPROPERTY(VisibleAnywhere, Category = "AI")
+	int MoveCount = 0;
+	// 移動可能か
+	UPROPERTY(VisibleAnywhere, Category = "AI")
+	bool bCanMove = true;
 
 protected:
 	// 死んだか

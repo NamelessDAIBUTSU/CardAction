@@ -65,6 +65,8 @@ void AMyCharacter::Tick(float DeltaSeconds)
 	this->CustomTimeDilation = 1.f;
 
     Super::Tick(DeltaSeconds);
+
+	UE_LOG(LogTemp, Warning, TEXT("%f"), GetActorLocation().Z);
 }
 
 void AMyCharacter::BeginPlay()

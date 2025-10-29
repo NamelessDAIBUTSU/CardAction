@@ -113,12 +113,16 @@ FVector AGridManager::GetPlayerSpawnPosition()
 bool AGridManager::IsAccessableGridCell(FVector CheckPosition)
 {
 	FVector2D Coord = ConvertToGridCoord(CheckPosition);
+	return IsAccessableGridCell(Coord);
+}
+bool AGridManager::IsAccessableGridCell(FVector2D Coord)
+{
 	AGridCellActor* GridCell = GetGridCellActor(Coord);
 	if (GridCell == nullptr)
 		return false;
 
-	// 条件判定していく
 	bool bIsAccessable = true;
+	// 以下、条件判定
 	// セル上にオブジェクトが乗ってないならOK
 	bIsAccessable &= GridCell->IsExistActorOnCell() == false;
 	// 空セルじゃないならOK
@@ -126,7 +130,6 @@ bool AGridManager::IsAccessableGridCell(FVector CheckPosition)
 
 	return bIsAccessable;
 }
-
 
 // エネミーをグリッド上にスポーン
 void AGridManager::SpawnEnemies()
@@ -186,8 +189,8 @@ void AGridManager::AddActorOnCell(AActor* Actor, FVector2D Coord)
 	}
 }
 
-// グリッド上から指定アクターの情報を削除
-void AGridManager::RemoveActorFromGrid(AActor* Actor, FVector2D Coord)
+// セル上から指定アクターの情報を削除
+void AGridManager::RemoveActorFromCell(AActor* Actor, FVector2D Coord)
 {
 	if (IsInGrid(Coord) == false)
 		return;
@@ -290,6 +293,17 @@ AEnemyBase* AGridManager::GetEnemyOnGridCell(FVector2D Coord)
 	}
 
 	return nullptr;
+}
+
+// セル上にプレイヤーが存在するか
+bool AGridManager::IsExistPlayerOnGridCell(FVector2D Coord)
+{
+	if (AGridCellActor* TargetCell = GetGridCellActor(Coord))
+	{
+		return TargetCell->IsExistPlayerOnCell();
+	}
+
+	return false;
 }
 
 // グリッド座標 → ワールド座標に変換

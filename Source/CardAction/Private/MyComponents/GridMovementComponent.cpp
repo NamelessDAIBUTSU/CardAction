@@ -7,34 +7,33 @@
 #include <System/MyGameMode.h>
 #include "Grid\GridManager.h"
 
-// Sets default values for this component's properties
 UGridMovementComponent::UGridMovementComponent()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
 }
 
-
-// Called when the game starts
 void UGridMovementComponent::BeginPlay()
 {
 	Super::BeginPlay();
 }
 
-
-// Called every frame
 void UGridMovementComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	// 線形移動更新
+	UpdateGridMove(DeltaTime);
 }
 
-void UGridMovementComponent::MoveToDirection(FVector Direction)
+// 移動リクエスト
+void UGridMovementComponent::RequestMoveToDirection(FVector2D TargetCoord, float GoalSecond)
 {
-	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this);
-	AMyGameMode* MyGameMode = Cast<AMyGameMode>(GameMode);
+	// 移動中はリクエストできない
+	if (bIsMoving)
+		return;
+
+	AMyGameMode* MyGameMode = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this));
 	if (MyGameMode == nullptr)
 		return;
 
@@ -50,9 +49,10 @@ void UGridMovementComponent::MoveToDirection(FVector Direction)
 	if (Controller == nullptr)
 		return;
 
-	// 移動中は移動終了判定のみ
-	if (IsFinishGridMove() == false)
+	AGridManager* GridManager = MyGameMode->GridManager;
+	if (GridManager == nullptr)
 		return;
+
 
 	// コントローラのYaw回転を取得
 	const FRotator Rotation = Controller->GetControlRotation();
@@ -62,59 +62,71 @@ void UGridMovementComponent::MoveToDirection(FVector Direction)
 	const FVector UpDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 	const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 
-	// ワールド軸に合わせて進行方向用のベクトルを作成
-	// #MEMO : 上方向がX軸、右方向がY軸のため、Direction(1.f, 0.f)ならRightDirectionを使用
-	FVector MoveDirection;
-	if (Direction.X != 0.f)
-	{
-		MoveDirection = RightDirection * Direction.X;
-	}
-	else if (Direction.Y != 0.f)
-	{
-		MoveDirection = UpDirection * Direction.Y;
-	}
+	//// ワールド軸に合わせて進行方向用のベクトルを作成
+	//// #MEMO : 上方向がX軸、右方向がY軸のため、Direction(1.f, 0.f)ならRightDirectionを使用
+	//FVector MoveDirection;
+	//if (Direction.X != 0.f)
+	//{
+	//	MoveDirection = RightDirection * Direction.X;
+	//}
+	//else if (Direction.Y != 0.f)
+	//{
+	//	MoveDirection = UpDirection * Direction.Y;
+	//}
 
-	// 到着地点を計算
-	TargetLocation = PawnOwner->GetActorLocation() + MoveDirection * GridUnit;
+	//// 到着地点を計算
+	//TargetLocation = PawnOwner->GetActorLocation() + MoveDirection * GRID_CELL_UNIT;
+	
+	//// 前回の進行方向と同じであれば抜ける
+	//if (DirectionCache.Equals(MoveDirection))
+	//	return;
 
-	// 前回の進行方向と同じであれば抜ける
-	if (DirectionCache.Equals(MoveDirection))
-		return;
+	// 到着地点を取得
+	TargetLocation = GridManager->ConvertToWorldPosition(TargetCoord);
+	TargetLocation.Z = PawnOwner->GetActorLocation().Z;
 
 	// 進行方向に回転
-	FRotator NextRotation = (TargetLocation - PawnOwner->GetActorLocation()).Rotation();
+	FVector Dist = TargetLocation - PawnOwner->GetActorLocation();
+	FRotator NextRotation = Dist.Rotation();
+	NextRotation.Pitch = 0.f;
 	PawnOwner->SetActorRotation(NextRotation);
 
 	// 向き変更フラグが立っていないなら、グリッド移動
 	if (bIsTurningMode == false)
 	{
-		AGridManager* GridManager = MyGameMode->GridManager;
-		if (GridManager == nullptr)
-			return;
-
 		// 進行方向のグリッドが進行可能状態か
 		if (GridManager->IsAccessableGridCell(TargetLocation) == false)
 		{
 			return;
 		}
 
+		// 毎フレームの移動量を保存
+		GoalSec = GoalSecond;
+		if (FMath::IsNearlyZero(GoalSec))
+		{
+			MoveSpeed = Dist;
+		}
+		else
+		{
+			MoveSpeed = Dist / GoalSec;
+		}
+
+		// 移動終了後に元の位置をグリッドマネージャーから除去するための座標保存
+		FromCoord = GridManager->ConvertToGridCoord(PawnOwner->GetActorLocation());
+
+		// ほかのアクターと移動先が被らないように、移動先の座標登録
+		FVector2D ToCoord = GridManager->ConvertToGridCoord(TargetLocation);
+		GridManager->AddActorOnCell(PawnOwner, ToCoord);
+
+		// 更新用の変数をリセット
+		ElapsedSec = 0.f;
+
 		// 移動中フラグを立てる
 		bIsMoving = true;
-
-		// グリッドマネージャーのアクターの位置情報を更新
-		FVector2D FromCell = GridManager->ConvertToGridCoord(PawnOwner->GetActorLocation());
-		FVector2D ToCell = GridManager->ConvertToGridCoord(TargetLocation);
-		GridManager->RefleshActorInfoOnCell(PawnOwner, FromCell, ToCell);
-
-		// 位置設定
-		PawnOwner->SetActorLocation(TargetLocation);
-
-		// 座標設定
-		SetCoord(ToCell);
 	}
 
-	// キャッシュの更新
-	DirectionCache = MoveDirection;
+	//// キャッシュの更新
+	//DirectionCache = MoveDirection;
 }
 
 void UGridMovementComponent::OnMoveToDirection(const FInputActionValue& Value)
@@ -126,11 +138,18 @@ void UGridMovementComponent::OnMoveToDirection(const FInputActionValue& Value)
 	// 移動量の取得
 	const FVector2D MovementVector = Value.Get<FVector2D>();
 
+	// 長押しによる高速移動制御
+	if (DirectionCache.Equals(MovementVector))
+		return;
+
+	// 移動方向のキャッシュ
+	DirectionCache = MovementVector;
+
 	// 進行方向の取得
 	FVector2D Dir;
 	if (FMath::Abs(MovementVector.X) < FMath::Abs(MovementVector.Y))
 	{
-		Dir = FVector2D(0.f, MovementVector.Y);
+		Dir = FVector2D(0.f, MovementVector.Y * -1.f);
 	}
 	if (FMath::Abs(MovementVector.X) >= FMath::Abs(MovementVector.Y))
 	{
@@ -139,13 +158,15 @@ void UGridMovementComponent::OnMoveToDirection(const FInputActionValue& Value)
 	// 正規化
 	Dir = Dir.GetSafeNormal();
 
-	MoveToDirection(FVector(Dir.X, Dir.Y, 0.f));
+	// 移動リクエスト
+	FVector2D TargetCoord = CurrentCoord + Dir;
+	RequestMoveToDirection(TargetCoord, 0.2f);
 }
 
 // 移動方向キャッシュの削除
 void UGridMovementComponent::OnResetDirectionCache(const FInputActionValue& Value)
 {
-	DirectionCache = FVector::Zero();
+	DirectionCache = FVector2D::Zero();
 }
 
 void UGridMovementComponent::OnChangeTurnMode(const FInputActionValue& Value)
@@ -168,13 +189,55 @@ bool UGridMovementComponent::IsFinishGridMove()
 	// 移動終了
 	if (TargetLocation.Equals(Owner->GetActorLocation()))
 	{
-		bIsMoving = false;
 		return true;
 	}
+
 	// 移動中
-	else
+	return false;
+}
+
+// 移動更新
+void UGridMovementComponent::UpdateGridMove(float DeltaSec)
+{
+	if (bIsMoving == false)
+		return;
+
+	APawn* PawnOwner = Cast<APawn>(GetOwner());
+	if (PawnOwner == nullptr)
+		return;
+
+	AMyGameMode* MyGameMode = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this));
+	if (MyGameMode == nullptr)
+		return;
+
+	AGridManager* GridManager = MyGameMode->GridManager;
+	if (GridManager == nullptr)
+		return;
+
+
+	// 移動
+	FVector CurrentLocation = PawnOwner->GetActorLocation();
+	CurrentLocation += MoveSpeed * DeltaSec;
+	
+	// 移動補正
+	ElapsedSec += DeltaSec;
+	if (ElapsedSec >= GoalSec)
 	{
-		return false;
+		CurrentLocation = TargetLocation;
+	}
+	PawnOwner->SetActorLocation(CurrentLocation);
+
+	// 現在の座標を更新
+	SetCoord(GridManager->ConvertToGridCoord(CurrentLocation));
+
+	// 移動が終了したら
+	if (IsFinishGridMove())
+	{
+		// フラグを降ろす
+		bIsMoving = false;
+
+		// グリッドマネージャーの元の座標から自身を除去
+		GridManager->RemoveActorFromCell(PawnOwner, FromCoord);
 	}
 }
 
