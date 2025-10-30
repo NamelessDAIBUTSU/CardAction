@@ -62,13 +62,13 @@ void AMyGameMode::StartPlay()
 	}
 
 	// 生成したセル上にプレイヤーを登録
-	GridManager->AddActorOnCell(PlayerPawn, GridManager->ConvertToGridCoord(PlayerPawn->GetActorLocation()));
+	FVector2D SpawnCoord = GridManager->ConvertToGridCoord(PlayerPawn->GetActorLocation());
+	GridManager->AddActorOnCell(PlayerPawn, SpawnCoord);
 
 	// プレイヤーのグリッド座標設定
 	Player = Cast<AMyCharacter>(PlayerPawn);
 	if (Player)
 	{
-		FVector2D SpawnCoord = GridManager->ConvertToGridCoord(GridManager->GetPlayerSpawnPosition());
 		Player->SetCurrentCoord(SpawnCoord);
 	}
 

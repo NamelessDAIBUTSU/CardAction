@@ -77,6 +77,17 @@ void AGridCellActor::Tick(float DeltaTime)
 void AGridCellActor::AddActorOnCell(AActor* Actor)
 {
     CellData.Objects.Add(Actor);
+
+    // 追加されたアクターの種類によって枠のマテリアルを変える
+    if (AEnemyBase* Enemy = Cast<AEnemyBase>(Actor))
+    {
+        ChangeEdgeEnemyMaterial();
+    }
+    // プレイヤーにダメージ
+    if (AMyCharacter* Player = Cast<AMyCharacter>(Actor))
+    {
+        ChangeEdgePlayerMaterial();
+    }
 }
 
 // セル上からアクターを除去
@@ -87,6 +98,9 @@ void AGridCellActor::RemoveActorFromCell(AActor* Actor)
         if (CellData.Objects[i] == Actor)
         {
             CellData.Objects.RemoveAt(i);
+
+            // 枠を通常のマテリアルに変更
+            ChangeEdgeDefaultMaterial();
         }
     }
 }
@@ -119,6 +133,44 @@ void AGridCellActor::ChangeDefaultMaterial()
             MeshComp->SetVisibility(false, true);
         }
     }
+}
+
+void AGridCellActor::ChangeEdgeMaterial(UMaterialInterface* Material)
+{
+    if (Material == nullptr)
+        return;
+
+    if (EdgeLeftComp)
+    {
+        EdgeLeftComp->SetMaterial(0, Material);
+    }
+    if (EdgeRightComp)
+    {
+        EdgeRightComp->SetMaterial(0, Material);
+    }
+    if (EdgeTopComp)
+    {
+        EdgeTopComp->SetMaterial(0, Material);
+    }
+    if (EdgeDownComp)
+    {
+        EdgeDownComp->SetMaterial(0, Material);
+    }
+}
+
+void AGridCellActor::ChangeEdgeDefaultMaterial()
+{
+    ChangeEdgeMaterial(EdgeDefaultMaterial);
+}
+
+void AGridCellActor::ChangeEdgePlayerMaterial()
+{
+    ChangeEdgeMaterial(EdgePlayerMaterial);
+}
+
+void AGridCellActor::ChangeEdgeEnemyMaterial()
+{
+    ChangeEdgeMaterial(EdgeEnemyMaterial);
 }
 
 // セル上のアクターにダメージ処理

@@ -62,25 +62,6 @@ void UGridMovementComponent::RequestMoveToDirection(FVector2D TargetCoord, float
 	const FVector UpDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 	const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 
-	//// ワールド軸に合わせて進行方向用のベクトルを作成
-	//// #MEMO : 上方向がX軸、右方向がY軸のため、Direction(1.f, 0.f)ならRightDirectionを使用
-	//FVector MoveDirection;
-	//if (Direction.X != 0.f)
-	//{
-	//	MoveDirection = RightDirection * Direction.X;
-	//}
-	//else if (Direction.Y != 0.f)
-	//{
-	//	MoveDirection = UpDirection * Direction.Y;
-	//}
-
-	//// 到着地点を計算
-	//TargetLocation = PawnOwner->GetActorLocation() + MoveDirection * GRID_CELL_UNIT;
-	
-	//// 前回の進行方向と同じであれば抜ける
-	//if (DirectionCache.Equals(MoveDirection))
-	//	return;
-
 	// 到着地点を取得
 	TargetLocation = GridManager->ConvertToWorldPosition(TargetCoord);
 	TargetLocation.Z = PawnOwner->GetActorLocation().Z;
@@ -124,9 +105,6 @@ void UGridMovementComponent::RequestMoveToDirection(FVector2D TargetCoord, float
 		// 移動中フラグを立てる
 		bIsMoving = true;
 	}
-
-	//// キャッシュの更新
-	//DirectionCache = MoveDirection;
 }
 
 void UGridMovementComponent::OnMoveToDirection(const FInputActionValue& Value)
@@ -160,7 +138,7 @@ void UGridMovementComponent::OnMoveToDirection(const FInputActionValue& Value)
 
 	// 移動リクエスト
 	FVector2D TargetCoord = CurrentCoord + Dir;
-	RequestMoveToDirection(TargetCoord, 0.2f);
+	RequestMoveToDirection(TargetCoord, 0.1f);
 }
 
 // 移動方向キャッシュの削除

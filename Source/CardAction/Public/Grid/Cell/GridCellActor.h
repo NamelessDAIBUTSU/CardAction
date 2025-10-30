@@ -36,6 +36,12 @@ public:
 	void ChangeDamageSignMaterial();
 	void ChangeDefaultMaterial();
 
+	// 枠マテリアル設定
+	void ChangeEdgeMaterial(UMaterialInterface* Material);
+	void ChangeEdgeDefaultMaterial();
+	void ChangeEdgePlayerMaterial();
+	void ChangeEdgeEnemyMaterial();
+
 	// セル上のアクターにダメージ処理
 	void ExecuteAttackToActorOnCell(AActor* AttackedActor, float Damage);
 
@@ -67,6 +73,14 @@ public:
 	UStaticMeshComponent* EdgeTopComp;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UStaticMeshComponent* EdgeDownComp;
+
+	// 枠用マテリアル
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UMaterialInterface* EdgeDefaultMaterial;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UMaterialInterface* EdgePlayerMaterial;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UMaterialInterface* EdgeEnemyMaterial;
 
 	// 攻撃との当たり判定用コリジョン
 	UPROPERTY(VisibleAnywhere, Category = "Collision")

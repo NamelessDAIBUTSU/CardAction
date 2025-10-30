@@ -56,8 +56,4 @@ private:
 	// ボタン
 	UPROPERTY(meta = (BindWidget))
 	UButton* StageButton = nullptr;
-
-	// テキスト
-	UPROPERTY(meta = (BindWidget))
-	UTextBlock* CoordText = nullptr;
 };
