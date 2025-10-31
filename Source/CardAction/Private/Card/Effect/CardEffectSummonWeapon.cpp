@@ -1,6 +1,8 @@
 #include "Card/Effect/CardEffectSummonWeapon.h"
 #include <Kismet/GameplayStatics.h>
 #include <Character/MyCharacter.h>
+#include <System/MyGameMode.h>
+#include "Grid/GridManager.h"
 
 void UCardEffectSummonWeapon::ExecuteEffect()
 {
@@ -21,10 +23,20 @@ void UCardEffectSummonWeapon::ExecuteEffect()
 
 		UE_LOG(LogTemp, Warning, TEXT("Projectile Spawn Location: %s"), *WeaponActor->GetActorLocation().ToString());
 
-		// Š—LÒ‚ğİ’è
 		if (WeaponActor)
 		{
+			// Š—LÒ‚ğİ’è
 			WeaponActor->SetWeaponOwner(Player);
+
+			// ¶¬‚ÌÀ•W‚ğ•Û‘¶
+			if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
+			{
+				if (MyGM->GridManager == nullptr)
+					return;
+
+				FVector2D SpawnCoord = MyGM->GridManager->ConvertToGridCoord(Player->GetActorLocation());
+				WeaponActor->SetSpawnCoord(SpawnCoord);
+			}
 		}
 	}
 }

@@ -60,7 +60,4 @@ private:
 	// カスケードを再生するコンポーネント
 	UPROPERTY(VisibleAnywhere, Category = "VFX")
 	UParticleSystemComponent* ParticleComp;
-
-	UPROPERTY(VisibleAnywhere, Category = "Move")
-	FVector2D GeneratedCoord = FVector2D::Zero();
 };

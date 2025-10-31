@@ -62,7 +62,7 @@ void AWeapon_ThrowKnife::OnOverlap(UPrimitiveComponent* OverlappedComp,
 
     // 発射位置のグリッドマスとの当たり判定は無視
     FVector2D Coord = GridManager->ConvertToGridCoord(OtherActor->GetActorLocation());
-    if (Coord == GeneratedCoord)
+    if (Coord == SpawnCoord)
         return;
 
     // 敵がいるマスか先に取得しておく
@@ -87,13 +87,4 @@ void AWeapon_ThrowKnife::OnOverlap(UPrimitiveComponent* OverlappedComp,
 void AWeapon_ThrowKnife::BeginPlay()
 {
     Super::BeginPlay();
-
-    // 生成時の座標を保存
-    if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
-    {
-        if (MyGM->GridManager == nullptr)
-            return;
-
-        GeneratedCoord = MyGM->GridManager->ConvertToGridCoord(GetActorLocation());
-    }
 }

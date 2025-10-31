@@ -235,6 +235,16 @@ void AEnemyBase::OnTakeDamage(int TakeDamage)
 			SelfDestroy();
 		}
 	}
+	// 死んでいない場合、ヒットモンタージュ再生
+	else
+	{
+		// 死亡アニメーション再生
+		if (GetMesh() && GetMesh()->GetAnimInstance() && HitAnimMontage)
+		{
+			auto* AnimInstance = GetMesh()->GetAnimInstance();
+			AnimInstance->Montage_Play(HitAnimMontage);
+		}
+	}
 }
 
 // 死亡時のコールバック

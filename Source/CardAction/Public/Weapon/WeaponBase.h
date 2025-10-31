@@ -26,6 +26,9 @@ public:
 	// 所有者の設定
 	void SetWeaponOwner(class AMyCharacter* Player) { WeaponOwner = Player; }
 
+	// 生成時の座標設定
+	void SetSpawnCoord(FVector2D Coord) { SpawnCoord = Coord; }
+
 
 public: /* Status */
 	// ダメージ
@@ -49,4 +52,7 @@ public:
 protected:
 	UPROPERTY(VisibleAnywhere)
 	AMyCharacter* WeaponOwner = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Move")
+	FVector2D SpawnCoord = FVector2D::Zero();
 };

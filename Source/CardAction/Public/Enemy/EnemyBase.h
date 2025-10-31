@@ -102,6 +102,9 @@ public: /* Anim */
 	// 死亡モンタージュ
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim")
 	UAnimMontage* DeadAnimMontage = nullptr;
+	// ヒットモンタージュ
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim")
+	UAnimMontage* HitAnimMontage = nullptr;
 
 public: /* Callback */
 	UPROPERTY(BlueprintAssignable, Category = "Event")

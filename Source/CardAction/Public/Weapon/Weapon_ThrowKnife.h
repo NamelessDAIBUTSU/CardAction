@@ -42,8 +42,4 @@ public:
 	// ‘¬“x
 	UPROPERTY(VisibleAnywhere, Category = "Move")
 	float Verocity = 2000.f;
-
-private:
-	UPROPERTY(VisibleAnywhere, Category = "Move")
-	FVector2D GeneratedCoord = FVector2D::Zero();
 };

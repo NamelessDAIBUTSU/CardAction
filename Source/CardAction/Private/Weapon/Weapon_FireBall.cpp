@@ -119,7 +119,7 @@ void AWeapon_FireBall::OnOverlap(UPrimitiveComponent* OverlappedComp,
 
     // 発射位置のグリッドマスとの当たり判定は無視
     FVector2D Coord = GridManager->ConvertToGridCoord(OtherActor->GetActorLocation());
-    if (Coord == GeneratedCoord)
+    if (Coord == SpawnCoord)
         return;
 
 
