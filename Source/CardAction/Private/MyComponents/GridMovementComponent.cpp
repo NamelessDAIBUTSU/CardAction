@@ -94,6 +94,7 @@ void UGridMovementComponent::RequestMoveToDirection(FVector2D TargetCoord, float
 
 		// 移動終了後に元の位置をグリッドマネージャーから除去するための座標保存
 		FromCoord = GridManager->ConvertToGridCoord(PawnOwner->GetActorLocation());
+		GridManager->RemoveActorFromCell(PawnOwner, FromCoord);
 
 		// ほかのアクターと移動先が被らないように、移動先の座標登録
 		FVector2D ToCoord = GridManager->ConvertToGridCoord(TargetLocation);
