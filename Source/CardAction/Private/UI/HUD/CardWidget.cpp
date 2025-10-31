@@ -101,7 +101,7 @@ void UCardWidget::SetupCardData(UCardData* Data)
             UCardEffectSummonWeapon* Effect = CardData->EffectClass->GetDefaultObject<UCardEffectSummonWeapon>();
             if (Effect && Effect->WeaponClass)
             {
-                AWeapon_ThrowKnife* WeaponActor = Effect->WeaponClass->GetDefaultObject<AWeapon_ThrowKnife>();
+                AWeaponActorBase* WeaponActor = Effect->WeaponClass->GetDefaultObject<AWeaponActorBase>();
                 if (WeaponActor)
                 {
                     FSlateBrush Brush;

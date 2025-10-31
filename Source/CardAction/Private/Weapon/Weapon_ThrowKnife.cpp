@@ -41,7 +41,7 @@ AWeapon_ThrowKnife::AWeapon_ThrowKnife()
 void AWeapon_ThrowKnife::Tick(float DeltaSec)
 {
     // 進行方向を軸に回転
-    
+    Super::Tick(DeltaSec);
 }
 
 void AWeapon_ThrowKnife::OnOverlap(UPrimitiveComponent* OverlappedComp,
@@ -76,7 +76,6 @@ void AWeapon_ThrowKnife::OnOverlap(UPrimitiveComponent* OverlappedComp,
 
     // ダメージ判定追加
     GridManager->ExecuteAttackToGridCell(this, Damage, Coord);
-    UE_LOG(LogTemp, Warning, TEXT("Overlap(%f, %f)"),Coord.X, Coord.Y);
 
     // 敵マスの場合、自身の削除
     if (bIsExistEnemyOnGridCell)

@@ -37,6 +37,10 @@ public:
 	UPROPERTY(EditAnywhere)
 	float RotateSpeed = 120.f;
 
+	// ダメージ処理時のカスケード
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UParticleSystem* DamageEffect;
+
 private:
 	float ElapsedSec = 0.f;
 

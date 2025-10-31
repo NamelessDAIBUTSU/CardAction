@@ -63,7 +63,14 @@ void ACactusNeedle::Tick(float DeltaTime)
 		}
 
 		// エフェクトの再生
-
+		UGameplayStatics::SpawnEmitterAtLocation(
+			GetWorld(),
+			DamageEffect,
+			GetActorLocation(),
+			FRotator::ZeroRotator,
+			FVector(0.5f),
+			true
+		);
 
 		// 自身の削除
 		Destroy();
