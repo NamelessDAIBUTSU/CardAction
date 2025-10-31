@@ -61,7 +61,7 @@ public:
 	bool IsPlayingDeadMontage();
 
 	// ŠJn€”õ‚ª‚Å‚«‚Ä‚¢‚é‚©
-	bool IsReady() const { return bIsReady; }
+	virtual bool IsReady() const { return bIsReady; }
 	void SetIsReady(bool IsReady) { bIsReady = IsReady; }
 
 private:
