@@ -8,6 +8,11 @@
 #include <Kismet/GameplayStatics.h>
 #include "Grid/GridManager.h"
 
+UBTTask_GridMove::UBTTask_GridMove()
+{
+	bNotifyTick = true;
+}
+
 EBTNodeResult::Type UBTTask_GridMove::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	AAIController* AIController = OwnerComp.GetAIOwner();
@@ -42,7 +47,6 @@ EBTNodeResult::Type UBTTask_GridMove::ExecuteTask(UBehaviorTreeComponent& OwnerC
 
 	// 移動先セルの抽選
 	FVector2D Dir = FVector2D::Zero();
-	FVector2D TargetCoord = FVector2D::Zero();
 	int Count = 0;
 	do {
 		// 経路を見つけられなかったので失敗
@@ -80,10 +84,26 @@ EBTNodeResult::Type UBTTask_GridMove::ExecuteTask(UBehaviorTreeComponent& OwnerC
 	// グリッド移動命令
 	GridMoveComp->RequestMoveToDirection(TargetCoord, GoalSec);
 
-	return EBTNodeResult::Succeeded;
+	return EBTNodeResult::InProgress;
 }
 
-void UBTTask_GridMove::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted, UBehaviorTreeComponent* OwnerComp)
+void UBTTask_GridMove::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
+	AAIController* AIController = OwnerComp.GetAIOwner();
+	if (AIController == nullptr)
+		return;
 
+	AEnemyBase* Enemy = Cast<AEnemyBase>(AIController->GetPawn());
+	if (Enemy == nullptr)
+		return;
+
+	UGridMovementComponent* GridMoveComp = Enemy->GetGridMovementComponent();
+	if (GridMoveComp == nullptr)
+		return;
+
+	// ターゲットの座標にたどり着いたらタスク終了
+	if (GridMoveComp->IsMoving() == false)
+	{
+		FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
+	}
 }

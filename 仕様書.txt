@@ -61,6 +61,7 @@ https://github.com/NamelessDAIBUTSU/CardAction.git
 【カード仕様】
 ・武器枠、魔法枠、バフ枠、召喚枠をデッキに用意？
 ・カードは無制限使用カードと回数制限カード
+・クールダウン　オミット
 ・
 
 【武器】

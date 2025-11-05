@@ -4,6 +4,7 @@
 #include "Enemy/EnemyAttackBase.h"
 #include <Kismet/GameplayStatics.h>
 #include <System/MyGameMode.h>
+#include "Grid/GridManager.h"
 
 AEnemyAttackBase::AEnemyAttackBase()
 {
@@ -24,6 +25,14 @@ void AEnemyAttackBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	// ç¿ïWê›íË
+	if (AMyGameMode* MyGameMode = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
+	{
+		if (AGridManager* GridManager = MyGameMode->GridManager)
+		{
+			CurrentCoord = GridManager->ConvertToGridCoord(GetActorLocation());
+		}
+	}
 }
 
 void AEnemyAttackBase::Tick(float DeltaTime)

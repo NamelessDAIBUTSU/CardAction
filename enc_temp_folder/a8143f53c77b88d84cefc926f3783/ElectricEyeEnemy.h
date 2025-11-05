@@ -38,7 +38,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float StartReadySec = 2.f;
 
-	// ‰½•b‚ÅˆÚ“®‚ğ‚·‚é‚©
+	// ‰½•b‚Åã¸/‰º~ˆÚ“®‚ğ‚·‚é‚©
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float MoveSec = 1.f;
 

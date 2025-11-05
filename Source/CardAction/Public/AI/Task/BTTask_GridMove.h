@@ -15,9 +15,11 @@ class CARDACTION_API UBTTask_GridMove : public UBTTaskNode
 	GENERATED_BODY()
 	
 public:
-	EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory);
+	UBTTask_GridMove();
 
-	void OnMontageEnded(UAnimMontage* Montage, bool bInterrupted, UBehaviorTreeComponent* OwnerComp);
+public:
+	EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory);
+	virtual void TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 
 public:
 	// ‰½•b‚ÅˆÚ“®‚·‚é‚©
@@ -27,5 +29,8 @@ public:
 	// ŽÎ‚ßˆÚ“®‚ð‹–‚·‚©
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bCanMoveDiagonal = false;
+
+private:
+	FVector2D TargetCoord = FVector2D::Zero();
 };
 
