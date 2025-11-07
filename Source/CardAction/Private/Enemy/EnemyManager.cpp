@@ -59,7 +59,9 @@ bool AEnemyManager::IsAliveAnyEnemy()
 	for (int i = EnemyList.Num() - 1; i >= 0; --i)
 	{
 		if (EnemyList[i]->IsDead() == false)
+		{
 			return true;
+		}
 	}
 
 	return false;
@@ -71,9 +73,25 @@ bool AEnemyManager::IsAllEnemyReady()
 	for (int i = EnemyList.Num() - 1; i >= 0; --i)
 	{
 		if (EnemyList[i]->IsReady() == false)
+		{
 			return false;
+		}
 	}
 
 	return true;
+}
+
+// 指定座標のエネミーを取得
+AEnemyBase* AEnemyManager::GetEnemy(FCoord Coord)
+{
+	for (int i = EnemyList.Num() - 1; i >= 0; --i)
+	{
+		if (EnemyList[i] && EnemyList[i]->GetCurrentCoord() == Coord)
+		{
+			return EnemyList[i];
+		}
+	}
+
+	return nullptr;
 }
 

@@ -23,18 +23,30 @@ AEnemyBase::AEnemyBase()
 	// 配置・スポーン時に自動でAIに制御されるよう指定
 	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 
-	// 正面方向を合わせるように回転と位置調整
-	GetMesh()->SetRelativeLocation(FVector(0.f, 0.f, -90.f));
-	GetMesh()->SetRelativeRotation(FRotator(0.f, -90.f, 0.f));
+	if (auto* MeshComp = GetMesh())
+	{
+		// 正面方向を合わせるように回転と位置調整
+		MeshComp->SetRelativeLocation(FVector(0.f, 0.f, -90.f));
+		MeshComp->SetRelativeRotation(FRotator(0.f, -90.f, 0.f));
 
+		// ポーン同士は当たらないようにする
+		MeshComp->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
+	}
+
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
+
+	// ウィジェットコンポーネントの生成
 	WidgetComp = CreateDefaultSubobject<UWidgetComponent>(TEXT("WidgetComponent"));
-	WidgetComp->SetupAttachment(RootComponent);
-	// シャドウを落とさない
-	WidgetComp->SetCastShadow(false);          
-	// デカールも受けない
-	WidgetComp->bReceivesDecals = false;       
-	// 当たり判定も不要
-	WidgetComp->SetCollisionEnabled(ECollisionEnabled::NoCollision); 
+	if (WidgetComp)
+	{
+		WidgetComp->SetupAttachment(RootComponent);
+		// シャドウを落とさない
+		WidgetComp->SetCastShadow(false);
+		// デカールも受けない
+		WidgetComp->bReceivesDecals = false;
+		// 当たり判定も不要
+		WidgetComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	}
 
 	// グリッド移動コンポーネント
 	GridMovementComp = CreateDefaultSubobject<UGridMovementComponent>(TEXT("GridMovementComponent"));
@@ -177,6 +189,10 @@ void AEnemyBase::Tick(float DeltaTime)
 	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this);
 	AMyGameMode* MyGameMode = Cast<AMyGameMode>(GameMode);
 	if (MyGameMode == nullptr)
+		return;
+
+	AGridManager* GridManager = MyGameMode->GridManager;
+	if (GridManager == nullptr)
 		return;
 
 	// 開始/アクション フェーズ以外では時間停止
@@ -349,7 +365,7 @@ void AEnemyBase::SelfDestroy()
 }
 
 
-void AEnemyBase::SetCurrentCoord(FVector2D Coord)
+void AEnemyBase::SetCurrentCoord(FCoord Coord)
 {
 	if (GridMovementComp)
 	{
@@ -357,12 +373,12 @@ void AEnemyBase::SetCurrentCoord(FVector2D Coord)
 	}
 }
 
-FVector2D AEnemyBase::GetCurrentCoord() const
+FCoord AEnemyBase::GetCurrentCoord() const
 {
 	if (GridMovementComp)
 	{
 		return GridMovementComp->GetCurrentCoord();
 	}
 
-	return FVector2D::Zero();
+	return FCoord::Zero();
 }

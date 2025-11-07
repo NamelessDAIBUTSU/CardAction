@@ -38,6 +38,9 @@ public:
 	// 全エネミーの取得
 	TArray<AEnemyBase*> GetEnemyList() const { return EnemyList; }
 
+	// 指定座標のエネミーを取得
+	AEnemyBase* GetEnemy(FCoord Coord);
+
 private:
 	UPROPERTY(VisibleAnywhere)
 	TArray<AEnemyBase*> EnemyList;

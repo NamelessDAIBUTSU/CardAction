@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "../Card/CardTypeDef.h"
+#include "Util/CoordDef.h"
 #include "WeaponBase.generated.h"
 
 /**
@@ -27,7 +28,7 @@ public:
 	void SetWeaponOwner(class AMyCharacter* Player) { WeaponOwner = Player; }
 
 	// ê∂ê¨éûÇÃç¿ïWê›íË
-	void SetSpawnCoord(FVector2D Coord) { SpawnCoord = Coord; }
+	void SetSpawnCoord(FCoord Coord) { SpawnCoord = Coord; }
 
 
 public: /* Status */
@@ -54,5 +55,5 @@ protected:
 	AMyCharacter* WeaponOwner = nullptr;
 
 	UPROPERTY(VisibleAnywhere, Category = "Move")
-	FVector2D SpawnCoord = FVector2D::Zero();
+	FCoord SpawnCoord = FCoord::Zero();
 };

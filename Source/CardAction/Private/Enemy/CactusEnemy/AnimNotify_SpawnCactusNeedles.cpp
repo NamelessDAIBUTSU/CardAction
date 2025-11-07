@@ -31,8 +31,8 @@ void UAnimNotify_SpawnCactusNeedles::Notify(USkeletalMeshComponent* MeshComp, UA
     Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
     // 前後左右のセルにカクタスニードルを生成
-    FVector2D CurrentCoord = Enemy->GetCurrentCoord();
-    FVector2D SpawnCoord = FVector2D::Zero();
+    FCoord CurrentCoord = Enemy->GetCurrentCoord();
+    FCoord SpawnCoord = FCoord::Zero();
     for (int i = 0;i < 4; i++)
     {
         switch (i)

@@ -7,6 +7,7 @@
 #include "Grid/Cell/GridCellActor.h"
 #include "Grid/GridData.h"
 #include <Enemy/EnemyBase.h>
+#include "Util/CoordDef.h"
 #include "GridManager.generated.h"
 
 UCLASS()
@@ -33,49 +34,49 @@ public: /* 生成 */
 
 public: /* セル関連処理 */
 	// セル上にアクターを登録
-	void AddActorOnCell(AActor* Actor, FVector2D Coord);
+	void AddActorOnCell(AActor* Actor, FCoord Coord);
 	// セル上からアクターを除去
-	void RemoveActorFromCell(AActor* Actor, FVector2D Coord);
+	void RemoveActorFromCell(AActor* Actor, FCoord Coord);
 
 	// セル上のアクターにダメージ判定
-	void ExecuteAttackToGridCell(AActor* AttackedActor, float Damage, FVector2D Coord);
+	void ExecuteAttackToGridCell(AActor* AttackedActor, float Damage, FCoord Coord);
 
 	// セル上のアクター情報更新
-	void RefleshActorInfoOnCell(AActor* MoveActor, FVector2D FromCoord, FVector2D ToCoord);
+	void RefleshActorInfoOnCell(AActor* MoveActor, FCoord FromCoord, FCoord ToCoord);
+
+	// 移動先予定セルを登録/解除
+	void SetMoveTargetCell(FCoord Coord, bool Value);
 
 public: /* 敵 */
 	// 攻撃予測を追加
-	void AddAttackSign(FVector2D Coord);
+	void AddAttackSign(FCoord Coord);
 	// 攻撃予測を除去
-	void RemoveAttackSign(FVector2D Coord);
+	void RemoveAttackSign(FCoord Coord);
 
 	// グリッド上に敵が存在するか
 	bool IsExistEnemyOnGrid();
 	// グリッドマス上に敵が存在するか
-	bool IsExistEnemyOnGridCell(FVector2D Coord);
-
-	// グリッドセル上にいるエネミーを取得
-	AEnemyBase* GetEnemyOnGridCell(FVector2D Coord);
+	bool IsExistEnemyOnGridCell(FCoord Coord);
 
 	// セル上にプレイヤーが存在するか
-	bool IsExistPlayerOnGridCell(FVector2D Coord);
+	bool IsExistPlayerOnGridCell(FCoord Coord);
 
 public: /* Util */
 	// グリッド座標 → ワールド座標に変換
-	FVector ConvertToWorldPosition(FVector2D Coord);
+	FVector ConvertToWorldPosition(FCoord Coord);
 	// ワールド座標 → グリッド座標に変換
-	FVector2D ConvertToGridCoord(FVector Position);
+	FCoord ConvertToGridCoord(FVector Position);
 
 	// 二つの座標が 縦・横・斜め のいずれかの線上にいるか
-	bool IsSameLine(FVector2D Coord1, FVector2D Coord2);
+	bool IsSameLine(FCoord Coord1, FCoord Coord2);
 	// プレイヤーと指定座標が同線上にいるか
-	bool IsPlayerSameLine(FVector2D Coord);
+	bool IsPlayerSameLine(FCoord Coord);
 	// アクセス可能なグリッドセルか
 	bool IsAccessableGridCell(FVector CheckPosition);
-	bool IsAccessableGridCell(FVector2D Coord);
+	bool IsAccessableGridCell(FCoord Coord);
 
 	// グリッドセルを取得
-	AGridCellActor* GetGridCellActor(FVector2D Coord);
+	AGridCellActor* GetGridCellActor(FCoord Coord);
 	AGridCellActor* GetGridCellActor(FVector Position);
 
 	// グリッドサイズの取得
@@ -89,7 +90,7 @@ private:
 	void SpawnEnemies();
 
 	// グリッド座標範囲外チェック
-	bool IsInGrid(FVector2D Coord);
+	bool IsInGrid(FCoord Coord);
 
 
 public:

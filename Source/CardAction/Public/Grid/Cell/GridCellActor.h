@@ -51,8 +51,9 @@ public:
 	// セル上にプレイヤーが存在するか
 	bool IsExistPlayerOnCell();
 
-	// セル上のエネミーを取得
-	class AEnemyBase* GetEnemyOnCell();
+	// 移動先予定のセルか
+	bool IsMoveTargetCell() const { return bIsMoveTargetCell; }
+	void SetMoveTargetCell(bool Val) { bIsMoveTargetCell = Val; }
 
 public: /* 攻撃予測 */
 	// 攻撃予測の追加
@@ -94,4 +95,8 @@ private:
 	// 攻撃予測のリクエストカウンタ
 	UPROPERTY(VisibleAnywhere, Category = "Attack")
 	int AttackSignCount = 0;
+
+	// 攻撃予測のリクエストカウンタ
+	UPROPERTY(VisibleAnywhere)
+	bool bIsMoveTargetCell = false;
 };

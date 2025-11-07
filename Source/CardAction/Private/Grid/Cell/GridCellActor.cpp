@@ -5,6 +5,9 @@
 #include <Character/MyCharacter.h>
 #include <Enemy/EnemyBase.h>
 #include <Map/MapManager.h>
+#include <Kismet/GameplayStatics.h>
+#include <System/MyGameMode.h>
+#include "Enemy/EnemyManager.h"
 
 AGridCellActor::AGridCellActor()
 {
@@ -179,27 +182,38 @@ void AGridCellActor::ExecuteAttackToActorOnCell(AActor* AttackedActor, float Dam
     if (AttackedActor == nullptr)
         return;
 
+    AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this));
+    if (MyGM == nullptr)
+        return;
+
+    AEnemyManager* EnemyManager = MyGM->EnemyManager;
+    if (EnemyManager == nullptr)
+        return;
+
+
     // プレイヤーからの攻撃かどうか
     bool bFromPlayer = Cast<AWeaponActorBase>(AttackedActor) != nullptr;
 
     // セル上のアクターが複数いる場合は全てにダメージ処理
-    for (int i = CellData.Objects.Num() - 1; 0 <= i ; --i)
+    // 敵にダメージ
+    if (bFromPlayer)
     {
-        // 敵にダメージ
-        if (bFromPlayer)
+        if (AEnemyBase* Enemy = EnemyManager->GetEnemy(CellData.GridCoord))
         {
-            if (AEnemyBase* Enemy = Cast<AEnemyBase>(CellData.Objects[i]))
-            {
-                Enemy->OnTakeDamage(Damage);
-            }
+            Enemy->OnTakeDamage(Damage);
         }
-        // プレイヤーにダメージ
-        else
+    }
+    // プレイヤーにダメージ
+    else
+    {
+        // プレイヤーの取得
+        APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+        if (PlayerController == nullptr)
+            return;
+
+        if (AMyCharacter* Player = Cast<AMyCharacter>(PlayerController->GetPawn()))
         {
-            if (AMyCharacter* Player = Cast<AMyCharacter>(CellData.Objects[i]))
-            {
-                Player->OnTakeDamage(Damage);
-            }
+            Player->OnTakeDamage(Damage);
         }
     }
 }
@@ -207,46 +221,30 @@ void AGridCellActor::ExecuteAttackToActorOnCell(AActor* AttackedActor, float Dam
 // セル上に敵が存在するか
 bool AGridCellActor::IsExistEnemyOnCell()
 {
-    for (AActor* Actor : CellData.Objects)
-    {
-        AEnemyBase* Enemy = Cast<AEnemyBase>(Actor);
-        if (Enemy)
-        {
-            return true;
-        }
-    }
+    AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this));
+    if (MyGM == nullptr)
+        return false;
 
-    return false;
+    AEnemyManager* EnemyManager = MyGM->EnemyManager;
+    if (EnemyManager == nullptr)
+        return false;
+
+    return EnemyManager->GetEnemy(CellData.GridCoord) != nullptr;
 }
 
 // セル上にプレイヤーが存在するか
 bool AGridCellActor::IsExistPlayerOnCell()
 {
-    for (AActor* Actor : CellData.Objects)
-    {
-        AMyCharacter* Player = Cast<AMyCharacter>(Actor);
-        if (Player)
-        {
-            return true;
-        }
-    }
+    // プレイヤーの取得
+    APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+    if (PlayerController == nullptr)
+        return false;
 
-    return false;
-}
+    AMyCharacter* Player = Cast<AMyCharacter>(PlayerController->GetPawn());
+    if (Player == nullptr)
+        return false;
 
-// セル上のエネミーを取得
-AEnemyBase* AGridCellActor::GetEnemyOnCell()
-{
-    for (AActor* Actor : CellData.Objects)
-    {
-        AEnemyBase* Enemy = Cast<AEnemyBase>(Actor);
-        if (Enemy)
-        {
-            return Enemy;
-        }
-    }
-
-    return nullptr;
+    return CellData.GridCoord == Player->GetCurrentCoord();
 }
 
 // 攻撃予測の追加

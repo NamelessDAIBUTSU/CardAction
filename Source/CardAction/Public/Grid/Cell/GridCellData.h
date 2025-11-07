@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Grid/Cell/GridCellDef.h"
+#include "Util/CoordDef.h"
 #include "GridCellData.generated.h"
 
 USTRUCT(BlueprintType)
@@ -11,9 +12,10 @@ struct CARDACTION_API FGridCellData
 {
 	GENERATED_BODY()
 
+public:
 	// グリッド内の座標
 	UPROPERTY()
-	FVector2D GridCoord;
+	FCoord GridCoord;
 
 	// セルの種類
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

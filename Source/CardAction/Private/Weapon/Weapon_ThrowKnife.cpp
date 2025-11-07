@@ -7,7 +7,9 @@
 #include <Kismet/GameplayStatics.h>
 #include <System/MyGameMode.h>
 #include "Grid/GridManager.h"
+#include "Util/CoordDef.h"
 #include "Enemy/EnemyBase.h"
+#include "Enemy/EnemyManager.h"
 
 AWeapon_ThrowKnife::AWeapon_ThrowKnife()
 {
@@ -53,23 +55,29 @@ void AWeapon_ThrowKnife::OnOverlap(UPrimitiveComponent* OverlappedComp,
 {
     if (OtherActor == nullptr)
         return;
+
     AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this));
     if (MyGM == nullptr)
         return;
+
     AGridManager* GridManager = MyGM->GridManager;
     if (GridManager == nullptr)
         return;
 
+    AEnemyManager* EnemyManager = MyGM->EnemyManager;
+    if (EnemyManager == nullptr)
+        return;
+
     // 発射位置のグリッドマスとの当たり判定は無視
-    FVector2D Coord = GridManager->ConvertToGridCoord(OtherActor->GetActorLocation());
+    FCoord Coord = GridManager->ConvertToGridCoord(OtherActor->GetActorLocation());
     if (Coord == SpawnCoord)
         return;
+
 
     // 敵がいるマスか先に取得しておく
     bool bIsExistEnemyOnGridCell = GridManager->IsExistEnemyOnGridCell(Coord);
     // 敵が死亡モーション中なら消さない
-    AEnemyBase* Enemy = GridManager->GetEnemyOnGridCell(Coord);
-    if (Enemy)
+    if (AEnemyBase* Enemy = EnemyManager->GetEnemy(Coord))
     {
         bIsExistEnemyOnGridCell &= (Enemy->IsPlayingDeadMontage() == false);
     }

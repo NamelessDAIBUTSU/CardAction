@@ -112,10 +112,10 @@ FVector AGridManager::GetPlayerSpawnPosition()
 // アクセス可能なグリッドセルか
 bool AGridManager::IsAccessableGridCell(FVector CheckPosition)
 {
-	FVector2D Coord = ConvertToGridCoord(CheckPosition);
+	FCoord Coord = ConvertToGridCoord(CheckPosition);
 	return IsAccessableGridCell(Coord);
 }
-bool AGridManager::IsAccessableGridCell(FVector2D Coord)
+bool AGridManager::IsAccessableGridCell(FCoord Coord)
 {
 	AGridCellActor* GridCell = GetGridCellActor(Coord);
 	if (GridCell == nullptr)
@@ -123,10 +123,12 @@ bool AGridManager::IsAccessableGridCell(FVector2D Coord)
 
 	bool bIsAccessable = true;
 	// 以下、条件判定
-	// セル上にオブジェクトが乗ってないならOK
+	// セル上にオブジェクトがあるならNG
 	bIsAccessable &= GridCell->IsExistActorOnCell() == false;
-	// 空セルじゃないならOK
+	// 空セルはNG
 	bIsAccessable &= GridCell->CellData.GridCellType != EGridCellType::None;
+	// 移動先に指定されているセルはNG
+	bIsAccessable &= GridCell->IsMoveTargetCell() == false;
 
 	return bIsAccessable;
 }
@@ -138,7 +140,7 @@ void AGridManager::SpawnEnemies()
 		return;
 
 	// スポーン可能な座標の取得
-	TArray<FVector2D> SpawnableCoords = GenerateGridData->EnemySpawnableCoords;
+	TArray<FCoord> SpawnableCoords = GenerateGridData->EnemySpawnableCoords;
 
 	for (auto Enemy : SpawnEnemyArray)
 	{
@@ -147,7 +149,7 @@ void AGridManager::SpawnEnemies()
 
 		// スポーンする位置を決定
 		int RandomIndex = FMath::RandRange(0, SpawnableCoords.Num() - 1);
-		FVector2D SpawnCoord = SpawnableCoords[RandomIndex];
+		FCoord SpawnCoord = SpawnableCoords[RandomIndex];
 		FVector SpawnPosition = FVector(SpawnCoord.Y * GRID_CELL_UNIT * -1.f, SpawnCoord.X * GRID_CELL_UNIT, GRID_CELL_HEIGHT_UNIT * 0.5f);
 
 		// スポーン
@@ -174,11 +176,13 @@ void AGridManager::SpawnEnemies()
 
 		// スポーン可能位置を減らす
 		SpawnableCoords.RemoveAt(RandomIndex);
+
+		return;
 	}
 }
 
 // セル上にアクターを登録
-void AGridManager::AddActorOnCell(AActor* Actor, FVector2D Coord)
+void AGridManager::AddActorOnCell(AActor* Actor, FCoord Coord)
 {
 	if (IsInGrid(Coord) == false)
 		return;
@@ -190,7 +194,7 @@ void AGridManager::AddActorOnCell(AActor* Actor, FVector2D Coord)
 }
 
 // セル上から指定アクターの情報を削除
-void AGridManager::RemoveActorFromCell(AActor* Actor, FVector2D Coord)
+void AGridManager::RemoveActorFromCell(AActor* Actor, FCoord Coord)
 {
 	if (IsInGrid(Coord) == false)
 		return;
@@ -202,7 +206,7 @@ void AGridManager::RemoveActorFromCell(AActor* Actor, FVector2D Coord)
 }
 
 // セル上のアクターにダメージ判定
-void AGridManager::ExecuteAttackToGridCell(AActor* AttackedActor, float Damage, FVector2D Coord)
+void AGridManager::ExecuteAttackToGridCell(AActor* AttackedActor, float Damage, FCoord Coord)
 {
 	if (IsInGrid(Coord) == false)
 		return;
@@ -214,7 +218,7 @@ void AGridManager::ExecuteAttackToGridCell(AActor* AttackedActor, float Damage, 
 }
 
 // セル上のアクター情報更新
-void AGridManager::RefleshActorInfoOnCell(AActor* MoveActor, FVector2D FromCoord, FVector2D ToCoord)
+void AGridManager::RefleshActorInfoOnCell(AActor* MoveActor, FCoord FromCoord, FCoord ToCoord)
 {
 	if (MoveActor == nullptr)
 		return;
@@ -232,8 +236,17 @@ void AGridManager::RefleshActorInfoOnCell(AActor* MoveActor, FVector2D FromCoord
 	}
 }
 
+// 移動先予定セルを登録/解除
+void AGridManager::SetMoveTargetCell(FCoord Coord, bool Value)
+{
+	if (AGridCellActor* Cell = GetGridCellActor(Coord))
+	{
+		Cell->SetMoveTargetCell(Value);
+	}
+}
+
 // 攻撃予測を追加
-void AGridManager::AddAttackSign(FVector2D Coord)
+void AGridManager::AddAttackSign(FCoord Coord)
 {
 	if (AGridCellActor* TargetCell = GetGridCellActor(Coord))
 	{
@@ -242,7 +255,7 @@ void AGridManager::AddAttackSign(FVector2D Coord)
 }
 
 // 攻撃予測を除去
-void AGridManager::RemoveAttackSign(FVector2D Coord)
+void AGridManager::RemoveAttackSign(FCoord Coord)
 {
 	if (AGridCellActor* TargetCell = GetGridCellActor(Coord))
 	{
@@ -274,7 +287,7 @@ bool AGridManager::IsExistEnemyOnGrid()
 }
 
 // グリッドマス上に敵が存在するか
-bool AGridManager::IsExistEnemyOnGridCell(FVector2D Coord)
+bool AGridManager::IsExistEnemyOnGridCell(FCoord Coord)
 {
 	if (AGridCellActor* TargetCell = GetGridCellActor(Coord))
 	{
@@ -284,19 +297,8 @@ bool AGridManager::IsExistEnemyOnGridCell(FVector2D Coord)
 	return false;
 }
 
-// グリッドセル上にいるエネミーを取得
-AEnemyBase* AGridManager::GetEnemyOnGridCell(FVector2D Coord)
-{
-	if (AGridCellActor* TargetCell = GetGridCellActor(Coord))
-	{
-		return TargetCell->GetEnemyOnCell();
-	}
-
-	return nullptr;
-}
-
 // セル上にプレイヤーが存在するか
-bool AGridManager::IsExistPlayerOnGridCell(FVector2D Coord)
+bool AGridManager::IsExistPlayerOnGridCell(FCoord Coord)
 {
 	if (AGridCellActor* TargetCell = GetGridCellActor(Coord))
 	{
@@ -307,7 +309,7 @@ bool AGridManager::IsExistPlayerOnGridCell(FVector2D Coord)
 }
 
 // グリッド座標 → ワールド座標に変換
-FVector AGridManager::ConvertToWorldPosition(FVector2D Coord)
+FVector AGridManager::ConvertToWorldPosition(FCoord Coord)
 {
 	// 上方向がX軸のため、Coord.XとCoord.Yを逆に使用
 	FVector Position = FVector(Coord.Y * GRID_CELL_UNIT * -1.f, Coord.X * GRID_CELL_UNIT, GRID_CELL_HEIGHT_UNIT * 0.5f);
@@ -316,16 +318,19 @@ FVector AGridManager::ConvertToWorldPosition(FVector2D Coord)
 }
 
 // ワールド座標 → グリッド座標に変換
-FVector2D AGridManager::ConvertToGridCoord(FVector Position)
+FCoord AGridManager::ConvertToGridCoord(FVector Position)
 {
 	// 上方向がX軸のため、Coord.XとCoord.Yを逆に使用
-	FVector2D Coord = FVector2D(Position.Y / GRID_CELL_UNIT, (Position.X * -1.f) / GRID_CELL_UNIT);
+	float X = Position.Y / GRID_CELL_UNIT;
+	float Y = (Position.X * -1.f) / GRID_CELL_UNIT;
+	int32 XCoord = FMath::RoundToInt(X);
+	int32 YCoord = FMath::RoundToInt(Y);
 
-	return Coord;
+	return FCoord(XCoord, YCoord);
 }
 
 // 二つの座標が 縦・横・斜め のいずれかの線上にいるか
-bool AGridManager::IsSameLine(FVector2D Coord1, FVector2D Coord2)
+bool AGridManager::IsSameLine(FCoord Coord1, FCoord Coord2)
 {
 	bool bIsSameLine = false;
 
@@ -340,7 +345,7 @@ bool AGridManager::IsSameLine(FVector2D Coord1, FVector2D Coord2)
 }
 
 // プレイヤーと指定座標が同線上にいるか
-bool AGridManager::IsPlayerSameLine(FVector2D Coord)
+bool AGridManager::IsPlayerSameLine(FCoord Coord)
 {
 	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	if (PlayerController == nullptr)
@@ -360,7 +365,7 @@ bool AGridManager::IsPlayerSameLine(FVector2D Coord)
 }
 
 // グリッド座標範囲外チェック
-bool AGridManager::IsInGrid(FVector2D Coord)
+bool AGridManager::IsInGrid(FCoord Coord)
 {
 	if (Coord.Y < 0 || Grid.Num() <= Coord.Y)
 		return false;
@@ -371,7 +376,7 @@ bool AGridManager::IsInGrid(FVector2D Coord)
 }
 
 // グリッドセルを取得
-AGridCellActor* AGridManager::GetGridCellActor(FVector2D Coord)
+AGridCellActor* AGridManager::GetGridCellActor(FCoord Coord)
 {
 	if (IsInGrid(Coord) == false)
 		return nullptr;
@@ -380,7 +385,7 @@ AGridCellActor* AGridManager::GetGridCellActor(FVector2D Coord)
 }
 AGridCellActor* AGridManager::GetGridCellActor(FVector Position)
 {
-	FVector2D Coord = ConvertToGridCoord(Position);
+	FCoord Coord = ConvertToGridCoord(Position);
 	return GetGridCellActor(Coord);
 }
 

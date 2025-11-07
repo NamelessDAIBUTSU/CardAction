@@ -6,13 +6,14 @@
 #include "GameFramework/Character.h"
 #include <Components/WidgetComponent.h>
 #include "Delegates/DelegateCombinations.h"
+#include "Interface/GridMoveCompInterface.h"
 #include <MyComponents/GridMovementComponent.h>
 #include "EnemyBase.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnEnemyDead, AEnemyBase*, DeadEnemy);
 
 UCLASS()
-class CARDACTION_API AEnemyBase : public ACharacter
+class CARDACTION_API AEnemyBase : public ACharacter, public IGridMoveCompInterface
 {
 	GENERATED_BODY()
 
@@ -23,9 +24,12 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void BeginDestroy() override;
 
-public:	
+public: /* ACharacter */
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+public: /* IGridMoveCompInterface */
+	virtual UGridMovementComponent* GetGridMoveComponent() override { return GridMovementComp; }
 
 public: /* Callback */
 	UFUNCTION()
@@ -47,8 +51,8 @@ public:
 	virtual bool CanRotate() { return true; }
 
 	// 座標
-	void SetCurrentCoord(FVector2D Coord);
-	FVector2D GetCurrentCoord() const;
+	void SetCurrentCoord(FCoord Coord);
+	FCoord GetCurrentCoord() const;
 
 	// グリッド移動コンポーネント
 	UGridMovementComponent* GetGridMovementComponent() { return GridMovementComp; }

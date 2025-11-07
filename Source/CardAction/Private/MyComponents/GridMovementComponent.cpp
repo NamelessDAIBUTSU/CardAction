@@ -27,7 +27,7 @@ void UGridMovementComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 }
 
 // 移動リクエスト
-void UGridMovementComponent::RequestMoveToDirection(FVector2D TargetCoord, float GoalSecond)
+void UGridMovementComponent::RequestMoveToDirection(FCoord Coord, float GoalSecond)
 {
 	// 移動中はリクエストできない
 	if (bIsMoving)
@@ -53,6 +53,7 @@ void UGridMovementComponent::RequestMoveToDirection(FVector2D TargetCoord, float
 	if (GridManager == nullptr)
 		return;
 
+	TargetCoord = Coord;
 
 	// コントローラのYaw回転を取得
 	const FRotator Rotation = Controller->GetControlRotation();
@@ -92,13 +93,11 @@ void UGridMovementComponent::RequestMoveToDirection(FVector2D TargetCoord, float
 			MoveSpeed = Dist / GoalSec;
 		}
 
-		// 移動終了後に元の位置をグリッドマネージャーから除去するための座標保存
-		FromCoord = GridManager->ConvertToGridCoord(PawnOwner->GetActorLocation());
-		GridManager->RemoveActorFromCell(PawnOwner, FromCoord);
+		// 1フレーム前の座標を保存
+		CoordCache = GridManager->ConvertToGridCoord(PawnOwner->GetActorLocation());
 
-		// ほかのアクターと移動先が被らないように、移動先の座標登録
-		FVector2D ToCoord = GridManager->ConvertToGridCoord(TargetLocation);
-		GridManager->AddActorOnCell(PawnOwner, ToCoord);
+		// ほかのアクターの移動と被らないように、移動先予定セルに登録
+		GridManager->SetMoveTargetCell(TargetCoord, true);
 
 		// 更新用の変数をリセット
 		ElapsedSec = 0.f;
@@ -138,8 +137,8 @@ void UGridMovementComponent::OnMoveToDirection(const FInputActionValue& Value)
 	Dir = Dir.GetSafeNormal();
 
 	// 移動リクエスト
-	FVector2D TargetCoord = CurrentCoord + Dir;
-	RequestMoveToDirection(TargetCoord, 0.1f);
+	FCoord Coord = CurrentCoord + Dir;
+	RequestMoveToDirection(Coord, 0.1f);
 }
 
 // 移動方向キャッシュの削除
@@ -207,7 +206,18 @@ void UGridMovementComponent::UpdateGridMove(float DeltaSec)
 	PawnOwner->SetActorLocation(CurrentLocation);
 
 	// 現在の座標を更新
-	SetCoord(GridManager->ConvertToGridCoord(CurrentLocation));
+	FCoord NextCoord = GridManager->ConvertToGridCoord(CurrentLocation);
+	SetCoord(NextCoord);
+
+	// セルが変わったらグリッド上の位置も更新
+	if (CoordCache != NextCoord)
+	{
+		GridManager->RemoveActorFromCell(PawnOwner, CoordCache);
+		GridManager->AddActorOnCell(PawnOwner, NextCoord);
+	}
+
+	// 座標キャッシュの更新
+	CoordCache = NextCoord;
 
 	// 移動が終了したら
 	if (IsFinishGridMove())
@@ -215,8 +225,8 @@ void UGridMovementComponent::UpdateGridMove(float DeltaSec)
 		// フラグを降ろす
 		bIsMoving = false;
 
-		// グリッドマネージャーの元の座標から自身を除去
-		GridManager->RemoveActorFromCell(PawnOwner, FromCoord);
+		// 移動先予定セルの解除
+		GridManager->SetMoveTargetCell(TargetCoord, false);
 	}
 }
 

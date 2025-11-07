@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/BTTaskNode.h"
+#include "Util/CoordDef.h"
 #include "BTTask_GridMove.generated.h"
 
 /**
@@ -31,6 +32,6 @@ public:
 	bool bCanMoveDiagonal = false;
 
 private:
-	FVector2D TargetCoord = FVector2D::Zero();
+	FCoord TargetCoord = FCoord::Zero();
 };
 

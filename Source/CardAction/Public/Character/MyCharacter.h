@@ -9,16 +9,18 @@
 #include <Card/CardData.h>
 #include "MyComponents/GridMovementComponent.h"
 #include <Components/WidgetComponent.h>
+#include "Interface/GridMoveCompInterface.h"
 #include "MyCharacter.generated.h"
 
 UCLASS(Blueprintable)
-class AMyCharacter : public ACharacter
+class AMyCharacter : public ACharacter, public IGridMoveCompInterface
 {
 	GENERATED_BODY()
 
 public:
 	AMyCharacter();
 
+public:
 	// Called every frame.
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void BeginPlay() override;
@@ -26,6 +28,8 @@ public:
 	// 入力バインド設定
 	virtual void SetupPlayerInputComponent(UInputComponent* InputComp) override;
 
+public: /* IGridMoveCompInterface */
+	virtual UGridMovementComponent* GetGridMoveComponent() override{ return GridMovementComp; }
 
 public: /* Callback */
 	// 武器発動
@@ -50,8 +54,8 @@ public: /* Callback */
 
 public:
 	// 座標設定
-	void SetCurrentCoord(FVector2D Coord);
-	FVector2D GetCurrentCoord() const;
+	void SetCurrentCoord(FCoord Coord);
+	FCoord GetCurrentCoord() const;
 
 	// ゲッタ
 	UGridMovementComponent* GetGridMovementComponent() { return GridMovementComp; }

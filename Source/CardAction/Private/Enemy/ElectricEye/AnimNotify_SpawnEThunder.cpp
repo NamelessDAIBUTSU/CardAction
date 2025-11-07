@@ -39,14 +39,14 @@ void UAnimNotify_SpawnEThunder::Notify(USkeletalMeshComponent* MeshComp, UAnimSe
     for (int i = 0; i < SpawnEThunderNum; i++)
     {
         // エレクトリックサンダーを降らせる座標を取得する
-        FVector2D SpawnCoord = FVector2D::Zero();
+        FCoord SpawnCoord = FCoord::Zero();
         do {
             // ループ防止用
             Count++;
 
-            float RandomX = FMath::RandRange(0, (int)GridSize.X - 1);
-            float RandomY = FMath::RandRange(0, (int)GridSize.Y - 1);
-            SpawnCoord = FVector2D(RandomX, RandomY);
+            int32 RandomX = FMath::RandRange(0, (int)GridSize.X - 1);
+            int32 RandomY = FMath::RandRange(0, (int)GridSize.Y - 1);
+            SpawnCoord = FCoord(RandomX, RandomY);
         } while (GridManager->IsAccessableGridCell(SpawnCoord) == false && Count < 10);
         FVector SpawnLocation = GridManager->ConvertToWorldPosition(SpawnCoord);
 

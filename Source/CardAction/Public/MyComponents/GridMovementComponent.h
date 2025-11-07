@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include <Util/CoordDef.h>
 #include "GridMovementComponent.generated.h"
 
 
@@ -37,12 +38,12 @@ public: /* プレイヤー用 */
 
 public:
 	// 移動リクエスト
-	void RequestMoveToDirection(FVector2D Direction, float GoalSecond);
+	void RequestMoveToDirection(FCoord Coord, float GoalSecond);
 
 	// 座標
 	UFUNCTION()
-	FVector2D GetCurrentCoord() const { return CurrentCoord; }
-	void SetCoord(FVector2D Coord) { CurrentCoord = Coord; }
+	FCoord GetCurrentCoord() const { return CurrentCoord; }
+	void SetCoord(FCoord Coord) { CurrentCoord = Coord; }
 
 	// 移動中
 	UFUNCTION(BlueprintCallable)
@@ -68,7 +69,7 @@ private:
 
 	// 現在の座標
 	UPROPERTY(VisibleAnywhere, Category = "GridMove")
-	FVector2D CurrentCoord = FVector2D::Zero();
+	FCoord CurrentCoord = FCoord::Zero();
 
 private: /* 移動更新関連 */
 	// 移動中か
@@ -82,10 +83,12 @@ private: /* 移動更新関連 */
 	// 移動先位置
 	UPROPERTY(VisibleAnywhere, Category = "GridMove")
 	FVector TargetLocation = FVector::Zero();
-
-	// 移動前の座標
 	UPROPERTY(VisibleAnywhere, Category = "GridMove")
-	FVector2D FromCoord = FVector2D::Zero();
+	FCoord TargetCoord = FCoord::Zero();
+
+	// 1フレーム前の座標
+	UPROPERTY(VisibleAnywhere, Category = "GridMove")
+	FCoord CoordCache = FCoord::Zero();
 
 	// 移動時間
 	UPROPERTY(VisibleAnywhere, Category = "GridMove")

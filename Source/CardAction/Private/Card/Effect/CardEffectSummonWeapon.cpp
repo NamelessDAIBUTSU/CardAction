@@ -20,9 +20,6 @@ void UCardEffectSummonWeapon::ExecuteEffect()
 	{
 		// •Ší‚ð¶¬
 		AWeaponActorBase* WeaponActor = GetWorld()->SpawnActor<AWeaponActorBase>(WeaponClass, Player->GetActorLocation(), Player->GetActorRotation());
-
-		UE_LOG(LogTemp, Warning, TEXT("Projectile Spawn Location: %s"), *WeaponActor->GetActorLocation().ToString());
-
 		if (WeaponActor)
 		{
 			// Š—LŽÒ‚ðÝ’è
@@ -34,7 +31,7 @@ void UCardEffectSummonWeapon::ExecuteEffect()
 				if (MyGM->GridManager == nullptr)
 					return;
 
-				FVector2D SpawnCoord = MyGM->GridManager->ConvertToGridCoord(Player->GetActorLocation());
+				FCoord SpawnCoord = MyGM->GridManager->ConvertToGridCoord(Player->GetActorLocation());
 				WeaponActor->SetSpawnCoord(SpawnCoord);
 			}
 		}

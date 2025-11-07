@@ -44,6 +44,10 @@ AMyCharacter::AMyCharacter()
 		WidgetComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 
+	// ポーン同士は当たらないようにする
+	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
+
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
 }
@@ -277,7 +281,7 @@ void AMyCharacter::OnTakeDamage(float Damage)
 	StartInvincible();
 }
 
-void AMyCharacter::SetCurrentCoord(FVector2D Coord)
+void AMyCharacter::SetCurrentCoord(FCoord Coord)
 {
 	if (GridMovementComp)
 	{
@@ -285,14 +289,14 @@ void AMyCharacter::SetCurrentCoord(FVector2D Coord)
 	}
 }
 
-FVector2D AMyCharacter::GetCurrentCoord() const
+FCoord AMyCharacter::GetCurrentCoord() const
 {
 	if (GridMovementComp)
 	{
 		return GridMovementComp->GetCurrentCoord();
 	}
 
-	return FVector2D::Zero();
+	return FCoord::Zero();
 }
 
 // 手札にカードを追加

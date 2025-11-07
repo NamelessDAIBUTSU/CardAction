@@ -14,6 +14,7 @@
 #include <System/Phase/BattlePhase_Result.h>
 #include <Character/MyPlayerController.h>
 #include "Components/CapsuleComponent.h"
+#include "Util/CoordDef.h"
 
 AMyGameMode::AMyGameMode()
 {
@@ -62,7 +63,7 @@ void AMyGameMode::StartPlay()
 	}
 
 	// 生成したセル上にプレイヤーを登録
-	FVector2D SpawnCoord = GridManager->ConvertToGridCoord(PlayerPawn->GetActorLocation());
+	FCoord SpawnCoord = GridManager->ConvertToGridCoord(PlayerPawn->GetActorLocation());
 	GridManager->AddActorOnCell(PlayerPawn, SpawnCoord);
 
 	// プレイヤーのグリッド座標設定

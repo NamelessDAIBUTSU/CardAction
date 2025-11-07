@@ -32,11 +32,11 @@ public:
 
 	// プレイヤーのスポーンさせる座標
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grid")
-	FVector2D PlayerSpawnCoord;
+	FCoord PlayerSpawnCoord;
 
 	// エネミースポーン可能の座標配列
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grid")
-	TArray<FVector2D> EnemySpawnableCoords;
+	TArray<FCoord> EnemySpawnableCoords;
 
 	// 何マップ目で生成可能か
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grid")

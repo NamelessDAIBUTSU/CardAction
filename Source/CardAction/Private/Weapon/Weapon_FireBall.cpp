@@ -6,7 +6,9 @@
 #include <Kismet/GameplayStatics.h>
 #include "Grid/GridManager.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "Util/CoordDef.h"
 #include "Components/SphereComponent.h"
+#include "Enemy/EnemyManager.h"
 
 AWeapon_FireBall::AWeapon_FireBall()
 {
@@ -60,8 +62,6 @@ void AWeapon_FireBall::Tick(float DeltaSec)
                 {
                     float NewSpeed = FMath::Min(Speed + AccelRate * DeltaSec, ProjectileMoveComp->MaxSpeed);
                     ProjectileMoveComp->Velocity = CurrentVel.GetSafeNormal() * NewSpeed;
-
-                    UE_LOG(LogTemp, Warning, TEXT("Speed %f"), NewSpeed);
                 }
             }
         }
@@ -117,17 +117,21 @@ void AWeapon_FireBall::OnOverlap(UPrimitiveComponent* OverlappedComp,
     if (GridManager == nullptr)
         return;
 
+    AEnemyManager* EnemyManager = MyGM->EnemyManager;
+    if (EnemyManager == nullptr)
+        return;
+
     // 発射位置のグリッドマスとの当たり判定は無視
-    FVector2D Coord = GridManager->ConvertToGridCoord(OtherActor->GetActorLocation());
+    FCoord Coord = GridManager->ConvertToGridCoord(OtherActor->GetActorLocation());
     if (Coord == SpawnCoord)
         return;
 
 
     // 敵がいるマスか先に取得しておく
     bool bIsExistEnemyOnGridCell = GridManager->IsExistEnemyOnGridCell(Coord);
+
     // 敵が死亡モーション中なら当たり判定を取らない
-    AEnemyBase* Enemy = GridManager->GetEnemyOnGridCell(Coord);
-    if (Enemy)
+    if (AEnemyBase* Enemy = EnemyManager->GetEnemy(Coord))
     {
         bIsExistEnemyOnGridCell &= (Enemy->IsPlayingDeadMontage() == false);
     }

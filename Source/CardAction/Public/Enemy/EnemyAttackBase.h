@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Util/CoordDef.h"
 #include "EnemyAttackBase.generated.h"
 
 UCLASS(abstract)
@@ -21,8 +22,8 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	void SetCurrentCoord(FVector2D Coord) { CurrentCoord = Coord; }
-	FVector2D GetCurrentCoord() const { return CurrentCoord; }
+	void SetCurrentCoord(FCoord Coord) { CurrentCoord = Coord; }
+	FCoord GetCurrentCoord() const { return CurrentCoord; }
 
 
 public:
@@ -40,5 +41,5 @@ protected:
 
 	// ç¿ïW
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	FVector2D CurrentCoord = FVector2D::Zero();
+	FCoord CurrentCoord = FCoord::Zero();
 };

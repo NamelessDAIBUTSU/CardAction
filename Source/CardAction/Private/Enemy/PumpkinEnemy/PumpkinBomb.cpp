@@ -106,8 +106,8 @@ void APumpkinBomb::Setup(FVector Position)
 			if (GridManager == nullptr)
 				return;
 
-			FVector2D CellDist = GridManager->ConvertToGridCoord(TargetPosition) - GridManager->ConvertToGridCoord(StartPosition);
-			FallSec *= CellDist.Size() * 0.5f;
+			FCoord DistCell = GridManager->ConvertToGridCoord(TargetPosition) - GridManager->ConvertToGridCoord(StartPosition);
+			FallSec *= DistCell.Vector2D().Size() * 0.5f;
 		}
 
 		// XY•½–Ê‚Ì‘¬“x

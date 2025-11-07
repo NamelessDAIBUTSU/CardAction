@@ -46,7 +46,7 @@ EBTNodeResult::Type UBTTask_GridMove::ExecuteTask(UBehaviorTreeComponent& OwnerC
 	}
 
 	// ˆÚ“®æƒZƒ‹‚Ì’Š‘I
-	FVector2D Dir = FVector2D::Zero();
+	FCoord Dir = FCoord::Zero();
 	int Count = 0;
 	do {
 		// Œo˜H‚ðŒ©‚Â‚¯‚ç‚ê‚È‚©‚Á‚½‚Ì‚ÅŽ¸”s
@@ -58,21 +58,21 @@ EBTNodeResult::Type UBTTask_GridMove::ExecuteTask(UBehaviorTreeComponent& OwnerC
 		switch (RandomDir)
 		{
 		case 0:
-			Dir = FVector2D(0, 1); break;
+			Dir = FCoord(0, 1); break;
 		case 1:
-			Dir = FVector2D(0, -1); break;
+			Dir = FCoord(0, -1); break;
 		case 2:
-			Dir = FVector2D(1, 0); break;
+			Dir = FCoord(1, 0); break;
 		case 3:
-			Dir = FVector2D(-1, 0); break;
+			Dir = FCoord(-1, 0); break;
 		case 4:
-			Dir = FVector2D(1, 1); break;
+			Dir = FCoord(1, 1); break;
 		case 5:
-			Dir = FVector2D(-1, 1); break;
+			Dir = FCoord(-1, 1); break;
 		case 6:
-			Dir = FVector2D(1, -1); break;
+			Dir = FCoord(1, -1); break;
 		case 7:
-			Dir = FVector2D(-1, -1); break;
+			Dir = FCoord(-1, -1); break;
 		}
 		TargetCoord = GridMoveComp->GetCurrentCoord() + Dir;
 
