@@ -31,8 +31,6 @@ public:
 	void ChangePhase(EBattlePhase NextPhase);
 	EBattlePhase GetCurrentButtlePhase() const;
 
-	ACardBook* GetCardBook() { return CardBook; }
-
 	// アクションフェーズの場合、残り時間を取得
 	int GetRemainSec();
 
@@ -86,7 +84,4 @@ private:
 	// プレイヤーコントローラー
 	UPROPERTY(VisibleAnywhere, Category = "Player")
 	APlayerController* PlayerController = nullptr;
-
-	UPROPERTY(VisibleAnywhere, Category = "Card")
-	ACardBook* CardBook;
 };

@@ -35,8 +35,12 @@ public:
 	FCoord PlayerSpawnCoord;
 
 	// エネミースポーン可能の座標配列
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grid")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy")
 	TArray<FCoord> EnemySpawnableCoords;
+
+	// エネミースポーン数
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy")
+	int SpawnEnemyNum = 1;
 
 	// 何マップ目で生成可能か
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grid")

@@ -39,6 +39,10 @@ public:
 	int MinMapNum;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int MaxMapNum;
+
+	// スポーン可能の敵
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy")
+	TArray<TSubclassOf<AEnemyBase>> SpawnableEnemy;
 	
 	// このマップで使うグリッドセルのデフォルトマテリアル
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

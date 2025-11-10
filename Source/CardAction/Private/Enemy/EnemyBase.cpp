@@ -361,6 +361,15 @@ void AEnemyBase::SelfDestroy()
 		}
 	}
 
+	// エネミーマネージャーから自身を解除
+	if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
+	{
+		if (MyGM->EnemyManager)
+		{
+			MyGM->EnemyManager->UnRegistEnemy(this);
+		}
+	}
+
 	Destroy();
 }
 

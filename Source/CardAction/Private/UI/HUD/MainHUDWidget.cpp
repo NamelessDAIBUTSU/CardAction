@@ -36,6 +36,7 @@ void UMainHUDWidget::CreateWidgets()
     {
         StageClearWidget = CreateWidget<UStageClearWidget>(GetWorld(), StageClearWidgetClass);
         HUDList.Add(StageClearWidget);
+        StageClearWidget->SetVisibility(ESlateVisibility::HitTestInvisible);
 
         // 配置
         if (MainCanvas)

@@ -41,6 +41,10 @@ public:
 	UGridData* GetGridData() const { return GenerateGridData; }
 	void SetGridData(UGridData* Data) { GenerateGridData = Data; }
 
+	// 出現させる敵クラスを設定
+	void SetupEnemyClass(class UMapObject* Map);
+	TArray<TSubclassOf<class AEnemyBase>> GetEnemyClassList() const { return GenerateEnemyClassList; }
+
 private:
 	// ステージタイプ
 	UPROPERTY()
@@ -71,5 +75,5 @@ private:
 
 	// 出現する敵のリスト
 	UPROPERTY();
-	TArray<class AEnemyBase*> GenerateEnemyList;
+	TArray<TSubclassOf<class AEnemyBase>> GenerateEnemyClassList;
 };

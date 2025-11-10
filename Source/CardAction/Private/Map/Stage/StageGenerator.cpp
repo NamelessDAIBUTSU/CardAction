@@ -48,7 +48,7 @@ bool UStageGenerator::GenerateChainedStage(UStageObject* PreStage)
 			FirstStage->SetStageCondition(EStageCondition::CanSelect);
 
 			// ステージ情報をランダムに設定
-			GenerateGridData(FirstStage);
+			GenerateStageInfo(FirstStage);
 		}
 	}
 
@@ -158,7 +158,7 @@ bool UStageGenerator::GenerateChainedStage(UStageObject* PreStage)
 				TargetMap->AddStageList(ChainedStage);
 
 				// ステージ情報をランダムに設定
-				GenerateGridData(ChainedStage);
+				GenerateStageInfo(ChainedStage);
 			}
 		}
 	}
@@ -191,12 +191,12 @@ void UStageGenerator::GenerateBossStage()
 		TargetMap->AddStageList(BossStage);
 
 		// ステージ情報をランダムに設定
-		GenerateGridData(BossStage);
+		GenerateStageInfo(BossStage);
 	}
 }
 
-// グリッド情報生成
-void UStageGenerator::GenerateGridData(UStageObject* TargetStage)
+// ステージ情報生成
+void UStageGenerator::GenerateStageInfo(UStageObject* TargetStage)
 {
 	if (GenGridDataList == nullptr || TargetMap == nullptr || TargetStage == nullptr)
 		return;
@@ -214,5 +214,8 @@ void UStageGenerator::GenerateGridData(UStageObject* TargetStage)
 
 	// ステージに設定
 	TargetStage->SetGridData(GridDataList[Index]);
+
+	// 出現させる敵クラスをランダムに設定
+	TargetStage->SetupEnemyClass(TargetMap);
 }
 

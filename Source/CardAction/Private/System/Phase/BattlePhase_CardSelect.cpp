@@ -80,14 +80,4 @@ void UBattlePhase_CardSelect::SetHidden(bool bHidden)
 
 	ESlateVisibility Visibility = bHidden ? ESlateVisibility::Hidden : ESlateVisibility::Visible;
 	CardSelectWidget->SetVisibility(Visibility);
-
-	// カードブックの非表示
-	AGameModeBase* GM = UGameplayStatics::GetGameMode(this);
-	if (AMyGameMode* MyGM = Cast<AMyGameMode>(GM))
-	{
-		if (ACardBook* CardBook = MyGM->GetCardBook())
-		{
-			CardBook->SetActorHiddenInGame(bHidden);
-		}
-	}
 }

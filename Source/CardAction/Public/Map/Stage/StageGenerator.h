@@ -27,8 +27,8 @@ public:
 	// ボスステージ生成
 	void GenerateBossStage();
 
-	// グリッド情報生成
-	void GenerateGridData(UStageObject* TargetStage);
+	// ステージ情報生成
+	void GenerateStageInfo(UStageObject* TargetStage);
 
 private:
 	UPROPERTY()

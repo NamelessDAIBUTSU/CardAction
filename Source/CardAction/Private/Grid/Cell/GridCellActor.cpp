@@ -213,7 +213,10 @@ void AGridCellActor::ExecuteAttackToActorOnCell(AActor* AttackedActor, float Dam
 
         if (AMyCharacter* Player = Cast<AMyCharacter>(PlayerController->GetPawn()))
         {
-            Player->OnTakeDamage(Damage);
+            if (Player->GetCurrentCoord() == CellData.GridCoord)
+            {
+                Player->OnTakeDamage(Damage);
+            }
         }
     }
 }

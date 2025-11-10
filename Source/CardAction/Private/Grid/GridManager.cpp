@@ -139,10 +139,17 @@ void AGridManager::SpawnEnemies()
 	if (GenerateGridData == nullptr)
 		return;
 
+	UMapManager* MapManager = GetWorld()->GetGameInstance()->GetSubsystem<UMapManager>();
+	if (MapManager == nullptr || MapManager->GetCurrentStage() == nullptr)
+		return;
+
 	// スポーン可能な座標の取得
 	TArray<FCoord> SpawnableCoords = GenerateGridData->EnemySpawnableCoords;
 
-	for (auto Enemy : SpawnEnemyArray)
+	// スポーンさせる敵の数を取得
+	const int SpawnEnemyNum = GenerateGridData->SpawnEnemyNum;
+
+	for (auto EnemyClass : MapManager->GetCurrentStage()->GetEnemyClassList())
 	{
 		if (SpawnableCoords.IsEmpty())
 			break;
@@ -151,9 +158,9 @@ void AGridManager::SpawnEnemies()
 		int RandomIndex = FMath::RandRange(0, SpawnableCoords.Num() - 1);
 		FCoord SpawnCoord = SpawnableCoords[RandomIndex];
 		FVector SpawnPosition = FVector(SpawnCoord.Y * GRID_CELL_UNIT * -1.f, SpawnCoord.X * GRID_CELL_UNIT, GRID_CELL_HEIGHT_UNIT * 0.5f);
-
+		
 		// スポーン
-		AEnemyBase* NewEnemy = GetWorld()->SpawnActor<AEnemyBase>(Enemy, SpawnPosition, FRotator(0.f, 180.f, 0.f));
+		AEnemyBase* NewEnemy = GetWorld()->SpawnActor<AEnemyBase>(EnemyClass, SpawnPosition, FRotator(0.f, 180.f, 0.f));
 		if (NewEnemy)
 		{
 			// スポーンさせたセルにアクターを追加
@@ -168,16 +175,13 @@ void AGridManager::SpawnEnemies()
 				AdjustedPos.Z += HalfHeight * 1.1f;
 				NewEnemy->SetActorLocation(AdjustedPos);
 			}
-		
+
 			// 座標の設定
 			NewEnemy->SetCurrentCoord(SpawnCoord);
 		}
-		
 
 		// スポーン可能位置を減らす
 		SpawnableCoords.RemoveAt(RandomIndex);
-
-		return;
 	}
 }
 
