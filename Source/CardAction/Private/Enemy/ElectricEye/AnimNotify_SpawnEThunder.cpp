@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Enemy/ElectricEye/AnimNotify_SpawnEThunder.h"
@@ -29,19 +29,19 @@ void UAnimNotify_SpawnEThunder::Notify(USkeletalMeshComponent* MeshComp, UAnimSe
         return;
 
 
-    // ƒXƒ|[ƒ“ƒpƒ‰ƒ[ƒ^Ý’è
+    // ã‚¹ãƒãƒ¼ãƒ³ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿è¨­å®š
     FActorSpawnParameters Params;
     Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
-    // ƒGƒŒƒNƒgƒŠƒbƒNƒTƒ“ƒ_[ƒXƒ|[ƒ“
+    // ã‚¨ãƒ¬ã‚¯ãƒˆãƒªãƒƒã‚¯ã‚µãƒ³ãƒ€ãƒ¼ã‚¹ãƒãƒ¼ãƒ³
     FVector2D GridSize = GridManager->GetGridSize();
     int Count = 0;
     for (int i = 0; i < SpawnEThunderNum; i++)
     {
-        // ƒGƒŒƒNƒgƒŠƒbƒNƒTƒ“ƒ_[‚ð~‚ç‚¹‚éÀ•W‚ðŽæ“¾‚·‚é
+        // ã‚¨ãƒ¬ã‚¯ãƒˆãƒªãƒƒã‚¯ã‚µãƒ³ãƒ€ãƒ¼ã‚’é™ã‚‰ã›ã‚‹åº§æ¨™ã‚’å–å¾—ã™ã‚‹
         FCoord SpawnCoord = FCoord::Zero();
         do {
-            // ƒ‹[ƒv–hŽ~—p
+            // ãƒ«ãƒ¼ãƒ—é˜²æ­¢ç”¨
             Count++;
 
             int32 RandomX = FMath::RandRange(0, (int)GridSize.X - 1);
@@ -50,12 +50,12 @@ void UAnimNotify_SpawnEThunder::Notify(USkeletalMeshComponent* MeshComp, UAnimSe
         } while (GridManager->IsAccessableGridCell(SpawnCoord) == false && Count < 10);
         FVector SpawnLocation = GridManager->ConvertToWorldPosition(SpawnCoord);
 
-        // ƒXƒ|[ƒ“
+        // ã‚¹ãƒãƒ¼ãƒ³
         AElectricThunder* ElectricThunder = GetWorld()->SpawnActor<AElectricThunder>(Enemy->AttackClass, SpawnLocation, FRotator(0.f, 0.f, 0.f), Params);
         if (ElectricThunder == nullptr)
             return;
 
-        // UŒ‚—\‘ª‚Ì’Ç‰Á
+        // æ”»æ’ƒäºˆæ¸¬ã®è¿½åŠ 
         GridManager->AddAttackSign(SpawnCoord);
     }
 }

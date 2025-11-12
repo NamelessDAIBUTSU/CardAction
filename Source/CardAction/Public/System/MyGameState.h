@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -16,6 +16,6 @@ public:
 	EBattlePhase GetCurrentBattlePhase() const { return CurrentBattlePhase; }
 
 private:
-	// Œ»İ‚Ìƒoƒgƒ‹ƒtƒF[ƒY
+	// ç¾åœ¨ã®ãƒãƒˆãƒ«ãƒ•ã‚§ãƒ¼ã‚º
 	EBattlePhase CurrentBattlePhase;
 };

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "UI/FadeWidget.h"
@@ -7,11 +7,11 @@ void UFadeWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	// ƒ}ƒEƒX‚Æ‚Ì“–‚½‚è”»’è‚ğØ‚é
+	// ãƒã‚¦ã‚¹ã¨ã®å½“ãŸã‚Šåˆ¤å®šã‚’åˆ‡ã‚‹
 	SetVisibility(ESlateVisibility::HitTestInvisible);
 }
 
-// ƒtƒF[ƒhˆ—
+// ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç†
 void UFadeWidget::FadeIn(float InFadeSec)
 {
 	if (FadeMask == nullptr)
@@ -19,16 +19,16 @@ void UFadeWidget::FadeIn(float InFadeSec)
 
 	CurrentFadeType = EFadeType::FadeIn;
 
-	// Œ»İ‚ÌƒAƒ‹ƒtƒ@’l
+	// ç¾åœ¨ã®ã‚¢ãƒ«ãƒ•ã‚¡å€¤
 	float CurrentAlpha = FadeMask->ColorAndOpacity.A;
-	// ƒ¿•Ï‰»—Ê
+	// Î±å¤‰åŒ–é‡
 	float AmountOfAlpha = CurrentAlpha - 0.f;
 
 	if (FMath::IsNearlyZero(InFadeSec))
 	{
 		FadeSpeed = AmountOfAlpha;
 	}
-	// –ˆƒtƒŒ[ƒ€‚Ìƒ¿•Ï‰»—Ê‚ğŒvZ
+	// æ¯ãƒ•ãƒ¬ãƒ¼ãƒ ã®Î±å¤‰åŒ–é‡ã‚’è¨ˆç®—
 	else
 	{
 		FadeSpeed = AmountOfAlpha / InFadeSec;
@@ -42,7 +42,7 @@ void UFadeWidget::FadeOut(float OutFadeSec)
 
 	CurrentFadeType = EFadeType::FadeOut;
 
-	// ‰‰ñƒtƒF[ƒh‚ÅHidden‚¾‚Á‚½ê‡Aƒ¿’l‚ğ0 / Visible‚É‚·‚é
+	// åˆå›ãƒ•ã‚§ãƒ¼ãƒ‰ã§Hiddenã ã£ãŸå ´åˆã€Î±å€¤ã‚’0 / Visibleã«ã™ã‚‹
 	if (GetVisibility() == ESlateVisibility::Hidden)
 	{
 		FLinearColor Color = FadeMask->GetColorAndOpacity();
@@ -52,24 +52,24 @@ void UFadeWidget::FadeOut(float OutFadeSec)
 		SetVisibility(ESlateVisibility::Visible);
 	}
 
-	// Œ»İ‚ÌƒAƒ‹ƒtƒ@’l
+	// ç¾åœ¨ã®ã‚¢ãƒ«ãƒ•ã‚¡å€¤
 	float CurrentAlpha = FadeMask->ColorAndOpacity.A;
-	// ƒ¿•Ï‰»—Ê
+	// Î±å¤‰åŒ–é‡
 	float AmountOfAlpha = 1.f - CurrentAlpha;
 
-	// 0•bw’è‚ÍƒXƒs[ƒh‚ğMAX‚É‚·‚é
+	// 0ç§’æŒ‡å®šã¯ã‚¹ãƒ”ãƒ¼ãƒ‰ã‚’MAXã«ã™ã‚‹
 	if (FMath::IsNearlyZero(OutFadeSec))
 	{
 		FadeSpeed = AmountOfAlpha;
 	}
-	// –ˆƒtƒŒ[ƒ€‚Ìƒ¿•Ï‰»—Ê‚ğŒvZ
+	// æ¯ãƒ•ãƒ¬ãƒ¼ãƒ ã®Î±å¤‰åŒ–é‡ã‚’è¨ˆç®—
 	else
 	{
 		FadeSpeed = AmountOfAlpha / OutFadeSec;
 	}
 }
 
-// ƒtƒF[ƒhXV
+// ãƒ•ã‚§ãƒ¼ãƒ‰æ›´æ–°
 void UFadeWidget::UpdateFade(float DeltaSec)
 {
 	if (FadeMask == nullptr)
@@ -83,7 +83,7 @@ void UFadeWidget::UpdateFade(float DeltaSec)
 		Color.A -= FadeSpeed * DeltaSec;
 		Color.A = FMath::Max(0.f, Color.A);
 
-		// ƒtƒF[ƒhI—¹
+		// ãƒ•ã‚§ãƒ¼ãƒ‰çµ‚äº†
 		if (FMath::IsNearlyZero(Color.A))
 		{
 			CurrentFadeType = EFadeType::None;
@@ -94,12 +94,12 @@ void UFadeWidget::UpdateFade(float DeltaSec)
 		Color.A += FadeSpeed * DeltaSec;
 		Color.A = FMath::Min(Color.A, 1.f);
 
-		// ƒtƒF[ƒhI—¹
+		// ãƒ•ã‚§ãƒ¼ãƒ‰çµ‚äº†
 		if (FMath::IsNearlyEqual(Color.A, 1.f))
 		{
 			CurrentFadeType = EFadeType::None;
 
-			// ƒtƒF[ƒhI—¹Œã‚ÌƒR[ƒ‹ƒoƒbƒNˆ—
+			// ãƒ•ã‚§ãƒ¼ãƒ‰çµ‚äº†å¾Œã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯å‡¦ç†
 			if (OnFadeOutFinished)
 			{
 				OnFadeOutFinished();
@@ -113,7 +113,7 @@ void UFadeWidget::UpdateFade(float DeltaSec)
 	FadeMask->SetColorAndOpacity(Color);
 }
 
-// ƒtƒF[ƒh’†‚©
+// ãƒ•ã‚§ãƒ¼ãƒ‰ä¸­ã‹
 bool UFadeWidget::IsFade() 
 {
 	return IsFadeIn() || IsFadeOut(); 
@@ -127,7 +127,7 @@ bool UFadeWidget::IsFadeOut()
 	return CurrentFadeType == EFadeType::FadeOut; 
 }
 
-// ƒtƒF[ƒhI—¹‚ÌƒR[ƒ‹ƒoƒbƒN“o˜^
+// ãƒ•ã‚§ãƒ¼ãƒ‰çµ‚äº†æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ç™»éŒ²
 void UFadeWidget::SetOnFadeOutFinished(TFunction<void()> Func)
 {
 	OnFadeOutFinished = Func;

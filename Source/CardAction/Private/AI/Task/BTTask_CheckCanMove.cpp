@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "AI/Task/BTTask_CheckCanMove.h"
@@ -17,7 +17,7 @@ EBTNodeResult::Type UBTTask_CheckCanMove::ExecuteTask(UBehaviorTreeComponent& Ow
 
 	if (Enemy->GetMoveCount() >= Enemy->AttackSpan)
 	{
-		// ˆÚ“®‰Â”\ƒtƒ‰ƒO‚ð~‚ë‚·
+		// ç§»å‹•å¯èƒ½ãƒ•ãƒ©ã‚°ã‚’é™ã‚ã™
 		Enemy->SetCanMove(false);
 	}
 

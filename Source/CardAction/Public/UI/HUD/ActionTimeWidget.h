@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -18,7 +18,7 @@ class CARDACTION_API UActionTimeWidget : public UHUDBase
 public:
 	virtual void OnUpdate(float DeltaSec) override;
 
-	// ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒYˆÈŠO‚Å”ñ•\¦
+	// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºä»¥å¤–ã§éè¡¨ç¤º
 	virtual bool IsVisibleExceptActionPhase() override{ return false; }
 
 private:

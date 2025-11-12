@@ -1,54 +1,58 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
 #include "Map/MapDef.h"
+#include "Enemy/EnemyBase.h"
 #include "MapData.generated.h"
 
+/// <summary>
+/// ãƒãƒƒãƒ—ãƒ‡ãƒ¼ã‚¿
+/// </summary>
 UCLASS()
 class CARDACTION_API UMapData : public UDataAsset
 {
 	GENERATED_BODY()
 	
 public:
-	// ƒ}ƒbƒv‚Ìí—Ş
+	// ãƒãƒƒãƒ—ã®ç¨®é¡
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EMapType MapType;
 
-	// ƒ}ƒbƒv–¼
+	// ãƒãƒƒãƒ—å
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FName MapName;
-	// ƒŒƒxƒ‹–¼
+	// ãƒ¬ãƒ™ãƒ«å
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FName LevelName;
 
-	// ƒXƒe[ƒW‚Ì‚‚³
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã®é«˜ã•
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int Height;
 
-	// ƒXƒe[ƒW‚Ì•‚ÌÅ¬EÅ‘å
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã®å¹…ã®æœ€å°ãƒ»æœ€å¤§
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int MinWidth;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int MaxWidth;
 
-	// ‰½ƒ}ƒbƒv–Ú‚Æ‚µ‚Ä¶¬‰Â”\‚©
+	// ä½•ãƒãƒƒãƒ—ç›®ã¨ã—ã¦ç”Ÿæˆå¯èƒ½ã‹
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int MinMapNum;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int MaxMapNum;
 
-	// ƒXƒ|[ƒ“‰Â”\‚Ì“G
+	// ã‚¹ãƒãƒ¼ãƒ³å¯èƒ½ã®æ•µ
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy")
 	TArray<TSubclassOf<AEnemyBase>> SpawnableEnemy;
 	
-	// ‚±‚Ìƒ}ƒbƒv‚Åg‚¤ƒOƒŠƒbƒhƒZƒ‹‚ÌƒfƒtƒHƒ‹ƒgƒ}ƒeƒŠƒAƒ‹
+	// ã“ã®ãƒãƒƒãƒ—ã§ä½¿ã†ã‚°ãƒªãƒƒãƒ‰ã‚»ãƒ«ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒãƒ†ãƒªã‚¢ãƒ«
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UMaterialInterface* DefaultMaterial = nullptr;
 
-	// ƒwƒbƒ_[ / ƒtƒbƒ^[ / ƒx[ƒX‰æ‘œ
+	// ãƒ˜ãƒƒãƒ€ãƒ¼ / ãƒ•ãƒƒã‚¿ãƒ¼ / ãƒ™ãƒ¼ã‚¹ç”»åƒ
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UTexture2D* HeaderImage = nullptr;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -57,6 +61,10 @@ public:
 	UTexture2D* BaseImage = nullptr;
 };
 
+
+/// <summary>
+/// ç”Ÿæˆãƒãƒƒãƒ—ãƒªã‚¹ãƒˆ
+/// </summary>
 UCLASS()
 class CARDACTION_API UGenerateMapDataList : public UDataAsset
 {

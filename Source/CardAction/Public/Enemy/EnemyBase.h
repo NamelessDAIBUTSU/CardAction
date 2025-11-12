@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -35,7 +35,7 @@ public: /* Callback */
 	UFUNCTION()
 	void OnTakeDamage(int TakeDamage);
 
-	// €–S‚ÌƒR[ƒ‹ƒoƒbƒN
+	// æ­»äº¡æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 	UFUNCTION()
 	virtual void OnBeforeDead();
 
@@ -47,31 +47,31 @@ public: /* AI */
 	int GetMoveCount() { return MoveCount; }
 
 public:
-	// ‰ñ“]‰Â”\‚©
+	// å›è»¢å¯èƒ½ã‹
 	virtual bool CanRotate() { return true; }
 
-	// À•W
+	// åº§æ¨™
 	void SetCurrentCoord(FCoord Coord);
 	FCoord GetCurrentCoord() const;
 
-	// ƒOƒŠƒbƒhˆÚ“®ƒRƒ“ƒ|[ƒlƒ“ƒg
+	// ã‚°ãƒªãƒƒãƒ‰ç§»å‹•ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 	UGridMovementComponent* GetGridMovementComponent() { return GridMovementComp; }
 
-	// €–Sƒ‚ƒ“ƒ^[ƒWƒ…I—¹Œãˆ—
+	// æ­»äº¡ãƒ¢ãƒ³ã‚¿ãƒ¼ã‚¸ãƒ¥çµ‚äº†å¾Œå‡¦ç†
 	void OnEndDeadMontage(UAnimMontage* Montage, bool bInterrupted);
-	// €‚ñ‚¾‚©
+	// æ­»ã‚“ã ã‹
 	bool IsDead() const { return bIsDead; }
-	// €–Sƒ‚ƒ“ƒ^[ƒWƒ…Ä¶’†‚©
+	// æ­»äº¡ãƒ¢ãƒ³ã‚¿ãƒ¼ã‚¸ãƒ¥å†ç”Ÿä¸­ã‹
 	bool IsPlayingDeadMontage();
 
-	// ŠJn€”õ‚ª‚Å‚«‚Ä‚¢‚é‚©
+	// é–‹å§‹æº–å‚™ãŒã§ãã¦ã„ã‚‹ã‹
 	virtual bool IsReady() const { return bIsReady; }
 	void SetIsReady(bool IsReady) { bIsReady = IsReady; }
 
 private:
-	// ƒvƒŒƒCƒ„[‚Ì•ûŒü‚ğŒü‚­
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ–¹å‘ã‚’å‘ã
 	void LookAtPlayer();
-	// ©g‚Ìíœ
+	// è‡ªèº«ã®å‰Šé™¤
 	void SelfDestroy();
 
 
@@ -82,31 +82,31 @@ public: /* Info */
 	FString Description;
 
 public: /* Status */
-	// ‘Ì—Í
+	// ä½“åŠ›
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Status")
 	int CurrentHP = 100;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Status")
 	int MaxHP = 100;
 
-	// ©“®‚ÅƒvƒŒƒCƒ„[‚Ì•ûŒü‚ğŒü‚­‚©
+	// è‡ªå‹•ã§ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ–¹å‘ã‚’å‘ãã‹
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Status")
 	bool bIsAutoLookAtPlayer = true;
 
 public: /* AI */
-	// ‰½‰ñ‚ÌˆÚ“®‚ÅUŒ‚‚ğ‚·‚é‚©
+	// ä½•å›ã®ç§»å‹•ã§æ”»æ’ƒã‚’ã™ã‚‹ã‹
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
 	int AttackSpan = 0;
 
 public: /* UI */
-	// ƒAƒCƒRƒ“‰æ‘œ
+	// ã‚¢ã‚¤ã‚³ãƒ³ç”»åƒ
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UI")
 	UTexture2D* IconTexture = nullptr;
 
 public: /* Anim */
-	// €–Sƒ‚ƒ“ƒ^[ƒWƒ…
+	// æ­»äº¡ãƒ¢ãƒ³ã‚¿ãƒ¼ã‚¸ãƒ¥
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim")
 	UAnimMontage* DeadAnimMontage = nullptr;
-	// ƒqƒbƒgƒ‚ƒ“ƒ^[ƒWƒ…
+	// ãƒ’ãƒƒãƒˆãƒ¢ãƒ³ã‚¿ãƒ¼ã‚¸ãƒ¥
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Anim")
 	UAnimMontage* HitAnimMontage = nullptr;
 
@@ -115,30 +115,30 @@ public: /* Callback */
 	FOnEnemyDead OnEnemyDied;
 
 public: /* Component */
-	// HPƒo[
+	// HPãƒãƒ¼
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Component")
 	UWidgetComponent* WidgetComp = nullptr;
 
 
 protected: /* Component */
-	// ƒOƒŠƒbƒhˆÚ“®
+	// ã‚°ãƒªãƒƒãƒ‰ç§»å‹•
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Component")
 	UGridMovementComponent* GridMovementComp = nullptr;
 
 protected: /* AI */
-	// Œ»İ‚ÌˆÚ“®‰ñ”
+	// ç¾åœ¨ã®ç§»å‹•å›æ•°
 	UPROPERTY(VisibleAnywhere, Category = "AI")
 	int MoveCount = 0;
-	// ˆÚ“®‰Â”\‚©
+	// ç§»å‹•å¯èƒ½ã‹
 	UPROPERTY(VisibleAnywhere, Category = "AI")
 	bool bCanMove = true;
 
 protected:
-	// €‚ñ‚¾‚©
+	// æ­»ã‚“ã ã‹
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Status")
 	bool bIsDead = false;
 
-	// ŠJn€”õ‚ª‚Å‚«‚½‚©
+	// é–‹å§‹æº–å‚™ãŒã§ããŸã‹
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Status")
 	bool bIsReady = false;
 };

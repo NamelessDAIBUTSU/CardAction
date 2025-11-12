@@ -1,41 +1,41 @@
-#pragma once
+ï»¿#pragma once
 
 #include "CoreMinimal.h"
 #include "CardTypeDef.generated.h"
 
-// èD‚ÌÅ‘å”
+// æ‰‹æœ­ã®æœ€å¤§æ•°
 #define MAX_HAND_CARDS_NUM 4
-// ƒfƒbƒL‚©‚çˆø‚¢‚Ä‚­‚éƒJ[ƒh‚Ì–‡”
+// ãƒ‡ãƒƒã‚­ã‹ã‚‰å¼•ã„ã¦ãã‚‹ã‚«ãƒ¼ãƒ‰ã®æšæ•°
 #define DRAW_CARDS_NUM 8
 
-// ƒJ[ƒh‚Ìí—Ş
+// ã‚«ãƒ¼ãƒ‰ã®ç¨®é¡
 UENUM(BlueprintType)
 enum class ECardType : uint8
 {
-    Weapon      UMETA(DisplayName = "Weapon"),    // •ŠíƒJ[ƒh
-    Assist      UMETA(DisplayName = "Assist"),    // ƒAƒVƒXƒgƒJ[ƒh
-    Guardian    UMETA(DisplayName = "Guardian"),  // ƒK[ƒfƒBƒAƒ“ƒJ[ƒh
+    Weapon      UMETA(DisplayName = "Weapon"),    // æ­¦å™¨ã‚«ãƒ¼ãƒ‰
+    Assist      UMETA(DisplayName = "Assist"),    // ã‚¢ã‚·ã‚¹ãƒˆã‚«ãƒ¼ãƒ‰
+    Guardian    UMETA(DisplayName = "Guardian"),  // ã‚¬ãƒ¼ãƒ‡ã‚£ã‚¢ãƒ³ã‚«ãƒ¼ãƒ‰
 };
 
-// •Ší‚Ìí—Ş
+// æ­¦å™¨ã®ç¨®é¡
 UENUM(BlueprintType)
 enum class EWeaponType : uint8
 {
-    Melee       UMETA(DisplayName = "Melee"),       // ‹ßÚ
-    LongRange   UMETA(DisplayName = "LongRange"),   // ‰“‹——£
+    Melee       UMETA(DisplayName = "Melee"),       // è¿‘æ¥
+    LongRange   UMETA(DisplayName = "LongRange"),   // é è·é›¢
 };
 
-// UŒ‚‘®«
+// æ”»æ’ƒå±æ€§
 UENUM(BlueprintType)
 enum class EAttackElementType : uint8
 {
-    None        UMETA(DisplayName = "None"),    // –³‘®«
-    Fire        UMETA(DisplayName = "Fire"),    // ‰Î‘®«
-    Thunder     UMETA(DisplayName = "Thunder"), // —‹‘®«
-    Water       UMETA(DisplayName = "Water"),   // …‘®«
+    None        UMETA(DisplayName = "None"),    // ç„¡å±æ€§
+    Fire        UMETA(DisplayName = "Fire"),    // ç«å±æ€§
+    Thunder     UMETA(DisplayName = "Thunder"), // é›·å±æ€§
+    Water       UMETA(DisplayName = "Water"),   // æ°´å±æ€§
 };
 
-// ƒŒƒAƒŠƒeƒB
+// ãƒ¬ã‚¢ãƒªãƒ†ã‚£
 UENUM(BlueprintType)
 enum class ECardRarityType : uint8
 {

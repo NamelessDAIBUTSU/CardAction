@@ -1,12 +1,12 @@
-#pragma once
+ï»¿#pragma once
 
 #include "CoreMinimal.h"
 #include "MapDef.generated.h"
 
-// ƒQ[ƒ€ƒNƒŠƒA‚É•K—v‚Èƒ}ƒbƒv”
+// ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢ã«å¿…è¦ãªãƒãƒƒãƒ—æ•°
 #define NEED_CLEAR_MAP_NUM 4
 
-// ƒ}ƒbƒv‚Ìí—Ş
+// ãƒãƒƒãƒ—ã®ç¨®é¡
 UENUM(BlueprintType)
 enum class EMapType : uint8
 {

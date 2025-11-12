@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -8,48 +8,48 @@
 #include "Map/MapDef.h"
 #include "GridData.generated.h"
 
-// 1s‚ÌƒOƒŠƒbƒhƒf[ƒ^
+// 1è¡Œã®ã‚°ãƒªãƒƒãƒ‰ãƒ‡ãƒ¼ã‚¿
 USTRUCT(BlueprintType)
 struct FGridRow
 {
 	GENERATED_BODY()
 
-	// 1s•ª‚ÌƒZƒ‹”z—ñ
+	// 1è¡Œåˆ†ã®ã‚»ãƒ«é…åˆ—
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<TSubclassOf<AGridCellActor>> RowCells;
 };
 
-// ‘S‘Ì‚ÌƒOƒŠƒbƒhƒf[ƒ^
+// å…¨ä½“ã®ã‚°ãƒªãƒƒãƒ‰ãƒ‡ãƒ¼ã‚¿
 UCLASS(BlueprintType)
 class CARDACTION_API UGridData : public UDataAsset
 {
 	GENERATED_BODY()
 	
 public:
-	// ”z’u‚·‚éƒOƒŠƒbƒhƒZƒ‹
+	// é…ç½®ã™ã‚‹ã‚°ãƒªãƒƒãƒ‰ã‚»ãƒ«
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grid")
 	TArray<FGridRow> GridCellActors;
 
-	// ƒvƒŒƒCƒ„[‚ÌƒXƒ|[ƒ“‚³‚¹‚éÀ•W
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¹ãƒãƒ¼ãƒ³ã•ã›ã‚‹åº§æ¨™
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grid")
 	FCoord PlayerSpawnCoord;
 
-	// ƒGƒlƒ~[ƒXƒ|[ƒ“‰Â”\‚ÌÀ•W”z—ñ
+	// ã‚¨ãƒãƒŸãƒ¼ã‚¹ãƒãƒ¼ãƒ³å¯èƒ½ã®åº§æ¨™é…åˆ—
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy")
 	TArray<FCoord> EnemySpawnableCoords;
 
-	// ƒGƒlƒ~[ƒXƒ|[ƒ“”
+	// ã‚¨ãƒãƒŸãƒ¼ã‚¹ãƒãƒ¼ãƒ³æ•°
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy")
 	int SpawnEnemyNum = 1;
 
-	// ‰½ƒ}ƒbƒv–Ú‚Å¶¬‰Â”\‚©
+	// ä½•ãƒãƒƒãƒ—ç›®ã§ç”Ÿæˆå¯èƒ½ã‹
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grid")
 	int MinGenMapNum = 0;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grid")
 	int MaxGenMapNum = NEED_CLEAR_MAP_NUM - 1;
 };
 
-// ƒOƒŠƒbƒhƒf[ƒ^ƒŠƒXƒg
+// ã‚°ãƒªãƒƒãƒ‰ãƒ‡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆ
 UCLASS(BlueprintType)
 class CARDACTION_API UGridDataList : public UDataAsset
 {

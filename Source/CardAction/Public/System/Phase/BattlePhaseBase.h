@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -15,11 +15,11 @@ class CARDACTION_API UBattlePhaseBase : public UObject
 	GENERATED_BODY()
 	
 public:
-	// ƒtƒF[ƒYŠJn
+	// ãƒ•ã‚§ãƒ¼ã‚ºé–‹å§‹æ™‚
 	virtual void OnBegin() {}
-	// ƒtƒF[ƒY’†
+	// ãƒ•ã‚§ãƒ¼ã‚ºä¸­
 	virtual void OnTick(float DeltaSec) {}
-	// ƒtƒF[ƒYI—¹
+	// ãƒ•ã‚§ãƒ¼ã‚ºçµ‚äº†æ™‚
 	virtual void OnExit() {}
 
 public:
@@ -31,6 +31,6 @@ public:
 protected:
 	EBattlePhase BattlePhase;
 
-	// Ø‚è‘Ö‚¦‚½‚¢ƒtƒF[ƒY
+	// åˆ‡ã‚Šæ›¿ãˆãŸã„ãƒ•ã‚§ãƒ¼ã‚º
 	EBattlePhase RequestNextPhase = EBattlePhase::None;
 };

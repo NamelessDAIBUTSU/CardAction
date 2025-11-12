@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -24,48 +24,48 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 public:
-	// ƒZƒ‹ã‚ÌƒAƒNƒ^[‚ğ’Ç‰Á
+	// ã‚»ãƒ«ä¸Šã®ã‚¢ã‚¯ã‚¿ãƒ¼ã‚’è¿½åŠ 
 	void AddActorOnCell(AActor* Actor);
-	// ƒZƒ‹ã‚©‚çƒAƒNƒ^[‚ğœ‹
+	// ã‚»ãƒ«ä¸Šã‹ã‚‰ã‚¢ã‚¯ã‚¿ãƒ¼ã‚’é™¤å»
 	void RemoveActorFromCell(AActor* Actor);
 
-	// ƒZƒ‹ã‚ÉƒAƒNƒ^[‘¶İ‚·‚é‚©
+	// ã‚»ãƒ«ä¸Šã«ã‚¢ã‚¯ã‚¿ãƒ¼å­˜åœ¨ã™ã‚‹ã‹
 	bool IsExistActorOnCell();
 
-	// ƒ}ƒeƒŠƒAƒ‹İ’è
+	// ãƒãƒ†ãƒªã‚¢ãƒ«è¨­å®š
 	void ChangeDamageSignMaterial();
 	void ChangeDefaultMaterial();
 
-	// ˜gƒ}ƒeƒŠƒAƒ‹İ’è
+	// æ ãƒãƒ†ãƒªã‚¢ãƒ«è¨­å®š
 	void ChangeEdgeMaterial(UMaterialInterface* Material);
 	void ChangeEdgeDefaultMaterial();
 	void ChangeEdgePlayerMaterial();
 	void ChangeEdgeEnemyMaterial();
 
-	// ƒZƒ‹ã‚ÌƒAƒNƒ^[‚Éƒ_ƒ[ƒWˆ—
+	// ã‚»ãƒ«ä¸Šã®ã‚¢ã‚¯ã‚¿ãƒ¼ã«ãƒ€ãƒ¡ãƒ¼ã‚¸å‡¦ç†
 	void ExecuteAttackToActorOnCell(AActor* AttackedActor, float Damage);
 
-	// ƒZƒ‹ã‚É“G‚ª‘¶İ‚·‚é‚©
+	// ã‚»ãƒ«ä¸Šã«æ•µãŒå­˜åœ¨ã™ã‚‹ã‹
 	bool IsExistEnemyOnCell();
 	
-	// ƒZƒ‹ã‚ÉƒvƒŒƒCƒ„[‚ª‘¶İ‚·‚é‚©
+	// ã‚»ãƒ«ä¸Šã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå­˜åœ¨ã™ã‚‹ã‹
 	bool IsExistPlayerOnCell();
 
-	// ˆÚ“®æ—\’è‚ÌƒZƒ‹‚©
+	// ç§»å‹•å…ˆäºˆå®šã®ã‚»ãƒ«ã‹
 	bool IsMoveTargetCell() const { return bIsMoveTargetCell; }
 	void SetMoveTargetCell(bool Val) { bIsMoveTargetCell = Val; }
 
-public: /* UŒ‚—\‘ª */
-	// UŒ‚—\‘ª‚Ì’Ç‰Á
+public: /* æ”»æ’ƒäºˆæ¸¬ */
+	// æ”»æ’ƒäºˆæ¸¬ã®è¿½åŠ 
 	void AddAttackSign();
-	// UŒ‚—\‘ª‚Ìœ‹
+	// æ”»æ’ƒäºˆæ¸¬ã®é™¤å»
 	void RemoveAttackSign();
 
 public:
-	// ƒXƒ^ƒeƒBƒbƒNƒƒbƒVƒ…
+	// ã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯ãƒ¡ãƒƒã‚·ãƒ¥
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UStaticMeshComponent* MeshComp;
-	// ˜g•£ƒƒbƒVƒ…
+	// æ æ·µãƒ¡ãƒƒã‚·ãƒ¥
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UStaticMeshComponent* EdgeLeftComp;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
@@ -75,7 +75,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UStaticMeshComponent* EdgeDownComp;
 
-	// ˜g—pƒ}ƒeƒŠƒAƒ‹
+	// æ ç”¨ãƒãƒ†ãƒªã‚¢ãƒ«
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	UMaterialInterface* EdgeDefaultMaterial;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
@@ -83,20 +83,20 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	UMaterialInterface* EdgeEnemyMaterial;
 
-	// UŒ‚‚Æ‚Ì“–‚½‚è”»’è—pƒRƒŠƒWƒ‡ƒ“
+	// æ”»æ’ƒã¨ã®å½“ãŸã‚Šåˆ¤å®šç”¨ã‚³ãƒªã‚¸ãƒ§ãƒ³
 	UPROPERTY(VisibleAnywhere, Category = "Collision")
 	UBoxComponent* AttackCollisionComp = nullptr;
 
-	// ‚±‚ÌƒZƒ‹‚ª•Û‚·‚éî•ñ
+	// ã“ã®ã‚»ãƒ«ãŒä¿æŒã™ã‚‹æƒ…å ±
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Cell")
 	FGridCellData CellData;
 
 private:
-	// UŒ‚—\‘ª‚ÌƒŠƒNƒGƒXƒgƒJƒEƒ“ƒ^
+	// æ”»æ’ƒäºˆæ¸¬ã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚«ã‚¦ãƒ³ã‚¿
 	UPROPERTY(VisibleAnywhere, Category = "Attack")
 	int AttackSignCount = 0;
 
-	// UŒ‚—\‘ª‚ÌƒŠƒNƒGƒXƒgƒJƒEƒ“ƒ^
+	// æ”»æ’ƒäºˆæ¸¬ã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚«ã‚¦ãƒ³ã‚¿
 	UPROPERTY(VisibleAnywhere)
 	bool bIsMoveTargetCell = false;
 };

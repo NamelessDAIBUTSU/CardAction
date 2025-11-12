@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "AI/Task/BTTask_GridMove.h"
@@ -36,24 +36,24 @@ EBTNodeResult::Type UBTTask_GridMove::ExecuteTask(UBehaviorTreeComponent& OwnerC
 		return EBTNodeResult::Failed;
 
 
-	// ˆÚ“®æ‚ðƒ‰ƒ“ƒ_ƒ€‚ÉŽæ“¾
+	// ç§»å‹•å…ˆã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«å–å¾—
 	int Min = 0;
 	int Max = 3;
-	// ŽÎ‚ßˆÚ“®‚àOK‚È‚ç’Š‘I‘ÎÛ‚ÉŠÜ‚ß‚é
+	// æ–œã‚ç§»å‹•ã‚‚OKãªã‚‰æŠ½é¸å¯¾è±¡ã«å«ã‚ã‚‹
 	if (bCanMoveDiagonal)
 	{
 		Max = 7;
 	}
 
-	// ˆÚ“®æƒZƒ‹‚Ì’Š‘I
+	// ç§»å‹•å…ˆã‚»ãƒ«ã®æŠ½é¸
 	FCoord Dir = FCoord::Zero();
 	int Count = 0;
 	do {
-		// Œo˜H‚ðŒ©‚Â‚¯‚ç‚ê‚È‚©‚Á‚½‚Ì‚ÅŽ¸”s
+		// çµŒè·¯ã‚’è¦‹ã¤ã‘ã‚‰ã‚Œãªã‹ã£ãŸã®ã§å¤±æ•—
 		if(Count > 10)
 			return EBTNodeResult::Failed;
 
-		// ’Š‘I
+		// æŠ½é¸
 		int RandomDir = FMath::RandRange(Min, Max);
 		switch (RandomDir)
 		{
@@ -76,12 +76,12 @@ EBTNodeResult::Type UBTTask_GridMove::ExecuteTask(UBehaviorTreeComponent& OwnerC
 		}
 		TargetCoord = GridMoveComp->GetCurrentCoord() + Dir;
 
-		// ƒ‹[ƒv‰ñ”ð—p‚ÌƒJƒEƒ“ƒg
+		// ãƒ«ãƒ¼ãƒ—å›žé¿ç”¨ã®ã‚«ã‚¦ãƒ³ãƒˆ
 		Count++;
 
 	} while (GridManager->IsAccessableGridCell(TargetCoord) == false);
 
-	// ƒOƒŠƒbƒhˆÚ“®–½—ß
+	// ã‚°ãƒªãƒƒãƒ‰ç§»å‹•å‘½ä»¤
 	GridMoveComp->RequestMoveToDirection(TargetCoord, GoalSec);
 
 	return EBTNodeResult::InProgress;
@@ -101,7 +101,7 @@ void UBTTask_GridMove::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMe
 	if (GridMoveComp == nullptr)
 		return;
 
-	// ƒ^[ƒQƒbƒg‚ÌÀ•W‚É‚½‚Ç‚è’…‚¢‚½‚çƒ^ƒXƒNI—¹
+	// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®åº§æ¨™ã«ãŸã©ã‚Šç€ã„ãŸã‚‰ã‚¿ã‚¹ã‚¯çµ‚äº†
 	if (GridMoveComp->IsMoving() == false)
 	{
 		FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);

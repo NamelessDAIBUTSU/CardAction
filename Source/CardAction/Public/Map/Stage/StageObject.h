@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -21,59 +21,59 @@ public:
 	FVector2D GetPos() const { return Pos; }
 	void SetPos(FVector2D P) { Pos = P; }
 
-	// Œq‚ª‚Á‚Ä‚¢‚éƒXƒe[ƒW‚Ìæ“¾
+	// ç¹‹ãŒã£ã¦ã„ã‚‹ã‚¹ãƒ†ãƒ¼ã‚¸ã®å–å¾—
 	TArray<UStageObject*> GetChainedStageList() const {return ChainedStageList;}
 	TArray<UStageObject*> GetPreStageList() const {return PreStageList;}
 
-	// ƒXƒe[ƒWƒŠƒXƒg‚É’Ç‰Á
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ãƒªã‚¹ãƒˆã«è¿½åŠ 
 	void AddChainedStage(UStageObject* ChainedStage);
 	void AddPreStage(UStageObject* PreStage);
 
-	// ƒXƒe[ƒWó‹µ‚Ìæ“¾
+	// ã‚¹ãƒ†ãƒ¼ã‚¸çŠ¶æ³ã®å–å¾—
 	EStageCondition GetStageCondition() const { return Condition; }
 	void SetStageCondition(EStageCondition Cond) { Condition = Cond; }
 
-	// ƒXƒe[ƒWƒ^ƒCƒv
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¿ã‚¤ãƒ—
 	EStageType GetStageType() const { return StageType; }
 	void SetStageType(EStageType Type) { StageType = Type; }
 
-	// ƒOƒŠƒbƒhî•ñ
+	// ã‚°ãƒªãƒƒãƒ‰æƒ…å ±
 	UGridData* GetGridData() const { return GenerateGridData; }
 	void SetGridData(UGridData* Data) { GenerateGridData = Data; }
 
-	// oŒ»‚³‚¹‚é“GƒNƒ‰ƒX‚ğİ’è
+	// å‡ºç¾ã•ã›ã‚‹æ•µã‚¯ãƒ©ã‚¹ã‚’è¨­å®š
 	void SetupEnemyClass(class UMapObject* Map);
 	TArray<TSubclassOf<class AEnemyBase>> GetEnemyClassList() const { return GenerateEnemyClassList; }
 
 private:
-	// ƒXƒe[ƒWƒ^ƒCƒv
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¿ã‚¤ãƒ—
 	UPROPERTY()
 	EStageType StageType;
 
-	// Šm’è•ñVƒJ[ƒh
+	// ç¢ºå®šå ±é…¬ã‚«ãƒ¼ãƒ‰
 	UPROPERTY();
 	UCardData* FixedRewardCard = nullptr;
 
-	// ƒXƒe[ƒWó‹µ
+	// ã‚¹ãƒ†ãƒ¼ã‚¸çŠ¶æ³
 	UPROPERTY();
 	EStageCondition Condition = EStageCondition::NotSelect;
 
-	// ƒXƒe[ƒW‚Ì‚‚³E•
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã®é«˜ã•ãƒ»å¹…
 	UPROPERTY();
 	FVector2D Pos;
 
-	// Œq‚ª‚Á‚Ä‚¢‚éƒXƒe[ƒW‚Ìƒ|ƒCƒ“ƒ^(‘O•ûŒü)
+	// ç¹‹ãŒã£ã¦ã„ã‚‹ã‚¹ãƒ†ãƒ¼ã‚¸ã®ãƒã‚¤ãƒ³ã‚¿(å‰æ–¹å‘)
 	UPROPERTY();
 	TArray<UStageObject*> ChainedStageList;
-	// Œq‚ª‚Á‚Ä‚¢‚éƒXƒe[ƒW‚Ìƒ|ƒCƒ“ƒ^(Œã‚ë•ûŒü)
+	// ç¹‹ãŒã£ã¦ã„ã‚‹ã‚¹ãƒ†ãƒ¼ã‚¸ã®ãƒã‚¤ãƒ³ã‚¿(å¾Œã‚æ–¹å‘)
 	UPROPERTY();
 	TArray<UStageObject*> PreStageList;
 
-	// ƒOƒŠƒbƒhî•ñ
+	// ã‚°ãƒªãƒƒãƒ‰æƒ…å ±
 	UPROPERTY();
 	UGridData* GenerateGridData = nullptr;
 
-	// oŒ»‚·‚é“G‚ÌƒŠƒXƒg
+	// å‡ºç¾ã™ã‚‹æ•µã®ãƒªã‚¹ãƒˆ
 	UPROPERTY();
 	TArray<TSubclassOf<class AEnemyBase>> GenerateEnemyClassList;
 };

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Enemy/CactusEnemy/CactusNeedle.h"
@@ -10,7 +10,7 @@ void ACactusNeedle::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ƒXƒP[ƒ‹ƒXƒs[ƒh
+	// ã‚¹ã‚±ãƒ¼ãƒ«ã‚¹ãƒ”ãƒ¼ãƒ‰
 	ScaleSpeed = GoalScale / GoalSec;
 }
 
@@ -20,10 +20,10 @@ void ACactusNeedle::Setup()
 	{
 		if (MyGameMode->GridManager)
 		{
-			// À•W‚ğİ’è
+			// åº§æ¨™ã‚’è¨­å®š
 			CurrentCoord = MyGameMode->GridManager->ConvertToGridCoord(GetActorLocation());
 
-			// UŒ‚—\’›‚ğ’Ç‰Á
+			// æ”»æ’ƒäºˆå…†ã‚’è¿½åŠ 
 			MyGameMode->GridManager->AddAttackSign(CurrentCoord);
 		}
 	}
@@ -35,12 +35,12 @@ void ACactusNeedle::Tick(float DeltaTime)
 
 	ElapsedSec += DeltaTime;
 
-	// ‰ñ“]‰‰o
+	// å›è»¢æ¼”å‡º
 	FRotator Rotation = GetActorRotation();
 	Rotation.Yaw += RotateSpeed * DeltaTime;
 	SetActorRotation(Rotation);
 
-	// ƒXƒP[ƒ‹‰‰o
+	// ã‚¹ã‚±ãƒ¼ãƒ«æ¼”å‡º
 	if (MeshComp)
 	{
 		FVector CurrentScale = MeshComp->GetComponentScale();
@@ -54,15 +54,15 @@ void ACactusNeedle::Tick(float DeltaTime)
 		{
 			if (MyGameMode->GridManager)
 			{
-				// ƒ_ƒ[ƒW”»’è‚ğ’Ç‰Á
+				// ãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤å®šã‚’è¿½åŠ 
 				MyGameMode->GridManager->ExecuteAttackToGridCell(this, Damage, CurrentCoord);
 
-				// UŒ‚—\’›‚ğíœ
+				// æ”»æ’ƒäºˆå…†ã‚’å‰Šé™¤
 				MyGameMode->GridManager->RemoveAttackSign(CurrentCoord);
 			}
 		}
 
-		// ƒGƒtƒFƒNƒg‚ÌÄ¶
+		// ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®å†ç”Ÿ
 		UGameplayStatics::SpawnEmitterAtLocation(
 			GetWorld(),
 			DamageEffect,
@@ -72,7 +72,7 @@ void ACactusNeedle::Tick(float DeltaTime)
 			true
 		);
 
-		// ©g‚Ìíœ
+		// è‡ªèº«ã®å‰Šé™¤
 		Destroy();
 	}
 }

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "System/StageSelectGameMode.h"
@@ -23,21 +23,21 @@ void AStageSelectGameMode::StartPlay()
 	if (MapManager == nullptr)
 		return;
 
-	// ƒ}ƒbƒvƒ}ƒl[ƒWƒƒ[‚Ì‰Šú‰»
+	// ãƒžãƒƒãƒ—ãƒžãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã®åˆæœŸåŒ–
 	MapManager->Initialize();
 
-	// ƒXƒe[ƒW‚Ìó‹µ‚ðXV
-	// #MEMO : ƒ}ƒbƒv¶¬‘O‚ÉŒÄ‚Ô•K—v‚ ‚è
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã®çŠ¶æ³ã‚’æ›´æ–°
+	// #MEMO : ãƒžãƒƒãƒ—ç”Ÿæˆå‰ã«å‘¼ã¶å¿…è¦ã‚ã‚Š
 	MapManager->RefleshStageCondition();
 
-	// ƒ}ƒbƒv‚ÌƒNƒŠƒA”»’è
+	// ãƒžãƒƒãƒ—ã®ã‚¯ãƒªã‚¢åˆ¤å®š
 	if (MapManager->IsClearCurrentMap())
 	{
-		// ƒ}ƒbƒvƒCƒ“ƒfƒbƒNƒX‚ði‚ß‚ÄŒ»Ý‚Ìƒ}ƒbƒv‚ðƒŠƒZƒbƒg
+		// ãƒžãƒƒãƒ—ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’é€²ã‚ã¦ç¾åœ¨ã®ãƒžãƒƒãƒ—ã‚’ãƒªã‚»ãƒƒãƒˆ
 		MapManager->GoNextMap();
 		MapManager->ResetCurrentMap();
 
-		// ŽŸ‚Ìƒ}ƒbƒv‚ª‘¶Ý‚·‚é‚È‚çAƒtƒF[ƒh‚µ‚ÄÄ“xƒXƒe[ƒW‘I‘ðƒŒƒxƒ‹‚Ö
+		// æ¬¡ã®ãƒžãƒƒãƒ—ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰ã€ãƒ•ã‚§ãƒ¼ãƒ‰ã—ã¦å†åº¦ã‚¹ãƒ†ãƒ¼ã‚¸é¸æŠžãƒ¬ãƒ™ãƒ«ã¸
 		if(MapManager->IsClearAllMap() == false)
 		{
 			if (GetWorld()->GetGameInstance() == nullptr)
@@ -57,7 +57,7 @@ void AStageSelectGameMode::StartPlay()
 		return;
 	}
 
-	// ƒ}ƒbƒv‚ª–¢¶¬‚È‚ç¶¬‚·‚é
+	// ãƒžãƒƒãƒ—ãŒæœªç”Ÿæˆãªã‚‰ç”Ÿæˆã™ã‚‹
 	if (MapManager->GetCurrentMap() == nullptr)
 	{
 		MapManager->GenerateMap();
@@ -72,16 +72,16 @@ void AStageSelectGameMode::StartPlay()
 		if (Map == nullptr)
 			return;
 
-		// ƒXƒe[ƒWƒEƒBƒWƒFƒbƒg¶¬—p‚Ì‰ŠúÝ’è
+		// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆç”Ÿæˆç”¨ã®åˆæœŸè¨­å®š
 		MapWidget->SetupInfo(Map->GetMapData());
 
-		// ƒXƒe[ƒWƒEƒBƒWƒFƒbƒg‚Ì¶¬
+		// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®ç”Ÿæˆ
 		for (UStageObject* Stage : Map->GetStageList())
 		{
 			MapWidget->CreateStageWidget(Stage);
 		}
 
-		// ƒXƒe[ƒWƒ‰ƒCƒ“ƒEƒBƒWƒFƒbƒg‚Ì¶¬
+		// ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ©ã‚¤ãƒ³ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®ç”Ÿæˆ
 		MapWidget->CreateStageLineWidget();
 	}
 }

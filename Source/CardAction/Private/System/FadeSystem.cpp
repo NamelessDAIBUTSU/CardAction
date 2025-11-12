@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "System/FadeSystem.h"
@@ -8,7 +8,7 @@ void UFadeSystem::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
 
-	// Widget‚Ì¶¬
+	// Widgetã®ç”Ÿæˆ
 	FTimerHandle TimerHandle;
 	GetWorld()->GetTimerManager().SetTimer(TimerHandle, [this]()
 		{
@@ -26,7 +26,7 @@ void UFadeSystem::Initialize(FSubsystemCollectionBase& Collection)
 				FadeWidget = CreateWidget<UFadeWidget>(World, FadeWidgetClass);
 				if (FadeWidget)
 				{
-					// Å‘O–Ê‚É”z’u
+					// æœ€å‰é¢ã«é…ç½®
 					FadeWidget->AddToViewport(1000);
 					FadeWidget->SetVisibility(ESlateVisibility::Hidden);
 				}
@@ -34,12 +34,12 @@ void UFadeSystem::Initialize(FSubsystemCollectionBase& Collection)
 		}, 0.1f, false);
 
 
-	// Ticker“o˜^
+	// Tickerç™»éŒ²
 	FTSTicker::GetCoreTicker().AddTicker(
 		FTickerDelegate::CreateWeakLambda(this, [this](float DeltaTime)
 			{
 				UpdateFade(DeltaTime);
-				return true; // true‚ð•Ô‚·‚ÆŒp‘±ŽÀs
+				return true; // trueã‚’è¿”ã™ã¨ç¶™ç¶šå®Ÿè¡Œ
 			})
 	);
 }
@@ -49,10 +49,10 @@ void UFadeSystem::FadeOutAndOpenLevel(FName LevelName, float FadeSec)
 	if (FadeWidget == nullptr)
 		return;
 
-	// ƒtƒF[ƒhƒAƒEƒg
+	// ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆ
 	FadeWidget->FadeOut(FadeSec);
 
-	// ‘JˆÚæ‚ÌƒŒƒxƒ‹‚Ì“Ç‚Ýž‚Ý‚ðƒtƒF[ƒhŒã‚É‚·‚é‚æ‚¤Ý’è
+	// é·ç§»å…ˆã®ãƒ¬ãƒ™ãƒ«ã®èª­ã¿è¾¼ã¿ã‚’ãƒ•ã‚§ãƒ¼ãƒ‰å¾Œã«ã™ã‚‹ã‚ˆã†è¨­å®š
 	FadeWidget->SetOnFadeOutFinished(
 		[this, LevelName]() {
 			UGameplayStatics::OpenLevel(GetWorld(), LevelName);
@@ -60,7 +60,7 @@ void UFadeSystem::FadeOutAndOpenLevel(FName LevelName, float FadeSec)
 			FadeIn();
 		});
 
-	// ƒ}ƒbƒvƒ[ƒhŠ®—¹ƒCƒxƒ“ƒg“o˜^
+	// ãƒžãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰å®Œäº†ã‚¤ãƒ™ãƒ³ãƒˆç™»éŒ²
 	WorldDelegate.PostLoadMapWithWorld.AddUObject(this, &UFadeSystem::OnPostLoadLevel);
 }
 
@@ -104,7 +104,7 @@ bool UFadeSystem::IsFadeOut()
 	return FadeWidget->IsFadeOut();
 }
 
-// ƒtƒF[ƒhXV
+// ãƒ•ã‚§ãƒ¼ãƒ‰æ›´æ–°
 void UFadeSystem::UpdateFade(float DeltaSec)
 {
 	if (IsFade() == false)
@@ -116,10 +116,10 @@ void UFadeSystem::UpdateFade(float DeltaSec)
 	}
 }
 
-// ƒŒƒxƒ‹“Ç‚Ýž‚ÝŒã‚ÌƒR[ƒ‹ƒoƒbƒN
+// ãƒ¬ãƒ™ãƒ«èª­ã¿è¾¼ã¿å¾Œã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 void UFadeSystem::OnPostLoadLevel(UWorld* LoadedWorld)
 {
-	// ViewportÄ“o˜^
+	// Viewportå†ç™»éŒ²
 	if (FadeWidget)
 	{
 		FadeWidget->AddToViewport(100);

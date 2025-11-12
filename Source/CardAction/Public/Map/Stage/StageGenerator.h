@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -8,7 +8,7 @@
 #include <Grid/GridData.h>
 #include "StageGenerator.generated.h"
 
-// ƒXƒe[ƒW‚Ì“à•”î•ñ‚ğ¶¬‚·‚éƒWƒFƒlƒŒ[ƒ^
+// ã‚¹ãƒ†ãƒ¼ã‚¸ã®å†…éƒ¨æƒ…å ±ã‚’ç”Ÿæˆã™ã‚‹ã‚¸ã‚§ãƒãƒ¬ãƒ¼ã‚¿
 UCLASS()
 class CARDACTION_API UStageGenerator : public UObject
 {
@@ -18,16 +18,16 @@ public:
 	UStageGenerator();
 
 public:
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	void Initialize(class UMapObject* Map);
 
-	// Œq‚°‚éƒXƒe[ƒW¶¬
+	// ç¹‹ã’ã‚‹ã‚¹ãƒ†ãƒ¼ã‚¸ç”Ÿæˆ
 	bool GenerateChainedStage(UStageObject* PreStage);
 
-	// ƒ{ƒXƒXƒe[ƒW¶¬
+	// ãƒœã‚¹ã‚¹ãƒ†ãƒ¼ã‚¸ç”Ÿæˆ
 	void GenerateBossStage();
 
-	// ƒXƒe[ƒWî•ñ¶¬
+	// ã‚¹ãƒ†ãƒ¼ã‚¸æƒ…å ±ç”Ÿæˆ
 	void GenerateStageInfo(UStageObject* TargetStage);
 
 private:
@@ -37,7 +37,7 @@ private:
 	UPROPERTY()
 	UStageObject* BossStage = nullptr;
 
-	// ¶¬‰Â”\ƒOƒŠƒbƒhƒf[ƒ^ƒŠƒXƒg
+	// ç”Ÿæˆå¯èƒ½ã‚°ãƒªãƒƒãƒ‰ãƒ‡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆ
 	UPROPERTY()
 	UGridDataList* GenGridDataList = nullptr;
 };

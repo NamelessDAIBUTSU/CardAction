@@ -1,9 +1,9 @@
-#pragma once
+ï»¿#pragma once
 #include "CoreMinimal.h"
 #include "Delegates/DelegateCombinations.h"
 #include "Card/CardData.h"
 
-// ƒJ[ƒh‚ğ‘I‘ğ‚µ‚½‚ÌƒfƒŠƒQ[ƒg
+// ã‚«ãƒ¼ãƒ‰ã‚’é¸æŠã—ãŸæ™‚ã®ãƒ‡ãƒªã‚²ãƒ¼ãƒˆ
 DECLARE_DELEGATE_OneParam(FOnSelectCard, UCardData*);
-// ƒJ[ƒh‘I‘ğó‘Ô‚ğ‰ğœ‚·‚éƒfƒŠƒQ[ƒg
+// ã‚«ãƒ¼ãƒ‰é¸æŠçŠ¶æ…‹ã‚’è§£é™¤ã™ã‚‹ãƒ‡ãƒªã‚²ãƒ¼ãƒˆ
 DECLARE_DELEGATE_OneParam(FOnUnSelectCard, UCardData*);

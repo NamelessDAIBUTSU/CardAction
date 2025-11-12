@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -17,83 +17,83 @@ class CARDACTION_API UCardData : public UDataAsset
 	GENERATED_BODY()
 	
 public:
-	// ƒ†ƒj[ƒNID
+	// ãƒ¦ãƒ‹ãƒ¼ã‚¯ID
 	UPROPERTY(VisibleAnywhere, Category = "Card")
 	FName UniqueID;
 
-	// ƒJ[ƒh–¼
+	// ã‚«ãƒ¼ãƒ‰å
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	FName Name;
 
-	// ƒJ[ƒhà–¾
+	// ã‚«ãƒ¼ãƒ‰èª¬æ˜
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	FString Description;
 
-	// Á”ïƒGƒlƒ‹ƒM[
+	// æ¶ˆè²»ã‚¨ãƒãƒ«ã‚®ãƒ¼
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	int ConsumeEnergy;
 
-	// ƒJ[ƒh‰æ‘œ
+	// ã‚«ãƒ¼ãƒ‰ç”»åƒ
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	UTexture2D* CardTexture;
 
-	// ƒŒƒA“x
+	// ãƒ¬ã‚¢åº¦
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	ECardRarityType Rarity;
 
-	// ƒJ[ƒhí
+	// ã‚«ãƒ¼ãƒ‰ç¨®
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	ECardType CardType;
 
-	// Œø‰ÊƒNƒ‰ƒX
+	// åŠ¹æœã‚¯ãƒ©ã‚¹
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	TSubclassOf<UCardEffectBase> EffectClass;
 };
 
-// ƒŒƒAƒŠƒeƒBƒJ[ƒhƒx[ƒX—p
+// ãƒ¬ã‚¢ãƒªãƒ†ã‚£ã‚«ãƒ¼ãƒ‰ãƒ™ãƒ¼ã‚¹ç”¨
 USTRUCT(BlueprintType)
 struct FRarityCardBaseData 
 {
 	GENERATED_BODY()
 
 public:
-	// ƒŒƒA“x
+	// ãƒ¬ã‚¢åº¦
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	ECardRarityType Rarity;
 
-	// ƒJ[ƒhƒx[ƒX‰æ‘œ
+	// ã‚«ãƒ¼ãƒ‰ãƒ™ãƒ¼ã‚¹ç”»åƒ
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	UTexture2D* CardBaseTexture;
 };
 
-// ƒJ[ƒhƒ^ƒCƒvƒAƒCƒRƒ“—p
+// ã‚«ãƒ¼ãƒ‰ã‚¿ã‚¤ãƒ—ã‚¢ã‚¤ã‚³ãƒ³ç”¨
 USTRUCT(BlueprintType)
 struct FCardTypeIconData
 {
 	GENERATED_BODY()
 
 public:
-	// ƒJ[ƒhƒ^ƒCƒv
+	// ã‚«ãƒ¼ãƒ‰ã‚¿ã‚¤ãƒ—
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	ECardType CardType;
 
-	// ƒAƒCƒRƒ“‰æ‘œ
+	// ã‚¢ã‚¤ã‚³ãƒ³ç”»åƒ
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	UTexture2D* IconTexture;
 };
 
-// ‘®«ƒ^ƒCƒvƒAƒCƒRƒ“—p
+// å±æ€§ã‚¿ã‚¤ãƒ—ã‚¢ã‚¤ã‚³ãƒ³ç”¨
 USTRUCT(BlueprintType)
 struct FElementTypeIconData
 {
 	GENERATED_BODY()
 
 public:
-	// ƒJ[ƒhƒ^ƒCƒv
+	// ã‚«ãƒ¼ãƒ‰ã‚¿ã‚¤ãƒ—
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	EAttackElementType AttackElementType;
 
-	// ƒAƒCƒRƒ“‰æ‘œ
+	// ã‚¢ã‚¤ã‚³ãƒ³ç”»åƒ
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	UTexture2D* IconTexture;
 };
@@ -104,15 +104,15 @@ class CARDACTION_API UCardUtilData : public UDataAsset
 	GENERATED_BODY()
 
 public:
-	// ƒŒƒAƒŠƒeƒB‚É•R‚Ã‚¢‚½ƒJ[ƒhƒx[ƒX‰æ‘œ
+	// ãƒ¬ã‚¢ãƒªãƒ†ã‚£ã«ç´ã¥ã„ãŸã‚«ãƒ¼ãƒ‰ãƒ™ãƒ¼ã‚¹ç”»åƒ
 	UPROPERTY(EditAnywhere, Category = "Card")
 	TArray<FRarityCardBaseData> RarityCardBaseData;
 
-	// ƒJ[ƒhƒ^ƒCƒv‚É•R‚Ã‚¢‚½ƒAƒCƒRƒ“‰æ‘œ
+	// ã‚«ãƒ¼ãƒ‰ã‚¿ã‚¤ãƒ—ã«ç´ã¥ã„ãŸã‚¢ã‚¤ã‚³ãƒ³ç”»åƒ
 	UPROPERTY(EditAnywhere, Category = "Card")
 	TArray<FCardTypeIconData> CardTypeIconData;
 
-	// ‘®«ƒ^ƒCƒv‚É•R‚Ã‚¢‚½ƒAƒCƒRƒ“‰æ‘œ
+	// å±æ€§ã‚¿ã‚¤ãƒ—ã«ç´ã¥ã„ãŸã‚¢ã‚¤ã‚³ãƒ³ç”»åƒ
 	UPROPERTY(EditAnywhere, Category = "Card")
 	TArray<FElementTypeIconData> ElementTypeIconData;
 };

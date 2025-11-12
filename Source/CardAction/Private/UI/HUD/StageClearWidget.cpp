@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "UI/HUD/StageClearWidget.h"
@@ -10,7 +10,7 @@ bool UStageClearWidget::Initialize()
 	if (Super::Initialize() == false)
 		return false;
 
-	// Œˆ’è‚ÌƒR[ƒ‹ƒoƒbƒN“o˜^
+	// æ±ºå®šæ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ç™»éŒ²
 	if (DecideButton)
 	{
 		DecideButton->OnClicked.AddDynamic(this, &UStageClearWidget::OnDecide);
@@ -34,23 +34,23 @@ void UStageClearWidget::OnDecide()
 {
     if (OutAnim)
     {
-        // ƒoƒCƒ“ƒh‰ğœ
+        // ãƒã‚¤ãƒ³ãƒ‰è§£é™¤
         UnbindAllFromAnimationFinished(OutAnim);
 
-        // OutƒAƒjƒ[ƒVƒ‡ƒ“‚ğÄ¶
+        // Outã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å†ç”Ÿ
         StopAnimation(OutAnim);
         PlayAnimation(OutAnim);
 
-        // ƒAƒjƒ[ƒVƒ‡ƒ“I—¹‚ÌƒR[ƒ‹ƒoƒbƒN“o˜^
+        // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ç™»éŒ²
         FWidgetAnimationDynamicEvent Delegate;
         Delegate.BindUFunction(this, FName("OnFinishOutAnim"));
         BindToAnimationFinished(OutAnim, Delegate);
     }
 }
 
-// ƒAƒjƒ[ƒVƒ‡ƒ“I—¹‚ÌƒR[ƒ‹ƒoƒbƒN
+// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 void UStageClearWidget::OnFinishOutAnim()
 {
-    // ‘JˆÚ—p‚Ìƒtƒ‰ƒO—§‚Ä
+    // é·ç§»ç”¨ã®ãƒ•ãƒ©ã‚°ç«‹ã¦
     bIsOutAnimFinished = true;
 }

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -18,68 +18,68 @@ public:
 	UMapManager();
 
 public:
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	void Initialize();
 
-	// XV
+	// æ›´æ–°
 	void Update(float DeltaSec);
 
-	// ƒ}ƒbƒv¶¬
+	// ãƒãƒƒãƒ—ç”Ÿæˆ
 	void GenerateMap();
 
-	// ƒ}ƒbƒv‚ği‚ß‚é
+	// ãƒãƒƒãƒ—ã‚’é€²ã‚ã‚‹
 	void GoNextMap();
 
-	// ƒ}ƒbƒv‚Ìæ“¾
+	// ãƒãƒƒãƒ—ã®å–å¾—
 	UMapObject* GetCurrentMap() const { return CurrentMap; }
 	void ResetCurrentMap() { CurrentMap = nullptr; }
 
-	// ƒXƒe[ƒW‚Ìæ“¾
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã®å–å¾—
 	UStageObject* GetCurrentStage() const;
 
-	// ƒXƒe[ƒWó‹µ‚ÌXV
+	// ã‚¹ãƒ†ãƒ¼ã‚¸çŠ¶æ³ã®æ›´æ–°
 	void RefleshStageCondition();
 
-	// ƒŒƒxƒ‹–¼‚Ìæ“¾
+	// ãƒ¬ãƒ™ãƒ«åã®å–å¾—
 	FName GetCurrentLevelName();
 
-	// ƒ}ƒbƒv–¼‚Ìæ“¾
+	// ãƒãƒƒãƒ—åã®å–å¾—
 	FName GetCurrentMapName();
 
-	// ƒNƒŠƒA”»’è
+	// ã‚¯ãƒªã‚¢åˆ¤å®š
 	bool IsClearCurrentMap();
 	bool IsClearAllMap() const { return bIsClearAllMap; }
 
 private:
-	// ¶¬ƒ}ƒbƒv‚Ìƒf[ƒ^‚ğƒ‰ƒ“ƒ_ƒ€‚Éİ’è
+	// ç”Ÿæˆãƒãƒƒãƒ—ã®ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«è¨­å®š
 	void SetupGenerateMapData();
 
-private: /* ƒAƒZƒbƒg */
-	// ¶¬‰Â”\ƒ}ƒbƒvƒf[ƒ^ƒŠƒXƒg
+private: /* ã‚¢ã‚»ãƒƒãƒˆ */
+	// ç”Ÿæˆå¯èƒ½ãƒãƒƒãƒ—ãƒ‡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆ
 	UPROPERTY()
 	UGenerateMapDataList* GenMapDataListAsset = nullptr;
 
 private:
-	// ƒXƒe[ƒWƒWƒFƒlƒŒ[ƒ^
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¸ã‚§ãƒãƒ¬ãƒ¼ã‚¿
 	UPROPERTY()
 	UStageGenerator* StageGenerator = nullptr;
 
-	// ¶¬‚·‚éƒ}ƒbƒvƒf[ƒ^ƒŠƒX
+	// ç”Ÿæˆã™ã‚‹ãƒãƒƒãƒ—ãƒ‡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆ
 	UPROPERTY()
 	TArray<UMapData*> GenMapDataList;
 
-	// Œ»İ‚Ìƒ}ƒbƒv
+	// ç¾åœ¨ã®ãƒãƒƒãƒ—
 	UPROPERTY()
 	UMapObject* CurrentMap = nullptr;
 
-	// ‰Šú‰»Ï‚İ‚©
+	// åˆæœŸåŒ–æ¸ˆã¿ã‹
 	UPROPERTY()
 	bool bIsInitialized = false;
 	
-	// Œ»İ‚Ìƒ}ƒbƒvƒCƒ“ƒfƒbƒNƒX
+	// ç¾åœ¨ã®ãƒãƒƒãƒ—ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 	UPROPERTY()
 	int32 CurrentMapIndex = 0;
 
-	// ‘Sƒ}ƒbƒvƒNƒŠƒA‚µ‚½‚©
+	// å…¨ãƒãƒƒãƒ—ã‚¯ãƒªã‚¢ã—ãŸã‹
 	bool bIsClearAllMap = false;
 };

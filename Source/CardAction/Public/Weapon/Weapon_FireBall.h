@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -35,29 +35,29 @@ public:
 
 
 public:
-	// Hit‚ÌƒJƒXƒP[ƒh
+	// Hitæ™‚ã®ã‚«ã‚¹ã‚±ãƒ¼ãƒ‰
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VFX")
 	UParticleSystem* HitEffect;
-	// –{‘ÌƒJƒXƒP[ƒh
+	// æœ¬ä½“ã‚«ã‚¹ã‚±ãƒ¼ãƒ‰
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VFX")
 	UParticleSystem* BodyEffect;
-	// ”­Ë‚ÌƒJƒXƒP[ƒh
+	// ç™ºå°„æ™‚ã®ã‚«ã‚¹ã‚±ãƒ¼ãƒ‰
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VFX")
 	UParticleSystem* ShockWaveEffect;
 
-	// ˆÚ“®§ŒäƒRƒ“ƒ|[ƒlƒ“ƒg
+	// ç§»å‹•åˆ¶å¾¡ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class UProjectileMovementComponent* ProjectileMoveComp;
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class USphereComponent* SphereCollisionComp = nullptr;
 
-	// ‰Á‘¬“x
+	// åŠ é€Ÿåº¦
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Move")
 	float AccelRate =  2500.f;
 
 private:
-	// ƒJƒXƒP[ƒh‚ğÄ¶‚·‚éƒRƒ“ƒ|[ƒlƒ“ƒg
+	// ã‚«ã‚¹ã‚±ãƒ¼ãƒ‰ã‚’å†ç”Ÿã™ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 	UPROPERTY(VisibleAnywhere, Category = "VFX")
 	UParticleSystemComponent* ParticleComp;
 };

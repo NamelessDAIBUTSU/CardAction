@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -20,7 +20,7 @@ protected:
 	virtual void NativeConstruct() override;
 
 public:
-	// ƒoƒi[‚Ì‰Šú‰»
+	// ãƒãƒŠãƒ¼ã®åˆæœŸåŒ–
 	void InitializeBanner();
 
 private:

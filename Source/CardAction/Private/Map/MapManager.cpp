@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Map/MapManager.h"
@@ -6,7 +6,7 @@
 
 UMapManager::UMapManager()
 {
-	// DataAsset‚ğƒ[ƒh‚µ‚Äİ’è
+	// DataAssetã‚’ãƒ­ãƒ¼ãƒ‰ã—ã¦è¨­å®š
 	static ConstructorHelpers::FObjectFinder<UGenerateMapDataList> GenMapDataAsset(TEXT("/Game/CardAction/Map/DA_GenMapDataList.DA_GenMapDataList"));
 	if (GenMapDataAsset.Succeeded())
 	{
@@ -14,22 +14,22 @@ UMapManager::UMapManager()
 	}
 }
 
-// ‰Šú‰»
+// åˆæœŸåŒ–
 void UMapManager::Initialize()
 {
 	if (bIsInitialized)
 		return;
 
-	// ¶¬‚·‚éƒ}ƒbƒv‚Ì¶¬ƒf[ƒ^‚ğ‰Šú‰»
+	// ç”Ÿæˆã™ã‚‹ãƒãƒƒãƒ—ã®ç”Ÿæˆãƒ‡ãƒ¼ã‚¿ã‚’åˆæœŸåŒ–
 	SetupGenerateMapData();
 
-	// ƒXƒe[ƒWƒWƒFƒlƒŒ[ƒ^[‚Ì¶¬
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¸ã‚§ãƒãƒ¬ãƒ¼ã‚¿ãƒ¼ã®ç”Ÿæˆ
 	StageGenerator = NewObject<UStageGenerator>(this, UStageGenerator::StaticClass());
 
 	bIsInitialized = true;
 }
 
-// XV
+// æ›´æ–°
 void UMapManager::Update(float DeltaSec)
 {
 	if (CurrentMap == nullptr)
@@ -37,7 +37,7 @@ void UMapManager::Update(float DeltaSec)
 	
 }
 
-// ƒ}ƒbƒv¶¬
+// ãƒãƒƒãƒ—ç”Ÿæˆ
 void UMapManager::GenerateMap()
 {
 	if (StageGenerator == nullptr || GenMapDataList.Num() <= CurrentMapIndex)
@@ -46,7 +46,7 @@ void UMapManager::GenerateMap()
 		return;
 	}
 
-	// ƒ}ƒbƒv‚Ì¶¬
+	// ãƒãƒƒãƒ—ã®ç”Ÿæˆ
 	CurrentMap = NewObject<UMapObject>(this, UMapObject::StaticClass());
 	if (CurrentMap == nullptr)
 	{
@@ -54,39 +54,39 @@ void UMapManager::GenerateMap()
 		return;
 	}
 
-	// ƒ}ƒbƒv‚Ì‰Šú‰»
+	// ãƒãƒƒãƒ—ã®åˆæœŸåŒ–
 	CurrentMap->Initialize(GenMapDataList[CurrentMapIndex]);
 
-	// ƒXƒe[ƒWƒWƒFƒlƒŒ[ƒ^‚Ì‰Šú‰»
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¸ã‚§ãƒãƒ¬ãƒ¼ã‚¿ã®åˆæœŸåŒ–
 	StageGenerator->Initialize(CurrentMap);
 
-	// ƒ{ƒXƒXƒe[ƒW‚Ìì¬
+	// ãƒœã‚¹ã‚¹ãƒ†ãƒ¼ã‚¸ã®ä½œæˆ
 	StageGenerator->GenerateBossStage();
 
-	// ‘¼ƒXƒe[ƒW‚Ìì¬‚ÆŒq‚¬ˆ—
+	// ä»–ã‚¹ãƒ†ãƒ¼ã‚¸ã®ä½œæˆã¨ç¹‹ãå‡¦ç†
 	bool bIsSuccess = StageGenerator->GenerateChainedStage(nullptr);
 	UE_LOG(LogTemp, Warning, TEXT("Map Generate is %hs"), bIsSuccess ? "Success." : "Failed.");
 }
 
-// ƒ}ƒbƒv‚ği‚ß‚é
+// ãƒãƒƒãƒ—ã‚’é€²ã‚ã‚‹
 void UMapManager::GoNextMap()
 {
 	CurrentMapIndex++;
 
-	// ÅIƒ}ƒbƒv‚ğƒNƒŠƒA‚µ‚½‚©”»’è
+	// æœ€çµ‚ãƒãƒƒãƒ—ã‚’ã‚¯ãƒªã‚¢ã—ãŸã‹åˆ¤å®š
 	if (CurrentMapIndex >= NEED_CLEAR_MAP_NUM)
 	{
 		bIsClearAllMap = true;
 	}
 }
 
-// ƒXƒe[ƒWó‹µ‚ÌXV
+// ã‚¹ãƒ†ãƒ¼ã‚¸çŠ¶æ³ã®æ›´æ–°
 void UMapManager::RefleshStageCondition()
 {
 	if (CurrentMap == nullptr)
 		return;
 
-	// ˆê’U‘I‘ğ‰Â”\ƒXƒe[ƒW‚ğ‚·‚×‚Ä‘I‘ğ•s‰Â‚É•ÏX
+	// ä¸€æ—¦é¸æŠå¯èƒ½ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’ã™ã¹ã¦é¸æŠä¸å¯ã«å¤‰æ›´
 	for (UStageObject* Stage : CurrentMap->GetStageList())
 	{
 		if (Stage->GetStageCondition() == EStageCondition::CanSelect)
@@ -97,10 +97,10 @@ void UMapManager::RefleshStageCondition()
 
 	if (UStageObject* CurrentStage = CurrentMap->GetCurrentStage())
 	{
-		// ƒNƒŠƒAÏ‚İ‚É•ÏX
+		// ã‚¯ãƒªã‚¢æ¸ˆã¿ã«å¤‰æ›´
 		CurrentStage->SetStageCondition(EStageCondition::Clear);
 
-		// Œq‚ª‚Á‚Ä‚¢‚éƒXƒe[ƒW‚ğ‘I‘ğ‰Â”\‚É•ÏX
+		// ç¹‹ãŒã£ã¦ã„ã‚‹ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’é¸æŠå¯èƒ½ã«å¤‰æ›´
 		for (UStageObject* ChainedStage : CurrentStage->GetChainedStageList())
 		{
 			ChainedStage->SetStageCondition(EStageCondition::CanSelect);
@@ -108,7 +108,7 @@ void UMapManager::RefleshStageCondition()
 	}
 }
 
-// ƒŒƒxƒ‹–¼‚Ìæ“¾
+// ãƒ¬ãƒ™ãƒ«åã®å–å¾—
 FName UMapManager::GetCurrentLevelName()
 {
 	if (CurrentMap == nullptr || CurrentMap->GetMapData() == nullptr)
@@ -117,7 +117,7 @@ FName UMapManager::GetCurrentLevelName()
 	return CurrentMap->GetMapData()->LevelName;
 }
 
-// ƒ}ƒbƒv–¼‚Ìæ“¾
+// ãƒãƒƒãƒ—åã®å–å¾—
 FName UMapManager::GetCurrentMapName()
 {
 	if (CurrentMap == nullptr || CurrentMap->GetMapData() == nullptr)
@@ -126,7 +126,7 @@ FName UMapManager::GetCurrentMapName()
 	return CurrentMap->GetMapData()->MapName;
 }
 
-// ƒNƒŠƒA”»’è
+// ã‚¯ãƒªã‚¢åˆ¤å®š
 bool UMapManager::IsClearCurrentMap()
 {
 	if (CurrentMap == nullptr)
@@ -139,7 +139,7 @@ bool UMapManager::IsClearCurrentMap()
 	return CurrentStage->GetStageCondition() == EStageCondition::Clear && CurrentStage->GetChainedStageList().IsEmpty();
 }
 
-// ¶¬ƒ}ƒbƒv‚Ìƒf[ƒ^‚ğƒ‰ƒ“ƒ_ƒ€‚Éİ’è
+// ç”Ÿæˆãƒãƒƒãƒ—ã®ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«è¨­å®š
 void UMapManager::SetupGenerateMapData() 
 {
 	if (GenMapDataListAsset == nullptr)
@@ -154,21 +154,21 @@ void UMapManager::SetupGenerateMapData()
 
 		bool bCanGenerate = MapDataList[RandomIndex]->MinMapNum <= i && i <= MapDataList[RandomIndex]->MaxMapNum;
 
-		// ‚·‚Å‚É’Š‘IÏ‚İ‚Å‚ ‚ê‚ÎÄ’Š‘I
+		// ã™ã§ã«æŠ½é¸æ¸ˆã¿ã§ã‚ã‚Œã°å†æŠ½é¸
 		while (IndexBuffer.Find(RandomIndex) != INDEX_NONE || bCanGenerate == false)
 		{
 			RandomIndex = FMath::RandRange(0, MapDataList.Num() - 1);
 			bCanGenerate = MapDataList[RandomIndex]->MinMapNum <= i && i <= MapDataList[RandomIndex]->MaxMapNum;
 		}
 
-		// ¶¬‚·‚éƒ}ƒbƒvƒf[ƒ^ƒŠƒXƒg‚É’Ç‰Á
+		// ç”Ÿæˆã™ã‚‹ãƒãƒƒãƒ—ãƒ‡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆã«è¿½åŠ 
 		GenMapDataList.Add(MapDataList[RandomIndex]);
 
 		IndexBuffer.Add(RandomIndex);
 	}
 }
 
-// ƒXƒe[ƒW‚Ìæ“¾
+// ã‚¹ãƒ†ãƒ¼ã‚¸ã®å–å¾—
 UStageObject* UMapManager::GetCurrentStage() const
 {
 	if (CurrentMap == nullptr)

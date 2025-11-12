@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -19,10 +19,10 @@ public:
 	AElectricEyeEnemy();
 
 public:
-	// ƒvƒŒƒCƒ„[‚Ö‚Ì‰ñ“]‚Í‚µ‚È‚¢
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¸ã®å›è»¢ã¯ã—ãªã„
 	virtual bool CanRotate() override { return false; }
 
-	// ŠJn€”õ‚ª‚Å‚«‚Ä‚¢‚é‚©
+	// é–‹å§‹æº–å‚™ãŒã§ãã¦ã„ã‚‹ã‹
 	virtual bool IsReady() const override { return bIsReady && bCanCardSelect; }
 
 protected:
@@ -34,20 +34,20 @@ public:
 
 
 public:
-	// ‰½•b‚Å€”õŠ®—¹‚Æ‚·‚é‚©
+	// ä½•ç§’ã§æº–å‚™å®Œäº†ã¨ã™ã‚‹ã‹
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float StartReadySec = 2.f;
 
-	// ‰½•b‚ÅˆÚ“®‚ğ‚·‚é‚©
+	// ä½•ç§’ã§ç§»å‹•ã‚’ã™ã‚‹ã‹
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float MoveSec = 1.f;
 
-	// ¶¬‚·‚éƒGƒŒƒNƒgƒŠƒbƒNƒTƒ“ƒ_[
+	// ç”Ÿæˆã™ã‚‹ã‚¨ãƒ¬ã‚¯ãƒˆãƒªãƒƒã‚¯ã‚µãƒ³ãƒ€ãƒ¼
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack")
 	TSubclassOf<AEnemyAttackBase> AttackClass;
 
 private:
-	// ƒJ[ƒhƒZƒŒƒNƒg‰æ–Ê‚É‘JˆÚ‚µ‚Ä‚æ‚¢‚©
+	// ã‚«ãƒ¼ãƒ‰ã‚»ãƒ¬ã‚¯ãƒˆç”»é¢ã«é·ç§»ã—ã¦ã‚ˆã„ã‹
 	bool bCanCardSelect = false;;
 
 	FTimerHandle TimerHandle;

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -21,16 +21,16 @@ class CARDACTION_API UMapWidget : public UHUDBase
 	GENERATED_BODY()
 	
 public:
-	// Šeí•Ï”İ’è
+	// å„ç¨®å¤‰æ•°è¨­å®š
 	void SetupInfo(UMapData* Data);
 
-	// ƒLƒƒƒ“ƒoƒX‚ÉƒXƒe[ƒW‚ğ’Ç‰Á
+	// ã‚­ãƒ£ãƒ³ãƒã‚¹ã«ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’è¿½åŠ 
 	void CreateStageWidget(UStageObject* Stage);
 
-	// ƒLƒƒƒ“ƒoƒX‚ÉƒXƒe[ƒWü‚ğ’Ç‰Á
+	// ã‚­ãƒ£ãƒ³ãƒã‚¹ã«ã‚¹ãƒ†ãƒ¼ã‚¸ç·šã‚’è¿½åŠ 
 	void CreateStageLineWidget();
 
-	// ƒGƒ“ƒWƒ“‚©‚ç“Æ—§‚µ‚½XVƒNƒ‰ƒX
+	// ã‚¨ãƒ³ã‚¸ãƒ³ã‹ã‚‰ç‹¬ç«‹ã—ãŸæ›´æ–°ã‚¯ãƒ©ã‚¹
 	virtual void OnUpdate(float DeltaSec) override;
 
 public:
@@ -39,22 +39,22 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UUserWidget> StageLineWidgetClass;
 
-	// ”z’uƒIƒtƒZƒbƒg
+	// é…ç½®ã‚ªãƒ•ã‚»ãƒƒãƒˆ
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float OffsetX = 100.f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float OffsetY = 150.f;
 
-private: /* ƒEƒBƒWƒFƒbƒg */
-	// ‚Ù‚©ƒEƒBƒWƒFƒbƒg’Ç‰Á—pƒLƒƒƒ“ƒoƒX
+private: /* ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆ */
+	// ã»ã‹ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆè¿½åŠ ç”¨ã‚­ãƒ£ãƒ³ãƒã‚¹
 	UPROPERTY(meta = (BindWidget))
 	UCanvasPanel* StageCanvas = nullptr;
 
-	// ƒ}ƒbƒv–¼ƒeƒLƒXƒg
+	// ãƒãƒƒãƒ—åãƒ†ã‚­ã‚¹ãƒˆ
 	UPROPERTY(meta = (BindWidget))
 	UTextBlock* MapName = nullptr;
 
-	// ƒwƒbƒ_[ / ƒtƒbƒJ[ / ”wŒi
+	// ãƒ˜ãƒƒãƒ€ãƒ¼ / ãƒ•ãƒƒã‚«ãƒ¼ / èƒŒæ™¯
 	UPROPERTY(meta = (BindWidget))
 	UImage* HeaderImage = nullptr;
 	UPROPERTY(meta = (BindWidget))
@@ -63,20 +63,20 @@ private: /* ƒEƒBƒWƒFƒbƒg */
 	UImage* MapBaseImage = nullptr;
 
 private:
-	// ƒ}ƒbƒvƒf[ƒ^
+	// ãƒãƒƒãƒ—ãƒ‡ãƒ¼ã‚¿
 	UPROPERTY()
 	UMapData* MapData = nullptr;
 
-	// ƒXƒe[ƒWƒEƒBƒWƒFƒbƒg
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆ
 	UPROPERTY()
 	TArray<UStageWidget*> StageWidgets;
 	
-	// ƒXƒe[ƒWŠÔ‚Ì‹——£
+	// ã‚¹ãƒ†ãƒ¼ã‚¸é–“ã®è·é›¢
 	UPROPERTY()
 	float StageDistX = 0.f;
 	UPROPERTY()
 	float StageDistY = 0.f;
-	// ‰ŠúƒXƒe[ƒW‚ÌÀ•W
+	// åˆæœŸã‚¹ãƒ†ãƒ¼ã‚¸ã®åº§æ¨™
 	UPROPERTY()
 	float StartPosX = 0.f;
 	UPROPERTY()

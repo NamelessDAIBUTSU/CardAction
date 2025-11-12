@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -7,7 +7,7 @@
 #include <Components/Image.h>
 #include "FadeWidget.generated.h"
 
-// ƒtƒF[ƒh‚Ìí—Ş
+// ãƒ•ã‚§ãƒ¼ãƒ‰ã®ç¨®é¡
 UENUM(BlueprintType)
 enum class EFadeType : uint8
 {
@@ -25,36 +25,36 @@ protected:
 	virtual void NativeConstruct() override;
 
 public:
-	// ƒtƒF[ƒhˆ—
+	// ãƒ•ã‚§ãƒ¼ãƒ‰å‡¦ç†
 	void FadeIn(float InFadeSec = 1.f);
 	void FadeOut(float OutFadeSec = 1.f);
 
-	// ƒtƒF[ƒhXV
+	// ãƒ•ã‚§ãƒ¼ãƒ‰æ›´æ–°
 	void UpdateFade(float DeltaSec);
 
-	// ƒtƒF[ƒh’†‚©
+	// ãƒ•ã‚§ãƒ¼ãƒ‰ä¸­ã‹
 	bool IsFade();
 	bool IsFadeIn();
 	bool IsFadeOut();
 
-	// ƒtƒF[ƒhI—¹‚ÌƒR[ƒ‹ƒoƒbƒN“o˜^
+	// ãƒ•ã‚§ãƒ¼ãƒ‰çµ‚äº†æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ç™»éŒ²
 	void SetOnFadeOutFinished(TFunction<void()> Func);
 
 
 private:
-	// ƒtƒF[ƒh‚·‚éƒEƒBƒWƒFƒbƒg
+	// ãƒ•ã‚§ãƒ¼ãƒ‰ã™ã‚‹ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆ
 	UPROPERTY(meta = (BindWidget))
 	UImage* FadeMask;
 
-	// ƒtƒF[ƒhXVŠÔ—p
+	// ãƒ•ã‚§ãƒ¼ãƒ‰æ›´æ–°æ™‚é–“ç”¨
 	float ElapsedSec = 0.f;
 
-	// –ˆƒtƒŒ[ƒ€‚ÌƒtƒF[ƒh•Ï‰»—Ê
+	// æ¯ãƒ•ãƒ¬ãƒ¼ãƒ ã®ãƒ•ã‚§ãƒ¼ãƒ‰å¤‰åŒ–é‡
 	float FadeSpeed = 0.f;
 
-	// Œ»İ‚ÌƒtƒF[ƒhƒ^ƒCƒv
+	// ç¾åœ¨ã®ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¿ã‚¤ãƒ—
 	EFadeType CurrentFadeType = EFadeType::None;
 
-	// ƒtƒF[ƒhƒAƒEƒgI—¹‚ÌƒR[ƒ‹ƒoƒbƒN
+	// ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆçµ‚äº†æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 	TFunction<void()> OnFadeOutFinished;
 };

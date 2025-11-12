@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -32,14 +32,14 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	// ˆÚ“®§ŒäƒRƒ“ƒ|[ƒlƒ“ƒg
+	// ç§»å‹•åˆ¶å¾¡ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class UProjectileMovementComponent* ProjectileMoveComp;
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class USphereComponent* SphereCollisionComp = nullptr;
 
-	// ‘¬“x
+	// é€Ÿåº¦
 	UPROPERTY(VisibleAnywhere, Category = "Move")
 	float Verocity = 2000.f;
 };

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Enemy/ElectricEye/ElectricEyeEnemy.h"
@@ -11,7 +11,7 @@ void AElectricEyeEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// w’èŠÔŒã‚ÉŠJn€”õƒtƒ‰ƒO‚ğ—§‚Ä‚é
+	// æŒ‡å®šæ™‚é–“å¾Œã«é–‹å§‹æº–å‚™ãƒ•ãƒ©ã‚°ã‚’ç«‹ã¦ã‚‹
 	GetWorldTimerManager().SetTimer(TimerHandle, this, &AElectricEyeEnemy::OnSetReady, StartReadySec, true);
 }
 

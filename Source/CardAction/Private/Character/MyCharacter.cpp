@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+ï»¿// Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "Character/MyCharacter.h"
 #include "Camera/CameraComponent.h"
@@ -16,35 +16,35 @@ AMyCharacter::AMyCharacter()
 {
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
-	// ƒRƒ“ƒgƒ[ƒ‰[‚Ì‰ñ“]‚ğ§ŒÀ
+	// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã®å›è»¢ã‚’åˆ¶é™
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
 
-	// 2D•½–Ê‚É§–ñ
+	// 2Då¹³é¢ã«åˆ¶ç´„
 	if (UCharacterMovementComponent* CharacterMovementComp = GetCharacterMovement())
 	{
 		CharacterMovementComp->bConstrainToPlane = true;
 		CharacterMovementComp->bSnapToPlaneAtStart = true;
 	}
 
-	// ƒOƒŠƒbƒhˆÚ“®ƒRƒ“ƒ|[ƒlƒ“ƒg
+	// ã‚°ãƒªãƒƒãƒ‰ç§»å‹•ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 	GridMovementComp = CreateDefaultSubobject<UGridMovementComponent>(TEXT("GridMovement"));
 
-	// HPƒo[—pƒEƒBƒWƒFƒbƒgƒRƒ“ƒ|[ƒlƒ“ƒg
+	// HPãƒãƒ¼ç”¨ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 	WidgetComp = CreateDefaultSubobject<UWidgetComponent>(TEXT("WidgetComponent"));
 	if (WidgetComp)
 	{
 		WidgetComp->SetupAttachment(RootComponent);
-		// ƒVƒƒƒhƒE‚ğ—‚Æ‚³‚È‚¢
+		// ã‚·ãƒ£ãƒ‰ã‚¦ã‚’è½ã¨ã•ãªã„
 		WidgetComp->SetCastShadow(false);
-		// ƒfƒJ[ƒ‹‚àó‚¯‚È‚¢
+		// ãƒ‡ã‚«ãƒ¼ãƒ«ã‚‚å—ã‘ãªã„
 		WidgetComp->bReceivesDecals = false;
-		// “–‚½‚è”»’è‚à•s—v
+		// å½“ãŸã‚Šåˆ¤å®šã‚‚ä¸è¦
 		WidgetComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 
-	// ƒ|[ƒ““¯m‚Í“–‚½‚ç‚È‚¢‚æ‚¤‚É‚·‚é
+	// ãƒãƒ¼ãƒ³åŒå£«ã¯å½“ãŸã‚‰ãªã„ã‚ˆã†ã«ã™ã‚‹
 	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
 
@@ -59,7 +59,7 @@ void AMyCharacter::Tick(float DeltaSeconds)
 	if (MyGameMode == nullptr)
 		return;
 
-	// ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒYˆÈŠO‚Å‚ÍŠÔ’â~
+	// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºä»¥å¤–ã§ã¯æ™‚é–“åœæ­¢
 	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Entry && MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
 	{
 		this->CustomTimeDilation = 0.f;
@@ -75,18 +75,18 @@ void AMyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// èDƒJ[ƒh‚Ì”z—ñ‚ÌƒTƒCƒYŠm•Û
+	// æ‰‹æœ­ã‚«ãƒ¼ãƒ‰ã®é…åˆ—ã®ã‚µã‚¤ã‚ºç¢ºä¿
 	HandCards.Reserve(MAX_HAND_CARDS_NUM);
 
-	// ƒEƒBƒWƒFƒbƒg‚É”½‰f
+	// ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã«åæ˜ 
 	RefleshHandCards();
 
-	// HPƒo[‚ÉŠ—LÒ‚ğ“o˜^
+	// HPãƒãƒ¼ã«æ‰€æœ‰è€…ã‚’ç™»éŒ²
 	if (WidgetComp)
 	{
 		if (UHPBar* HPWidget = Cast<UHPBar>(WidgetComp->GetUserWidgetObject()))
 		{
-			// HPæ“¾—p‚ÌŠÖ”İ’è
+			// HPå–å¾—ç”¨ã®é–¢æ•°è¨­å®š
 			FOnGetMaxHP GetMaxHPFunc;
 			GetMaxHPFunc.BindLambda([this]()
 				{
@@ -106,20 +106,20 @@ void AMyCharacter::BeginPlay()
 				});
 			HPWidget->Setup(WidgetComp, GetMaxHPFunc, GetCurrentHPFunc);
 
-			// ƒGƒlƒ~[—p‚ÌƒŒƒCƒAƒEƒg‚É•ÏX
+			// ã‚¨ãƒãƒŸãƒ¼ç”¨ã®ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã«å¤‰æ›´
 			HPWidget->ChangeLayout(EHPBarType::Player);
 		}
 	}
 }
 
-// “ü—ÍƒoƒCƒ“ƒhİ’è
+// å…¥åŠ›ãƒã‚¤ãƒ³ãƒ‰è¨­å®š
 void AMyCharacter::SetupPlayerInputComponent(UInputComponent* InputComp)
 {
 	if (UEnhancedInputComponent* EnhancedInputComp = Cast<UEnhancedInputComponent>(InputComp))
 	{
-		// ƒJ[ƒh”­“®
+		// ã‚«ãƒ¼ãƒ‰ç™ºå‹•
 		EnhancedInputComp->BindAction(UseCardAction, ETriggerEvent::Started, this, &AMyCharacter::OnUseCard);
-		// ƒJ[ƒh‘I‘ğ
+		// ã‚«ãƒ¼ãƒ‰é¸æŠ
 		EnhancedInputComp->BindAction(SelectFirstCardAction, ETriggerEvent::Started, this, &AMyCharacter::OnSelectFirstCard);
 		EnhancedInputComp->BindAction(SelectSecondCardAction, ETriggerEvent::Started, this, &AMyCharacter::OnSelectSecondCard);
 		EnhancedInputComp->BindAction(SelectThirdCardAction, ETriggerEvent::Started, this, &AMyCharacter::OnSelectThirdCard);
@@ -128,17 +128,17 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* InputComp)
 
 		if (GridMovementComp)
 		{
-			// ƒOƒŠƒbƒhˆÚ“®
+			// ã‚°ãƒªãƒƒãƒ‰ç§»å‹•
 			EnhancedInputComp->BindAction(MoveGridAction, ETriggerEvent::Triggered, GridMovementComp, &UGridMovementComponent::OnMoveToDirection);
 			EnhancedInputComp->BindAction(MoveGridAction, ETriggerEvent::Completed, GridMovementComp, &UGridMovementComponent::OnResetDirectionCache);
-			// Œü‚­
+			// å‘ã
 			EnhancedInputComp->BindAction(TurnTowardAction, ETriggerEvent::Started, GridMovementComp, &UGridMovementComponent::OnChangeTurnMode);
 			EnhancedInputComp->BindAction(TurnTowardAction, ETriggerEvent::Completed, GridMovementComp, &UGridMovementComponent::OnChangeTurnMode);
 		}
 	}
 }
 
-// ƒJ[ƒh”­“®
+// ã‚«ãƒ¼ãƒ‰ç™ºå‹•
 void AMyCharacter::OnUseCard(const FInputActionValue& Value)
 {
 	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this);
@@ -146,7 +146,7 @@ void AMyCharacter::OnUseCard(const FInputActionValue& Value)
 	if (MyGameMode == nullptr)
 		return;
 
-	// ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒYˆÈŠO‚Å‚Íˆ—‚ğ‚µ‚È‚¢
+	// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºä»¥å¤–ã§ã¯å‡¦ç†ã‚’ã—ãªã„
 	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
 		return;
 
@@ -161,7 +161,7 @@ void AMyCharacter::OnUseCard(const FInputActionValue& Value)
 	}
 }
 
-// ƒJ[ƒh‘I‘ğ
+// ã‚«ãƒ¼ãƒ‰é¸æŠ
 void AMyCharacter::OnSelectFirstCard(const FInputActionValue& Value)
 {
 	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this);
@@ -169,13 +169,13 @@ void AMyCharacter::OnSelectFirstCard(const FInputActionValue& Value)
 	if (MyGameMode == nullptr)
 		return;
 
-	// ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒYˆÈŠO‚Å‚Íˆ—‚ğ‚µ‚È‚¢
+	// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºä»¥å¤–ã§ã¯å‡¦ç†ã‚’ã—ãªã„
 	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
 		return;
 
 	SelectHandCardsIndex = 0;
 
-	// ƒEƒBƒWƒFƒbƒg‚É”½‰f
+	// ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã«åæ˜ 
 	RefleshHandCards();
 }
 
@@ -186,13 +186,13 @@ void AMyCharacter::OnSelectSecondCard(const FInputActionValue& Value)
 	if (MyGameMode == nullptr)
 		return;
 
-	// ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒYˆÈŠO‚Å‚Íˆ—‚ğ‚µ‚È‚¢
+	// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºä»¥å¤–ã§ã¯å‡¦ç†ã‚’ã—ãªã„
 	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
 		return;
 
 	SelectHandCardsIndex = 1;
 
-	// ƒEƒBƒWƒFƒbƒg‚É”½‰f
+	// ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã«åæ˜ 
 	RefleshHandCards();
 }
 
@@ -203,13 +203,13 @@ void AMyCharacter::OnSelectThirdCard(const FInputActionValue& Value)
 	if (MyGameMode == nullptr)
 		return;
 
-	// ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒYˆÈŠO‚Å‚Íˆ—‚ğ‚µ‚È‚¢
+	// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºä»¥å¤–ã§ã¯å‡¦ç†ã‚’ã—ãªã„
 	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
 		return;
 
 	SelectHandCardsIndex = 2;
 
-	// ƒEƒBƒWƒFƒbƒg‚É”½‰f
+	// ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã«åæ˜ 
 	RefleshHandCards();
 }
 
@@ -220,13 +220,13 @@ void AMyCharacter::OnSelectFourthCard(const FInputActionValue& Value)
 	if (MyGameMode == nullptr)
 		return;
 
-	// ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒYˆÈŠO‚Å‚Íˆ—‚ğ‚µ‚È‚¢
+	// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºä»¥å¤–ã§ã¯å‡¦ç†ã‚’ã—ãªã„
 	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
 		return;
 
 	SelectHandCardsIndex = 3;
 
-	// ƒEƒBƒWƒFƒbƒg‚É”½‰f
+	// ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã«åæ˜ 
 	RefleshHandCards();
 }
 
@@ -237,7 +237,7 @@ void AMyCharacter::OnScrollSelectCard(const FInputActionValue& Value)
 	if (MyGameMode == nullptr)
 		return;
 
-	// ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒYˆÈŠO‚Å‚Íˆ—‚ğ‚µ‚È‚¢
+	// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºä»¥å¤–ã§ã¯å‡¦ç†ã‚’ã—ãªã„
 	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
 		return;
 
@@ -251,21 +251,21 @@ void AMyCharacter::OnScrollSelectCard(const FInputActionValue& Value)
 		SelectHandCardsIndex = FMath::Max(0, SelectHandCardsIndex - 1);
 	}
 
-	// ƒEƒBƒWƒFƒbƒg‚É”½‰f
+	// ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã«åæ˜ 
 	RefleshHandCards();
 }
 
-// ƒ_ƒ[ƒWˆ—
+// ãƒ€ãƒ¡ãƒ¼ã‚¸å‡¦ç†
 void AMyCharacter::OnTakeDamage(float Damage)
 {
-	// –³“G’†‚È‚ç–³‹
+	// ç„¡æ•µä¸­ãªã‚‰ç„¡è¦–
 	if (bIsInvincible)
 		return;
 
-	// ƒ_ƒ[ƒW‚ğó‚¯‚é
+	// ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã‚‹
 	CurrentHP = FMath::Max(CurrentHP - Damage, 0.f);
 
-	// GameMode‚ÌƒQ[ƒ€ƒI[ƒo[ˆ—‚ğŒÄ‚Ô
+	// GameModeã®ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼å‡¦ç†ã‚’å‘¼ã¶
 	if (CurrentHP == 0)
 	{
 		if (AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this))
@@ -277,7 +277,7 @@ void AMyCharacter::OnTakeDamage(float Damage)
 		}
 	}
 
-	// –³“GŠÔ‚ÌŠJn
+	// ç„¡æ•µæ™‚é–“ã®é–‹å§‹
 	StartInvincible();
 }
 
@@ -299,23 +299,23 @@ FCoord AMyCharacter::GetCurrentCoord() const
 	return FCoord::Zero();
 }
 
-// èD‚ÉƒJ[ƒh‚ğ’Ç‰Á
+// æ‰‹æœ­ã«ã‚«ãƒ¼ãƒ‰ã‚’è¿½åŠ 
 void AMyCharacter::AddToHandCards(UCardData* CardData)
 {
-	// ‚¢‚Á‚Ï‚¢‚È‚Ì‚Å’Ç‰Á‚Å‚«‚Ü‚¹[‚ñ
+	// ã„ã£ã±ã„ãªã®ã§è¿½åŠ ã§ãã¾ã›ãƒ¼ã‚“
 	if (HandCards.Num() == MAX_HAND_CARDS_NUM)
 		return;
 
 	HandCards.Add(CardData);
 }
 
-// èD‚©‚çƒJ[ƒh‚ğœ‹
+// æ‰‹æœ­ã‹ã‚‰ã‚«ãƒ¼ãƒ‰ã‚’é™¤å»
 void AMyCharacter::RemoveFromHandCards(UCardData* CardData)
 {
 	HandCards.Remove(CardData);
 }
 
-// èDƒEƒBƒWƒFƒbƒg‚É”½‰f
+// æ‰‹æœ­ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã«åæ˜ 
 void AMyCharacter::RefleshHandCards()
 {
 	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
@@ -329,7 +329,7 @@ void AMyCharacter::RefleshHandCards()
 	}
 }
 
-// ƒ_ƒ[ƒW‚É‚æ‚é“_–Å
+// ãƒ€ãƒ¡ãƒ¼ã‚¸ã«ã‚ˆã‚‹ç‚¹æ»…
 void AMyCharacter::StartBlinkEffect()
 {
 	GetWorldTimerManager().SetTimer(BlinkTimer, this, &AMyCharacter::ToggleBlink, 0.1f, true);
@@ -354,19 +354,19 @@ void AMyCharacter::EndInvincible()
 	}
 }
 
-// –³“GŠÔ‚ÌŠJn
+// ç„¡æ•µæ™‚é–“ã®é–‹å§‹
 void AMyCharacter::StartInvincible()
 {
 	bIsInvincible = true;
 
-	// “_–Å‰‰oŠJn
+	// ç‚¹æ»…æ¼”å‡ºé–‹å§‹
 	StartBlinkEffect();
 
-	// I—¹‚ÌƒR[ƒ‹ƒoƒbƒNİ’è
+	// çµ‚äº†æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯è¨­å®š
 	GetWorldTimerManager().SetTimer(InvincibleTimer, this, &AMyCharacter::EndInvincible, 2.0f, false);
 }
 
-//// –³“GŠÔ‚ÌXV
+//// ç„¡æ•µæ™‚é–“ã®æ›´æ–°
 //void AMyCharacter::UpdateInvincible(float DeltaSec)
 //{
 //	if (bIsInvincible == false)
@@ -374,12 +374,12 @@ void AMyCharacter::StartInvincible()
 //
 //	ElapsedSec += DeltaSec;
 //
-//	// –³“GŠÔI—¹
+//	// ç„¡æ•µæ™‚é–“çµ‚äº†
 //	if (ElapsedSec >= InvincibleSec)
 //	{
 //		bIsInvincible = false;
 //
-//		// “_–Å‰‰oI—¹
+//		// ç‚¹æ»…æ¼”å‡ºçµ‚äº†
 //		StopBlinkEffect();
 //	}
 //}

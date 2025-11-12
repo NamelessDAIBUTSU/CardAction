@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -23,17 +23,17 @@ public:
 	UCardUtil();
 
 public:
-	// ƒŒƒAƒŠƒeƒB‚É•R‚Ã‚­ƒJ[ƒhƒx[ƒX‰æ‘œ‚ğæ“¾
+	// ãƒ¬ã‚¢ãƒªãƒ†ã‚£ã«ç´ã¥ãã‚«ãƒ¼ãƒ‰ãƒ™ãƒ¼ã‚¹ç”»åƒã‚’å–å¾—
 	UTexture2D* GetCardBaseTexture(ECardRarityType Rarity);
 
-	// UŒ‚‘®«‚É•R‚Ã‚­ƒAƒCƒRƒ“‰æ‘œæ“¾
+	// æ”»æ’ƒå±æ€§ã«ç´ã¥ãã‚¢ã‚¤ã‚³ãƒ³ç”»åƒå–å¾—
 	UTexture2D* GetElementTypeIconTexture(EAttackElementType ElementType);
 
-	// ƒJ[ƒhƒ^ƒCƒv‚É•R‚Ã‚­ƒAƒCƒRƒ“‰æ‘œæ“¾
+	// ã‚«ãƒ¼ãƒ‰ã‚¿ã‚¤ãƒ—ã«ç´ã¥ãã‚¢ã‚¤ã‚³ãƒ³ç”»åƒå–å¾—
 	UTexture2D* GetCardTypeIconTexture(ECardType CardType);
 
 public:
-	// Utilƒf[ƒ^ƒAƒZƒbƒg
+	// Utilãƒ‡ãƒ¼ã‚¿ã‚¢ã‚»ãƒƒãƒˆ
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UCardUtilData* CardUtilData;
 };

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "System/Phase/BattlePhase_Entry.h"
@@ -8,14 +8,14 @@
 
 void UBattlePhase_Entry::OnTick(float DeltaSec)
 {
-	// “GƒXƒe[ƒW‚¶‚á‚È‚¢ê‡‚ÍƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒY‚ÖƒŠƒNƒGƒXƒg
+	// æ•µã‚¹ãƒ†ãƒ¼ã‚¸ã˜ã‚ƒãªã„å ´åˆã¯ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºã¸ãƒªã‚¯ã‚¨ã‚¹ãƒˆ
 	if (false)
 	{
 		RequestNextPhase = EBattlePhase::Action;
 		return;
 	}
 
-	// ‘S“G‚ªŠJn€”õ‚ğ®‚¦‚½‚çƒJ[ƒh‘I‘ğƒtƒF[ƒY‚ÖƒŠƒNƒGƒXƒg
+	// å…¨æ•µãŒé–‹å§‹æº–å‚™ã‚’æ•´ãˆãŸã‚‰ã‚«ãƒ¼ãƒ‰é¸æŠãƒ•ã‚§ãƒ¼ã‚ºã¸ãƒªã‚¯ã‚¨ã‚¹ãƒˆ
 	if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
 	{
 		if (MyGM->EnemyManager && MyGM->EnemyManager->IsAllEnemyReady())

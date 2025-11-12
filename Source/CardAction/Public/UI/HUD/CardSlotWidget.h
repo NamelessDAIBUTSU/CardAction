@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -17,37 +17,37 @@ class CARDACTION_API UCardSlotWidget : public UHUDBase
 	GENERATED_BODY()
 
 public:
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	virtual void NativeConstruct() override;
 
 public:
-	// ƒXƒƒbƒg‚ÉƒJ[ƒh‚ğİ’è
+	// ã‚¹ãƒ­ãƒƒãƒˆã«ã‚«ãƒ¼ãƒ‰ã‚’è¨­å®š
 	void SetupCardSlot(class UCardData* Data);
 
-	// ƒJ[ƒh‘I‘ğƒAƒjƒ[ƒVƒ‡ƒ“Ä¶
+	// ã‚«ãƒ¼ãƒ‰é¸æŠã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å†ç”Ÿ
 	void PlaySelectAnim();
-	// ƒJ[ƒh‘I‘ğ‰ğœƒAƒjƒ[ƒVƒ‡ƒ“Ä¶
+	// ã‚«ãƒ¼ãƒ‰é¸æŠè§£é™¤ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å†ç”Ÿ
 	void PlayUnSelectAnim();
 
-	// Œø‰Ê”­“®
+	// åŠ¹æœç™ºå‹•
 	void ExecuteEffect();
 
-	// ƒJ[ƒhƒEƒBƒWƒFƒbƒg‚ÌƒAƒjƒ[ƒVƒ‡ƒ“‚ğƒfƒtƒHƒ‹ƒg‚É–ß‚·
+	// ã‚«ãƒ¼ãƒ‰ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã«æˆ»ã™
 	void PlayDefaultAnimation();
 
 public:
-	// ƒJ[ƒhƒNƒ‰ƒX
+	// ã‚«ãƒ¼ãƒ‰ã‚¯ãƒ©ã‚¹
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UUserWidget> CardWidgetClass;
 
-	// ƒJ[ƒhƒEƒBƒWƒFƒbƒg
+	// ã‚«ãƒ¼ãƒ‰ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆ
 	class UCardWidget* CardWidget;
 
-	// ”z’u—pƒTƒCƒYƒ{ƒbƒNƒX
+	// é…ç½®ç”¨ã‚µã‚¤ã‚ºãƒœãƒƒã‚¯ã‚¹
 	UPROPERTY(meta = (BindWidget))
 	USizeBox* CardBox;
 
-	// ƒAƒjƒ[ƒVƒ‡ƒ“
+	// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
 	UWidgetAnimation* SelectAnim;
 	UPROPERTY(meta = (BindWidgetAnim), Transient)

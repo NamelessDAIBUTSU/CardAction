@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Weapon/Weapon_FireBall.h"
@@ -14,7 +14,7 @@ AWeapon_FireBall::AWeapon_FireBall()
 {
     PrimaryActorTick.bCanEverTick = true;
 
-    // ƒRƒ“ƒ|[ƒlƒ“ƒgì¬
+    // ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆä½œæˆ
     ParticleComp = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ParticleComp"));
     if (ParticleComp)
     {
@@ -22,16 +22,16 @@ AWeapon_FireBall::AWeapon_FireBall()
         ParticleComp->bAutoActivate = true;
     }
 
-    // ˆÚ“®ƒRƒ“ƒ|[ƒlƒ“ƒg¶¬
+    // ç§»å‹•ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆç”Ÿæˆ
     ProjectileMoveComp = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Projectile Move Comp"));
     if (ProjectileMoveComp)
     {
         ProjectileMoveComp->Velocity = GetActorForwardVector() * ProjectileMoveComp->InitialSpeed;
-        // d—Í‚È‚µ
+        // é‡åŠ›ãªã—
         ProjectileMoveComp->ProjectileGravityScale = 0.f;
     }
 
-    // “–‚½‚è”»’èƒRƒ“ƒ|[ƒlƒ“ƒg¶¬
+    // å½“ãŸã‚Šåˆ¤å®šã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆç”Ÿæˆ
     SphereCollisionComp = CreateDefaultSubobject<USphereComponent>(TEXT("Sphere Collision Component"));
     if (SphereCollisionComp)
     {
@@ -48,7 +48,7 @@ void AWeapon_FireBall::Tick(float DeltaSec)
 {
     Super::Tick(DeltaSec);
 
-    // ‰Á‘¬ˆ—
+    // åŠ é€Ÿå‡¦ç†
     if (ProjectileMoveComp)
     {
         if (FMath::IsNearlyEqual(ProjectileMoveComp->InitialSpeed, ProjectileMoveComp->MaxSpeed) == false)
@@ -72,7 +72,7 @@ void AWeapon_FireBall::BeginPlay()
 {
     Super::BeginPlay();
 
-    // ”­ËƒGƒtƒFƒNƒgÄ¶
+    // ç™ºå°„ã‚¨ãƒ•ã‚§ã‚¯ãƒˆå†ç”Ÿ
     UGameplayStatics::SpawnEmitterAtLocation(
         GetWorld(),
         ShockWaveEffect,
@@ -82,18 +82,18 @@ void AWeapon_FireBall::BeginPlay()
         true
     );
 
-    // –{‘Ì‚ÌƒGƒtƒFƒNƒgÄ¶
+    // æœ¬ä½“ã®ã‚¨ãƒ•ã‚§ã‚¯ãƒˆå†ç”Ÿ
     if (ParticleComp && BodyEffect)
     {
         ParticleComp->SetTemplate(BodyEffect);
         ParticleComp->ActivateSystem(true);
     }
 
-    // InitialSpeed‚ªİ’è‚³‚ê‚Ä‚©‚ç‘¬“xİ’è
+    // InitialSpeedãŒè¨­å®šã•ã‚Œã¦ã‹ã‚‰é€Ÿåº¦è¨­å®š
     if (ProjectileMoveComp)
     {
         ProjectileMoveComp->Velocity = GetActorForwardVector() * ProjectileMoveComp->InitialSpeed;
-        // d—Í‚È‚µ
+        // é‡åŠ›ãªã—
         ProjectileMoveComp->ProjectileGravityScale = 0.f;
     }
 }
@@ -121,28 +121,28 @@ void AWeapon_FireBall::OnOverlap(UPrimitiveComponent* OverlappedComp,
     if (EnemyManager == nullptr)
         return;
 
-    // ”­ËˆÊ’u‚ÌƒOƒŠƒbƒhƒ}ƒX‚Æ‚Ì“–‚½‚è”»’è‚Í–³‹
+    // ç™ºå°„ä½ç½®ã®ã‚°ãƒªãƒƒãƒ‰ãƒã‚¹ã¨ã®å½“ãŸã‚Šåˆ¤å®šã¯ç„¡è¦–
     FCoord Coord = GridManager->ConvertToGridCoord(OtherActor->GetActorLocation());
     if (Coord == SpawnCoord)
         return;
 
 
-    // “G‚ª‚¢‚éƒ}ƒX‚©æ‚Éæ“¾‚µ‚Ä‚¨‚­
+    // æ•µãŒã„ã‚‹ãƒã‚¹ã‹å…ˆã«å–å¾—ã—ã¦ãŠã
     bool bIsExistEnemyOnGridCell = GridManager->IsExistEnemyOnGridCell(Coord);
 
-    // “G‚ª€–Sƒ‚[ƒVƒ‡ƒ“’†‚È‚ç“–‚½‚è”»’è‚ğæ‚ç‚È‚¢
+    // æ•µãŒæ­»äº¡ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ä¸­ãªã‚‰å½“ãŸã‚Šåˆ¤å®šã‚’å–ã‚‰ãªã„
     if (AEnemyBase* Enemy = EnemyManager->GetEnemy(Coord))
     {
         bIsExistEnemyOnGridCell &= (Enemy->IsPlayingDeadMontage() == false);
     }
 
-    // ƒ_ƒ[ƒWˆ—
+    // ãƒ€ãƒ¡ãƒ¼ã‚¸å‡¦ç†
     GridManager->ExecuteAttackToGridCell(this, Damage, Coord);
 
-    // “Gƒ}ƒX‚Ìê‡A©g‚Ìíœ
+    // æ•µãƒã‚¹ã®å ´åˆã€è‡ªèº«ã®å‰Šé™¤
     if (bIsExistEnemyOnGridCell)
     {
-        // ƒqƒbƒgƒGƒtƒFƒNƒgÄ¶
+        // ãƒ’ãƒƒãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆå†ç”Ÿ
         UGameplayStatics::SpawnEmitterAtLocation(
             GetWorld(),
             HitEffect,

@@ -1,9 +1,9 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Weapon/Weapon_ShortSword.h"
 
-// ƒvƒŒƒCƒ„[‚É‚æ‚éUŒ‚ƒAƒNƒVƒ‡ƒ“ˆ—
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ã‚ˆã‚‹æ”»æ’ƒã‚¢ã‚¯ã‚·ãƒ§ãƒ³æ™‚å‡¦ç†
 void AWeapon_ShortSword::OnAttack()
 {
 

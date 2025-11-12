@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Enemy/CactusEnemy/AnimNotify_SpawnCactusNeedles.h"
@@ -26,11 +26,11 @@ void UAnimNotify_SpawnCactusNeedles::Notify(USkeletalMeshComponent* MeshComp, UA
     if (Enemy == nullptr || Enemy->AttackClass == nullptr)
         return;
 
-    // ƒXƒ|[ƒ“ƒpƒ‰ƒ[ƒ^Ý’è
+    // ã‚¹ãƒãƒ¼ãƒ³ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿è¨­å®š
     FActorSpawnParameters Params;
     Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
-    // ‘OŒã¶‰E‚ÌƒZƒ‹‚ÉƒJƒNƒ^ƒXƒj[ƒhƒ‹‚ð¶¬
+    // å‰å¾Œå·¦å³ã®ã‚»ãƒ«ã«ã‚«ã‚¯ã‚¿ã‚¹ãƒ‹ãƒ¼ãƒ‰ãƒ«ã‚’ç”Ÿæˆ
     FCoord CurrentCoord = Enemy->GetCurrentCoord();
     FCoord SpawnCoord = FCoord::Zero();
     for (int i = 0;i < 4; i++)
@@ -43,19 +43,19 @@ void UAnimNotify_SpawnCactusNeedles::Notify(USkeletalMeshComponent* MeshComp, UA
         case 3: SpawnCoord = CurrentCoord + FVector2D(0.f, -1.f); break;
         }
 
-        // ƒvƒŒƒCƒ„[‚ªæ‚Á‚Ä‚¢‚È‚¢ ‚©‚Â ƒAƒNƒZƒX‚Å‚«‚È‚¢ê‡A¶¬‚µ‚È‚¢
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒä¹—ã£ã¦ã„ãªã„ ã‹ã¤ ã‚¢ã‚¯ã‚»ã‚¹ã§ããªã„å ´åˆã€ç”Ÿæˆã—ãªã„
         if (GridManager->IsExistPlayerOnGridCell(SpawnCoord) == false && GridManager->IsAccessableGridCell(SpawnCoord) == false)
             continue;
 
-        // ¶¬‚·‚éˆÊ’u‚ðŽæ“¾
+        // ç”Ÿæˆã™ã‚‹ä½ç½®ã‚’å–å¾—
         FVector SpawnLocation = GridManager->ConvertToWorldPosition(SpawnCoord);
 
-        // ¶¬
+        // ç”Ÿæˆ
         ACactusNeedle* CactusNeedle = GetWorld()->SpawnActor<ACactusNeedle>(Enemy->AttackClass, SpawnLocation, FRotator(0.f, 0.f, 0.f), Params);
         if (CactusNeedle == nullptr)
             return;
 
-        // ‰ŠúÝ’è
+        // åˆæœŸè¨­å®š
         CactusNeedle->Setup();
     }
 }

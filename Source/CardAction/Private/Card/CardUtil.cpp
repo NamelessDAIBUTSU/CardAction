@@ -1,11 +1,11 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Card/CardUtil.h"
 
 UCardUtil::UCardUtil()
 {
-	// C++‚ÅDataAsset‚ğƒ[ƒh‚µ‚Äİ’è
+	// C++ã§DataAssetã‚’ãƒ­ãƒ¼ãƒ‰ã—ã¦è¨­å®š
 	static ConstructorHelpers::FObjectFinder<UCardUtilData> CardDataAsset(TEXT("/Game/CardAction/Card/UtilData/DA_CardUtilData.DA_CardUtilData"));
 	if (CardDataAsset.Succeeded())
 	{
@@ -20,7 +20,7 @@ void UCardUtil::Initialize(FSubsystemCollectionBase& Collection)
 	
 }
 
-// ƒŒƒAƒŠƒeƒB‚É•R‚Ã‚­ƒJ[ƒhƒx[ƒX‰æ‘œ‚ğæ“¾
+// ãƒ¬ã‚¢ãƒªãƒ†ã‚£ã«ç´ã¥ãã‚«ãƒ¼ãƒ‰ãƒ™ãƒ¼ã‚¹ç”»åƒã‚’å–å¾—
 UTexture2D* UCardUtil::GetCardBaseTexture(ECardRarityType Rarity)
 {
 	if (CardUtilData == nullptr)
@@ -37,7 +37,7 @@ UTexture2D* UCardUtil::GetCardBaseTexture(ECardRarityType Rarity)
 	return nullptr;
 }
 
-// UŒ‚‘®«‚É•R‚Ã‚­ƒAƒCƒRƒ“‰æ‘œæ“¾
+// æ”»æ’ƒå±æ€§ã«ç´ã¥ãã‚¢ã‚¤ã‚³ãƒ³ç”»åƒå–å¾—
 UTexture2D* UCardUtil::GetElementTypeIconTexture(EAttackElementType ElementType)
 {
 	if (CardUtilData == nullptr)
@@ -54,7 +54,7 @@ UTexture2D* UCardUtil::GetElementTypeIconTexture(EAttackElementType ElementType)
 	return nullptr;
 }
 
-// ƒJ[ƒhƒ^ƒCƒv‚É•R‚Ã‚­ƒAƒCƒRƒ“‰æ‘œæ“¾
+// ã‚«ãƒ¼ãƒ‰ã‚¿ã‚¤ãƒ—ã«ç´ã¥ãã‚¢ã‚¤ã‚³ãƒ³ç”»åƒå–å¾—
 UTexture2D* UCardUtil::GetCardTypeIconTexture(ECardType CardType)
 {
 	if (CardUtilData == nullptr)

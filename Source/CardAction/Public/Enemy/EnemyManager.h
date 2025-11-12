@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -22,23 +22,23 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 public:
-	// ƒGƒlƒ~[‚Ì“o˜^ / ‰ğœ
+	// ã‚¨ãƒãƒŸãƒ¼ã®ç™»éŒ² / è§£é™¤
 	void RegistEnemy(AEnemyBase* Enemy);
 	void UnRegistEnemy(AEnemyBase* Enemy);
 
-	// ‘SƒGƒlƒ~[‚Ì‰ğœ
+	// å…¨ã‚¨ãƒãƒŸãƒ¼ã®è§£é™¤
 	void UnRegistAllEnemies();
 
-	// ƒGƒlƒ~[‚ª1l‚Å‚à¶‚«‚Ä‚¢‚é‚©
+	// ã‚¨ãƒãƒŸãƒ¼ãŒ1äººã§ã‚‚ç”Ÿãã¦ã„ã‚‹ã‹
 	bool IsAliveAnyEnemy();
 
-	// ‘SƒGƒlƒ~[‚ªŠJn‰Â”\ó‘Ô‚©
+	// å…¨ã‚¨ãƒãƒŸãƒ¼ãŒé–‹å§‹å¯èƒ½çŠ¶æ…‹ã‹
 	bool IsAllEnemyReady();
 
-	// ‘SƒGƒlƒ~[‚Ìæ“¾
+	// å…¨ã‚¨ãƒãƒŸãƒ¼ã®å–å¾—
 	TArray<AEnemyBase*> GetEnemyList() const { return EnemyList; }
 
-	// w’èÀ•W‚ÌƒGƒlƒ~[‚ğæ“¾
+	// æŒ‡å®šåº§æ¨™ã®ã‚¨ãƒãƒŸãƒ¼ã‚’å–å¾—
 	AEnemyBase* GetEnemy(FCoord Coord);
 
 private:

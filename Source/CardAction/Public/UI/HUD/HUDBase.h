@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -21,14 +21,14 @@ public:
 	bool IsPlayingInAnim();
 	bool IsPlayingOutAnim();
 
-	// ƒGƒ“ƒWƒ“‚©‚ç“Æ—§‚µ‚½XVƒNƒ‰ƒX
+	// ã‚¨ãƒ³ã‚¸ãƒ³ã‹ã‚‰ç‹¬ç«‹ã—ãŸæ›´æ–°ã‚¯ãƒ©ã‚¹
 	virtual void OnUpdate(float DeltaSec) {}
 
-	// ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒYˆÈŠO‚Å‚à•\¦‚·‚é‚©
+	// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºä»¥å¤–ã§ã‚‚è¡¨ç¤ºã™ã‚‹ã‹
 	virtual bool IsVisibleExceptActionPhase() { return true; }
 
 protected:
-	// ƒAƒjƒ[ƒVƒ‡ƒ“
+	// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
 	UWidgetAnimation* InAnim;
 	UPROPERTY(meta = (BindWidgetAnim), Transient)

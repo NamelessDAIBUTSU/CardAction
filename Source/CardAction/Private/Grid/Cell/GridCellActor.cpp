@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Grid/Cell/GridCellActor.h"
@@ -15,7 +15,7 @@ AGridCellActor::AGridCellActor()
 
     RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 
-    // ƒƒbƒVƒ…¶¬
+    // ãƒ¡ãƒƒã‚·ãƒ¥ç”Ÿæˆ
     MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
     EdgeLeftComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("EdgeLeft"));
     EdgeRightComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("EdgeRight"));
@@ -30,7 +30,7 @@ AGridCellActor::AGridCellActor()
         EdgeDownComp->SetupAttachment(RootComponent);
     }
 
-    // ƒRƒŠƒWƒ‡ƒ“¶¬
+    // ã‚³ãƒªã‚¸ãƒ§ãƒ³ç”Ÿæˆ
     AttackCollisionComp = CreateDefaultSubobject<UBoxComponent>(TEXT("Collision"));
     if (AttackCollisionComp)
     {
@@ -51,7 +51,7 @@ void AGridCellActor::BeginPlay()
 {
     Super::BeginPlay();
 
-    // ƒfƒtƒHƒ‹ƒgƒ}ƒeƒŠƒAƒ‹‚ğŒ»İ‚Ìƒ}ƒbƒvw’è‚Ì‚à‚Ì‚É•ÏX
+    // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒãƒ†ãƒªã‚¢ãƒ«ã‚’ç¾åœ¨ã®ãƒãƒƒãƒ—æŒ‡å®šã®ã‚‚ã®ã«å¤‰æ›´
     UMapManager* MapManager = GetWorld()->GetGameInstance()->GetSubsystem<UMapManager>();
     if (MapManager == nullptr || MapManager->GetCurrentMap() == nullptr)
         return;
@@ -59,7 +59,7 @@ void AGridCellActor::BeginPlay()
     UMaterialInterface* DefaultMaterial = MapData != nullptr ? MapData->DefaultMaterial : nullptr;
     CellData.DefaultMaterial = DefaultMaterial;
 
-    // ƒƒbƒVƒ…İ’è
+    // ãƒ¡ãƒƒã‚·ãƒ¥è¨­å®š
     if (CellData.GridCellType == EGridCellType::Normal)
     {
         MeshComp->SetMaterial(0, CellData.DefaultMaterial);
@@ -76,24 +76,24 @@ void AGridCellActor::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-// ƒZƒ‹ã‚ÌƒAƒNƒ^[‚ğ’Ç‰Á
+// ã‚»ãƒ«ä¸Šã®ã‚¢ã‚¯ã‚¿ãƒ¼ã‚’è¿½åŠ 
 void AGridCellActor::AddActorOnCell(AActor* Actor)
 {
     CellData.Objects.Add(Actor);
 
-    // ’Ç‰Á‚³‚ê‚½ƒAƒNƒ^[‚Ìí—Ş‚É‚æ‚Á‚Ä˜g‚Ìƒ}ƒeƒŠƒAƒ‹‚ğ•Ï‚¦‚é
+    // è¿½åŠ ã•ã‚ŒãŸã‚¢ã‚¯ã‚¿ãƒ¼ã®ç¨®é¡ã«ã‚ˆã£ã¦æ ã®ãƒãƒ†ãƒªã‚¢ãƒ«ã‚’å¤‰ãˆã‚‹
     if (AEnemyBase* Enemy = Cast<AEnemyBase>(Actor))
     {
         ChangeEdgeEnemyMaterial();
     }
-    // ƒvƒŒƒCƒ„[‚Éƒ_ƒ[ƒW
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ãƒ€ãƒ¡ãƒ¼ã‚¸
     if (AMyCharacter* Player = Cast<AMyCharacter>(Actor))
     {
         ChangeEdgePlayerMaterial();
     }
 }
 
-// ƒZƒ‹ã‚©‚çƒAƒNƒ^[‚ğœ‹
+// ã‚»ãƒ«ä¸Šã‹ã‚‰ã‚¢ã‚¯ã‚¿ãƒ¼ã‚’é™¤å»
 void AGridCellActor::RemoveActorFromCell(AActor* Actor)
 {
     for (int i = CellData.Objects.Num() - 1; i >= 0; --i)
@@ -102,13 +102,13 @@ void AGridCellActor::RemoveActorFromCell(AActor* Actor)
         {
             CellData.Objects.RemoveAt(i);
 
-            // ˜g‚ğ’Êí‚Ìƒ}ƒeƒŠƒAƒ‹‚É•ÏX
+            // æ ã‚’é€šå¸¸ã®ãƒãƒ†ãƒªã‚¢ãƒ«ã«å¤‰æ›´
             ChangeEdgeDefaultMaterial();
         }
     }
 }
 
-// ƒZƒ‹ã‚ÉƒAƒNƒ^[‘¶İ‚·‚é‚©
+// ã‚»ãƒ«ä¸Šã«ã‚¢ã‚¯ã‚¿ãƒ¼å­˜åœ¨ã™ã‚‹ã‹
 bool AGridCellActor::IsExistActorOnCell()
 {
     return CellData.Objects.IsEmpty() == false;
@@ -130,7 +130,7 @@ void AGridCellActor::ChangeDefaultMaterial()
         {
             MeshComp->SetMaterial(0, CellData.DefaultMaterial);
         }
-        // ƒƒbƒVƒ…‚ğ”ñ•\¦
+        // ãƒ¡ãƒƒã‚·ãƒ¥ã‚’éè¡¨ç¤º
         if (CellData.GridCellType == EGridCellType::None)
         {
             MeshComp->SetVisibility(false, true);
@@ -176,7 +176,7 @@ void AGridCellActor::ChangeEdgeEnemyMaterial()
     ChangeEdgeMaterial(EdgeEnemyMaterial);
 }
 
-// ƒZƒ‹ã‚ÌƒAƒNƒ^[‚Éƒ_ƒ[ƒWˆ—
+// ã‚»ãƒ«ä¸Šã®ã‚¢ã‚¯ã‚¿ãƒ¼ã«ãƒ€ãƒ¡ãƒ¼ã‚¸å‡¦ç†
 void AGridCellActor::ExecuteAttackToActorOnCell(AActor* AttackedActor, float Damage)
 {
     if (AttackedActor == nullptr)
@@ -191,11 +191,11 @@ void AGridCellActor::ExecuteAttackToActorOnCell(AActor* AttackedActor, float Dam
         return;
 
 
-    // ƒvƒŒƒCƒ„[‚©‚ç‚ÌUŒ‚‚©‚Ç‚¤‚©
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‹ã‚‰ã®æ”»æ’ƒã‹ã©ã†ã‹
     bool bFromPlayer = Cast<AWeaponActorBase>(AttackedActor) != nullptr;
 
-    // ƒZƒ‹ã‚ÌƒAƒNƒ^[‚ª•¡”‚¢‚éê‡‚Í‘S‚Ä‚Éƒ_ƒ[ƒWˆ—
-    // “G‚Éƒ_ƒ[ƒW
+    // ã‚»ãƒ«ä¸Šã®ã‚¢ã‚¯ã‚¿ãƒ¼ãŒè¤‡æ•°ã„ã‚‹å ´åˆã¯å…¨ã¦ã«ãƒ€ãƒ¡ãƒ¼ã‚¸å‡¦ç†
+    // æ•µã«ãƒ€ãƒ¡ãƒ¼ã‚¸
     if (bFromPlayer)
     {
         if (AEnemyBase* Enemy = EnemyManager->GetEnemy(CellData.GridCoord))
@@ -203,10 +203,10 @@ void AGridCellActor::ExecuteAttackToActorOnCell(AActor* AttackedActor, float Dam
             Enemy->OnTakeDamage(Damage);
         }
     }
-    // ƒvƒŒƒCƒ„[‚Éƒ_ƒ[ƒW
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ãƒ€ãƒ¡ãƒ¼ã‚¸
     else
     {
-        // ƒvƒŒƒCƒ„[‚Ìæ“¾
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å–å¾—
         APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
         if (PlayerController == nullptr)
             return;
@@ -221,7 +221,7 @@ void AGridCellActor::ExecuteAttackToActorOnCell(AActor* AttackedActor, float Dam
     }
 }
 
-// ƒZƒ‹ã‚É“G‚ª‘¶İ‚·‚é‚©
+// ã‚»ãƒ«ä¸Šã«æ•µãŒå­˜åœ¨ã™ã‚‹ã‹
 bool AGridCellActor::IsExistEnemyOnCell()
 {
     AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this));
@@ -235,10 +235,10 @@ bool AGridCellActor::IsExistEnemyOnCell()
     return EnemyManager->GetEnemy(CellData.GridCoord) != nullptr;
 }
 
-// ƒZƒ‹ã‚ÉƒvƒŒƒCƒ„[‚ª‘¶İ‚·‚é‚©
+// ã‚»ãƒ«ä¸Šã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå­˜åœ¨ã™ã‚‹ã‹
 bool AGridCellActor::IsExistPlayerOnCell()
 {
-    // ƒvƒŒƒCƒ„[‚Ìæ“¾
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å–å¾—
     APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
     if (PlayerController == nullptr)
         return false;
@@ -250,27 +250,27 @@ bool AGridCellActor::IsExistPlayerOnCell()
     return CellData.GridCoord == Player->GetCurrentCoord();
 }
 
-// UŒ‚—\‘ª‚Ì’Ç‰Á
+// æ”»æ’ƒäºˆæ¸¬ã®è¿½åŠ 
 void AGridCellActor::AddAttackSign()
 {
-    // ‚à‚Æ‚à‚ÆUŒ‚—\‘ª‚ğ•\¦‚µ‚Ä‚¢‚È‚¢‚©
+    // ã‚‚ã¨ã‚‚ã¨æ”»æ’ƒäºˆæ¸¬ã‚’è¡¨ç¤ºã—ã¦ã„ãªã„ã‹
     bool bWasNoSign = AttackSignCount == 0;
 
     AttackSignCount++;
 
-    // ‚à‚Æ‚à‚ÆUŒ‚—\‘ª‚ğ•\¦‚µ‚Ä‚¢‚È‚©‚Á‚½‚çAUŒ‚—\‘ª—p‚Ìƒ}ƒeƒŠƒAƒ‹‚É•ÏX
+    // ã‚‚ã¨ã‚‚ã¨æ”»æ’ƒäºˆæ¸¬ã‚’è¡¨ç¤ºã—ã¦ã„ãªã‹ã£ãŸã‚‰ã€æ”»æ’ƒäºˆæ¸¬ç”¨ã®ãƒãƒ†ãƒªã‚¢ãƒ«ã«å¤‰æ›´
     if (bWasNoSign)
     {
         ChangeDamageSignMaterial();
     }
 }
 
-// UŒ‚—\‘ª‚Ìœ‹
+// æ”»æ’ƒäºˆæ¸¬ã®é™¤å»
 void AGridCellActor::RemoveAttackSign()
 {
     AttackSignCount = FMath::Max(0, AttackSignCount - 1);
 
-    // ‚à‚µ‚àUŒ‚—\‘ªƒJƒEƒ“ƒ^[‚ª‚È‚©‚Á‚½‚çAƒfƒtƒHƒ‹ƒg‚ÌƒƒbƒVƒ…‚É–ß‚·
+    // ã‚‚ã—ã‚‚æ”»æ’ƒäºˆæ¸¬ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼ãŒãªã‹ã£ãŸã‚‰ã€ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒ¡ãƒƒã‚·ãƒ¥ã«æˆ»ã™
     if (AttackSignCount == 0)
     {
         ChangeDefaultMaterial();

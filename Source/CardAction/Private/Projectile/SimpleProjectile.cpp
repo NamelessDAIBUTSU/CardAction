@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Projectile/SimpleProjectile.h"
@@ -14,7 +14,7 @@ ASimpleProjectile::ASimpleProjectile()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-    // ‹…‚Ì“–‚½‚è”»’è
+    // çƒã®å½“ãŸã‚Šåˆ¤å®š
     CollisionComp = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComp"));
     CollisionComp->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
     CollisionComp->OnComponentHit.AddDynamic(this, &ASimpleProjectile::OnHit);
@@ -22,17 +22,17 @@ ASimpleProjectile::ASimpleProjectile()
     CollisionComp->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
     RootComponent = CollisionComp;
 
-    // ƒƒbƒVƒ…
+    // ãƒ¡ãƒƒã‚·ãƒ¥
     MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
     MeshComp->SetupAttachment(RootComponent);
 
-    // ˆÚ“®ƒRƒ“ƒ|[ƒlƒ“ƒg
+    // ç§»å‹•ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
     ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovement"));
     ProjectileMovement->InitialSpeed = 2000.f;
     ProjectileMovement->MaxSpeed = 2000.f;
-    // ‘¬“x‚É‡‚í‚¹‚Ä‰ñ“]
+    // é€Ÿåº¦ã«åˆã‚ã›ã¦å›è»¢
     ProjectileMovement->bRotationFollowsVelocity = true;
-    // d—Í‚È‚µ
+    // é‡åŠ›ãªã—
     ProjectileMovement->ProjectileGravityScale = 0.f;
 }
 
@@ -50,7 +50,7 @@ void ASimpleProjectile::Tick(float DeltaTime)
 
 }
 
-// “®“IƒIƒuƒWƒFƒNƒg‚Æ‚ÌÚG
+// å‹•çš„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã®æ¥è§¦
 void ASimpleProjectile::OnOverlap(UPrimitiveComponent* OverlappedComp,
     AActor* OtherActor,
     UPrimitiveComponent* OtherComp,
@@ -61,11 +61,11 @@ void ASimpleProjectile::OnOverlap(UPrimitiveComponent* OverlappedComp,
     if (OverlappedComp == nullptr || OtherActor == nullptr || OtherActor == this || OtherComp == nullptr)
         return;
 
-    // ƒvƒŒƒCƒ„[‚Í–³‹
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¯ç„¡è¦–
     if (Cast<AMyCharacter>(OtherActor))
         return;
 
-    // ƒ_ƒ[ƒW”»’è
+    // ãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤å®š
     if (AEnemyBase* Enemy = Cast<AEnemyBase>(OtherActor))
     {
         Enemy->OnTakeDamage(Damage);
@@ -73,11 +73,11 @@ void ASimpleProjectile::OnOverlap(UPrimitiveComponent* OverlappedComp,
 
 }
 
-// Ã“IƒIƒuƒWƒFƒNƒg‚Æ‚ÌÚG
+// é™çš„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã®æ¥è§¦
 void ASimpleProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor,
     UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-    // ’e‚ğÁ‚·‚¾‚¯
+    // å¼¾ã‚’æ¶ˆã™ã ã‘
     if (OtherActor && OtherActor != this)
     {
         Destroy();

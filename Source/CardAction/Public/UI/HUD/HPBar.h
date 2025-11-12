@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -16,7 +16,7 @@ enum class EHPBarType : uint8
 	Enemy       UMETA(DisplayName = "Enemy"),
 };
 
-// HPæ“¾—p‚ÌƒfƒŠƒQ[ƒg
+// HPå–å¾—ç”¨ã®ãƒ‡ãƒªã‚²ãƒ¼ãƒˆ
 DECLARE_DELEGATE_RetVal(int, FOnGetMaxHP);
 DECLARE_DELEGATE_RetVal(int, FOnGetCurrentHP);
 
@@ -35,10 +35,10 @@ public:
 	UFUNCTION()
 	void OnUpdateHPBar();
 
-	// ‰Šúİ’è
+	// åˆæœŸè¨­å®š
 	void Setup(UWidgetComponent* OwnerComp, const FOnGetMaxHP& GetMaxHPFunc, const FOnGetCurrentHP& GetCurrentHPFunc);
 
-	// ƒŒƒCƒAƒEƒg‚ğ•ÏX
+	// ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’å¤‰æ›´
 	void ChangeLayout(EHPBarType Type);
 
 
@@ -51,21 +51,21 @@ private:
 	UPROPERTY(meta = (BindWidget))
 	UTextBlock* PlayerHPText = nullptr;
 
-	// ƒAƒjƒ[ƒVƒ‡ƒ“
+	// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
 	UWidgetAnimation* EnemyLayout;
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
 	UWidgetAnimation* PlayerLayout;
 
 private:
-	// ’N—p‚©
+	// èª°ç”¨ã‹
 	EHPBarType BarType;
 
-	// HPæ“¾—pƒfƒŠƒQ[ƒg
+	// HPå–å¾—ç”¨ãƒ‡ãƒªã‚²ãƒ¼ãƒˆ
 	FOnGetMaxHP OnGetMaxHP;
 	FOnGetCurrentHP OnGetCurrentHP;
 
-	// ©g‚ğŠ—L‚µ‚Ä‚¢‚éƒEƒBƒWƒFƒbƒgƒRƒ“ƒ|[ƒlƒ“ƒg
+	// è‡ªèº«ã‚’æ‰€æœ‰ã—ã¦ã„ã‚‹ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 	UPROPERTY()
 	TWeakObjectPtr<UWidgetComponent> OwnerWidgetComp;
 };

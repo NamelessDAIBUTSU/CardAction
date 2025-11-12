@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -16,15 +16,15 @@ class CARDACTION_API UInitDeckData : public UDataAsset
 	GENERATED_BODY()
 	
 public:
-	// ƒfƒbƒL–¼
+	// ãƒ‡ãƒƒã‚­å
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	FName Name;
 
-	// ƒfƒbƒLà–¾
+	// ãƒ‡ãƒƒã‚­èª¬æ˜
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	FString Description;
 
-	// ‰ŠúƒJ[ƒh
+	// åˆæœŸã‚«ãƒ¼ãƒ‰
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	TArray<UCardData*> Cards;
 };

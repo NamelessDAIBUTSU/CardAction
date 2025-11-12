@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -8,7 +8,7 @@
 #include "BTTask_GridMove.generated.h"
 
 /**
- * üˆÍ‚Ì‚Ç‚±‚©‚Ö1ƒ}ƒXˆÚ“®
+ * å‘¨å›²ã®ã©ã“ã‹ã¸1ãƒã‚¹ç§»å‹•
  */
 UCLASS()
 class CARDACTION_API UBTTask_GridMove : public UBTTaskNode
@@ -23,11 +23,11 @@ public:
 	virtual void TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 
 public:
-	// ‰½•b‚ÅˆÚ“®‚·‚é‚©
+	// ä½•ç§’ã§ç§»å‹•ã™ã‚‹ã‹
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float GoalSec = 1.f;
 
-	// Î‚ßˆÚ“®‚ğ‹–‚·‚©
+	// æ–œã‚ç§»å‹•ã‚’è¨±ã™ã‹
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bCanMoveDiagonal = false;
 

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "UI/HUD/CardSelectWidget.h"
@@ -9,22 +9,22 @@
 #include <Kismet/GameplayStatics.h>
 #include <Character/MyPlayerController.h>
 
-// ‰Šú‰»
+// åˆæœŸåŒ–
 bool UCardSelectWidget::Initialize()
 {
     if (Super::Initialize() == false)
         return false;
 
-    // Œˆ’è‚ÌƒR[ƒ‹ƒoƒbƒN“o˜^
+    // æ±ºå®šæ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ç™»éŒ²
     if (DecideSelectButton)
     {
         DecideSelectButton->OnClicked.AddDynamic(this, &UCardSelectWidget::OnDecide);
     }
 
-    // Hidden¨Visible‚É•Ï‚í‚Á‚½‚Æ‚«‚Éƒtƒ‰ƒO‚ğ‰Šú‰»‚·‚é
+    // Hiddenâ†’Visibleã«å¤‰ã‚ã£ãŸã¨ãã«ãƒ•ãƒ©ã‚°ã‚’åˆæœŸåŒ–ã™ã‚‹
     OnVisibilityChanged.AddDynamic(this, &UCardSelectWidget::OnChangeVisibility);
 
-    // ƒJ[ƒhƒ{ƒbƒNƒXƒEƒBƒWƒFƒbƒg‚ğ”z—ñ‚É‚¢‚ê‚é
+    // ã‚«ãƒ¼ãƒ‰ãƒœãƒƒã‚¯ã‚¹ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã‚’é…åˆ—ã«ã„ã‚Œã‚‹
     CardBoxArray.Add(CardBox0);
     CardBoxArray.Add(CardBox1);
     CardBoxArray.Add(CardBox2);
@@ -43,34 +43,34 @@ void UCardSelectWidget::OnDecide()
     {
         bIsPlayingOutAnim = true;
 
-        // ƒoƒCƒ“ƒh‰ğœ
+        // ãƒã‚¤ãƒ³ãƒ‰è§£é™¤
         UnbindAllFromAnimationFinished(OutAnim);
 
-        // OutƒAƒjƒ[ƒVƒ‡ƒ“‚ğÄ¶
+        // Outã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å†ç”Ÿ
         StopAnimation(OutAnim); 
         PlayAnimation(OutAnim);
 
-        // ƒAƒjƒ[ƒVƒ‡ƒ“I—¹‚ÉŠm’èƒtƒ‰ƒO‚ğ—§‚Ä‚é‚æ‚¤ƒR[ƒ‹ƒoƒbƒN“o˜^
+        // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†æ™‚ã«ç¢ºå®šãƒ•ãƒ©ã‚°ã‚’ç«‹ã¦ã‚‹ã‚ˆã†ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ç™»éŒ²
         FWidgetAnimationDynamicEvent Delegate;
         Delegate.BindUFunction(this, FName("OnChangeIsDecided"));
         BindToAnimationFinished(OutAnim, Delegate);
     }
 }
 
-// ƒrƒWƒuƒ‹•ÏX‚ÌƒR[ƒ‹ƒoƒbƒN
+// ãƒ“ã‚¸ãƒ–ãƒ«å¤‰æ›´æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 void UCardSelectWidget::OnChangeVisibility(ESlateVisibility NextVisibility)
 {
     if (NextVisibility == ESlateVisibility::Visible)
     {
         bIsDecided = false;
 
-        // ‘I‘ğ’†ƒJ[ƒh‚Ì”z—ñ‚ğ‰Šú‰»
+        // é¸æŠä¸­ã‚«ãƒ¼ãƒ‰ã®é…åˆ—ã‚’åˆæœŸåŒ–
         for (int i = SelectCards.Num() - 1; i >= 0; --i)
         {
             SelectCards.RemoveAt(i);
         }
 
-        // èDƒJ[ƒh‚ğ‰Šú‰»
+        // æ‰‹æœ­ã‚«ãƒ¼ãƒ‰ã‚’åˆæœŸåŒ–
         AMyPlayerController* PlayerController = Cast<AMyPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
         if (PlayerController == nullptr)
             return;
@@ -91,7 +91,7 @@ void UCardSelectWidget::OnChangeIsDecided()
     bIsDecided = true;
     bIsPlayingOutAnim = false;
 
-    // ‘I‘ğ’†‚ÌƒJ[ƒh‚ğèD‚É‰Á‚¦‚é
+    // é¸æŠä¸­ã®ã‚«ãƒ¼ãƒ‰ã‚’æ‰‹æœ­ã«åŠ ãˆã‚‹
     {
         AMyPlayerController* PlayerController = Cast<AMyPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
         if (PlayerController == nullptr)
@@ -102,16 +102,16 @@ void UCardSelectWidget::OnChangeIsDecided()
         if (HandCardsWidget == nullptr)
             return;
 
-        // èD‚É‰Á‚¦‚é
+        // æ‰‹æœ­ã«åŠ ãˆã‚‹
         for (int i = 0; i < SelectCards.Num(); ++i)
         {
             HandCardsWidget->AddToHandCards(i, SelectCards[i]);
 
-            // ‰Á‚¦‚½ƒJ[ƒh‚ÌƒEƒBƒWƒFƒbƒg‚Ìó‘Ô‚ğƒfƒtƒHƒ‹ƒg‚É–ß‚·
+            // åŠ ãˆãŸã‚«ãƒ¼ãƒ‰ã®ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®çŠ¶æ…‹ã‚’ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã«æˆ»ã™
             HandCardsWidget->PlayDefaultAnimation(i);
         }
 
-        // ‹ó‚ª‚ ‚ê‚Înullptr‚ğİ’è
+        // ç©ºãŒã‚ã‚Œã°nullptrã‚’è¨­å®š
         for (int i = SelectCards.Num(); i < MAX_HAND_CARDS_NUM; ++i)
         {
             HandCardsWidget->AddToHandCards(i, nullptr);
@@ -128,7 +128,7 @@ void UCardSelectWidget::PlayInAnim()
     }
 }
 
-// ƒJ[ƒhƒEƒBƒWƒFƒbƒg‚Ì¶¬
+// ã‚«ãƒ¼ãƒ‰ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®ç”Ÿæˆ
 void UCardSelectWidget::CreateCardWidgets(const TArray<UCardData*>& CardDataArray)
 {
     if (CardWidgetClass == nullptr)
@@ -136,19 +136,19 @@ void UCardSelectWidget::CreateCardWidgets(const TArray<UCardData*>& CardDataArra
 
     for (int i = 0; i < CardDataArray.Num(); ++i)
     {
-        // ‚¸‚ê‚È‚¢‘z’è‚¾‚¯‚ÇAƒJ[ƒhƒ{ƒbƒNƒX‚ª‘¶İ‚µ‚È‚©‚Á‚½‚ç”²‚¯‚é
+        // ãšã‚Œãªã„æƒ³å®šã ã‘ã©ã€ã‚«ãƒ¼ãƒ‰ãƒœãƒƒã‚¯ã‚¹ãŒå­˜åœ¨ã—ãªã‹ã£ãŸã‚‰æŠœã‘ã‚‹
         if (CardBoxArray.Num() <= i || CardBoxArray[i] == nullptr)
             break;
 
-        // ƒJ[ƒhƒEƒBƒWƒFƒbƒg‚Ì¶¬
+        // ã‚«ãƒ¼ãƒ‰ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®ç”Ÿæˆ
         UCardWidget* CardWidget = CreateWidget<UCardWidget>(GetWorld(), CardWidgetClass);
         if (CardWidget == nullptr)
             return;
 
-        // ƒJ[ƒhƒf[ƒ^‚ğ‰Šú‰»
+        // ã‚«ãƒ¼ãƒ‰ãƒ‡ãƒ¼ã‚¿ã‚’åˆæœŸåŒ–
         {
             FCardWidgetOption Option;
-            // ƒfƒŠƒQ[ƒg‚É‘I‘ğƒJ[ƒh”z—ñ‚ÌXV‚Ìˆ—‚ğ“ü‚ê‚é
+            // ãƒ‡ãƒªã‚²ãƒ¼ãƒˆã«é¸æŠã‚«ãƒ¼ãƒ‰é…åˆ—ã®æ›´æ–°ã®å‡¦ç†ã‚’å…¥ã‚Œã‚‹
             Option.SelectCardDelegate.BindLambda([this](UCardData* CardData)
                 {
                     if (IsValid(this) == false)
@@ -173,7 +173,7 @@ void UCardSelectWidget::CreateCardWidgets(const TArray<UCardData*>& CardDataArra
             CardWidget->Initialize(CardDataArray[i], Option);
         }
 
-        // ƒTƒCƒYƒ{ƒbƒNƒX‚É’Ç‰Á
+        // ã‚µã‚¤ã‚ºãƒœãƒƒã‚¯ã‚¹ã«è¿½åŠ 
         CardBoxArray[i]->RemoveChildAt(0);
         if (USizeBoxSlot* BoxSlot = Cast<USizeBoxSlot>(CardBoxArray[i]->AddChild(CardWidget)))
         {
@@ -181,13 +181,13 @@ void UCardSelectWidget::CreateCardWidgets(const TArray<UCardData*>& CardDataArra
     }
 }
 
-// Å‘å‚Ü‚Å‘I‘ğ‚µ‚Ä‚¢‚é‚©
+// æœ€å¤§ã¾ã§é¸æŠã—ã¦ã„ã‚‹ã‹
 bool UCardSelectWidget::IsSelectMax() const 
 {
     return SelectCards.Num() == MAX_HAND_CARDS_NUM; 
 }
 
-// ŠY“–ƒJ[ƒh‚Ì‡”Ôæ“¾
+// è©²å½“ã‚«ãƒ¼ãƒ‰ã®é †ç•ªå–å¾—
 int UCardSelectWidget::GetSelectIndex(const FName& ID)
 {
     for (int index = 0; index < SelectCards.Num(); ++index)
@@ -199,7 +199,7 @@ int UCardSelectWidget::GetSelectIndex(const FName& ID)
     return -1;
 }
 
-// ‘I‘ğ’†ƒJ[ƒh‚Ì‘I‘ğ”Ô†ƒeƒLƒXƒg‚ğƒŠƒtƒŒƒbƒVƒ…‚·‚é
+// é¸æŠä¸­ã‚«ãƒ¼ãƒ‰ã®é¸æŠç•ªå·ãƒ†ã‚­ã‚¹ãƒˆã‚’ãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥ã™ã‚‹
 void UCardSelectWidget::OnRefleshSelectNumText(UUMGSequencePlayer& Player)
 {
     for (auto* CardBox : CardBoxArray)

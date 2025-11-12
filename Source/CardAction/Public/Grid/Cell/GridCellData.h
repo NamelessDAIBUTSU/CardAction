@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -13,19 +13,19 @@ struct CARDACTION_API FGridCellData
 	GENERATED_BODY()
 
 public:
-	// ƒOƒŠƒbƒh“à‚ÌÀ•W
+	// ã‚°ãƒªãƒƒãƒ‰å†…ã®åº§æ¨™
 	UPROPERTY()
 	FCoord GridCoord;
 
-	// ƒZƒ‹‚Ìí—Ş
+	// ã‚»ãƒ«ã®ç¨®é¡
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EGridCellType GridCellType = EGridCellType::Normal;
 
-	// ƒZƒ‹‚Éæ‚Á‚Ä‚¢‚éƒAƒNƒ^[î•ñ
+	// ã‚»ãƒ«ã«ä¹—ã£ã¦ã„ã‚‹ã‚¢ã‚¯ã‚¿ãƒ¼æƒ…å ±
 	UPROPERTY()
 	TArray<AActor*> Objects;
 
-	// ƒ}ƒeƒŠƒAƒ‹
+	// ãƒãƒ†ãƒªã‚¢ãƒ«
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Material")
 	UMaterialInterface* DefaultMaterial = nullptr;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Material")

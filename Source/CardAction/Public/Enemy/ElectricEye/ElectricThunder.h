@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -24,11 +24,11 @@ public:
 	virtual void Tick(float DeltaSec) override;
 
 public:
-	// ƒGƒtƒFƒNƒgÄ¶‚ÌƒR[ƒ‹ƒoƒbƒN
+	// ã‚¨ãƒ•ã‚§ã‚¯ãƒˆå†ç”Ÿæ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 	UFUNCTION()
 	void OnPlayEffect();
 
-	// ƒGƒtƒFƒNƒgI—¹‚ÌƒR[ƒ‹ƒoƒbƒN
+	// ã‚¨ãƒ•ã‚§ã‚¯ãƒˆçµ‚äº†æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 	UFUNCTION()
 	void OnAttack();
 

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Grid/GridManager.h"
@@ -26,20 +26,20 @@ void AGridManager::Tick(float DeltaTime)
 
 }
 
-// ‰Šú‰»
+// åˆæœŸåŒ–
 void AGridManager::Initialize()
 {
-	// ƒOƒŠƒbƒh¶¬
+	// ã‚°ãƒªãƒƒãƒ‰ç”Ÿæˆ
 	GenerateGrid();
 
-	// ƒOƒŠƒbƒhã‚ÉƒGƒlƒ~[¶¬
+	// ã‚°ãƒªãƒƒãƒ‰ä¸Šã«ã‚¨ãƒãƒŸãƒ¼ç”Ÿæˆ
 	SpawnEnemies();
 }
 
-// ƒOƒŠƒbƒh¶¬
+// ã‚°ãƒªãƒƒãƒ‰ç”Ÿæˆ
 void AGridManager::GenerateGrid()
 {
-	// ¶¬‚·‚éƒOƒŠƒbƒhƒf[ƒ^‚Ìæ“¾
+	// ç”Ÿæˆã™ã‚‹ã‚°ãƒªãƒƒãƒ‰ãƒ‡ãƒ¼ã‚¿ã®å–å¾—
 	UMapManager* MapManager = GetWorld()->GetGameInstance()->GetSubsystem<UMapManager>();
 	if (MapManager == nullptr || MapManager->GetCurrentStage() == nullptr)
 		return;
@@ -48,7 +48,7 @@ void AGridManager::GenerateGrid()
 	if (GenerateGridData == nullptr)
 		return;
 
-	// ƒOƒŠƒbƒhƒZƒ‹‚ÌƒXƒ|[ƒ“ˆÊ’u
+	// ã‚°ãƒªãƒƒãƒ‰ã‚»ãƒ«ã®ã‚¹ãƒãƒ¼ãƒ³ä½ç½®
 	FVector SpawnPosition = FVector::Zero();
 
 	const auto& CellActors = GenerateGridData->GridCellActors;
@@ -59,12 +59,12 @@ void AGridManager::GenerateGrid()
 
 		for (int32 X = 0; X < CellActors[Y].RowCells.Num(); ++X)
 		{
-			// ‹ó‚ÌƒOƒŠƒbƒhƒZƒ‹
+			// ç©ºã®ã‚°ãƒªãƒƒãƒ‰ã‚»ãƒ«
 			if (CellActors[Y].RowCells[X] == nullptr)
 			{
 				Row.Add(nullptr);
 			}
-			// ’ÊíƒOƒŠƒbƒhƒZƒ‹
+			// é€šå¸¸ã‚°ãƒªãƒƒãƒ‰ã‚»ãƒ«
 			else
 			{
 				FActorSpawnParameters SpawnParams;
@@ -79,12 +79,12 @@ void AGridManager::GenerateGrid()
 				}
 			}
 
-			// Ÿ‚ÉƒXƒ|[ƒ“‚·‚éˆÊ’u‚ğİ’è
+			// æ¬¡ã«ã‚¹ãƒãƒ¼ãƒ³ã™ã‚‹ä½ç½®ã‚’è¨­å®š
 			if (X < CellActors[Y].RowCells.Num() - 1)
 			{
 				SpawnPosition.Y += GRID_CELL_UNIT;
 			}
-			// Ÿ‚Ìs‚ÉˆÚ“®
+			// æ¬¡ã®è¡Œã«ç§»å‹•
 			else
 			{
 				SpawnPosition.X -= GRID_CELL_UNIT;
@@ -92,24 +92,24 @@ void AGridManager::GenerateGrid()
 			}
 		}
 
-		// s“à—e‚ğ“o˜^
+		// è¡Œå†…å®¹ã‚’ç™»éŒ²
 		Grid.Add(Row);
 	}
 }
 
-// ƒvƒŒƒCƒ„[‚ğƒXƒ|[ƒ“‚³‚¹‚éƒ[ƒ‹ƒhÀ•Wæ“¾
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ã‚¹ãƒãƒ¼ãƒ³ã•ã›ã‚‹ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™å–å¾—
 FVector AGridManager::GetPlayerSpawnPosition()
 {
 	if(GenerateGridData == nullptr)
 		return FVector();
 
-	// ƒOƒŠƒbƒhƒf[ƒ^‚ÌƒvƒŒƒCƒ„[ƒXƒ|[ƒ“ˆÊ’u‚©‚çƒ[ƒ‹ƒhÀ•W‚ğæ“¾
+	// ã‚°ãƒªãƒƒãƒ‰ãƒ‡ãƒ¼ã‚¿ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚¹ãƒãƒ¼ãƒ³ä½ç½®ã‹ã‚‰ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã‚’å–å¾—
 	FVector PlayerSpawnPosition = ConvertToWorldPosition(GenerateGridData->PlayerSpawnCoord);
 
 	return PlayerSpawnPosition;
 }
 
-// ƒAƒNƒZƒX‰Â”\‚ÈƒOƒŠƒbƒhƒZƒ‹‚©
+// ã‚¢ã‚¯ã‚»ã‚¹å¯èƒ½ãªã‚°ãƒªãƒƒãƒ‰ã‚»ãƒ«ã‹
 bool AGridManager::IsAccessableGridCell(FVector CheckPosition)
 {
 	FCoord Coord = ConvertToGridCoord(CheckPosition);
@@ -122,18 +122,18 @@ bool AGridManager::IsAccessableGridCell(FCoord Coord)
 		return false;
 
 	bool bIsAccessable = true;
-	// ˆÈ‰ºAğŒ”»’è
-	// ƒZƒ‹ã‚ÉƒIƒuƒWƒFƒNƒg‚ª‚ ‚é‚È‚çNG
+	// ä»¥ä¸‹ã€æ¡ä»¶åˆ¤å®š
+	// ã‚»ãƒ«ä¸Šã«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒã‚ã‚‹ãªã‚‰NG
 	bIsAccessable &= GridCell->IsExistActorOnCell() == false;
-	// ‹óƒZƒ‹‚ÍNG
+	// ç©ºã‚»ãƒ«ã¯NG
 	bIsAccessable &= GridCell->CellData.GridCellType != EGridCellType::None;
-	// ˆÚ“®æ‚Éw’è‚³‚ê‚Ä‚¢‚éƒZƒ‹‚ÍNG
+	// ç§»å‹•å…ˆã«æŒ‡å®šã•ã‚Œã¦ã„ã‚‹ã‚»ãƒ«ã¯NG
 	bIsAccessable &= GridCell->IsMoveTargetCell() == false;
 
 	return bIsAccessable;
 }
 
-// ƒGƒlƒ~[‚ğƒOƒŠƒbƒhã‚ÉƒXƒ|[ƒ“
+// ã‚¨ãƒãƒŸãƒ¼ã‚’ã‚°ãƒªãƒƒãƒ‰ä¸Šã«ã‚¹ãƒãƒ¼ãƒ³
 void AGridManager::SpawnEnemies()
 {
 	if (GenerateGridData == nullptr)
@@ -143,10 +143,10 @@ void AGridManager::SpawnEnemies()
 	if (MapManager == nullptr || MapManager->GetCurrentStage() == nullptr)
 		return;
 
-	// ƒXƒ|[ƒ“‰Â”\‚ÈÀ•W‚Ìæ“¾
+	// ã‚¹ãƒãƒ¼ãƒ³å¯èƒ½ãªåº§æ¨™ã®å–å¾—
 	TArray<FCoord> SpawnableCoords = GenerateGridData->EnemySpawnableCoords;
 
-	// ƒXƒ|[ƒ“‚³‚¹‚é“G‚Ì”‚ğæ“¾
+	// ã‚¹ãƒãƒ¼ãƒ³ã•ã›ã‚‹æ•µã®æ•°ã‚’å–å¾—
 	const int SpawnEnemyNum = GenerateGridData->SpawnEnemyNum;
 
 	for (auto EnemyClass : MapManager->GetCurrentStage()->GetEnemyClassList())
@@ -154,19 +154,19 @@ void AGridManager::SpawnEnemies()
 		if (SpawnableCoords.IsEmpty())
 			break;
 
-		// ƒXƒ|[ƒ“‚·‚éˆÊ’u‚ğŒˆ’è
+		// ã‚¹ãƒãƒ¼ãƒ³ã™ã‚‹ä½ç½®ã‚’æ±ºå®š
 		int RandomIndex = FMath::RandRange(0, SpawnableCoords.Num() - 1);
 		FCoord SpawnCoord = SpawnableCoords[RandomIndex];
 		FVector SpawnPosition = FVector(SpawnCoord.Y * GRID_CELL_UNIT * -1.f, SpawnCoord.X * GRID_CELL_UNIT, GRID_CELL_HEIGHT_UNIT * 0.5f);
 		
-		// ƒXƒ|[ƒ“
+		// ã‚¹ãƒãƒ¼ãƒ³
 		AEnemyBase* NewEnemy = GetWorld()->SpawnActor<AEnemyBase>(EnemyClass, SpawnPosition, FRotator(0.f, 180.f, 0.f));
 		if (NewEnemy)
 		{
-			// ƒXƒ|[ƒ“‚³‚¹‚½ƒZƒ‹‚ÉƒAƒNƒ^[‚ğ’Ç‰Á
+			// ã‚¹ãƒãƒ¼ãƒ³ã•ã›ãŸã‚»ãƒ«ã«ã‚¢ã‚¯ã‚¿ãƒ¼ã‚’è¿½åŠ 
 			AddActorOnCell(NewEnemy, SpawnCoord);
 
-			// ZˆÊ’u‚ğ•â³
+			// Zä½ç½®ã‚’è£œæ­£
 			UCapsuleComponent* Capsule = NewEnemy->GetCapsuleComponent();
 			if (Capsule)
 			{
@@ -176,16 +176,16 @@ void AGridManager::SpawnEnemies()
 				NewEnemy->SetActorLocation(AdjustedPos);
 			}
 
-			// À•W‚Ìİ’è
+			// åº§æ¨™ã®è¨­å®š
 			NewEnemy->SetCurrentCoord(SpawnCoord);
 		}
 
-		// ƒXƒ|[ƒ“‰Â”\ˆÊ’u‚ğŒ¸‚ç‚·
+		// ã‚¹ãƒãƒ¼ãƒ³å¯èƒ½ä½ç½®ã‚’æ¸›ã‚‰ã™
 		SpawnableCoords.RemoveAt(RandomIndex);
 	}
 }
 
-// ƒZƒ‹ã‚ÉƒAƒNƒ^[‚ğ“o˜^
+// ã‚»ãƒ«ä¸Šã«ã‚¢ã‚¯ã‚¿ãƒ¼ã‚’ç™»éŒ²
 void AGridManager::AddActorOnCell(AActor* Actor, FCoord Coord)
 {
 	if (IsInGrid(Coord) == false)
@@ -197,7 +197,7 @@ void AGridManager::AddActorOnCell(AActor* Actor, FCoord Coord)
 	}
 }
 
-// ƒZƒ‹ã‚©‚çw’èƒAƒNƒ^[‚Ìî•ñ‚ğíœ
+// ã‚»ãƒ«ä¸Šã‹ã‚‰æŒ‡å®šã‚¢ã‚¯ã‚¿ãƒ¼ã®æƒ…å ±ã‚’å‰Šé™¤
 void AGridManager::RemoveActorFromCell(AActor* Actor, FCoord Coord)
 {
 	if (IsInGrid(Coord) == false)
@@ -209,7 +209,7 @@ void AGridManager::RemoveActorFromCell(AActor* Actor, FCoord Coord)
 	}
 }
 
-// ƒZƒ‹ã‚ÌƒAƒNƒ^[‚Éƒ_ƒ[ƒW”»’è
+// ã‚»ãƒ«ä¸Šã®ã‚¢ã‚¯ã‚¿ãƒ¼ã«ãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤å®š
 void AGridManager::ExecuteAttackToGridCell(AActor* AttackedActor, float Damage, FCoord Coord)
 {
 	if (IsInGrid(Coord) == false)
@@ -221,26 +221,26 @@ void AGridManager::ExecuteAttackToGridCell(AActor* AttackedActor, float Damage, 
 	}
 }
 
-// ƒZƒ‹ã‚ÌƒAƒNƒ^[î•ñXV
+// ã‚»ãƒ«ä¸Šã®ã‚¢ã‚¯ã‚¿ãƒ¼æƒ…å ±æ›´æ–°
 void AGridManager::RefleshActorInfoOnCell(AActor* MoveActor, FCoord FromCoord, FCoord ToCoord)
 {
 	if (MoveActor == nullptr)
 		return;
 
-	// ˆÚ“®Œ³‚ÌƒZƒ‹‚©‚çƒAƒNƒ^[î•ñ‚ğœ‹
+	// ç§»å‹•å…ƒã®ã‚»ãƒ«ã‹ã‚‰ã‚¢ã‚¯ã‚¿ãƒ¼æƒ…å ±ã‚’é™¤å»
 	if (AGridCellActor* FromCell = GetGridCellActor(FromCoord))
 	{
 		FromCell->RemoveActorFromCell(MoveActor);
 	}
 
-	// ˆÚ“®æ‚ÌƒZƒ‹‚ÉƒAƒNƒ^[î•ñ‚ğ’Ç‰Á
+	// ç§»å‹•å…ˆã®ã‚»ãƒ«ã«ã‚¢ã‚¯ã‚¿ãƒ¼æƒ…å ±ã‚’è¿½åŠ 
 	if (AGridCellActor* ToCell = GetGridCellActor(ToCoord))
 	{
 		ToCell->AddActorOnCell(MoveActor);
 	}
 }
 
-// ˆÚ“®æ—\’èƒZƒ‹‚ğ“o˜^/‰ğœ
+// ç§»å‹•å…ˆäºˆå®šã‚»ãƒ«ã‚’ç™»éŒ²/è§£é™¤
 void AGridManager::SetMoveTargetCell(FCoord Coord, bool Value)
 {
 	if (AGridCellActor* Cell = GetGridCellActor(Coord))
@@ -249,7 +249,7 @@ void AGridManager::SetMoveTargetCell(FCoord Coord, bool Value)
 	}
 }
 
-// UŒ‚—\‘ª‚ğ’Ç‰Á
+// æ”»æ’ƒäºˆæ¸¬ã‚’è¿½åŠ 
 void AGridManager::AddAttackSign(FCoord Coord)
 {
 	if (AGridCellActor* TargetCell = GetGridCellActor(Coord))
@@ -258,7 +258,7 @@ void AGridManager::AddAttackSign(FCoord Coord)
 	}
 }
 
-// UŒ‚—\‘ª‚ğœ‹
+// æ”»æ’ƒäºˆæ¸¬ã‚’é™¤å»
 void AGridManager::RemoveAttackSign(FCoord Coord)
 {
 	if (AGridCellActor* TargetCell = GetGridCellActor(Coord))
@@ -267,7 +267,7 @@ void AGridManager::RemoveAttackSign(FCoord Coord)
 	}
 }
 
-// ƒOƒŠƒbƒhã‚É“G‚ª‘¶İ‚·‚é‚©
+// ã‚°ãƒªãƒƒãƒ‰ä¸Šã«æ•µãŒå­˜åœ¨ã™ã‚‹ã‹
 bool AGridManager::IsExistEnemyOnGrid()
 {
 	bool bIsExistEnemy = false;
@@ -279,7 +279,7 @@ bool AGridManager::IsExistEnemyOnGrid()
 			if (Cell == nullptr)
 				continue;
 
-			// “G‚ª‚¢‚é
+			// æ•µãŒã„ã‚‹
 			if (Cell->IsExistEnemyOnCell())
 			{
 				return true;
@@ -290,7 +290,7 @@ bool AGridManager::IsExistEnemyOnGrid()
 	return false;
 }
 
-// ƒOƒŠƒbƒhƒ}ƒXã‚É“G‚ª‘¶İ‚·‚é‚©
+// ã‚°ãƒªãƒƒãƒ‰ãƒã‚¹ä¸Šã«æ•µãŒå­˜åœ¨ã™ã‚‹ã‹
 bool AGridManager::IsExistEnemyOnGridCell(FCoord Coord)
 {
 	if (AGridCellActor* TargetCell = GetGridCellActor(Coord))
@@ -301,7 +301,7 @@ bool AGridManager::IsExistEnemyOnGridCell(FCoord Coord)
 	return false;
 }
 
-// ƒZƒ‹ã‚ÉƒvƒŒƒCƒ„[‚ª‘¶İ‚·‚é‚©
+// ã‚»ãƒ«ä¸Šã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå­˜åœ¨ã™ã‚‹ã‹
 bool AGridManager::IsExistPlayerOnGridCell(FCoord Coord)
 {
 	if (AGridCellActor* TargetCell = GetGridCellActor(Coord))
@@ -312,19 +312,19 @@ bool AGridManager::IsExistPlayerOnGridCell(FCoord Coord)
 	return false;
 }
 
-// ƒOƒŠƒbƒhÀ•W ¨ ƒ[ƒ‹ƒhÀ•W‚É•ÏŠ·
+// ã‚°ãƒªãƒƒãƒ‰åº§æ¨™ â†’ ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã«å¤‰æ›
 FVector AGridManager::ConvertToWorldPosition(FCoord Coord)
 {
-	// ã•ûŒü‚ªX²‚Ì‚½‚ßACoord.X‚ÆCoord.Y‚ğ‹t‚Ég—p
+	// ä¸Šæ–¹å‘ãŒXè»¸ã®ãŸã‚ã€Coord.Xã¨Coord.Yã‚’é€†ã«ä½¿ç”¨
 	FVector Position = FVector(Coord.Y * GRID_CELL_UNIT * -1.f, Coord.X * GRID_CELL_UNIT, GRID_CELL_HEIGHT_UNIT * 0.5f);
 
 	return Position;
 }
 
-// ƒ[ƒ‹ƒhÀ•W ¨ ƒOƒŠƒbƒhÀ•W‚É•ÏŠ·
+// ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ â†’ ã‚°ãƒªãƒƒãƒ‰åº§æ¨™ã«å¤‰æ›
 FCoord AGridManager::ConvertToGridCoord(FVector Position)
 {
-	// ã•ûŒü‚ªX²‚Ì‚½‚ßACoord.X‚ÆCoord.Y‚ğ‹t‚Ég—p
+	// ä¸Šæ–¹å‘ãŒXè»¸ã®ãŸã‚ã€Coord.Xã¨Coord.Yã‚’é€†ã«ä½¿ç”¨
 	float X = Position.Y / GRID_CELL_UNIT;
 	float Y = (Position.X * -1.f) / GRID_CELL_UNIT;
 	int32 XCoord = FMath::RoundToInt(X);
@@ -333,22 +333,22 @@ FCoord AGridManager::ConvertToGridCoord(FVector Position)
 	return FCoord(XCoord, YCoord);
 }
 
-// “ñ‚Â‚ÌÀ•W‚ª cE‰¡EÎ‚ß ‚Ì‚¢‚¸‚ê‚©‚Ìüã‚É‚¢‚é‚©
+// äºŒã¤ã®åº§æ¨™ãŒ ç¸¦ãƒ»æ¨ªãƒ»æ–œã‚ ã®ã„ãšã‚Œã‹ã®ç·šä¸Šã«ã„ã‚‹ã‹
 bool AGridManager::IsSameLine(FCoord Coord1, FCoord Coord2)
 {
 	bool bIsSameLine = false;
 
-	// ‰¡
+	// æ¨ª
 	bIsSameLine |= Coord1.X == Coord2.X;
-	// c
+	// ç¸¦
 	bIsSameLine |= Coord1.Y == Coord2.Y;
-	// Î‚ß
+	// æ–œã‚
 	bIsSameLine |= FMath::Abs(Coord1.X + Coord1.Y) == FMath::Abs(Coord2.X + Coord2.Y);
 
 	return bIsSameLine;
 }
 
-// ƒvƒŒƒCƒ„[‚Æw’èÀ•W‚ª“¯üã‚É‚¢‚é‚©
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨æŒ‡å®šåº§æ¨™ãŒåŒç·šä¸Šã«ã„ã‚‹ã‹
 bool AGridManager::IsPlayerSameLine(FCoord Coord)
 {
 	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
@@ -358,7 +358,7 @@ bool AGridManager::IsPlayerSameLine(FCoord Coord)
 	if (Pawn == nullptr)
 		return false;
 
-	// ƒvƒŒƒCƒ„[ƒLƒƒƒ‰ƒNƒ^[î•ñ‚ÉƒAƒNƒZƒX
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼æƒ…å ±ã«ã‚¢ã‚¯ã‚»ã‚¹
 	AMyCharacter* Player = Cast<AMyCharacter>(Pawn);
 	if (Player)
 	{
@@ -368,7 +368,7 @@ bool AGridManager::IsPlayerSameLine(FCoord Coord)
 	return false;
 }
 
-// ƒOƒŠƒbƒhÀ•W”ÍˆÍŠOƒ`ƒFƒbƒN
+// ã‚°ãƒªãƒƒãƒ‰åº§æ¨™ç¯„å›²å¤–ãƒã‚§ãƒƒã‚¯
 bool AGridManager::IsInGrid(FCoord Coord)
 {
 	if (Coord.Y < 0 || Grid.Num() <= Coord.Y)
@@ -379,7 +379,7 @@ bool AGridManager::IsInGrid(FCoord Coord)
 	return true;
 }
 
-// ƒOƒŠƒbƒhƒZƒ‹‚ğæ“¾
+// ã‚°ãƒªãƒƒãƒ‰ã‚»ãƒ«ã‚’å–å¾—
 AGridCellActor* AGridManager::GetGridCellActor(FCoord Coord)
 {
 	if (IsInGrid(Coord) == false)
@@ -393,7 +393,7 @@ AGridCellActor* AGridManager::GetGridCellActor(FVector Position)
 	return GetGridCellActor(Coord);
 }
 
-// ƒOƒŠƒbƒhƒTƒCƒY‚Ìæ“¾
+// ã‚°ãƒªãƒƒãƒ‰ã‚µã‚¤ã‚ºã®å–å¾—
 FVector2D AGridManager::GetGridSize()
 {
 	if (Grid.IsEmpty())

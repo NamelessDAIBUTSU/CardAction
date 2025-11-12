@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Weapon/SimpleGun.h"
@@ -11,15 +11,15 @@ void ASimpleGun::OnAttack()
     if (GetWorld() == nullptr || WeaponOwner == nullptr || BPProjectile == nullptr)
         return;
 
-    // ŽËo‚ðƒvƒŒƒCƒ„[³–Ê•ûŒü‚ÉÝ’è
+    // å°„å‡ºã‚’ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ­£é¢æ–¹å‘ã«è¨­å®š
     FVector MuzzleLocation = WeaponOwner->GetActorLocation() + WeaponOwner->GetActorForwardVector() * 100.f + WeaponOwner->MazzleOffset;
 
-    // ¶¬‚É•K—v‚Èî•ñ‚ðÝ’è
-    // ”­ŽËŒû‚ðƒvƒŒƒCƒ„[‚Ì’†S‚ ‚½‚è‚ÉÝ’è
+    // ç”Ÿæˆã«å¿…è¦ãªæƒ…å ±ã‚’è¨­å®š
+    // ç™ºå°„å£ã‚’ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä¸­å¿ƒã‚ãŸã‚Šã«è¨­å®š
     FVector PlayerCenterLocation = WeaponOwner->GetActorLocation() + WeaponOwner->MazzleOffset;
-    // ‰‘¬“x‚ðŽËo•ûŒü‚É‚·‚é
+    // åˆé€Ÿåº¦ã‚’å°„å‡ºæ–¹å‘ã«ã™ã‚‹
     FVector LaunchDir = (MuzzleLocation - PlayerCenterLocation).GetSafeNormal();
-    // ŽËo•ûŒü‚Ö‚Ì‰ñ“]
+    // å°„å‡ºæ–¹å‘ã¸ã®å›žè»¢
     FRotator MuzzleRotation = LaunchDir.Rotation();
 
     FActorSpawnParameters SpawnParams;
@@ -27,7 +27,7 @@ void ASimpleGun::OnAttack()
     SpawnParams.Instigator = WeaponOwner->GetInstigator();
     SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
-    // ’e‚Ì¶¬
+    // å¼¾ã®ç”Ÿæˆ
     ASimpleProjectile* Projectile = GetWorld()->SpawnActor<ASimpleProjectile>(
         BPProjectile,
         MuzzleLocation,
@@ -37,9 +37,9 @@ void ASimpleGun::OnAttack()
 
     if (Projectile)
     {
-        // ‰‘¬‚ÌÝ’è
+        // åˆé€Ÿã®è¨­å®š
         Projectile->ProjectileMovement->Velocity = LaunchDir * Projectile->ProjectileMovement->InitialSpeed;
-        // ƒ_ƒ[ƒW‚ÌÝ’è
+        // ãƒ€ãƒ¡ãƒ¼ã‚¸ã®è¨­å®š
         Projectile->Damage = Damage;
     }
 }

@@ -1,19 +1,19 @@
-#pragma once
+ï»¿#pragma once
 
 #include "CoreMinimal.h"
 #include "StageDef.generated.h"
 
-// ƒXƒe[ƒW‚Ìis•ûŒü‚ÉŒq‚ª‚éƒXƒe[ƒW‚ÌÅ¬EÅ‘å”
+// ã‚¹ãƒ†ãƒ¼ã‚¸ã®é€²è¡Œæ–¹å‘ã«ç¹‹ãŒã‚‹ã‚¹ãƒ†ãƒ¼ã‚¸ã®æœ€å°ãƒ»æœ€å¤§æ•°
 #define MIN_STAGE_CHAIN_NUM 1
 #define MAX_STAGE_CHAIN_NUM 3
 
-// ƒXƒe[ƒWƒEƒBƒWƒFƒbƒg‚Ì1•Ó‚ÌƒTƒCƒY
+// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®1è¾ºã®ã‚µã‚¤ã‚º
 #define STAGE_WIDGET_SIZE 64
-// ƒXƒe[ƒWƒEƒBƒWƒFƒbƒg‚Ì…•½•ûŒü‚Ìƒ}[ƒWƒ“ƒTƒCƒY
+// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®æ°´å¹³æ–¹å‘ã®ãƒãƒ¼ã‚¸ãƒ³ã‚µã‚¤ã‚º
 #define STAGE_WIDGET_VERTICAL_MERGIN 32
 
 
-// ƒXƒe[ƒW‚Ìí—Ş
+// ã‚¹ãƒ†ãƒ¼ã‚¸ã®ç¨®é¡
 UENUM(BlueprintType)
 enum class EStageType : uint8
 {
@@ -22,7 +22,7 @@ enum class EStageType : uint8
     Bonus    UMETA(DisplayName = "Bonus"),
 };
 
-// ƒXƒe[ƒWó‹µ
+// ã‚¹ãƒ†ãƒ¼ã‚¸çŠ¶æ³
 UENUM(BlueprintType)
 enum class EStageCondition : uint8
 {

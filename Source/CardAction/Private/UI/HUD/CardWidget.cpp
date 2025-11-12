@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "UI/HUD/CardWidget.h"
@@ -45,16 +45,16 @@ void UCardWidget::SetupCardData(UCardData* Data)
     if (CardUtil == nullptr)
         return;
 
-    // ŠeƒEƒBƒWƒFƒbƒg‚Ìİ’è
-    // –¼‘O
+    // å„ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®è¨­å®š
+    // åå‰
     if (NameText)
     {
         NameText->SetText(FText::FromName(CardData->Name));
     }
-    // ƒ_ƒ[ƒW
+    // ãƒ€ãƒ¡ãƒ¼ã‚¸
     if (DamageText)
     {
-        // ƒGƒtƒFƒNƒg‚©‚çƒfƒtƒHƒ‹ƒgƒIƒuƒWƒFƒNƒg‚ğæ“¾‚µ‚Äƒ_ƒ[ƒW‚ğæ“¾
+        // ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‹ã‚‰ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—ã—ã¦ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å–å¾—
         if (CardData->EffectClass)
         {
             UCardEffectSummonWeapon* Effect = CardData->EffectClass->GetDefaultObject<UCardEffectSummonWeapon>();
@@ -71,31 +71,31 @@ void UCardWidget::SetupCardData(UCardData* Data)
             
         }
     }
-    // ƒJ[ƒhƒx[ƒX
+    // ã‚«ãƒ¼ãƒ‰ãƒ™ãƒ¼ã‚¹
     if (CardBase)
     {
         FSlateBrush Brush;
         Brush.SetResourceObject(CardUtil->GetCardBaseTexture(CardData->Rarity));
         CardBase->SetBrush(Brush);
     }
-    // ƒeƒNƒXƒ`ƒƒ
+    // ãƒ†ã‚¯ã‚¹ãƒãƒ£
     if (CardImage)
     {
         FSlateBrush Brush;
         Brush.SetResourceObject(CardData->CardTexture);
         CardImage->SetBrush(Brush);
     }
-    // ƒJ[ƒhƒ^ƒCƒv‚ÌƒAƒCƒRƒ“İ’è
+    // ã‚«ãƒ¼ãƒ‰ã‚¿ã‚¤ãƒ—ã®ã‚¢ã‚¤ã‚³ãƒ³è¨­å®š
     if (CardTypeIcon)
     {
         FSlateBrush Brush;
         Brush.SetResourceObject(CardUtil->GetCardTypeIconTexture(CardData->CardType));
         CardTypeIcon->SetBrush(Brush);
     }
-    // ‘®«ƒ^ƒCƒv‚ÌƒAƒCƒRƒ“İ’è
+    // å±æ€§ã‚¿ã‚¤ãƒ—ã®ã‚¢ã‚¤ã‚³ãƒ³è¨­å®š
     if (ElementTypeIcon)
     {
-        // ƒGƒtƒFƒNƒg‚©‚çƒfƒtƒHƒ‹ƒgƒIƒuƒWƒFƒNƒg‚ğæ“¾‚µ‚Äƒ_ƒ[ƒW‚ğæ“¾
+        // ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‹ã‚‰ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—ã—ã¦ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å–å¾—
         if (CardData->EffectClass)
         {
             UCardEffectSummonWeapon* Effect = CardData->EffectClass->GetDefaultObject<UCardEffectSummonWeapon>();
@@ -115,14 +115,14 @@ void UCardWidget::SetupCardData(UCardData* Data)
 
 void UCardWidget::Initialize(UCardData* Data, const FCardWidgetOption& WidgetOption)
 {
-    // ƒEƒBƒWƒFƒbƒg‚Ì‰Šú‰»
+    // ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®åˆæœŸåŒ–
     SetupCardData(Data);
 
-    // •\¦ƒIƒvƒVƒ‡ƒ“‚Ìİ’è
+    // è¡¨ç¤ºã‚ªãƒ—ã‚·ãƒ§ãƒ³ã®è¨­å®š
     Option = WidgetOption;
 }
 
-// ƒNƒŠƒbƒN
+// ã‚¯ãƒªãƒƒã‚¯æ™‚
 void UCardWidget::OnCardClicked()
 {
     if (Option.bCanMouseOver == false)
@@ -137,10 +137,10 @@ void UCardWidget::OnCardClicked()
     if (CardSelectWidget == nullptr)
         return;
 
-    // ‘I‘ğ
+    // é¸æŠ
     if (bSelected == false)
     {
-        // èD‚ªƒ}ƒbƒNƒX‚Ìê‡A‘I‘ğ‚Å‚«‚È‚¢‚æ‚¤‚É‚·‚é
+        // æ‰‹æœ­ãŒãƒãƒƒã‚¯ã‚¹ã®å ´åˆã€é¸æŠã§ããªã„ã‚ˆã†ã«ã™ã‚‹
         if (CardSelectWidget->IsSelectMax())
             return;
 
@@ -148,34 +148,34 @@ void UCardWidget::OnCardClicked()
         {
             Option.SelectCardDelegate.Execute(CardData);
 
-            // ‘I‘ğ’†‚É‚·‚é
+            // é¸æŠä¸­ã«ã™ã‚‹
             bSelected = true;
 
-            // ‘I‘ğ’†—p‚Ìƒzƒo[‰æ‘œ‚ğ•\¦
+            // é¸æŠä¸­ç”¨ã®ãƒ›ãƒãƒ¼ç”»åƒã‚’è¡¨ç¤º
             if (SelectAnim)
             {
                 PlayAnimation(SelectAnim);
             }
 
-            // ‘I‘ğ”Ô†ƒeƒLƒXƒg‚ÌXV
+            // é¸æŠç•ªå·ãƒ†ã‚­ã‚¹ãƒˆã®æ›´æ–°
             SetupSelectNum();
         }
     }
-    // ‘I‘ğ‰ğœ
+    // é¸æŠè§£é™¤
     else
     {
         if (Option.UnSelectCardDelegate.IsBound())
         {
             Option.UnSelectCardDelegate.Execute(CardData);
 
-            // –¢‘I‘ğ‚É‚·‚é
+            // æœªé¸æŠã«ã™ã‚‹
             bSelected = false;
 
             if (UnSelectAnim)
             {
-                // ‘I‘ğ’†—p‚Ìƒzƒo[‰æ‘œ‚ğ”ñ•\¦
+                // é¸æŠä¸­ç”¨ã®ãƒ›ãƒãƒ¼ç”»åƒã‚’éè¡¨ç¤º
                 UUMGSequencePlayer* SequencePlayer = PlayAnimation(UnSelectAnim);
-                // ƒAƒjƒ[ƒVƒ‡ƒ“I—¹ŒãA‚Ù‚©‚Ì‘I‘ğ’†‚ÌƒJ[ƒh‚Ì‘I‘ğ”Ô†‚ğXV‚·‚é
+                // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†å¾Œã€ã»ã‹ã®é¸æŠä¸­ã®ã‚«ãƒ¼ãƒ‰ã®é¸æŠç•ªå·ã‚’æ›´æ–°ã™ã‚‹
                 if (SequencePlayer)
                 {
                     SequencePlayer->OnSequenceFinishedPlaying().AddUObject(CardSelectWidget, &UCardSelectWidget::OnRefleshSelectNumText);
@@ -185,47 +185,47 @@ void UCardWidget::OnCardClicked()
     }
 }
 
-// ƒ}ƒEƒXƒI[ƒo[
+// ãƒã‚¦ã‚¹ã‚ªãƒ¼ãƒãƒ¼æ™‚
 void UCardWidget::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
 {
     if (Option.bCanMouseOver == false)
         return;
 
-    // ƒXƒP[ƒ‹•ÏX
+    // ã‚¹ã‚±ãƒ¼ãƒ«å¤‰æ›´
     if (Option.bChangeScale && MouseOverAnim)
     {
         StopAnimation(MouseReleaseAnim);
         PlayAnimation(MouseOverAnim);
     }
 
-    // ƒc[ƒ‹ƒ`ƒbƒv•\¦
+    // ãƒ„ãƒ¼ãƒ«ãƒãƒƒãƒ—è¡¨ç¤º
     if (Option.bShowToolTip)
     {
 
     }
 }
 
-// ƒ}ƒEƒXƒI[ƒo[‚©‚ç—£‚ê‚½
+// ãƒã‚¦ã‚¹ã‚ªãƒ¼ãƒãƒ¼ã‹ã‚‰é›¢ã‚ŒãŸæ™‚
 void UCardWidget::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
 {
     if (Option.bCanMouseOver == false)
         return;
 
-    // ƒXƒP[ƒ‹•ÏX
+    // ã‚¹ã‚±ãƒ¼ãƒ«å¤‰æ›´
     if (Option.bChangeScale && MouseReleaseAnim)
     {
         StopAnimation(MouseOverAnim);
         PlayAnimation(MouseReleaseAnim);
     }
 
-    // ƒc[ƒ‹ƒ`ƒbƒv”ñ•\¦
+    // ãƒ„ãƒ¼ãƒ«ãƒãƒƒãƒ—éè¡¨ç¤º
     if (Option.bShowToolTip)
     {
 
     }
 }
 
-// Œø‰Ê”­“®
+// åŠ¹æœç™ºå‹•
 void UCardWidget::ExecuteEffect()
 {
     if (IsValid(this) == false)
@@ -234,15 +234,15 @@ void UCardWidget::ExecuteEffect()
         return;
     }
 
-    // ƒf[ƒ^–³‚µ‚È‚ç”­“®–³Œø
+    // ãƒ‡ãƒ¼ã‚¿ç„¡ã—ãªã‚‰ç™ºå‹•ç„¡åŠ¹
     if (CardData == nullptr)
         return;
 
-    // ‚·‚Å‚É”­“®’†‚Í”­“®–³Œø
+    // ã™ã§ã«ç™ºå‹•ä¸­ã¯ç™ºå‹•ç„¡åŠ¹
     if (IsAnimationPlaying(UseCardAnim))
         return;
 
-    // Œø‰Ê”­“®
+    // åŠ¹æœç™ºå‹•
     if (CardData->EffectClass)
     {
         if (UCardEffectBase* Effect = NewObject<UCardEffectBase>(this, CardData->EffectClass))
@@ -251,12 +251,12 @@ void UCardWidget::ExecuteEffect()
         }
     }
 
-    // ƒAƒjƒ[ƒVƒ‡ƒ“
+    // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
     if (UseCardAnim)
     {
         UUMGSequencePlayer* SequencePlayer = PlayAnimation(UseCardAnim);
 
-        // ƒAƒjƒ[ƒVƒ‡ƒ“I—¹Œã
+        // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†å¾Œ
         if (SequencePlayer)
         {
             SequencePlayer->OnSequenceFinishedPlaying().AddLambda([this, &SequencePlayer](UUMGSequencePlayer& SeqPlayer)
@@ -264,14 +264,14 @@ void UCardWidget::ExecuteEffect()
                     if (IsValid(this) == false)
                         return;
 
-                    // ƒJ[ƒhƒf[ƒ^‚ğƒŠƒZƒbƒg
+                    // ã‚«ãƒ¼ãƒ‰ãƒ‡ãƒ¼ã‚¿ã‚’ãƒªã‚»ãƒƒãƒˆ
                     SetupCardData(nullptr);
                 });
         }
     }
 }
 
-// ‘I‘ğ”Ô†ƒeƒLƒXƒg‚Ìİ’è
+// é¸æŠç•ªå·ãƒ†ã‚­ã‚¹ãƒˆã®è¨­å®š
 void UCardWidget::SetupSelectNum()
 {
     AMyPlayerController* PlayerController = Cast<AMyPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
@@ -283,7 +283,7 @@ void UCardWidget::SetupSelectNum()
     if (CardSelectWidget == nullptr)
         return;
 
-    // ‘I‘ğ”Ô†XV
+    // é¸æŠç•ªå·æ›´æ–°
     if (SelectNum && CardData)
     {
         int Index = CardSelectWidget->GetSelectIndex(CardData->UniqueID);
@@ -294,7 +294,7 @@ void UCardWidget::SetupSelectNum()
     }
 }
 
-// ƒfƒtƒHƒ‹ƒgƒAƒjƒ[ƒVƒ‡ƒ“‚É–ß‚·
+// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã«æˆ»ã™
 void UCardWidget::PlayDefaultAnimation()
 {
     if (DefaultAnim)

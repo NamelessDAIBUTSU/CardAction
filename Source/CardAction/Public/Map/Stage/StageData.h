@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -16,15 +16,15 @@ class CARDACTION_API UStageData : public UDataAsset
 	GENERATED_BODY()
 	
 public:
-	// ƒXƒe[ƒW–¼
+	// ã‚¹ãƒ†ãƒ¼ã‚¸å
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FName Name;
 
-	// ƒXƒe[ƒW‚Ìí—Ş
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã®ç¨®é¡
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EStageType StageType;
 
-	// Œq‚°‚ç‚ê‚éƒXƒe[ƒW‚ÌÅ¬EÅ‘å”
+	// ç¹‹ã’ã‚‰ã‚Œã‚‹ã‚¹ãƒ†ãƒ¼ã‚¸ã®æœ€å°ãƒ»æœ€å¤§æ•°
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int MinChainedStageNum;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

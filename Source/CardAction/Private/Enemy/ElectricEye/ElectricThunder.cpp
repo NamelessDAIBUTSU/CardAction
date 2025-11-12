@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Enemy/ElectricEye/ElectricThunder.h"
@@ -15,11 +15,11 @@ void AElectricThunder::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ƒGƒtƒFƒNƒg‚ÌÄ¶
+	// ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®å†ç”Ÿ
 	FTimerHandle PlayEffectHandle;
 	GetWorldTimerManager().SetTimer(PlayEffectHandle, this, &AElectricThunder::OnPlayEffect, 1.0f, false);
 
-	// ƒ_ƒ[ƒWˆ—‚ğw’èƒ^ƒCƒ~ƒ“ƒO‚Ås‚¤
+	// ãƒ€ãƒ¡ãƒ¼ã‚¸å‡¦ç†ã‚’æŒ‡å®šã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§è¡Œã†
 	FTimerHandle DamageTimerHandle;
 	GetWorldTimerManager().SetTimer(DamageTimerHandle, this, &AElectricThunder::OnAttack, 1.3f, false);
 }
@@ -29,7 +29,7 @@ void AElectricThunder::Tick(float DeltaSec)
 	Super::Tick(DeltaSec);
 }
 
-// ƒGƒtƒFƒNƒgI—¹‚ÌƒR[ƒ‹ƒoƒbƒN
+// ã‚¨ãƒ•ã‚§ã‚¯ãƒˆçµ‚äº†æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 void AElectricThunder::OnPlayEffect()
 {
 	if (ThunderEffect)
@@ -45,7 +45,7 @@ void AElectricThunder::OnPlayEffect()
 	}
 }
 
-// ƒGƒtƒFƒNƒgI—¹‚ÌƒR[ƒ‹ƒoƒbƒN
+// ã‚¨ãƒ•ã‚§ã‚¯ãƒˆçµ‚äº†æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 void AElectricThunder::OnAttack()
 {
 	if (AMyGameMode* MyGameMode = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
@@ -54,13 +54,13 @@ void AElectricThunder::OnAttack()
 		if (GridManager == nullptr)
 			return;
 
-		// ƒ_ƒ[ƒWˆ—
+		// ãƒ€ãƒ¡ãƒ¼ã‚¸å‡¦ç†
 		GridManager->ExecuteAttackToGridCell(this, Damage, CurrentCoord);
 
-		// UŒ‚—\‘ª‚Ìíœ
+		// æ”»æ’ƒäºˆæ¸¬ã®å‰Šé™¤
 		GridManager->RemoveAttackSign(CurrentCoord);
 
-		// ©g‚Ìíœ
+		// è‡ªèº«ã®å‰Šé™¤
 		Destroy();
 	}
 }

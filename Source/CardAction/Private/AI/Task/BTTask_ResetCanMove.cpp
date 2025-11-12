@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "AI/Task/BTTask_ResetCanMove.h"
@@ -15,10 +15,10 @@ EBTNodeResult::Type UBTTask_ResetCanMove::ExecuteTask(UBehaviorTreeComponent& Ow
 	if (Enemy == nullptr)
 		return EBTNodeResult::Failed;
 
-	// ƒJƒEƒ“ƒg‚ðƒŠƒZƒbƒg
+	// ã‚«ã‚¦ãƒ³ãƒˆã‚’ãƒªã‚»ãƒƒãƒˆ
 	Enemy->SetMoveCount(0);
 
-	// ˆÚ“®‰Â”\ƒtƒ‰ƒO‚ð—§‚Ä‚é
+	// ç§»å‹•å¯èƒ½ãƒ•ãƒ©ã‚°ã‚’ç«‹ã¦ã‚‹
 	Enemy->SetCanMove(true);
 
 	return EBTNodeResult::Succeeded;

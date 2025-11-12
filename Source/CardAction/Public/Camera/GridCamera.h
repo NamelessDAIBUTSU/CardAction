@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -18,7 +18,7 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	// ƒOƒŠƒbƒhî•ñ‚©‚ç‚‚³‚ğ’²®‚·‚éŠÖ”
+	// ã‚°ãƒªãƒƒãƒ‰æƒ…å ±ã‹ã‚‰é«˜ã•ã‚’èª¿æ•´ã™ã‚‹é–¢æ•°
 	void AdjustCameraToGrid();
 
 public:

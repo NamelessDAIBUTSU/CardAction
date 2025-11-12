@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -25,84 +25,84 @@ public:	/* AActor */
 	virtual void Tick(float DeltaTime) override;
 	
 
-public: /* ¶¬ */
-	// ‰Šú‰»
+public: /* ç”Ÿæˆ */
+	// åˆæœŸåŒ–
 	void Initialize();
 
-	// ƒvƒŒƒCƒ„[‚ğƒXƒ|[ƒ“‚³‚¹‚éƒ[ƒ‹ƒhÀ•Wæ“¾
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ã‚¹ãƒãƒ¼ãƒ³ã•ã›ã‚‹ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™å–å¾—
 	FVector GetPlayerSpawnPosition();
 
-public: /* ƒZƒ‹ŠÖ˜Aˆ— */
-	// ƒZƒ‹ã‚ÉƒAƒNƒ^[‚ğ“o˜^
+public: /* ã‚»ãƒ«é–¢é€£å‡¦ç† */
+	// ã‚»ãƒ«ä¸Šã«ã‚¢ã‚¯ã‚¿ãƒ¼ã‚’ç™»éŒ²
 	void AddActorOnCell(AActor* Actor, FCoord Coord);
-	// ƒZƒ‹ã‚©‚çƒAƒNƒ^[‚ğœ‹
+	// ã‚»ãƒ«ä¸Šã‹ã‚‰ã‚¢ã‚¯ã‚¿ãƒ¼ã‚’é™¤å»
 	void RemoveActorFromCell(AActor* Actor, FCoord Coord);
 
-	// ƒZƒ‹ã‚ÌƒAƒNƒ^[‚Éƒ_ƒ[ƒW”»’è
+	// ã‚»ãƒ«ä¸Šã®ã‚¢ã‚¯ã‚¿ãƒ¼ã«ãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤å®š
 	void ExecuteAttackToGridCell(AActor* AttackedActor, float Damage, FCoord Coord);
 
-	// ƒZƒ‹ã‚ÌƒAƒNƒ^[î•ñXV
+	// ã‚»ãƒ«ä¸Šã®ã‚¢ã‚¯ã‚¿ãƒ¼æƒ…å ±æ›´æ–°
 	void RefleshActorInfoOnCell(AActor* MoveActor, FCoord FromCoord, FCoord ToCoord);
 
-	// ˆÚ“®æ—\’èƒZƒ‹‚ğ“o˜^/‰ğœ
+	// ç§»å‹•å…ˆäºˆå®šã‚»ãƒ«ã‚’ç™»éŒ²/è§£é™¤
 	void SetMoveTargetCell(FCoord Coord, bool Value);
 
-public: /* “G */
-	// UŒ‚—\‘ª‚ğ’Ç‰Á
+public: /* æ•µ */
+	// æ”»æ’ƒäºˆæ¸¬ã‚’è¿½åŠ 
 	void AddAttackSign(FCoord Coord);
-	// UŒ‚—\‘ª‚ğœ‹
+	// æ”»æ’ƒäºˆæ¸¬ã‚’é™¤å»
 	void RemoveAttackSign(FCoord Coord);
 
-	// ƒOƒŠƒbƒhã‚É“G‚ª‘¶İ‚·‚é‚©
+	// ã‚°ãƒªãƒƒãƒ‰ä¸Šã«æ•µãŒå­˜åœ¨ã™ã‚‹ã‹
 	bool IsExistEnemyOnGrid();
-	// ƒOƒŠƒbƒhƒ}ƒXã‚É“G‚ª‘¶İ‚·‚é‚©
+	// ã‚°ãƒªãƒƒãƒ‰ãƒã‚¹ä¸Šã«æ•µãŒå­˜åœ¨ã™ã‚‹ã‹
 	bool IsExistEnemyOnGridCell(FCoord Coord);
 
-	// ƒZƒ‹ã‚ÉƒvƒŒƒCƒ„[‚ª‘¶İ‚·‚é‚©
+	// ã‚»ãƒ«ä¸Šã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå­˜åœ¨ã™ã‚‹ã‹
 	bool IsExistPlayerOnGridCell(FCoord Coord);
 
 public: /* Util */
-	// ƒOƒŠƒbƒhÀ•W ¨ ƒ[ƒ‹ƒhÀ•W‚É•ÏŠ·
+	// ã‚°ãƒªãƒƒãƒ‰åº§æ¨™ â†’ ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã«å¤‰æ›
 	FVector ConvertToWorldPosition(FCoord Coord);
-	// ƒ[ƒ‹ƒhÀ•W ¨ ƒOƒŠƒbƒhÀ•W‚É•ÏŠ·
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ â†’ ã‚°ãƒªãƒƒãƒ‰åº§æ¨™ã«å¤‰æ›
 	FCoord ConvertToGridCoord(FVector Position);
 
-	// “ñ‚Â‚ÌÀ•W‚ª cE‰¡EÎ‚ß ‚Ì‚¢‚¸‚ê‚©‚Ìüã‚É‚¢‚é‚©
+	// äºŒã¤ã®åº§æ¨™ãŒ ç¸¦ãƒ»æ¨ªãƒ»æ–œã‚ ã®ã„ãšã‚Œã‹ã®ç·šä¸Šã«ã„ã‚‹ã‹
 	bool IsSameLine(FCoord Coord1, FCoord Coord2);
-	// ƒvƒŒƒCƒ„[‚Æw’èÀ•W‚ª“¯üã‚É‚¢‚é‚©
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨æŒ‡å®šåº§æ¨™ãŒåŒç·šä¸Šã«ã„ã‚‹ã‹
 	bool IsPlayerSameLine(FCoord Coord);
-	// ƒAƒNƒZƒX‰Â”\‚ÈƒOƒŠƒbƒhƒZƒ‹‚©
+	// ã‚¢ã‚¯ã‚»ã‚¹å¯èƒ½ãªã‚°ãƒªãƒƒãƒ‰ã‚»ãƒ«ã‹
 	bool IsAccessableGridCell(FVector CheckPosition);
 	bool IsAccessableGridCell(FCoord Coord);
 
-	// ƒOƒŠƒbƒhƒZƒ‹‚ğæ“¾
+	// ã‚°ãƒªãƒƒãƒ‰ã‚»ãƒ«ã‚’å–å¾—
 	AGridCellActor* GetGridCellActor(FCoord Coord);
 	AGridCellActor* GetGridCellActor(FVector Position);
 
-	// ƒOƒŠƒbƒhƒTƒCƒY‚Ìæ“¾
+	// ã‚°ãƒªãƒƒãƒ‰ã‚µã‚¤ã‚ºã®å–å¾—
 	FVector2D GetGridSize();
 
 
 private:
-	// ƒOƒŠƒbƒh¶¬
+	// ã‚°ãƒªãƒƒãƒ‰ç”Ÿæˆ
 	void GenerateGrid();
-	// ƒGƒlƒ~[‚ğƒOƒŠƒbƒhã‚ÉƒXƒ|[ƒ“
+	// ã‚¨ãƒãƒŸãƒ¼ã‚’ã‚°ãƒªãƒƒãƒ‰ä¸Šã«ã‚¹ãƒãƒ¼ãƒ³
 	void SpawnEnemies();
 
-	// ƒOƒŠƒbƒhÀ•W”ÍˆÍŠOƒ`ƒFƒbƒN
+	// ã‚°ãƒªãƒƒãƒ‰åº§æ¨™ç¯„å›²å¤–ãƒã‚§ãƒƒã‚¯
 	bool IsInGrid(FCoord Coord);
 
 
 public:
-	// ƒXƒ|[ƒ“‚³‚¹‚éƒGƒlƒ~[î•ñ
+	// ã‚¹ãƒãƒ¼ãƒ³ã•ã›ã‚‹ã‚¨ãƒãƒŸãƒ¼æƒ…å ±
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy")
 	TArray<TSubclassOf<AEnemyBase>> SpawnEnemyArray;
 
 private:
-	// ƒOƒŠƒbƒhî•ñ
+	// ã‚°ãƒªãƒƒãƒ‰æƒ…å ±
 	TArray<TArray<AGridCellActor*>> Grid;
 
-	// ¶¬‚·‚éƒOƒŠƒbƒhƒf[ƒ^
+	// ç”Ÿæˆã™ã‚‹ã‚°ãƒªãƒƒãƒ‰ãƒ‡ãƒ¼ã‚¿
 	UPROPERTY()
 	UGridData* GenerateGridData = nullptr;
 };

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Enemy/PumpkinEnemy/AnimNotify_SpawnPumpkinBomb.h"
@@ -20,11 +20,11 @@ void UAnimNotify_SpawnPumpkinBomb::Notify(USkeletalMeshComponent* MeshComp, UAni
     if (Enemy == nullptr || Enemy->AttackClass == nullptr)
         return;
 
-    // ƒXƒ|[ƒ“ƒpƒ‰ƒ[ƒ^Ý’è
+    // ã‚¹ãƒãƒ¼ãƒ³ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿è¨­å®š
     FActorSpawnParameters Params;
     Params.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
-    // ‚©‚Ú‚¿‚á”š’eƒXƒ|[ƒ“
+    // ã‹ã¼ã¡ã‚ƒçˆ†å¼¾ã‚¹ãƒãƒ¼ãƒ³
     APumpkinBomb* PumpkinBomb = GetWorld()->SpawnActor<APumpkinBomb>(Enemy->AttackClass, Enemy->GetActorLocation(), FRotator(0.f, 0.f, 0.f), Params);
     if (PumpkinBomb == nullptr)
         return;
@@ -40,15 +40,15 @@ void UAnimNotify_SpawnPumpkinBomb::Notify(USkeletalMeshComponent* MeshComp, UAni
                 if (GridManager == nullptr)
                     return;
 
-                // –Ú•W’n“_‚ÌƒOƒŠƒbƒhƒZƒ‹‚ÌŽæ“¾
+                // ç›®æ¨™åœ°ç‚¹ã®ã‚°ãƒªãƒƒãƒ‰ã‚»ãƒ«ã®å–å¾—
                 AGridCellActor* TargetCell = GridManager->GetGridCellActor(Pawn->GetActorLocation());
                 if (TargetCell == nullptr)
                     return;
 
-                // ˆÚ“®‚É•K—v‚Èî•ñ‚Ì‰ŠúÝ’è
+                // ç§»å‹•ã«å¿…è¦ãªæƒ…å ±ã®åˆæœŸè¨­å®š
                 PumpkinBomb->Setup(TargetCell->GetActorLocation());
 
-                // UŒ‚—\‘ª‚Ì’Ç‰Á
+                // æ”»æ’ƒäºˆæ¸¬ã®è¿½åŠ 
                 GridManager->AddAttackSign(TargetCell->CellData.GridCoord);
             }
         }

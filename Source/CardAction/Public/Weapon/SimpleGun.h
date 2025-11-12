@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -15,7 +15,7 @@ class CARDACTION_API ASimpleGun : public AWeaponActorBase
 	GENERATED_BODY()
 	
 public: /* AWeaponActorBase */
-	// ’e‚Ì¶¬
+	// å¼¾ã®ç”Ÿæˆ
 	virtual void OnAttack() override;
 
 public:

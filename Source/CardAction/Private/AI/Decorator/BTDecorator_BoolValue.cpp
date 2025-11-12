@@ -1,13 +1,13 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "AI/Decorator/BTDecorator_BoolValue.h"
 
 UBTDecorator_BoolValue::UBTDecorator_BoolValue()
 {
-	// TickNode ‚ğŒÄ‚ñ‚Å‚à‚ç‚¤
+	// TickNode ã‚’å‘¼ã‚“ã§ã‚‚ã‚‰ã†
 	bNotifyTick = true;
-	// ğŒ‚ª•Ï‚í‚Á‚½‚çqƒm[ƒh‚ğ’†’f
+	// æ¡ä»¶ãŒå¤‰ã‚ã£ãŸã‚‰å­ãƒãƒ¼ãƒ‰ã‚’ä¸­æ–­
 	bAllowAbortChildNodes = true;
 }
 
@@ -24,7 +24,7 @@ void UBTDecorator_BoolValue::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* 
 {
 	Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
 
-	// –ˆƒtƒŒ[ƒ€ğŒ‚ğƒ`ƒFƒbƒN‚µ‚ÄğŒ•Ï‰»‚ª‚ ‚ê‚ÎBT‚ğÄ•]‰¿
+	// æ¯ãƒ•ãƒ¬ãƒ¼ãƒ æ¡ä»¶ã‚’ãƒã‚§ãƒƒã‚¯ã—ã¦æ¡ä»¶å¤‰åŒ–ãŒã‚ã‚Œã°BTã‚’å†è©•ä¾¡
 	bool bResult = CalculateRawConditionValue(OwnerComp, NodeMemory);
 	if (bResult == false)
 	{

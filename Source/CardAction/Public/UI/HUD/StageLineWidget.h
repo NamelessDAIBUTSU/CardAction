@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -16,10 +16,10 @@ class CARDACTION_API UStageLineWidget : public UUserWidget
 	GENERATED_BODY()
 
 public:
-	// Œã‚ÌƒXƒe[ƒW‚ğİ’è
+	// å¾Œã®ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’è¨­å®š
 	void SetPostStage(UStageObject* Post);
 
-	// ƒAƒjƒ[ƒVƒ‡ƒ“İ’è
+	// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³è¨­å®š
 	void SetupAnim();
 
 private:
@@ -28,6 +28,6 @@ private:
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
 	UWidgetAnimation* PointLineAnim;
 
-	// Œã‚ÌƒXƒe[ƒW
+	// å¾Œã®ã‚¹ãƒ†ãƒ¼ã‚¸
 	UStageObject* PostStage = nullptr;
 };

@@ -1,14 +1,14 @@
-#pragma once
+ï»¿#pragma once
 
 
 #include "CoreMinimal.h"
 #include "GridCellDef.generated.h"
 
-// ƒOƒŠƒbƒhƒZƒ‹ƒTƒCƒY
+// ã‚°ãƒªãƒƒãƒ‰ã‚»ãƒ«ã‚µã‚¤ã‚º
 #define GRID_CELL_UNIT 200 
 #define GRID_CELL_HEIGHT_UNIT 150 
 
-// ƒOƒŠƒbƒhƒZƒ‹‚Ìí—Ş
+// ã‚°ãƒªãƒƒãƒ‰ã‚»ãƒ«ã®ç¨®é¡
 UENUM(BlueprintType)
 enum class EGridCellType : uint8
 {

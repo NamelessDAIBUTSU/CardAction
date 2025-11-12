@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "UI/HUD/EnemyCharaBannerListWidget.h"
@@ -16,13 +16,13 @@ void UEnemyCharaBannerListWidget::NativeConstruct()
 	
 }
 
-// ƒoƒi[‚Ì‰Šú‰»
+// ãƒãƒŠãƒ¼ã®åˆæœŸåŒ–
 void UEnemyCharaBannerListWidget::InitializeBanner()
 {
 	if (CharaBannerWidgetClass == nullptr)
 		return;
 
-	// ƒŒƒxƒ‹‚É‘¶İ‚·‚é“G‚ÌƒŠƒXƒg‚ğæ“¾
+	// ãƒ¬ãƒ™ãƒ«ã«å­˜åœ¨ã™ã‚‹æ•µã®ãƒªã‚¹ãƒˆã‚’å–å¾—
 	if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
 	{
 		if (MyGM->EnemyManager == nullptr)
@@ -31,26 +31,26 @@ void UEnemyCharaBannerListWidget::InitializeBanner()
 		const auto& EnemyList = MyGM->EnemyManager->GetEnemyList();
 		for (int i = 0; i < EnemyList.Num(); ++i)
 		{
-			// ƒEƒBƒWƒFƒbƒg‚Ì¶¬
+			// ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®ç”Ÿæˆ
 			UCharaBannerWidget* BannerWidget = CreateWidget<UCharaBannerWidget>(GetWorld(), CharaBannerWidgetClass);
 			if (BannerWidget)
 			{
 				CharaBannerWidgets.Add(BannerWidget);
 
-				// ŠÔ·‚ÅInAnim‚ğÄ¶
+				// æ™‚é–“å·®ã§InAnimã‚’å†ç”Ÿ
 				BannerWidget->PlayInAnim();
 			
 				USizeBox* SizeBox = WidgetTree->ConstructWidget<USizeBox>(USizeBox::StaticClass());
 				SizeBox->SetHeightOverride(140.f);
 				SizeBox->AddChild(BannerWidget);
 
-				// VerticalBox‚É“o˜^
+				// VerticalBoxã«ç™»éŒ²
 				if (VerticalBannerBox)
 				{
 					UVerticalBoxSlot* BoxSlot = Cast<UVerticalBoxSlot>(VerticalBannerBox->AddChildToVerticalBox(SizeBox));
 					if (BoxSlot)
 					{
-						// ƒJ[ƒhŠÔ‚Ì—]”’‚ğ’Ç‰Á
+						// ã‚«ãƒ¼ãƒ‰é–“ã®ä½™ç™½ã‚’è¿½åŠ 
 						BoxSlot->SetPadding(FMargin(0.f, 5.f, 0.f, 5.f));
 
 						
@@ -60,12 +60,12 @@ void UEnemyCharaBannerListWidget::InitializeBanner()
 				}
 			}
 
-			// Šeíƒoƒi[‚ğİ’è & •\¦
+			// å„ç¨®ãƒãƒŠãƒ¼ã‚’è¨­å®š & è¡¨ç¤º
 			CharaBannerWidgets[i]->Setup(EnemyList[i]);
 			CharaBannerWidgets[i]->SetVisibility(ESlateVisibility::Visible);
 		}
 
-		// —]•ª‚Ìƒoƒi[‚Í”ñ•\¦
+		// ä½™åˆ†ã®ãƒãƒŠãƒ¼ã¯éè¡¨ç¤º
 		for (int i = EnemyList.Num(); i < CharaBannerWidgets.Num(); ++i)
 		{
 			CharaBannerWidgets[i]->SetVisibility(ESlateVisibility::Hidden);

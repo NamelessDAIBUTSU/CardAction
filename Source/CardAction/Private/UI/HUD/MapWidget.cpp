@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "UI/HUD/MapWidget.h"
@@ -27,12 +27,12 @@ void UMapWidget::SetupInfo(UMapData* Data)
 	if (MapManager == nullptr || MapManager->GetCurrentMap() == nullptr)
 		return;
 
-	// ƒ}ƒbƒv–¼‚ğİ’è
+	// ãƒãƒƒãƒ—åã‚’è¨­å®š
 	if (MapName)
 	{
 		MapName->SetText(FText::FromName(MapManager->GetCurrentMapName()));
 	}
-	// ƒwƒbƒ_[ / ƒtƒbƒ^[ / ƒx[ƒX‰æ‘œ‚ğİ’è
+	// ãƒ˜ãƒƒãƒ€ãƒ¼ / ãƒ•ãƒƒã‚¿ãƒ¼ / ãƒ™ãƒ¼ã‚¹ç”»åƒã‚’è¨­å®š
 	if (HeaderImage)
 	{
 		FSlateBrush Brush;
@@ -52,30 +52,30 @@ void UMapWidget::SetupInfo(UMapData* Data)
 		MapBaseImage->SetBrush(Brush);
 	}
 
-	// ƒ}ƒbƒv‚ÌƒTƒCƒY‚ğæ“¾
+	// ãƒãƒƒãƒ—ã®ã‚µã‚¤ã‚ºã‚’å–å¾—
 	FVector2D MapSize = MapManager->GetCurrentMap()->GetSize();
 
-	// ‰ğ‘œ“xæ“¾
+	// è§£åƒåº¦å–å¾—
 	float Scale = UWidgetLayoutLibrary::GetViewportScale(this);
 	FVector2D ViewportSize;
 	if (UGameViewportClient* Viewport = GetWorld()->GetGameViewport())
 	{
 		Viewport->GetViewportSize(ViewportSize);
 	}
-	// DPIƒXƒP[ƒ‹‚ğl—¶‚µ‚ÄA•â³Ï‚İ˜_—’l‚É•ÏŠ·
+	// DPIã‚¹ã‚±ãƒ¼ãƒ«ã‚’è€ƒæ…®ã—ã¦ã€è£œæ­£æ¸ˆã¿è«–ç†å€¤ã«å¤‰æ›
 	ViewportSize /= Scale;
 
-	// ƒXƒe[ƒWŠÔ‹——£‚ğZo
+	// ã‚¹ãƒ†ãƒ¼ã‚¸é–“è·é›¢ã‚’ç®—å‡º
 	StageDistX = (ViewportSize.X - OffsetX * 2.f) / MapSize.X;
 	StageDistY = (ViewportSize.Y - OffsetY * 2.f) / MapSize.Y;
 
-	// ‰ŠúƒXƒe[ƒW‚ÌXÀ•W
+	// åˆæœŸã‚¹ãƒ†ãƒ¼ã‚¸ã®Xåº§æ¨™
 	StartPosX = OffsetX + StageDistX * 0.5f;
-	// ‰ŠúƒXƒe[ƒW‚ÌYÀ•W
+	// åˆæœŸã‚¹ãƒ†ãƒ¼ã‚¸ã®Yåº§æ¨™
 	StartPosY = OffsetY + StageDistY * MapSize.Y * 0.5f;
 }
 
-// ƒLƒƒƒ“ƒoƒX‚ÉƒXƒe[ƒW‚ğ’Ç‰Á
+// ã‚­ãƒ£ãƒ³ãƒã‚¹ã«ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’è¿½åŠ 
 void UMapWidget::CreateStageWidget(UStageObject* Stage)
 {
 	if (StageCanvas == nullptr)
@@ -85,33 +85,33 @@ void UMapWidget::CreateStageWidget(UStageObject* Stage)
 
 	FVector2D StagePos = Stage->GetPos();
 
-	// ƒXƒe[ƒWƒEƒBƒWƒFƒbƒg‚ÌˆÊ’u
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®ä½ç½®
 	FVector2D Position = FVector2D::Zero();
 	Position.X = StartPosX + StagePos.X * StageDistX;
 	Position.Y = StartPosY + StagePos.Y * StageDistY * -1.f;
 
-	// ƒXƒe[ƒWƒEƒBƒWƒFƒbƒg‚Ì¶¬
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®ç”Ÿæˆ
 	UStageWidget* NewStage = CreateWidget<UStageWidget>(GetWorld(), StageWidgetClass);
 	if (NewStage == nullptr)
 		return;
 	StageWidgets.Add(NewStage);
 
-	// ƒXƒe[ƒWî•ñ‚Ìİ’è
+	// ã‚¹ãƒ†ãƒ¼ã‚¸æƒ…å ±ã®è¨­å®š
 	NewStage->SetStageObject(Stage);
 
-	// ”z’uİ’è
+	// é…ç½®è¨­å®š
 	UCanvasPanelSlot* CanvasSlot = StageCanvas->AddChildToCanvas(NewStage);
 	if (CanvasSlot)
 	{
-		// ©“®ƒTƒCƒY’²®
+		// è‡ªå‹•ã‚µã‚¤ã‚ºèª¿æ•´
 		CanvasSlot->SetAutoSize(true);                 
-		// ¶ãÀ•W‚Å”z’u
+		// å·¦ä¸Šåº§æ¨™ã§é…ç½®
 		CanvasSlot->SetPosition(Position);
-		// ƒXƒƒbƒg‚Ì’†S‡‚í‚¹
+		// ã‚¹ãƒ­ãƒƒãƒˆã®ä¸­å¿ƒåˆã‚ã›
 		CanvasSlot->SetAlignment(FVector2D(0.5f, 0.5f));
 	}
 
-	// ƒXƒe[ƒWó‹µ‚É‡‚í‚¹‚½ƒAƒjƒ[ƒVƒ‡ƒ“Ä¶
+	// ã‚¹ãƒ†ãƒ¼ã‚¸çŠ¶æ³ã«åˆã‚ã›ãŸã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å†ç”Ÿ
 	NewStage->PlayConditionAnim();
 }
 
@@ -131,44 +131,44 @@ void UMapWidget::CreateStageLineWidget()
 			if (ChainedStage == nullptr)
 				continue;
 
-			// ‘OƒXƒe[ƒWƒEƒBƒWƒFƒbƒg‚ÌˆÊ’u‚ğæ“¾
+			// å‰ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®ä½ç½®ã‚’å–å¾—
 			FVector2D StagePos = FVector2D::Zero();
 			if (UCanvasPanelSlot* CanvasSlot = Cast<UCanvasPanelSlot>(StageWidget->Slot))
 			{
 				StagePos = CanvasSlot->GetPosition();
 			}
 
-			// ƒXƒe[ƒWŠÔ‚Ì•‚ğæ“¾
+			// ã‚¹ãƒ†ãƒ¼ã‚¸é–“ã®å¹…ã‚’å–å¾—
 			FVector2D DistPos = (ChainedStage->GetPos() - Stage->GetPos()) * 0.5f;
 
-			// ‘OƒXƒe[ƒW‚ÌˆÊ’u‚©‚ç••ªˆÚ“®
+			// å‰ã‚¹ãƒ†ãƒ¼ã‚¸ã®ä½ç½®ã‹ã‚‰å¹…åˆ†ç§»å‹•
 			FVector2D LinePos = StagePos + FVector2D(StageDistX * DistPos.X, StageDistY * DistPos.Y * -1.f);
 
-			// ƒXƒe[ƒWƒ‰ƒCƒ“ƒEƒBƒWƒFƒbƒg‚ğ¶¬
+			// ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ©ã‚¤ãƒ³ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã‚’ç”Ÿæˆ
 			UStageLineWidget* NewLine = CreateWidget<UStageLineWidget>(GetWorld(), StageLineWidgetClass);
 			if (NewLine == nullptr)
 				return;
 
-			// ”z’u
+			// é…ç½®
 			UCanvasPanelSlot* CanvasSlot = StageCanvas->AddChildToCanvas(NewLine);
 			if (CanvasSlot)
 			{
-				// ©“®ƒTƒCƒY’²®
+				// è‡ªå‹•ã‚µã‚¤ã‚ºèª¿æ•´
 				CanvasSlot->SetAutoSize(true);
-				// ¶ãÀ•W‚Å”z’u
+				// å·¦ä¸Šåº§æ¨™ã§é…ç½®
 				CanvasSlot->SetPosition(LinePos);
-				// ƒXƒƒbƒg‚Ì’†S‡‚í‚¹
+				// ã‚¹ãƒ­ãƒƒãƒˆã®ä¸­å¿ƒåˆã‚ã›
 				CanvasSlot->SetAlignment(FVector2D(0.5f, 0.5f));
 
-				// OŠpŒ`‚É‚µ‚Äcosƒ¦‚ğ‹‚ß‚ÄŠp“xŒvZ
-				// #MEMO : cosƒ¦ = A^2 * B^2 / AEB
+				// ä¸‰è§’å½¢ã«ã—ã¦cosÎ˜ã‚’æ±‚ã‚ã¦è§’åº¦è¨ˆç®—
+				// #MEMO : cosÎ˜ = A^2 * B^2 / Aãƒ»B
 				FVector2D A = LinePos - StagePos;
 				FVector2D B = FVector2D(1.f, 0.f);
 				float AngleRad = FMath::Acos(
 					FVector2D::DotProduct(A.GetSafeNormal(), B.GetSafeNormal())
 				);
 				float AngleDeg = FMath::RadiansToDegrees(AngleRad);
-				// ã•ûŒü‚Å‚ ‚ê‚ÎŠp“x‚ğ”½“]
+				// ä¸Šæ–¹å‘ã§ã‚ã‚Œã°è§’åº¦ã‚’åè»¢
 				if (DistPos.Y > 0)
 				{
 					AngleDeg *= -1.f;
@@ -177,10 +177,10 @@ void UMapWidget::CreateStageLineWidget()
 				NewLine->SetRenderTransformAngle(AngleDeg);
 			}
 
-			// Œã‚ë‚ÌƒXƒe[ƒW‚ğİ’è
+			// å¾Œã‚ã®ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’è¨­å®š
 			NewLine->SetPostStage(ChainedStage);
 
-			// ƒAƒjƒ[ƒVƒ‡ƒ“İ’è
+			// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³è¨­å®š
 			NewLine->SetupAnim();
 		}
 	}

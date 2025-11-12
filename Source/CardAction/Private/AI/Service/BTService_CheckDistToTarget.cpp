@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "AI/Service/BTService_CheckDistToTarget.h"
@@ -26,13 +26,13 @@ void UBTService_CheckDistToTarget::TickNode(UBehaviorTreeComponent& OwnerComp, u
 	if (TargetActor == nullptr)
 		return;
 
-	// ƒvƒŒƒCƒ„[‚ÆƒGƒlƒ~[iŽ©gj‚Ì‹——£‚ªŽw’è‹——£“à‚É“ü‚Á‚½‚©ƒ`ƒFƒbƒN
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã‚¨ãƒãƒŸãƒ¼ï¼ˆè‡ªèº«ï¼‰ã®è·é›¢ãŒæŒ‡å®šè·é›¢å†…ã«å…¥ã£ãŸã‹ãƒã‚§ãƒƒã‚¯
 	float Distance = FMath::Abs(FVector::Dist(TargetActor->GetActorLocation(), Pawn->GetActorLocation()));
 	float BBDistance = BBComp->GetValueAsFloat("DistanceToTarget");
 
 	BBComp->SetValueAsBool("CanAttack", BBDistance >= Distance);
 
-	// Žw’è”ÍˆÍ“à‚Ìê‡Aƒ^[ƒQƒbƒgƒAƒNƒ^[‚ð‹ó‚É‚·‚é
+	// æŒ‡å®šç¯„å›²å†…ã®å ´åˆã€ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚¢ã‚¯ã‚¿ãƒ¼ã‚’ç©ºã«ã™ã‚‹
 	UObject* NewTargetActor = BBDistance >= Distance ? nullptr : Cast<UObject>(UGameplayStatics::GetPlayerCharacter(EnemyController->GetWorld(), 0));
 	BBComp->SetValueAsObject("TargetObject", NewTargetActor);
 }

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "CoreMinimal.h"
 #include "BattlePhaseDef.generated.h"
@@ -7,9 +7,9 @@ UENUM(BlueprintType)
 enum class EBattlePhase : uint8
 {
     None        UMETA(DisplayName = "None"),
-    Entry       UMETA(DisplayName = "Entry"),       // ƒGƒ“ƒgƒŠ[ƒtƒF[ƒY
-    Action      UMETA(DisplayName = "Action"),      // ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒY
-    CardSelect  UMETA(DisplayName = "CardSelect"),  // ƒJ[ƒh‘I‘ğƒtƒF[ƒY
-    Result      UMETA(DisplayName = "Result"),      // ƒŠƒUƒ‹ƒgƒtƒF[ƒY
-    End         UMETA(DisplayName = "End"),         // ‘JˆÚ—p‘Ò‹@ƒtƒF[ƒY
+    Entry       UMETA(DisplayName = "Entry"),       // ã‚¨ãƒ³ãƒˆãƒªãƒ¼ãƒ•ã‚§ãƒ¼ã‚º
+    Action      UMETA(DisplayName = "Action"),      // ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚º
+    CardSelect  UMETA(DisplayName = "CardSelect"),  // ã‚«ãƒ¼ãƒ‰é¸æŠãƒ•ã‚§ãƒ¼ã‚º
+    Result      UMETA(DisplayName = "Result"),      // ãƒªã‚¶ãƒ«ãƒˆãƒ•ã‚§ãƒ¼ã‚º
+    End         UMETA(DisplayName = "End"),         // é·ç§»ç”¨å¾…æ©Ÿãƒ•ã‚§ãƒ¼ã‚º
 };

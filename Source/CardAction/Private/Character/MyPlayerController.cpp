@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+ï»¿// Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "Character/MyPlayerController.h"
 #include "GameFramework/Pawn.h"
@@ -41,18 +41,18 @@ void AMyPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// UI¶¬
+	// UIç”Ÿæˆ
 	if (MainHUDWidgetClass)
 	{
 		MainHUDWidget = CreateWidget<UMainHUDWidget>(GetWorld(), MainHUDWidgetClass);
 		if (MainHUDWidget)
 		{
-			// •`‰æ–½—ß
+			// æç”»å‘½ä»¤
 			MainHUDWidget->AddToViewport();
 		}
 	}
 
-	// ­‚µ’x‚ç‚¹‚ÄUI“ü—Í‚ğ—LŒø‚É‚·‚é
+	// å°‘ã—é…ã‚‰ã›ã¦UIå…¥åŠ›ã‚’æœ‰åŠ¹ã«ã™ã‚‹
 	FTimerHandle TimerHandle;
 	GetWorldTimerManager().SetTimer(TimerHandle, this, &AMyPlayerController::SetupUIInputMode, 0.1f, false);
 }

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -20,49 +20,49 @@ class CARDACTION_API UHandCardsWidget : public UHUDBase
 	GENERATED_BODY()
 	
 public:
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	virtual void NativeConstruct() override;
 
 public: /* UHUDBase */
-	// ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒYˆÈŠO‚Å”ñ•\¦
+	// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºä»¥å¤–ã§éè¡¨ç¤º
 	virtual bool IsVisibleExceptActionPhase() override{ return false; }
 
 public:
-	// ƒJ[ƒh‘I‘ğƒfƒŠƒQ[ƒg‚ğİ’è
+	// ã‚«ãƒ¼ãƒ‰é¸æŠãƒ‡ãƒªã‚²ãƒ¼ãƒˆã‚’è¨­å®š
 	void SetSelectCardDelegate(FOnSelectCard SelectDelegate, FOnUnSelectCard UnSelectDelegate);
 
-	// èD‚ÉƒJ[ƒh‚ğ’Ç‰Á
+	// æ‰‹æœ­ã«ã‚«ãƒ¼ãƒ‰ã‚’è¿½åŠ 
 	void AddToHandCards(int Index, UCardData* CardData);
 
-	// èDƒJ[ƒh‚ğƒŠƒZƒbƒg
+	// æ‰‹æœ­ã‚«ãƒ¼ãƒ‰ã‚’ãƒªã‚»ãƒƒãƒˆ
 	void ResetHandCards();
 	void ResetHandCards(int Index);
 
-	// ƒJ[ƒh‘I‘ğ
+	// ã‚«ãƒ¼ãƒ‰é¸æŠ
 	void SelectCard(int SelectIndex);
 
-	// ƒJ[ƒh‚ÌŒø‰Ê”­“®
+	// ã‚«ãƒ¼ãƒ‰ã®åŠ¹æœç™ºå‹•
 	void ExecuteEffect(int Index);
 
-	// ƒJ[ƒhƒEƒBƒWƒFƒbƒg‚ÌƒAƒjƒ[ƒVƒ‡ƒ“‚ğƒfƒtƒHƒ‹ƒg‚É–ß‚·
+	// ã‚«ãƒ¼ãƒ‰ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã«æˆ»ã™
 	void PlayDefaultAnimation(int Index);
 
 public:
-	// ƒJ[ƒhƒXƒƒbƒgƒNƒ‰ƒX
+	// ã‚«ãƒ¼ãƒ‰ã‚¹ãƒ­ãƒƒãƒˆã‚¯ãƒ©ã‚¹
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UUserWidget> CardSlotWidgetClass;
 
-	// èD‚Ìƒ{ƒbƒNƒX
+	// æ‰‹æœ­ã®ãƒœãƒƒã‚¯ã‚¹
 	UPROPERTY(meta = (BindWidget))
 	UHorizontalBox* CardsHorizontalBox;
 
 private:
-	// èD
+	// æ‰‹æœ­
 	UPROPERTY(VisibleAnywhere)
 	TArray<UCardSlotWidget*> HandCards;
 
-	// ‘I‘ğ’†ƒJ[ƒh‚É’Ç‰Á‚·‚éƒfƒŠƒQ[ƒg
+	// é¸æŠä¸­ã‚«ãƒ¼ãƒ‰ã«è¿½åŠ ã™ã‚‹ãƒ‡ãƒªã‚²ãƒ¼ãƒˆ
 	FOnSelectCard SelectCardDelegate;
-	// ‘I‘ğó‘Ô‚ğ‰ğœ‚·‚éƒfƒŠƒQ[ƒg
+	// é¸æŠçŠ¶æ…‹ã‚’è§£é™¤ã™ã‚‹ãƒ‡ãƒªã‚²ãƒ¼ãƒˆ
 	FOnUnSelectCard UnSelectCardDelegate;
 };

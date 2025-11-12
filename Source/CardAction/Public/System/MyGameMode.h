@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -6,7 +6,6 @@
 #include "GameFramework/GameMode.h"
 #include <System/Phase/BattlePhaseDef.h>
 #include <Card/InitDeckData.h>
-#include <Card/CardBook.h>
 #include "MyGameMode.generated.h"
 
 class AGridManager;
@@ -31,7 +30,7 @@ public:
 	void ChangePhase(EBattlePhase NextPhase);
 	EBattlePhase GetCurrentButtlePhase() const;
 
-	// ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒY‚Ìê‡Ac‚èŠÔ‚ğæ“¾
+	// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºã®å ´åˆã€æ®‹ã‚Šæ™‚é–“ã‚’å–å¾—
 	int GetRemainSec();
 
 public:
@@ -39,23 +38,23 @@ public:
 	void OnGameOver();
 
 public:
-	// ¶¬‚·‚éƒvƒŒƒCƒ„[
+	// ç”Ÿæˆã™ã‚‹ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player")
 	TSubclassOf<APawn> PlayerPawnClass;
 
-	// ƒOƒŠƒbƒhƒ}ƒl[ƒWƒƒ[
+	// ã‚°ãƒªãƒƒãƒ‰ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Grid")
 	TSubclassOf<AGridManager> GridManagerClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Grid")
 	AGridManager* GridManager;
 
-	// ƒfƒbƒLƒ}ƒl[ƒWƒƒ[
+	// ãƒ‡ãƒƒã‚­ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	TSubclassOf<ADeckManager> DeckManagerClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Card")
 	ADeckManager* DeckManager;
 
-	// ƒGƒlƒ~[ƒ}ƒl[ƒWƒƒ[
+	// ã‚¨ãƒãƒŸãƒ¼ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy")
 	TSubclassOf<AEnemyManager> EnemyManagerClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Enemy")
@@ -64,24 +63,24 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
 	UInitDeckData* InitDeckData = nullptr;
 
-	// ƒQ[ƒ€I—¹‚É”­‰Î‚·‚éƒfƒŠƒQ[ƒg
+	// ã‚²ãƒ¼ãƒ çµ‚äº†æ™‚ã«ç™ºç«ã™ã‚‹ãƒ‡ãƒªã‚²ãƒ¼ãƒˆ
 	DECLARE_MULTICAST_DELEGATE(FOnGameEnd);
 	FOnGameEnd OnGameEnd;
 
-	// ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒYŠJn‚É”­‰Î‚·‚éƒfƒŠƒQ[ƒg
+	// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºé–‹å§‹æ™‚ã«ç™ºç«ã™ã‚‹ãƒ‡ãƒªã‚²ãƒ¼ãƒˆ
 	DECLARE_MULTICAST_DELEGATE(FOnStartActionPhase);
 	FOnStartActionPhase OnStartActionPhase;
 
 private:
-	// Œ»İ‚ÌƒtƒF[ƒY
+	// ç¾åœ¨ã®ãƒ•ã‚§ãƒ¼ã‚º
 	UPROPERTY(VisibleAnywhere, Category = "Phase")
 	UBattlePhaseBase* CurrentBattlePhase = nullptr;
 
-	// ƒvƒŒƒCƒ„[
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
 	UPROPERTY(VisibleAnywhere, Category = "Player")
 	AMyCharacter* Player = nullptr;
 
-	// ƒvƒŒƒCƒ„[ƒRƒ“ƒgƒ[ƒ‰[
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼
 	UPROPERTY(VisibleAnywhere, Category = "Player")
 	APlayerController* PlayerController = nullptr;
 };

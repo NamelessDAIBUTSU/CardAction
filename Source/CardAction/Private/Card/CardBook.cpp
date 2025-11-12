@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Card/CardBook.h"
@@ -20,11 +20,11 @@ ACardBook::ACardBook()
 	if (MaskWidgetComp)
 	{
 		MaskWidgetComp->SetupAttachment(RootComponent);
-		// ƒVƒƒƒhƒE‚ğ—‚Æ‚³‚È‚¢
+		// ã‚·ãƒ£ãƒ‰ã‚¦ã‚’è½ã¨ã•ãªã„
 		MaskWidgetComp->SetCastShadow(false);
-		// ƒfƒJ[ƒ‹‚àó‚¯‚È‚¢
+		// ãƒ‡ã‚«ãƒ¼ãƒ«ã‚‚å—ã‘ãªã„
 		MaskWidgetComp->bReceivesDecals = false;
-		// “–‚½‚è”»’è‚à•s—v
+		// å½“ãŸã‚Šåˆ¤å®šã‚‚ä¸è¦
 		MaskWidgetComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 }
@@ -33,7 +33,7 @@ ACardBook::ACardBook()
 void ACardBook::BeginPlay()
 {
 	Super::BeginPlay();
-	// ‰ŠúˆÊ’u
+	// åˆæœŸä½ç½®
 	SetActorLocation(FVector(-1255.f, 570.f, 463.f));
 	SetActorRotation(FRotator(0.f, -88.f, -19.f));
 	SetActorScale3D(FVector(9.52f, 9.52f, 9.52f));

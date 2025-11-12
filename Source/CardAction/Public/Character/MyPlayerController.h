@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+ï»¿// Copyright Epic Games, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -36,11 +36,11 @@ public:
 	void SetupUIInputMode();
 
 public:
-	// “ü—Íƒ}ƒbƒsƒ“ƒO
+	// å…¥åŠ›ãƒãƒƒãƒ”ãƒ³ã‚°
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputMappingContext* DefaultMappingContext = nullptr;
 
-	// UIŠÇ—
+	// UIç®¡ç†
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "UI")
 	TSubclassOf<UUserWidget> MainHUDWidgetClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI")

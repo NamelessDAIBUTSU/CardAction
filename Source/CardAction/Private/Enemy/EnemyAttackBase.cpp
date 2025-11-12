@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Enemy/EnemyAttackBase.h"
@@ -12,7 +12,7 @@ AEnemyAttackBase::AEnemyAttackBase()
 
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 
-	// ƒƒbƒVƒ…
+	// ãƒ¡ãƒƒã‚·ãƒ¥
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
 	if (MeshComp)
 	{
@@ -25,7 +25,7 @@ void AEnemyAttackBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	// À•Wİ’è
+	// åº§æ¨™è¨­å®š
 	if (AMyGameMode* MyGameMode = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
 	{
 		if (AGridManager* GridManager = MyGameMode->GridManager)
@@ -42,7 +42,7 @@ void AEnemyAttackBase::Tick(float DeltaTime)
 	if (MyGameMode == nullptr)
 		return;
 
-	// ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒYˆÈŠO‚Å‚ÍŠÔ’â~
+	// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºä»¥å¤–ã§ã¯æ™‚é–“åœæ­¢
 	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
 	{
 		this->CustomTimeDilation = 0.f;

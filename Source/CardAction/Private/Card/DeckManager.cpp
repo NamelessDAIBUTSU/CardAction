@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Card/DeckManager.h"
@@ -14,27 +14,27 @@ void ADeckManager::Initialzie(UInitDeckData* InitDeckData)
 	}
 }
 
-// ƒJ[ƒh‚Ì’Ç‰Á
+// ã‚«ãƒ¼ãƒ‰ã®è¿½åŠ 
 void ADeckManager::AddToDeck(UCardData* NewCard)
 {
 	if (NewCard == nullptr)
 		return;
 
-	// DataAsset‚ğ•¡»‚µ‚Ä“Æ—§‚µ‚½ƒCƒ“ƒXƒ^ƒ“ƒX‚É‚·‚é
+	// DataAssetã‚’è¤‡è£½ã—ã¦ç‹¬ç«‹ã—ãŸã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã«ã™ã‚‹
 	UCardData* Instance = DuplicateObject<UCardData>(NewCard, GetTransientPackage());
 
-	// ƒ†ƒj[ƒNID‚Ì¶¬
+	// ãƒ¦ãƒ‹ãƒ¼ã‚¯IDã®ç”Ÿæˆ
 	Instance->UniqueID = FName(*FGuid::NewGuid().ToString());
 	Deck.Add(Instance);
 }
 
-// ƒJ[ƒh‚Ìœ‹
+// ã‚«ãƒ¼ãƒ‰ã®é™¤å»
 void ADeckManager::RemoveFromDeck(UCardData* RemoveCard)
 {
 	Deck.Remove(RemoveCard);
 }
 
-// ƒJ[ƒh‚ğˆø‚­
+// ã‚«ãƒ¼ãƒ‰ã‚’å¼•ã
 TArray<UCardData*> ADeckManager::DrawCards()
 {
 	TArray<UCardData*> DrawCards;
@@ -42,7 +42,7 @@ TArray<UCardData*> ADeckManager::DrawCards()
 
 	for (int i = 0; i < DRAW_CARDS_NUM; ++i)
 	{
-		// ƒfƒbƒLÅŒã‚Ü‚Å‚«‚½‚çAƒVƒƒƒbƒtƒ‹‚µ‚ÄÄ“xˆø‚«’¼‚·
+		// ãƒ‡ãƒƒã‚­æœ€å¾Œã¾ã§ããŸã‚‰ã€ã‚·ãƒ£ãƒƒãƒ•ãƒ«ã—ã¦å†åº¦å¼•ãç›´ã™
 		if (DrawIndex == ShuffledDeck.Num())
 		{
 			DrawIndex = 0;
@@ -61,7 +61,7 @@ TArray<UCardData*> ADeckManager::DrawCards()
 	return DrawCards;
 }
 
-// ƒVƒƒƒbƒtƒ‹‚³‚ê‚½ƒfƒbƒL‚ğì¬
+// ã‚·ãƒ£ãƒƒãƒ•ãƒ«ã•ã‚ŒãŸãƒ‡ãƒƒã‚­ã‚’ä½œæˆ
 void ADeckManager::CreateShuffledDeck()
 {
 	ShuffledDeck = Deck;
@@ -69,7 +69,7 @@ void ADeckManager::CreateShuffledDeck()
 	ShuffleArray(ShuffledDeck);
 }
 
-// ƒVƒƒƒbƒtƒ‹
+// ã‚·ãƒ£ãƒƒãƒ•ãƒ«
 void ADeckManager::ShuffleArray(TArray<UCardData*>& Array)
 {
 	for (int32 i = Array.Num() - 1; i > 0; --i)

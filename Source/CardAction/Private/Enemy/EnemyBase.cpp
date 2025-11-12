@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Enemy/EnemyBase.h"
@@ -20,35 +20,35 @@ AEnemyBase::AEnemyBase()
 
 	PrimaryActorTick.bCanEverTick = true;
 
-	// ”z’uEƒXƒ|[ƒ“‚É©“®‚ÅAI‚É§Œä‚³‚ê‚é‚æ‚¤w’è
+	// é…ç½®ãƒ»ã‚¹ãƒãƒ¼ãƒ³æ™‚ã«è‡ªå‹•ã§AIã«åˆ¶å¾¡ã•ã‚Œã‚‹ã‚ˆã†æŒ‡å®š
 	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 
 	if (auto* MeshComp = GetMesh())
 	{
-		// ³–Ê•ûŒü‚ğ‡‚í‚¹‚é‚æ‚¤‚É‰ñ“]‚ÆˆÊ’u’²®
+		// æ­£é¢æ–¹å‘ã‚’åˆã‚ã›ã‚‹ã‚ˆã†ã«å›è»¢ã¨ä½ç½®èª¿æ•´
 		MeshComp->SetRelativeLocation(FVector(0.f, 0.f, -90.f));
 		MeshComp->SetRelativeRotation(FRotator(0.f, -90.f, 0.f));
 
-		// ƒ|[ƒ““¯m‚Í“–‚½‚ç‚È‚¢‚æ‚¤‚É‚·‚é
+		// ãƒãƒ¼ãƒ³åŒå£«ã¯å½“ãŸã‚‰ãªã„ã‚ˆã†ã«ã™ã‚‹
 		MeshComp->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
 	}
 
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
 
-	// ƒEƒBƒWƒFƒbƒgƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì¶¬
+	// ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®ç”Ÿæˆ
 	WidgetComp = CreateDefaultSubobject<UWidgetComponent>(TEXT("WidgetComponent"));
 	if (WidgetComp)
 	{
 		WidgetComp->SetupAttachment(RootComponent);
-		// ƒVƒƒƒhƒE‚ğ—‚Æ‚³‚È‚¢
+		// ã‚·ãƒ£ãƒ‰ã‚¦ã‚’è½ã¨ã•ãªã„
 		WidgetComp->SetCastShadow(false);
-		// ƒfƒJ[ƒ‹‚àó‚¯‚È‚¢
+		// ãƒ‡ã‚«ãƒ¼ãƒ«ã‚‚å—ã‘ãªã„
 		WidgetComp->bReceivesDecals = false;
-		// “–‚½‚è”»’è‚à•s—v
+		// å½“ãŸã‚Šåˆ¤å®šã‚‚ä¸è¦
 		WidgetComp->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 
-	// ƒOƒŠƒbƒhˆÚ“®ƒRƒ“ƒ|[ƒlƒ“ƒg
+	// ã‚°ãƒªãƒƒãƒ‰ç§»å‹•ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 	GridMovementComp = CreateDefaultSubobject<UGridMovementComponent>(TEXT("GridMovementComponent"));
 }
 
@@ -56,26 +56,26 @@ void AEnemyBase::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ¶¬‚ÍBT‚ğ~‚ß‚é
+	// ç”Ÿæˆæ™‚ã¯BTã‚’æ­¢ã‚ã‚‹
 	AAIController* A = Cast<AAIController>(GetController());
 	if (A)
 	{
 		if (A && A->BrainComponent)
 		{
-			// BrainComponent ‚É‘Î‚µ‚Ä BT ’â~
+			// BrainComponent ã«å¯¾ã—ã¦ BT åœæ­¢
 			A->BrainComponent->StopLogic("ExternalStop");
 		}
 	}
 
 	if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
 	{
-		// ƒQ[ƒ€I—¹‚ÌƒR[ƒ‹ƒoƒbƒN“o˜^
+		// ã‚²ãƒ¼ãƒ çµ‚äº†æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ç™»éŒ²
 		MyGM->OnGameEnd.AddLambda([this, MyGM]() {
-			// €‚ñ‚Å‚¢‚éê‡‚Í–³‹
+			// æ­»ã‚“ã§ã„ã‚‹å ´åˆã¯ç„¡è¦–
 			if (IsValid(this) == false)
 				return;
 
-			// ˆÚ“®ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ–³Œø‰»
+			// ç§»å‹•ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’ç„¡åŠ¹åŒ–
 			if (auto* MovementComp = GetCharacterMovement())
 			{
 				MovementComp->DisableMovement();
@@ -83,21 +83,21 @@ void AEnemyBase::BeginPlay()
 
 			if (AAIController* AIController = Cast<AAIController>(GetController()))
 			{
-				// ‰ñ“]‚ğ–³Œø‰»
+				// å›è»¢ã‚’ç„¡åŠ¹åŒ–
 				bUseControllerRotationYaw = false;
 
-				// BT / MoveTo ‚ğŠ®‘S’â~
+				// BT / MoveTo ã‚’å®Œå…¨åœæ­¢
 				AIController->StopMovement();
 			}
 			});
 
-		// ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒYŠJn‚ÌƒR[ƒ‹ƒoƒbƒN“o˜^
+		// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºé–‹å§‹æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ç™»éŒ²
 		MyGM->OnStartActionPhase.AddLambda([this, MyGM]() {
-			// €‚ñ‚Å‚¢‚éê‡‚Í–³‹
+			// æ­»ã‚“ã§ã„ã‚‹å ´åˆã¯ç„¡è¦–
 			if (IsValid(this) == false)
 				return;
 
-			// AI‚ª~‚Ü‚Á‚Ä‚¢‚½‚çÄŠJ
+			// AIãŒæ­¢ã¾ã£ã¦ã„ãŸã‚‰å†é–‹
 			auto* Contoller = GetController();
 			if (Contoller == nullptr)
 			{
@@ -114,12 +114,12 @@ void AEnemyBase::BeginPlay()
 				}
 			}
 
-			// TickÄŠJ
+			// Tickå†é–‹
 			this->CustomTimeDilation = 1.f;
 			});
 	}
 
-	// TargetActor‚ÉƒvƒŒƒCƒ„[‚ğ“o˜^
+	// TargetActorã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ç™»éŒ²
 	if (AAIController* AIController = Cast<AAIController>(GetController()))
 	{
 		UBlackboardComponent* BBComp = AIController->GetBlackboardComponent();
@@ -129,12 +129,12 @@ void AEnemyBase::BeginPlay()
 		}
 	}
 
-	// HPƒo[‚Ìİ’è
+	// HPãƒãƒ¼ã®è¨­å®š
 	if (WidgetComp)
 	{
 		if (UHPBar* HPWidget = Cast<UHPBar>(WidgetComp->GetUserWidgetObject()))
 		{
-			// HPæ“¾—p‚ÌŠÖ”İ’è
+			// HPå–å¾—ç”¨ã®é–¢æ•°è¨­å®š
 			FOnGetMaxHP GetMaxHPFunc;
 			GetMaxHPFunc.BindLambda([this]()
 				{
@@ -154,12 +154,12 @@ void AEnemyBase::BeginPlay()
 				});
 			HPWidget->Setup(WidgetComp, GetMaxHPFunc, GetCurrentHPFunc);
 
-			// ƒGƒlƒ~[—p‚ÌƒŒƒCƒAƒEƒg‚É•ÏX
+			// ã‚¨ãƒãƒŸãƒ¼ç”¨ã®ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã«å¤‰æ›´
 			HPWidget->ChangeLayout(EHPBarType::Enemy);
 		}
 	}
 
-	// ƒGƒlƒ~[ƒ}ƒl[ƒWƒƒ[‚É©g‚ğ“o˜^
+	// ã‚¨ãƒãƒŸãƒ¼ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã«è‡ªèº«ã‚’ç™»éŒ²
 	if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
 	{
 		if (MyGM->EnemyManager)
@@ -173,7 +173,7 @@ void AEnemyBase::BeginDestroy()
 {
 	Super::BeginDestroy();
 
-	// ƒGƒlƒ~[ƒ}ƒl[ƒWƒƒ[‚©‚ç©g‚ğ‰ğœ
+	// ã‚¨ãƒãƒŸãƒ¼ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã‹ã‚‰è‡ªèº«ã‚’è§£é™¤
 	if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
 	{
 		if (MyGM->EnemyManager)
@@ -195,18 +195,18 @@ void AEnemyBase::Tick(float DeltaTime)
 	if (GridManager == nullptr)
 		return;
 
-	// ŠJn/ƒAƒNƒVƒ‡ƒ“ ƒtƒF[ƒYˆÈŠO‚Å‚ÍŠÔ’â~
+	// é–‹å§‹/ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ ãƒ•ã‚§ãƒ¼ã‚ºä»¥å¤–ã§ã¯æ™‚é–“åœæ­¢
 	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Entry && MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
 	{
 		this->CustomTimeDilation = 0.f;
 
-		// AI‚à~‚ß‚é
+		// AIã‚‚æ­¢ã‚ã‚‹
 		AAIController* AIController = Cast<AAIController>(GetController());
 		if (AIController)
 		{
 			if (AIController && AIController->BrainComponent)
 			{
-				// BrainComponent ‚É‘Î‚µ‚Ä BT ’â~
+				// BrainComponent ã«å¯¾ã—ã¦ BT åœæ­¢
 				AIController->BrainComponent->StopLogic("ExternalStop");
 			}
 		}
@@ -216,13 +216,13 @@ void AEnemyBase::Tick(float DeltaTime)
 
 	Super::Tick(DeltaTime);
 
-	// €–S‚µ‚Ä‚¢‚½‚ç©g‚ğÁ‚·
+	// æ­»äº¡ã—ã¦ã„ãŸã‚‰è‡ªèº«ã‚’æ¶ˆã™
 	if (bIsDead)
 	{
 		Destroy();
 	}
 
-	// ©“®‚ÅƒvƒŒƒCƒ„[‚Ì•ûŒü‚Ö‰ñ“]
+	// è‡ªå‹•ã§ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ–¹å‘ã¸å›è»¢
 	if (bIsAutoLookAtPlayer)
 	{
 		LookAtPlayer();
@@ -237,35 +237,35 @@ void AEnemyBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 
 void AEnemyBase::OnTakeDamage(int TakeDamage)
 {
-	// ƒ_ƒ[ƒW‚ğó‚¯‚é
+	// ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã‚‹
  	CurrentHP = FMath::Max(CurrentHP - TakeDamage, 0.f);
 
 	if (CurrentHP <= 0)
 	{
-		// €–Sˆ—
+		// æ­»äº¡æ™‚å‡¦ç†
 		OnBeforeDead();
 
-		// €–SƒAƒjƒ[ƒVƒ‡ƒ“Ä¶
+		// æ­»äº¡ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å†ç”Ÿ
 		if (GetMesh() && GetMesh()->GetAnimInstance() && DeadAnimMontage)
 		{
 			auto* AnimInstance = GetMesh()->GetAnimInstance();
 			AnimInstance->Montage_Play(DeadAnimMontage);
 		
-			// ƒ‚ƒ“ƒ^[ƒWƒ…‚ªI—¹‚µ‚½‚ç€–Sƒtƒ‰ƒO‚ğ—§‚Ä‚é
+			// ãƒ¢ãƒ³ã‚¿ãƒ¼ã‚¸ãƒ¥ãŒçµ‚äº†ã—ãŸã‚‰æ­»äº¡ãƒ•ãƒ©ã‚°ã‚’ç«‹ã¦ã‚‹
 			FOnMontageEnded EndDelegate;
 			EndDelegate.BindUObject(this, &AEnemyBase::OnEndDeadMontage);
 			AnimInstance->Montage_SetEndDelegate(EndDelegate, DeadAnimMontage);
 		}
-		// íœ
+		// å‰Šé™¤
 		else
 		{
 			SelfDestroy();
 		}
 	}
-	// €‚ñ‚Å‚¢‚È‚¢ê‡Aƒqƒbƒgƒ‚ƒ“ƒ^[ƒWƒ…Ä¶
+	// æ­»ã‚“ã§ã„ãªã„å ´åˆã€ãƒ’ãƒƒãƒˆãƒ¢ãƒ³ã‚¿ãƒ¼ã‚¸ãƒ¥å†ç”Ÿ
 	else
 	{
-		// €–SƒAƒjƒ[ƒVƒ‡ƒ“Ä¶
+		// æ­»äº¡ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å†ç”Ÿ
 		if (GetMesh() && GetMesh()->GetAnimInstance() && HitAnimMontage)
 		{
 			auto* AnimInstance = GetMesh()->GetAnimInstance();
@@ -274,10 +274,10 @@ void AEnemyBase::OnTakeDamage(int TakeDamage)
 	}
 }
 
-// €–S‚ÌƒR[ƒ‹ƒoƒbƒN
+// æ­»äº¡æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 void AEnemyBase::OnBeforeDead()
 {
-	// BT‚ğ’â~
+	// BTã‚’åœæ­¢
 	if (AAIController* AIController = Cast<AAIController>(GetController()))
 	{
 		if (AIController->BrainComponent)
@@ -293,15 +293,15 @@ void AEnemyBase::OnEndDeadMontage(UAnimMontage* Montage, bool bInterrupted)
 {
 	bIsDead = true;
 
-	// ƒAƒjƒ[ƒVƒ‡ƒ“I—¹Œã‚ÍŠ®‘S’â~
+	// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†å¾Œã¯å®Œå…¨åœæ­¢
 	GetMesh()->bPauseAnims = true;
 	GetMesh()->bNoSkeletonUpdate = true;
 
-	// íœ
+	// å‰Šé™¤
 	SelfDestroy();
 }
 
-// €–Sƒ‚ƒ“ƒ^[ƒWƒ…Ä¶’†‚©
+// æ­»äº¡ãƒ¢ãƒ³ã‚¿ãƒ¼ã‚¸ãƒ¥å†ç”Ÿä¸­ã‹
 bool AEnemyBase::IsPlayingDeadMontage()
 {
 	if (GetMesh() == nullptr)
@@ -312,7 +312,7 @@ bool AEnemyBase::IsPlayingDeadMontage()
 	return GetMesh()->GetAnimInstance()->Montage_IsPlaying(DeadAnimMontage);
 }
 
-// ƒvƒŒƒCƒ„[‚Ì•ûŒü‚ğŒü‚­
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ–¹å‘ã‚’å‘ã
 void AEnemyBase::LookAtPlayer()
 {
 	AGameModeBase* GM = UGameplayStatics::GetGameMode(this);
@@ -325,15 +325,15 @@ void AEnemyBase::LookAtPlayer()
 	if (GridMovementComp == nullptr)
 		return;
 
-	// ‰ñ“]‰Â”\ó‘Ô‚©
+	// å›è»¢å¯èƒ½çŠ¶æ…‹ã‹
 	if (CanRotate() == false)
 		return;
 
-	// ƒvƒŒƒCƒ„[‚ÆcE‰¡EÎ‚ß‚Ìüã‚É‚¢‚éê‡‚¾‚¯‰ñ“]
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ç¸¦ãƒ»æ¨ªãƒ»æ–œã‚ã®ç·šä¸Šã«ã„ã‚‹å ´åˆã ã‘å›è»¢
 	if (GridManager->IsPlayerSameLine(GridMovementComp->GetCurrentCoord()) == false)
 		return;
 
-	// ƒvƒŒƒCƒ„[‚Ìæ“¾
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å–å¾—
 	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	if (PlayerController == nullptr)
 		return;
@@ -341,18 +341,18 @@ void AEnemyBase::LookAtPlayer()
 	if (Pawn == nullptr)
 		return;
 
-	// ƒvƒŒƒCƒ„[‚Ö‚Ì•ûŒü‚ğæ“¾
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¸ã®æ–¹å‘ã‚’å–å¾—
 	FVector Direction = Pawn->GetActorLocation() - this->GetActorLocation();
-	// Z²ü‚è‚Ì‰ñ“]‚¾‚¯‚Å‚¢‚¢‚Ì‚Å’²®
+	// Zè»¸å‘¨ã‚Šã®å›è»¢ã ã‘ã§ã„ã„ã®ã§èª¿æ•´
 	FRotator Rotation = FRotator(0.f, Direction.Rotation().Yaw, 0.f);
 
 	this->SetActorRotation(Rotation);
 }
 
-// ©g‚Ìíœ
+// è‡ªèº«ã®å‰Šé™¤
 void AEnemyBase::SelfDestroy()
 {
-	// Œ»İ‚ÌÀ•W‚ÌƒOƒŠƒbƒhƒZƒ‹‚©‚çî•ñ‚ğíœ
+	// ç¾åœ¨ã®åº§æ¨™ã®ã‚°ãƒªãƒƒãƒ‰ã‚»ãƒ«ã‹ã‚‰æƒ…å ±ã‚’å‰Šé™¤
 	if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
 	{
 		if (MyGM->GridManager)
@@ -361,7 +361,7 @@ void AEnemyBase::SelfDestroy()
 		}
 	}
 
-	// ƒGƒlƒ~[ƒ}ƒl[ƒWƒƒ[‚©‚ç©g‚ğ‰ğœ
+	// ã‚¨ãƒãƒŸãƒ¼ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã‹ã‚‰è‡ªèº«ã‚’è§£é™¤
 	if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
 	{
 		if (MyGM->EnemyManager)

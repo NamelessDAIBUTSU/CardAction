@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -15,45 +15,45 @@ class CARDACTION_API UCardSelectWidget : public UHUDBase
 	GENERATED_BODY()
 	
 public:
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	virtual bool Initialize() override;
 
 public: /* UHUDBase */
-	// InƒAƒjƒ[ƒVƒ‡ƒ“‚ÌÄ¶
+	// Inã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®å†ç”Ÿ
 	virtual void PlayInAnim() override;
 
 public:
-	// Œˆ’è‚ÌƒR[ƒ‹ƒoƒbƒN
+	// æ±ºå®šæ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 	UFUNCTION()
 	void OnDecide();
 
-	// ƒrƒWƒuƒ‹•ÏX‚ÌƒR[ƒ‹ƒoƒbƒN
+	// ãƒ“ã‚¸ãƒ–ãƒ«å¤‰æ›´æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 	UFUNCTION()
 	void OnChangeVisibility(ESlateVisibility NextVisibility);
 	UFUNCTION()
 	void OnChangeIsDecided();
 
-	// ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒY‚Ö‚Ì‘JˆÚ”»’è
+	// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºã¸ã®é·ç§»åˆ¤å®š
 	bool GetIsDecided() const { return bIsDecided; }
 
-	// ƒJ[ƒhƒEƒBƒWƒFƒbƒg‚Ì¶¬
+	// ã‚«ãƒ¼ãƒ‰ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®ç”Ÿæˆ
 	void CreateCardWidgets(const TArray<class UCardData*>& CardDataArray);
 
-	// Å‘å‚Ü‚Å‘I‘ğ‚µ‚Ä‚¢‚é‚©
+	// æœ€å¤§ã¾ã§é¸æŠã—ã¦ã„ã‚‹ã‹
 	bool IsSelectMax() const;
 
-	// ŠY“–ƒJ[ƒh‚Ì‡”Ôæ“¾
+	// è©²å½“ã‚«ãƒ¼ãƒ‰ã®é †ç•ªå–å¾—
 	int GetSelectIndex(const FName& ID);
 
-	// ‘I‘ğ’†ƒJ[ƒh‚Ì‘I‘ğ”Ô†ƒeƒLƒXƒg‚ğƒŠƒtƒŒƒbƒVƒ…‚·‚é
+	// é¸æŠä¸­ã‚«ãƒ¼ãƒ‰ã®é¸æŠç•ªå·ãƒ†ã‚­ã‚¹ãƒˆã‚’ãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥ã™ã‚‹
 	void OnRefleshSelectNumText(UUMGSequencePlayer& Player);
 
 public:
-	// Œˆ’èƒ{ƒ^ƒ“
+	// æ±ºå®šãƒœã‚¿ãƒ³
 	UPROPERTY(meta = (BindWidget))
 	UButton* DecideSelectButton;
 
-	// ƒJ[ƒhƒ{ƒbƒNƒX
+	// ã‚«ãƒ¼ãƒ‰ãƒœãƒƒã‚¯ã‚¹
 	UPROPERTY(meta = (BindWidget))
 	USizeBox* CardBox0;
 	UPROPERTY(meta = (BindWidget))
@@ -72,16 +72,16 @@ public:
 	USizeBox* CardBox7;
 	TArray<USizeBox*> CardBoxArray;
 
-	// ƒJ[ƒhƒEƒBƒWƒFƒbƒgƒNƒ‰ƒX
+	// ã‚«ãƒ¼ãƒ‰ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã‚¯ãƒ©ã‚¹
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UUserWidget> CardWidgetClass;
 
 private:
-	// ‘I‘ğ’†‚ÌƒJ[ƒh
+	// é¸æŠä¸­ã®ã‚«ãƒ¼ãƒ‰
 	TArray<UCardData*> SelectCards;
 
-	// Šm’è‚³‚¹‚½‚©
+	// ç¢ºå®šã•ã›ãŸã‹
 	bool bIsDecided = false;
-	// OutƒAƒjƒ[ƒVƒ‡ƒ“’†‚©
+	// Outã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ä¸­ã‹
 	bool bIsPlayingOutAnim = false;
 };

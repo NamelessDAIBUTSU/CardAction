@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Weapon/Weapon_ThrowKnife.h"
@@ -13,7 +13,7 @@
 
 AWeapon_ThrowKnife::AWeapon_ThrowKnife()
 {
-    // ˆÚ“®ƒRƒ“ƒ|[ƒlƒ“ƒg¶¬
+    // ç§»å‹•ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆç”Ÿæˆ
 	ProjectileMoveComp = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Projectile Move Comp"));
 	if (ProjectileMoveComp)
 	{
@@ -21,13 +21,13 @@ AWeapon_ThrowKnife::AWeapon_ThrowKnife()
         ProjectileMoveComp->Velocity = GetActorForwardVector() * Verocity;
 
         ProjectileMoveComp->MaxSpeed = Verocity;
-        // ‘¬“x‚É‡‚í‚¹‚Ä‰ñ“]‚µ‚È‚¢
+        // é€Ÿåº¦ã«åˆã‚ã›ã¦å›è»¢ã—ãªã„
         ProjectileMoveComp->bRotationFollowsVelocity = false;
-        // d—Í‚È‚µ
+        // é‡åŠ›ãªã—
         ProjectileMoveComp->ProjectileGravityScale = 0.f;
 	}
 
-    // “–‚½‚è”»’èƒRƒ“ƒ|[ƒlƒ“ƒg¶¬
+    // å½“ãŸã‚Šåˆ¤å®šã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆç”Ÿæˆ
     SphereCollisionComp = CreateDefaultSubobject<USphereComponent>(TEXT("Sphere Collision Component"));
     if (SphereCollisionComp)
     {
@@ -42,7 +42,7 @@ AWeapon_ThrowKnife::AWeapon_ThrowKnife()
 
 void AWeapon_ThrowKnife::Tick(float DeltaSec)
 {
-    // is•ûŒü‚ğ²‚É‰ñ“]
+    // é€²è¡Œæ–¹å‘ã‚’è»¸ã«å›è»¢
     Super::Tick(DeltaSec);
 }
 
@@ -68,24 +68,24 @@ void AWeapon_ThrowKnife::OnOverlap(UPrimitiveComponent* OverlappedComp,
     if (EnemyManager == nullptr)
         return;
 
-    // ”­ËˆÊ’u‚ÌƒOƒŠƒbƒhƒ}ƒX‚Æ‚Ì“–‚½‚è”»’è‚Í–³‹
+    // ç™ºå°„ä½ç½®ã®ã‚°ãƒªãƒƒãƒ‰ãƒã‚¹ã¨ã®å½“ãŸã‚Šåˆ¤å®šã¯ç„¡è¦–
     FCoord Coord = GridManager->ConvertToGridCoord(OtherActor->GetActorLocation());
     if (Coord == SpawnCoord)
         return;
 
 
-    // “G‚ª‚¢‚éƒ}ƒX‚©æ‚Éæ“¾‚µ‚Ä‚¨‚­
+    // æ•µãŒã„ã‚‹ãƒã‚¹ã‹å…ˆã«å–å¾—ã—ã¦ãŠã
     bool bIsExistEnemyOnGridCell = GridManager->IsExistEnemyOnGridCell(Coord);
-    // “G‚ª€–Sƒ‚[ƒVƒ‡ƒ“’†‚È‚çÁ‚³‚È‚¢
+    // æ•µãŒæ­»äº¡ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ä¸­ãªã‚‰æ¶ˆã•ãªã„
     if (AEnemyBase* Enemy = EnemyManager->GetEnemy(Coord))
     {
         bIsExistEnemyOnGridCell &= (Enemy->IsPlayingDeadMontage() == false);
     }
 
-    // ƒ_ƒ[ƒW”»’è’Ç‰Á
+    // ãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤å®šè¿½åŠ 
     GridManager->ExecuteAttackToGridCell(this, Damage, Coord);
 
-    // “Gƒ}ƒX‚Ìê‡A©g‚Ìíœ
+    // æ•µãƒã‚¹ã®å ´åˆã€è‡ªèº«ã®å‰Šé™¤
     if (bIsExistEnemyOnGridCell)
     {
         Destroy();

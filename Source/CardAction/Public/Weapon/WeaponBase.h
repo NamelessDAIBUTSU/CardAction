@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -21,24 +21,24 @@ public:
 	~AWeaponActorBase();
 
 public:
-	// ƒvƒŒƒCƒ„[‚É‚æ‚éUŒ‚ƒAƒNƒVƒ‡ƒ“
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ã‚ˆã‚‹æ”»æ’ƒã‚¢ã‚¯ã‚·ãƒ§ãƒ³æ™‚
 	virtual void OnAttack() {};
 
-	// Š—LÒ‚Ìİ’è
+	// æ‰€æœ‰è€…ã®è¨­å®š
 	void SetWeaponOwner(class AMyCharacter* Player) { WeaponOwner = Player; }
 
-	// ¶¬‚ÌÀ•Wİ’è
+	// ç”Ÿæˆæ™‚ã®åº§æ¨™è¨­å®š
 	void SetSpawnCoord(FCoord Coord) { SpawnCoord = Coord; }
 
 
 public: /* Status */
-	// ƒ_ƒ[ƒW
+	// ãƒ€ãƒ¡ãƒ¼ã‚¸
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Status")
 	int Damage = 0;
-	// ƒN[ƒ‹ƒ_ƒEƒ“
+	// ã‚¯ãƒ¼ãƒ«ãƒ€ã‚¦ãƒ³
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Status")
 	float CoolTime = 0.f;
-	// UŒ‚‘®«
+	// æ”»æ’ƒå±æ€§
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Status")
 	EAttackElementType ElementType = EAttackElementType::None;
 
@@ -46,7 +46,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Mesh")
 	UStaticMeshComponent* MeshComp = nullptr;
 
-	// UŒ‚‚ÉÄ¶‚·‚éƒvƒŒƒCƒ„[‚Ìƒ‚ƒ“ƒ^[ƒWƒ…
+	// æ”»æ’ƒæ™‚ã«å†ç”Ÿã™ã‚‹ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ¢ãƒ³ã‚¿ãƒ¼ã‚¸ãƒ¥
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animation")
 	UAnimMontage* AttackMontage = nullptr;
 

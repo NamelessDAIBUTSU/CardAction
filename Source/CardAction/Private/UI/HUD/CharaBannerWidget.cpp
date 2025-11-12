@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "UI/HUD/CharaBannerWidget.h"
@@ -9,7 +9,7 @@ void UCharaBannerWidget::Setup(AEnemyBase* Enemy)
 	if (Enemy == nullptr)
 		return;
 
-	// ƒAƒCƒRƒ“İ’è
+	// ã‚¢ã‚¤ã‚³ãƒ³è¨­å®š
 	if (IconImage)
 	{
 		FSlateBrush Brush;
@@ -17,17 +17,17 @@ void UCharaBannerWidget::Setup(AEnemyBase* Enemy)
 		IconImage->SetBrush(Brush);
 	}
 
-	// –¼‘Oİ’è
+	// åå‰è¨­å®š
 	if (EnemyNameText)
 	{
 		EnemyNameText->SetText(FText::FromName(Enemy->Name));
 	}
 
-	// ƒŒƒCƒAƒEƒgİ’è
+	// ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆè¨­å®š
 	ChangeLayout(false);
 }
 
-// ¶€ƒŒƒCƒAƒEƒg•ÏX
+// ç”Ÿæ­»ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆå¤‰æ›´
 void UCharaBannerWidget::ChangeLayout(bool IsDead)
 {
 	if (IsDead && DeadLayoutAnim)

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -21,29 +21,29 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	void Setup();
 
 public:
-	// ‰½•b‚ÅUŒ‚”»’è‚ğo‚·‚©
+	// ä½•ç§’ã§æ”»æ’ƒåˆ¤å®šã‚’å‡ºã™ã‹
 	UPROPERTY(EditAnywhere)
 	float GoalSec = 0.6f;
 
-	// ÅIƒXƒP[ƒ‹
+	// æœ€çµ‚ã‚¹ã‚±ãƒ¼ãƒ«
 	UPROPERTY(EditAnywhere)
 	FVector GoalScale = FVector(1.5f);
 
-	// ‰ñ“]ƒXƒs[ƒh/s
+	// å›è»¢ã‚¹ãƒ”ãƒ¼ãƒ‰/s
 	UPROPERTY(EditAnywhere)
 	float RotateSpeed = 120.f;
 
-	// ƒ_ƒ[ƒWˆ—‚ÌƒJƒXƒP[ƒh
+	// ãƒ€ãƒ¡ãƒ¼ã‚¸å‡¦ç†æ™‚ã®ã‚«ã‚¹ã‚±ãƒ¼ãƒ‰
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UParticleSystem* DamageEffect;
 
 private:
 	float ElapsedSec = 0.f;
 
-	// ƒXƒP[ƒ‹ƒXƒs[ƒh
+	// ã‚¹ã‚±ãƒ¼ãƒ«ã‚¹ãƒ”ãƒ¼ãƒ‰
 	FVector ScaleSpeed = FVector::Zero();
 };

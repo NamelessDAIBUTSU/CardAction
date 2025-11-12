@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Map/Stage/StageObject.h"
@@ -14,7 +14,7 @@ void UStageObject::AddPreStage(UStageObject* PreStage)
 	PreStageList.Add(PreStage);
 }
 
-// oŒ»‚³‚¹‚é“GƒNƒ‰ƒX‚ðÝ’è
+// å‡ºç¾ã•ã›ã‚‹æ•µã‚¯ãƒ©ã‚¹ã‚’è¨­å®š
 void UStageObject::SetupEnemyClass(UMapObject* Map)
 {
 	if (GenerateGridData == nullptr)
@@ -23,14 +23,14 @@ void UStageObject::SetupEnemyClass(UMapObject* Map)
 	if (Map == nullptr || Map->GetMapData() == nullptr)
 		return;
 
-	// oŒ»‚³‚¹‚é“G‚Ì”‚ðŽæ“¾
+	// å‡ºç¾ã•ã›ã‚‹æ•µã®æ•°ã‚’å–å¾—
 	const int SpawnEnemyNum = GenerateGridData->SpawnEnemyNum;
-	// oŒ»‰Â”\‚Ì“GƒŠƒXƒg‚ðŽæ“¾
+	// å‡ºç¾å¯èƒ½ã®æ•µãƒªã‚¹ãƒˆã‚’å–å¾—
 	const auto& EnemyList = Map->GetMapData()->SpawnableEnemy;
 	if (EnemyList.IsEmpty())
 		return;
 
-	// oŒ»‚³‚¹‚é“GƒNƒ‰ƒX‚ðƒ‰ƒ“ƒ_ƒ€‚ÉŽæ“¾‚µAƒŠƒXƒg‚É•Û‘¶‚µ‚Ä‚¢‚­
+	// å‡ºç¾ã•ã›ã‚‹æ•µã‚¯ãƒ©ã‚¹ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«å–å¾—ã—ã€ãƒªã‚¹ãƒˆã«ä¿å­˜ã—ã¦ã„ã
 	for (int i = 0; i < SpawnEnemyNum; ++i)
 	{
 		int Index = FMath::RandRange(0, EnemyList.Num() - 1);

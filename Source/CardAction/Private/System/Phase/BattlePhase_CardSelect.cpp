@@ -1,14 +1,14 @@
-#include "System/Phase/BattlePhase_CardSelect.h"
+ï»¿#include "System/Phase/BattlePhase_CardSelect.h"
 #include <Kismet/GameplayStatics.h>
 #include <System/MyGameMode.h>
 #include <Character/MyPlayerController.h>
 #include "Card/DeckManager.h"
 
 
-// ƒtƒF[ƒYŠJn
+// ãƒ•ã‚§ãƒ¼ã‚ºé–‹å§‹æ™‚
 void UBattlePhase_CardSelect::OnBegin()
 {
-	// ƒJ[ƒh‘I‘ğƒEƒBƒWƒFƒbƒg‚ÆƒJ[ƒhƒuƒbƒN‚Ì•\¦
+	// ã‚«ãƒ¼ãƒ‰é¸æŠã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã¨ã‚«ãƒ¼ãƒ‰ãƒ–ãƒƒã‚¯ã®è¡¨ç¤º
 	SetHidden(false);
 
 	AMyPlayerController* PlayerController = Cast<AMyPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
@@ -20,19 +20,19 @@ void UBattlePhase_CardSelect::OnBegin()
 	if (CardSelectWidget == nullptr)
 		return;
 
-	// ƒfƒbƒLƒ}ƒl[ƒWƒƒ[‚©‚çƒhƒ[
+	// ãƒ‡ãƒƒã‚­ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã‹ã‚‰ãƒ‰ãƒ­ãƒ¼
 	if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
 	{
 		ADeckManager* DeckManager = MyGM->DeckManager;
 		if (DeckManager == nullptr)
 			return;
 
-		// ƒJ[ƒhƒEƒBƒWƒFƒbƒg‚Ì’Ç‰Á
+		// ã‚«ãƒ¼ãƒ‰ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®è¿½åŠ 
 		TArray<UCardData*> DrawCards = DeckManager->DrawCards();
 		CardSelectWidget->CreateCardWidgets(DrawCards);
 	}
 
-	// •\¦ƒAƒjƒ[ƒVƒ‡ƒ“
+	// è¡¨ç¤ºã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
 	CardSelectWidget->PlayInAnim();
 
 }
@@ -42,7 +42,7 @@ void UBattlePhase_CardSelect::OnTick(float DeltaSec)
 	if (RequestNextPhase != EBattlePhase::None)
 		return;
 
-	// ƒtƒF[ƒYØ‚è‘Ö‚¦”»’è
+	// ãƒ•ã‚§ãƒ¼ã‚ºåˆ‡ã‚Šæ›¿ãˆåˆ¤å®š
 	AMyPlayerController* PlayerController = Cast<AMyPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
 	if (PlayerController == nullptr)
 		return;
@@ -52,23 +52,23 @@ void UBattlePhase_CardSelect::OnTick(float DeltaSec)
 	if (CardSelectWidget == nullptr)
 		return;
 
-	// Œˆ’èƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚çAI—¹ƒAƒjƒ[ƒVƒ‡ƒ“‚ğ‘Ò‚Á‚Ä‚©‚çƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒY‚ÖƒŠƒNƒGƒXƒg
+	// æ±ºå®šãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã‚‰ã€çµ‚äº†ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å¾…ã£ã¦ã‹ã‚‰ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºã¸ãƒªã‚¯ã‚¨ã‚¹ãƒˆ
 	if (CardSelectWidget->GetIsDecided())
 	{
 		RequestNextPhase = EBattlePhase::Action;
 	}
 }
 
-// ƒtƒF[ƒYI—¹
+// ãƒ•ã‚§ãƒ¼ã‚ºçµ‚äº†æ™‚
 void UBattlePhase_CardSelect::OnExit() 
 {
-	// ƒJ[ƒh‘I‘ğƒEƒBƒWƒFƒbƒg‚ÆƒJ[ƒhƒuƒbƒN‚Ì”ñ•\¦
+	// ã‚«ãƒ¼ãƒ‰é¸æŠã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã¨ã‚«ãƒ¼ãƒ‰ãƒ–ãƒƒã‚¯ã®éè¡¨ç¤º
 	SetHidden(true);
 }
 
 void UBattlePhase_CardSelect::SetHidden(bool bHidden)
 {
-	// ƒJ[ƒh‘I‘ğƒEƒBƒWƒFƒbƒg‚Ì”ñ•\¦
+	// ã‚«ãƒ¼ãƒ‰é¸æŠã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®éè¡¨ç¤º
 	AMyPlayerController* PlayerController = Cast<AMyPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
 	if (PlayerController == nullptr)
 		return;

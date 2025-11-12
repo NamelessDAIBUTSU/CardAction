@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+ï»¿// Copyright Epic Games, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -25,18 +25,18 @@ public:
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void BeginPlay() override;
 
-	// “ü—ÍƒoƒCƒ“ƒhİ’è
+	// å…¥åŠ›ãƒã‚¤ãƒ³ãƒ‰è¨­å®š
 	virtual void SetupPlayerInputComponent(UInputComponent* InputComp) override;
 
 public: /* IGridMoveCompInterface */
 	virtual UGridMovementComponent* GetGridMoveComponent() override{ return GridMovementComp; }
 
 public: /* Callback */
-	// •Ší”­“®
+	// æ­¦å™¨ç™ºå‹•
 	UFUNCTION()
 	void OnUseCard(const FInputActionValue& Value);
 
-	// ƒJ[ƒh‘I‘ğ
+	// ã‚«ãƒ¼ãƒ‰é¸æŠ
 	UFUNCTION()
 	void OnSelectFirstCard(const FInputActionValue& Value);
 	UFUNCTION()
@@ -48,44 +48,44 @@ public: /* Callback */
 	UFUNCTION()
 	void OnScrollSelectCard(const FInputActionValue& Value);
 
-	// ƒ_ƒ[ƒWˆ—
+	// ãƒ€ãƒ¡ãƒ¼ã‚¸å‡¦ç†
 	UFUNCTION()
 	void OnTakeDamage(float Damage);
 
 public:
-	// À•Wİ’è
+	// åº§æ¨™è¨­å®š
 	void SetCurrentCoord(FCoord Coord);
 	FCoord GetCurrentCoord() const;
 
-	// ƒQƒbƒ^
+	// ã‚²ãƒƒã‚¿
 	UGridMovementComponent* GetGridMovementComponent() { return GridMovementComp; }
 
-	// èD‚ÉƒJ[ƒh‚ğ’Ç‰Á
+	// æ‰‹æœ­ã«ã‚«ãƒ¼ãƒ‰ã‚’è¿½åŠ 
 	void AddToHandCards(UCardData* CardData);
-	// èD‚©‚çƒJ[ƒh‚ğœ‹
+	// æ‰‹æœ­ã‹ã‚‰ã‚«ãƒ¼ãƒ‰ã‚’é™¤å»
 	void RemoveFromHandCards(UCardData* CardData);
 
 private:
-	// èDƒEƒBƒWƒFƒbƒg‚É”½‰f
+	// æ‰‹æœ­ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã«åæ˜ 
 	void RefleshHandCards();
 
-	// ƒ_ƒ[ƒW‚É‚æ‚é“_–Å
+	// ãƒ€ãƒ¡ãƒ¼ã‚¸ã«ã‚ˆã‚‹ç‚¹æ»…
 	void StartBlinkEffect();
 
-	// –³“GŠÔ‚ÌŠJn
+	// ç„¡æ•µæ™‚é–“ã®é–‹å§‹
 	void StartInvincible();
 
-	// “_–Å‰‰oŠÖ˜A
+	// ç‚¹æ»…æ¼”å‡ºé–¢é€£
 	void ToggleBlink();
 	void EndInvincible();
 
 
 public: /* Input */
-	// ƒJ[ƒh”­“®
+	// ã‚«ãƒ¼ãƒ‰ç™ºå‹•
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* UseCardAction = nullptr;
 
-	// èD‚Ì‘I‘ğ
+	// æ‰‹æœ­ã®é¸æŠ
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* SelectFirstCardAction = nullptr;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
@@ -94,15 +94,15 @@ public: /* Input */
 	UInputAction* SelectThirdCardAction = nullptr;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* SelectFourthCardAction = nullptr;
-	// èD‚Ì‘I‘ğiƒzƒC[ƒ‹ƒXƒNƒ[ƒ‹j
+	// æ‰‹æœ­ã®é¸æŠï¼ˆãƒ›ã‚¤ãƒ¼ãƒ«ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ï¼‰
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* ScrollSelectCardAction = nullptr;
 
-	// ƒOƒŠƒbƒhˆÚ“®
+	// ã‚°ãƒªãƒƒãƒ‰ç§»å‹•
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* MoveGridAction = nullptr;
 
-	// ‰ñ“]ƒ‚[ƒh
+	// å›è»¢ãƒ¢ãƒ¼ãƒ‰
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* TurnTowardAction = nullptr;
 
@@ -112,41 +112,41 @@ public: /* Status */
 	int32 CurrentHP = 100;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Status")
 	int32 MaxHP = 100;
-	// ƒGƒiƒW[
+	// ã‚¨ãƒŠã‚¸ãƒ¼
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Status")
 	int32 CurrentEnergy = 10;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Status")
 	int32 MaxEnergy = 10;
 
 public:
-	// ƒ}ƒYƒ‹ƒIƒtƒZƒbƒg
+	// ãƒã‚ºãƒ«ã‚ªãƒ•ã‚»ãƒƒãƒˆ
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Weapon")
 	FVector MazzleOffset = FVector(0.f, 0.f, 50.f);
 	
-	// –³“GŠÔ
+	// ç„¡æ•µæ™‚é–“
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Invincible")
 	float InvincibleSec = 1.5f;
 
 private:
-	// èDƒJ[ƒh
+	// æ‰‹æœ­ã‚«ãƒ¼ãƒ‰
 	UPROPERTY(VisibleAnywhere, Category = "Card")
 	TArray<UCardData*> HandCards;
-	// èD‚Ì‘I‘ğ’†ƒCƒ“ƒfƒbƒNƒX
+	// æ‰‹æœ­ã®é¸æŠä¸­ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 	UPROPERTY(VisibleAnywhere, Category = "Card")
 	int SelectHandCardsIndex = 0;
 
-	// ƒOƒŠƒbƒhˆÚ“®ƒRƒ“ƒ|[ƒlƒ“ƒg
+	// ã‚°ãƒªãƒƒãƒ‰ç§»å‹•ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 	UPROPERTY(VisibleAnywhere, Category = "Component")
 	UGridMovementComponent* GridMovementComp = nullptr;
-	// HPƒo[—pƒRƒ“ƒ|[ƒlƒ“ƒg
+	// HPãƒãƒ¼ç”¨ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 	UPROPERTY(VisibleAnywhere, Category = "Component")
 	UWidgetComponent* WidgetComp = nullptr;
 
-private: /* –³“G */
-	// –³“GŠÔ’†‚©
+private: /* ç„¡æ•µ */
+	// ç„¡æ•µæ™‚é–“ä¸­ã‹
 	UPROPERTY(VisibleAnywhere, Category = "Invincible")
 	bool bIsInvincible = false;
-	// –³“GŒo‰ßŠÔ
+	// ç„¡æ•µçµŒéæ™‚é–“
 	UPROPERTY(VisibleAnywhere, Category = "Invincible")
 	float ElapsedSec = 0.f;
 

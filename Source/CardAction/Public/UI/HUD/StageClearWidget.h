@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -16,7 +16,7 @@ class CARDACTION_API UStageClearWidget : public UHUDBase
 	GENERATED_BODY()
 
 public:
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	virtual bool Initialize() override;
 
 public: /* UHUDBase */
@@ -26,22 +26,22 @@ public: /* UHUDBase */
 	virtual void OnUpdate(float DeltaSec) override {}
 
 public:
-	// Œˆ’èƒ{ƒ^ƒ“‰Ÿ‰º‚ÌƒR[ƒ‹ƒoƒbƒN
+	// æ±ºå®šãƒœã‚¿ãƒ³æŠ¼ä¸‹æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 	UFUNCTION()
 	void OnDecide();
 
-	// ƒAƒjƒ[ƒVƒ‡ƒ“I—¹‚ÌƒR[ƒ‹ƒoƒbƒN
+	// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†æ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 	UFUNCTION()
 	void OnFinishOutAnim();
 
-	// ƒAƒEƒgƒAƒjƒ‚ªI—¹‚µ‚½‚©
+	// ã‚¢ã‚¦ãƒˆã‚¢ãƒ‹ãƒ¡ãŒçµ‚äº†ã—ãŸã‹
 	bool IsOutAnimFinished() const { return bIsOutAnimFinished; }
 
 private:
-	// Œˆ’èƒ{ƒ^ƒ“
+	// æ±ºå®šãƒœã‚¿ãƒ³
 	UPROPERTY(meta = (BindWidget))
 	UButton* DecideButton;
 
-	// ‘JˆÚ—pƒtƒ‰ƒO
+	// é·ç§»ç”¨ãƒ•ãƒ©ã‚°
 	bool bIsOutAnimFinished = false;
 };

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #include "System/MyGameMode.h"
 #include "GameFramework/PlayerStart.h"
@@ -24,13 +24,13 @@ void AMyGameMode::StartPlay()
 {
 	Super::StartPlay();
 
-	// ƒGƒlƒ~[ƒ}ƒl[ƒWƒƒ[¶¬
+	// ã‚¨ãƒãƒŸãƒ¼ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ç”Ÿæˆ
 	if (EnemyManagerClass)
 	{
 		EnemyManager = GetWorld()->SpawnActor<AEnemyManager>(EnemyManagerClass, FVector(), FRotator());
 	}
 
-	// ƒOƒŠƒbƒhƒ}ƒl[ƒWƒƒ[¶¬
+	// ã‚°ãƒªãƒƒãƒ‰ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ç”Ÿæˆ
 	if (GridManagerClass)
 	{
 		GridManager = GetWorld()->SpawnActor<AGridManager>(GridManagerClass, FVector(), FRotator());
@@ -42,17 +42,17 @@ void AMyGameMode::StartPlay()
 		return;
 	}
 
-	// ƒOƒŠƒbƒh‰Šú‰»
+	// ã‚°ãƒªãƒƒãƒ‰åˆæœŸåŒ–
 	GridManager->Initialize();
 
-	// ƒvƒŒƒCƒ„[‚ğ¶¬
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ç”Ÿæˆ
 	ACharacter* PlayerPawn = GetWorld()->SpawnActor<ACharacter>(PlayerPawnClass, GridManager->GetPlayerSpawnPosition(), FRotator());
 	if (PlayerPawn == nullptr)
 	{
 		UE_LOG(LogTemp, Error, TEXT("Failed to spawn player pawn!"));
 		return;
 	}
-	// —‰º‚µ‚È‚¢‚æ‚¤‚ÉZˆÊ’u‚ğ•â³
+	// è½ä¸‹ã—ãªã„ã‚ˆã†ã«Zä½ç½®ã‚’è£œæ­£
 	UCapsuleComponent* Capsule = PlayerPawn->GetCapsuleComponent();
 	if (Capsule)
 	{
@@ -62,18 +62,18 @@ void AMyGameMode::StartPlay()
 		PlayerPawn->SetActorLocation(AdjustedPos);
 	}
 
-	// ¶¬‚µ‚½ƒZƒ‹ã‚ÉƒvƒŒƒCƒ„[‚ğ“o˜^
+	// ç”Ÿæˆã—ãŸã‚»ãƒ«ä¸Šã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ç™»éŒ²
 	FCoord SpawnCoord = GridManager->ConvertToGridCoord(PlayerPawn->GetActorLocation());
 	GridManager->AddActorOnCell(PlayerPawn, SpawnCoord);
 
-	// ƒvƒŒƒCƒ„[‚ÌƒOƒŠƒbƒhÀ•Wİ’è
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚°ãƒªãƒƒãƒ‰åº§æ¨™è¨­å®š
 	Player = Cast<AMyCharacter>(PlayerPawn);
 	if (Player)
 	{
 		Player->SetCurrentCoord(SpawnCoord);
 	}
 
-	// ƒvƒŒƒCƒ„[ƒRƒ“ƒgƒ[ƒ‰[‚ğæ“¾‚µ‚ÄPossess
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã‚’å–å¾—ã—ã¦Possess
 	AMyPlayerController* MyPC = Cast<AMyPlayerController>(GetWorld()->GetFirstPlayerController());
 	if (MyPC == nullptr)
 	{
@@ -82,33 +82,33 @@ void AMyGameMode::StartPlay()
 	}
 	MyPC->Possess(PlayerPawn);
 
-	// ƒJƒƒ‰¶¬
+	// ã‚«ãƒ¡ãƒ©ç”Ÿæˆ
 	if (AGridCamera* Camera = GetWorld()->SpawnActor<AGridCamera>())
 	{
 		Camera->AdjustCameraToGrid();
 
-		// ƒvƒŒƒCƒ„[‚Ìƒrƒ…[‚ğ‚±‚ÌƒJƒƒ‰‚ÉŒÅ’è
+		// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ“ãƒ¥ãƒ¼ã‚’ã“ã®ã‚«ãƒ¡ãƒ©ã«å›ºå®š
 		MyPC->SetViewTargetWithBlend(Camera, 0.0f);
 	}
 
-	// ƒfƒbƒLƒ}ƒl[ƒWƒƒ[¶¬
+	// ãƒ‡ãƒƒã‚­ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ç”Ÿæˆ
 	if (DeckManagerClass)
 	{
 		DeckManager = GetWorld()->SpawnActor<ADeckManager>(DeckManagerClass, FVector(), FRotator());
 		if (DeckManager)
 		{
-			// ƒfƒbƒL‚Ì‰Šú‰»
+			// ãƒ‡ãƒƒã‚­ã®åˆæœŸåŒ–
 			DeckManager->Initialzie(InitDeckData);
 		}
 	}
 
-	// ŠeíWidget‚Ì‰Šú‰»
+	// å„ç¨®Widgetã®åˆæœŸåŒ–
 	if (MyPC->MainHUDWidget)
 	{
 		MyPC->MainHUDWidget->InitializeWidgets();
 	}
 
-	// Å‰‚ÌƒtƒF[ƒYİ’è
+	// æœ€åˆã®ãƒ•ã‚§ãƒ¼ã‚ºè¨­å®š
 	ChangePhase(EBattlePhase::Entry);
 }
 
@@ -117,10 +117,10 @@ void AMyGameMode::Tick(float DeltaSeconds)
 	if (CurrentBattlePhase == nullptr)
 		return;
 
-	// Œ»İ‚ÌƒtƒF[ƒY‚ÌXV
+	// ç¾åœ¨ã®ãƒ•ã‚§ãƒ¼ã‚ºã®æ›´æ–°
 	CurrentBattlePhase->OnTick(DeltaSeconds);
 
-	// ƒtƒF[ƒYØ‚è‘Ö‚¦‚ÌƒŠƒNƒGƒXƒg‚ª‚ ‚Á‚½‚çƒtƒF[ƒYØ‚è‘Ö‚¦
+	// ãƒ•ã‚§ãƒ¼ã‚ºåˆ‡ã‚Šæ›¿ãˆã®ãƒªã‚¯ã‚¨ã‚¹ãƒˆãŒã‚ã£ãŸã‚‰ãƒ•ã‚§ãƒ¼ã‚ºåˆ‡ã‚Šæ›¿ãˆ
 	if (CurrentBattlePhase->IsRequestChangePhase())
 	{
 		ChangePhase(CurrentBattlePhase->GetRequestNextPhase());
@@ -129,13 +129,13 @@ void AMyGameMode::Tick(float DeltaSeconds)
 
 void AMyGameMode::ChangePhase(EBattlePhase NextPhase)
 {
-	// ƒtƒF[ƒYI—¹ˆ—
+	// ãƒ•ã‚§ãƒ¼ã‚ºçµ‚äº†æ™‚å‡¦ç†
 	if (CurrentBattlePhase)
 	{
 		CurrentBattlePhase->OnExit();
 	}
 
-	// Ÿ‚ÌƒtƒF[ƒY‚ğ¶¬
+	// æ¬¡ã®ãƒ•ã‚§ãƒ¼ã‚ºã‚’ç”Ÿæˆ
 	switch (NextPhase)
 	{
 	case EBattlePhase::Entry:
@@ -148,7 +148,7 @@ void AMyGameMode::ChangePhase(EBattlePhase NextPhase)
 	{
 		CurrentBattlePhase = NewObject<UBattlePhaseBase>(this, UBattlePhase_Action::StaticClass());
 
-		// ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒYŠJn‚Ìˆ—
+		// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºé–‹å§‹æ™‚ã®å‡¦ç†
 		OnStartActionPhase.Broadcast();
 		break;
 	}
@@ -162,7 +162,7 @@ void AMyGameMode::ChangePhase(EBattlePhase NextPhase)
 		break;
 	}
 
-	// ƒtƒF[ƒYŠJnˆ—
+	// ãƒ•ã‚§ãƒ¼ã‚ºé–‹å§‹æ™‚å‡¦ç†
 	if (CurrentBattlePhase)
 	{
 		CurrentBattlePhase->OnBegin();
@@ -177,7 +177,7 @@ EBattlePhase AMyGameMode::GetCurrentButtlePhase() const
 	return CurrentBattlePhase->GetBattlePhase();
 }
 
-// ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒY‚Ìê‡Ac‚èŠÔ‚ğæ“¾
+// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºã®å ´åˆã€æ®‹ã‚Šæ™‚é–“ã‚’å–å¾—
 int AMyGameMode::GetRemainSec()
 {
 	UBattlePhase_Action* ActionPhase = Cast<UBattlePhase_Action>(CurrentBattlePhase);
@@ -191,6 +191,6 @@ int AMyGameMode::GetRemainSec()
 
 void AMyGameMode::OnGameOver()
 {
-	// ƒQ[ƒ€ƒI[ƒo[ˆ—‚ğŒÄ‚Ô
+	// ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼å‡¦ç†ã‚’å‘¼ã¶
 	OnGameEnd.Broadcast();
 }

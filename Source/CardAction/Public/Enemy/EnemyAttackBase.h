@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -30,16 +30,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Status")
 	int32 Damage = 0;
 
-	// Œ©‚½–Ú
+	// è¦‹ãŸç›®
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class UStaticMeshComponent* MeshComp;
 
 protected:
-	// UŒ‚‚ª—LŒø‚©
+	// æ”»æ’ƒãŒæœ‰åŠ¹ã‹
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	bool bIsValidAttack = true;
 
-	// À•W
+	// åº§æ¨™
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	FCoord CurrentCoord = FCoord::Zero();
 };

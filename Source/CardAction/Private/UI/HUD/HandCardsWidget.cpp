@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "UI/HUD/HandCardsWidget.h"
@@ -8,13 +8,13 @@
 
 void UHandCardsWidget::NativeConstruct()
 {
-	// ƒJ[ƒh”z—ñ‚ÌƒTƒCƒYŠm•Û
+	// ã‚«ãƒ¼ãƒ‰é…åˆ—ã®ã‚µã‚¤ã‚ºç¢ºä¿
 	HandCards.Reserve(MAX_HAND_CARDS_NUM);
 
 	if (CardSlotWidgetClass == nullptr)
 		return;
 
-	// ƒEƒBƒWƒFƒbƒg‚ğ¶¬‚µ‚ÄAèD”z—ñ‚É’Ç‰Á
+	// ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã‚’ç”Ÿæˆã—ã¦ã€æ‰‹æœ­é…åˆ—ã«è¿½åŠ 
 	for (auto i = 0; i < MAX_HAND_CARDS_NUM; i++)
 	{
 		UCardSlotWidget* NewCardSlot = CreateWidget<UCardSlotWidget>(GetWorld(), CardSlotWidgetClass);
@@ -26,7 +26,7 @@ void UHandCardsWidget::NativeConstruct()
 				UHorizontalBoxSlot* BoxSlot = Cast<UHorizontalBoxSlot>(CardsHorizontalBox->AddChildToHorizontalBox(NewCardSlot));
 				if (BoxSlot)
 				{
-					// ƒJ[ƒhŠÔ‚Ì—]”’‚ğ’Ç‰Á
+					// ã‚«ãƒ¼ãƒ‰é–“ã®ä½™ç™½ã‚’è¿½åŠ 
 					BoxSlot->SetPadding(FMargin(5.f, 0.f, 5.f, 0.f));
 					BoxSlot->SetVerticalAlignment(VAlign_Bottom);
 				}
@@ -35,7 +35,7 @@ void UHandCardsWidget::NativeConstruct()
 	}
 }
 
-// ƒJ[ƒh‘I‘ğƒfƒŠƒQ[ƒg‚ğİ’è
+// ã‚«ãƒ¼ãƒ‰é¸æŠãƒ‡ãƒªã‚²ãƒ¼ãƒˆã‚’è¨­å®š
 void UHandCardsWidget::SetSelectCardDelegate(FOnSelectCard SelectDelegate, FOnUnSelectCard UnSelectDelegate) 
 {
 	SelectCardDelegate = SelectDelegate;
@@ -53,7 +53,7 @@ void UHandCardsWidget::AddToHandCards(int Index, UCardData* CardData)
 	}
 }
 
-// èDƒJ[ƒh‚ğƒŠƒZƒbƒg
+// æ‰‹æœ­ã‚«ãƒ¼ãƒ‰ã‚’ãƒªã‚»ãƒƒãƒˆ
 void UHandCardsWidget::ResetHandCards()
 {
 	for (int i = 0; i < HandCards.Num(); ++i)
@@ -72,7 +72,7 @@ void UHandCardsWidget::ResetHandCards(int Index)
 	}
 }
 
-// ƒJ[ƒh‘I‘ğ
+// ã‚«ãƒ¼ãƒ‰é¸æŠ
 void UHandCardsWidget::SelectCard(int SelectIndex)
 {
 	if (SelectIndex >= MAX_HAND_CARDS_NUM)
@@ -81,10 +81,10 @@ void UHandCardsWidget::SelectCard(int SelectIndex)
 	if (HandCards[SelectIndex] == nullptr)
 		return;
 
-	// ‘I‘ğƒAƒjƒ[ƒVƒ‡ƒ“
+	// é¸æŠã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
 	HandCards[SelectIndex]->PlaySelectAnim();
 
-	// ‘I‘ğ’†‚ÌƒJ[ƒh‚ª‚ ‚ê‚Î‘I‘ğ‰ğœƒAƒjƒ[ƒVƒ‡ƒ“‚ÌÄ¶
+	// é¸æŠä¸­ã®ã‚«ãƒ¼ãƒ‰ãŒã‚ã‚Œã°é¸æŠè§£é™¤ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®å†ç”Ÿ
 	for (auto i = 0; i < MAX_HAND_CARDS_NUM; i++)
 	{
 		if (i == SelectIndex)
@@ -97,7 +97,7 @@ void UHandCardsWidget::SelectCard(int SelectIndex)
 	}
 }
 
-// ƒJ[ƒh‚ÌŒø‰Ê”­“®
+// ã‚«ãƒ¼ãƒ‰ã®åŠ¹æœç™ºå‹•
 void UHandCardsWidget::ExecuteEffect(int Index)
 {
 	if (Index >= MAX_HAND_CARDS_NUM)
@@ -106,11 +106,11 @@ void UHandCardsWidget::ExecuteEffect(int Index)
 	if (HandCards[Index] == nullptr)
 		return;
 
-	// Œø‰Ê”­“®
+	// åŠ¹æœç™ºå‹•
 	HandCards[Index]->ExecuteEffect();
 }
 
-// ƒJ[ƒhƒEƒBƒWƒFƒbƒg‚ÌƒAƒjƒ[ƒVƒ‡ƒ“‚ğƒfƒtƒHƒ‹ƒg‚É–ß‚·
+// ã‚«ãƒ¼ãƒ‰ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã«æˆ»ã™
 void UHandCardsWidget::PlayDefaultAnimation(int Index)
 {
 	if (Index >= MAX_HAND_CARDS_NUM)
@@ -119,6 +119,6 @@ void UHandCardsWidget::PlayDefaultAnimation(int Index)
 	if (HandCards[Index] == nullptr)
 		return;
 
-	// Œø‰Ê”­“®
+	// åŠ¹æœç™ºå‹•
 	HandCards[Index]->PlayDefaultAnimation();
 }

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -23,74 +23,74 @@ protected: /* UObject */
 public:	/* UActorComponent */
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-public: /* ƒvƒŒƒCƒ„[—p */
-	// ƒOƒŠƒbƒhˆÚ“®
+public: /* ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ç”¨ */
+	// ã‚°ãƒªãƒƒãƒ‰ç§»å‹•
 	UFUNCTION()
 	void OnMoveToDirection(const FInputActionValue& Value);
 
-	// ˆÚ“®•ûŒüƒLƒƒƒbƒVƒ…‚Ìíœ
+	// ç§»å‹•æ–¹å‘ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã®å‰Šé™¤
 	UFUNCTION()
 	void OnResetDirectionCache(const FInputActionValue& Value);
 
-	// ‰ñ“]‚Ì‚İƒ‚[ƒh‚Ì•ÏX
+	// å›è»¢ã®ã¿ãƒ¢ãƒ¼ãƒ‰ã®å¤‰æ›´
 	UFUNCTION()
 	void OnChangeTurnMode(const FInputActionValue& Value);
 
 public:
-	// ˆÚ“®ƒŠƒNƒGƒXƒg
+	// ç§»å‹•ãƒªã‚¯ã‚¨ã‚¹ãƒˆ
 	void RequestMoveToDirection(FCoord Coord, float GoalSecond);
 
-	// À•W
+	// åº§æ¨™
 	UFUNCTION()
 	FCoord GetCurrentCoord() const { return CurrentCoord; }
 	void SetCoord(FCoord Coord) { CurrentCoord = Coord; }
 
-	// ˆÚ“®’†
+	// ç§»å‹•ä¸­
 	UFUNCTION(BlueprintCallable)
 	bool IsMoving() const { return bIsMoving; }
 
 private:
-	// ƒOƒŠƒbƒhˆÚ“®‚ªI—¹‚µ‚½‚©
+	// ã‚°ãƒªãƒƒãƒ‰ç§»å‹•ãŒçµ‚äº†ã—ãŸã‹
 	bool IsFinishGridMove();
 
-	// ˆÚ“®XV
+	// ç§»å‹•æ›´æ–°
 	void UpdateGridMove(float DeltaSec);
 
 
-private: /* ƒvƒŒƒCƒ„[—p */
-	// ˜A‘±ˆÚ“®§Œä—p‚ÌˆÚ“®•ûŒüƒLƒƒƒbƒVƒ…
+private: /* ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ç”¨ */
+	// é€£ç¶šç§»å‹•åˆ¶å¾¡ç”¨ã®ç§»å‹•æ–¹å‘ã‚­ãƒ£ãƒƒã‚·ãƒ¥
 	UPROPERTY(VisibleAnywhere, Category = "GridMove")
 	FVector2D DirectionCache = FVector2D::Zero();
 
 private:
-	// ‰ñ“]‚¾‚¯‚Ìƒ‚[ƒh‚©
+	// å›è»¢ã ã‘ã®ãƒ¢ãƒ¼ãƒ‰ã‹
 	UPROPERTY(VisibleAnywhere, Category = "GridMove")
 	bool bIsTurningMode = false;
 
-	// Œ»İ‚ÌÀ•W
+	// ç¾åœ¨ã®åº§æ¨™
 	UPROPERTY(VisibleAnywhere, Category = "GridMove")
 	FCoord CurrentCoord = FCoord::Zero();
 
-private: /* ˆÚ“®XVŠÖ˜A */
-	// ˆÚ“®’†‚©
+private: /* ç§»å‹•æ›´æ–°é–¢é€£ */
+	// ç§»å‹•ä¸­ã‹
 	UPROPERTY(VisibleAnywhere, Category = "GridMove")
 	bool bIsMoving = false;
 
-	// 1•b‚ÌˆÚ“®—Ê
+	// 1ç§’ã®ç§»å‹•é‡
 	UPROPERTY(VisibleAnywhere, Category = "GridMove")
 	FVector MoveSpeed = FVector::Zero();
 
-	// ˆÚ“®æˆÊ’u
+	// ç§»å‹•å…ˆä½ç½®
 	UPROPERTY(VisibleAnywhere, Category = "GridMove")
 	FVector TargetLocation = FVector::Zero();
 	UPROPERTY(VisibleAnywhere, Category = "GridMove")
 	FCoord TargetCoord = FCoord::Zero();
 
-	// 1ƒtƒŒ[ƒ€‘O‚ÌÀ•W
+	// 1ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®åº§æ¨™
 	UPROPERTY(VisibleAnywhere, Category = "GridMove")
 	FCoord CoordCache = FCoord::Zero();
 
-	// ˆÚ“®ŠÔ
+	// ç§»å‹•æ™‚é–“
 	UPROPERTY(VisibleAnywhere, Category = "GridMove")
 	float GoalSec = 0.f;
 	UPROPERTY(VisibleAnywhere, Category = "GridMove")

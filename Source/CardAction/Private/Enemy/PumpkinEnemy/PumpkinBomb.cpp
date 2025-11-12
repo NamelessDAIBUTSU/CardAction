@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Enemy/PumpkinEnemy/PumpkinBomb.h"
@@ -28,11 +28,11 @@ void APumpkinBomb::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	// “’B”»’è
+	// åˆ°é”åˆ¤å®š
 	ElapsedSec += DeltaTime;
 	if (ElapsedSec > FallSec)
 	{
-		// ”š”­ƒGƒtƒFƒNƒg¶¬
+		// çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆç”Ÿæˆ
 		UGameplayStatics::SpawnEmitterAtLocation(
 			GetWorld(),
 			ExplosionParticle,
@@ -53,19 +53,19 @@ void APumpkinBomb::Tick(float DeltaTime)
 			if (TargetCell == nullptr)
 				return;
 
-			// UŒ‚—\‘ª‚Ìœ‹
+			// æ”»æ’ƒäºˆæ¸¬ã®é™¤å»
 			GridManager->RemoveAttackSign(TargetCell->CellData.GridCoord);
 
-			// ƒ_ƒ[ƒWˆ—
+			// ãƒ€ãƒ¡ãƒ¼ã‚¸å‡¦ç†
 			GridManager->ExecuteAttackToGridCell(this, Damage, TargetCell->CellData.GridCoord);
 		}
 
-		// ©g‚Ìíœ
+		// è‡ªèº«ã®å‰Šé™¤
 		Destroy();
 		return;
 	}
 
-	// ˆÚ“®
+	// ç§»å‹•
 	FVector NewLocation;
 	NewLocation.X = StartPosition.X + InitialVelocity.X * ElapsedSec;
 	NewLocation.Y = StartPosition.Y + InitialVelocity.Y * ElapsedSec;
@@ -83,22 +83,22 @@ void APumpkinBomb::OnHitGridCell(UPrimitiveComponent* OverlappedComp,
 	if (OtherActor == nullptr || OtherActor == this)
 		return;
 
-	// ƒOƒŠƒbƒhƒ}ƒl[ƒWƒƒ[‚ÉUŒ‚”»’è‚ğ’Ç‰Á
+	// ã‚°ãƒªãƒƒãƒ‰ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã«æ”»æ’ƒåˆ¤å®šã‚’è¿½åŠ 
 	
 }
 
-// ˆÚ“®‚É•K—v‚Èƒpƒ‰ƒ[ƒ^‚Ìİ’è
+// ç§»å‹•ã«å¿…è¦ãªãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®è¨­å®š
 void APumpkinBomb::Setup(FVector Position) 
 { 
 	StartPosition = GetActorLocation();
 	TargetPosition = Position; 
 
-	// ‰‘¬“x‚ÌŒvZ
+	// åˆé€Ÿåº¦ã®è¨ˆç®—
 	{
-		// –Ú•W’n“_‚ÆŠJn’n“_‚Ì‹——£
+		// ç›®æ¨™åœ°ç‚¹ã¨é–‹å§‹åœ°ç‚¹ã®è·é›¢
 		FVector ToTarget = TargetPosition - StartPosition;
 
-		// ‹——£‚É‰‚¶‚Ä—‰º‘¬“x‚ğ•ÏX
+		// è·é›¢ã«å¿œã˜ã¦è½ä¸‹é€Ÿåº¦ã‚’å¤‰æ›´
 		AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this);
 		if (AMyGameMode* MyGameMode = Cast<AMyGameMode>(GameMode))
 		{
@@ -110,17 +110,17 @@ void APumpkinBomb::Setup(FVector Position)
 			FallSec *= DistCell.Vector2D().Size() * 0.5f;
 		}
 
-		// XY•½–Ê‚Ì‘¬“x
-		// 1•b‚ ‚½‚è‚Ì…•½•ûŒü‚Ì‘¬“x‚ğŒvZ
+		// XYå¹³é¢ã®é€Ÿåº¦
+		// 1ç§’ã‚ãŸã‚Šã®æ°´å¹³æ–¹å‘ã®é€Ÿåº¦ã‚’è¨ˆç®—
 		FVector HorizontalVelocity = ToTarget / FallSec;
 		HorizontalVelocity.Z = 0.f;
 
-		// Z•ûŒü‚Ì‘¬“x
-		// •ú•¨‰^“®‚ÌŒö® F Z(t)  =  Start.Z + Vz(0) * t - 1/2 * g * t^2
-		// @@@@@@@ @ Vz(t) =  (Target.Z - Start.Z + 1/2 * g * t^2) / t
+		// Zæ–¹å‘ã®é€Ÿåº¦
+		// æ”¾ç‰©é‹å‹•ã®å…¬å¼ ï¼š Z(t)  =  Start.Z + Vz(0) * t - 1/2 * g * t^2
+		// ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ã€€ Vz(t) =  (Target.Z - Start.Z + 1/2 * g * t^2) / t
 		float VerticalVelocity = (ToTarget.Z + 0.5f * Gravity * FallSec * FallSec) / FallSec;
 
-		// ‰‘¬“x
+		// åˆé€Ÿåº¦
 		InitialVelocity = FVector(HorizontalVelocity.X, HorizontalVelocity.Y, VerticalVelocity);
 	}
 

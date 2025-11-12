@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "UI/HUD/HPBar.h"
@@ -14,7 +14,7 @@ void UHPBar::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 {
 	Super::NativeTick(MyGeometry, InDeltaTime);
 
-	// ƒrƒ‹ƒ{[ƒh§Œä
+	// ãƒ“ãƒ«ãƒœãƒ¼ãƒ‰åˆ¶å¾¡
 	if (OwnerWidgetComp.IsValid())
 	{
 		APlayerCameraManager* CameraManager = UGameplayStatics::GetPlayerCameraManager(GetWorld(), 0);
@@ -23,9 +23,9 @@ void UHPBar::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 			FVector CamLoc = CameraManager->GetCameraLocation();
 			FVector CompLoc = OwnerWidgetComp->GetComponentLocation();
 
-			// ƒJƒƒ‰‚Ö‚Ì•ûŒü‚ğæ“¾
+			// ã‚«ãƒ¡ãƒ©ã¸ã®æ–¹å‘ã‚’å–å¾—
 			FVector ToCam = CamLoc - CompLoc;
-			// ã‰º¬•ª‚ğ–³‹‚µ‚Äí‚É…•½‚É
+			// ä¸Šä¸‹æˆåˆ†ã‚’ç„¡è¦–ã—ã¦å¸¸ã«æ°´å¹³ã«
 			ToCam.Z = 0.f;
 
 			FRotator LookAtRot = ToCam.Rotation();
@@ -34,7 +34,7 @@ void UHPBar::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 		}
 	}
 
-	// HPƒo[‚ÌXV
+	// HPãƒãƒ¼ã®æ›´æ–°
 	OnUpdateHPBar();
 }
 
@@ -48,15 +48,15 @@ void UHPBar::OnUpdateHPBar()
 	int MaxHP = OnGetMaxHP.Execute();
 	int CurrentHP = OnGetCurrentHP.Execute();
 
-	// 0œZ‰ñ”ğ
+	// 0é™¤ç®—å›é¿
 	if (OnGetMaxHP.Execute() == 0)
 		return;
 
-	// ƒQ[ƒWXV
+	// ã‚²ãƒ¼ã‚¸æ›´æ–°
 	float Rate = CurrentHP / (float)MaxHP;
 	HPBar->SetPercent(Rate);
 
-	// ƒeƒLƒXƒgXV
+	// ãƒ†ã‚­ã‚¹ãƒˆæ›´æ–°
 	UTextBlock* Text = nullptr;
 	switch (BarType)
 	{
@@ -78,7 +78,7 @@ void UHPBar::OnUpdateHPBar()
 	}
 }
 
-// ‰Šúİ’è
+// åˆæœŸè¨­å®š
 void UHPBar::Setup(UWidgetComponent* OwnerComp, const FOnGetMaxHP& GetMaxHPFunc, const FOnGetCurrentHP& GetCurrentHPFunc)
 {
 	OwnerWidgetComp = OwnerComp;
@@ -87,7 +87,7 @@ void UHPBar::Setup(UWidgetComponent* OwnerComp, const FOnGetMaxHP& GetMaxHPFunc,
 	OnGetCurrentHP = GetCurrentHPFunc;
 }
 
-// ƒŒƒCƒAƒEƒg‚ğ•ÏX
+// ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’å¤‰æ›´
 void UHPBar::ChangeLayout(EHPBarType Type)
 {
 	BarType = Type;

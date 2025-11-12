@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+Ôªø// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -21,7 +21,7 @@ class CARDACTION_API UBTTask_WaitSec : public UBTTaskNode
 	GENERATED_BODY()
 	
 public:
-    // NodeMemory ÇÃÉTÉCÉYÇï‘Ç∑
+    // NodeMemory „ÅÆ„Çµ„Ç§„Ç∫„ÇíËøî„Åô
     virtual uint16 GetInstanceMemorySize() const override { return sizeof(FWaitTaskMemory); }
 
     virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;

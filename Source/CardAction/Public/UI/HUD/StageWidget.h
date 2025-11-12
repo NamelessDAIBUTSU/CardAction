@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -22,7 +22,7 @@ protected: /* UUserWidget */
 	virtual void NativeConstruct() override;
 	virtual void NativeOnInitialized() override;
 
-public: /* ƒ}ƒEƒXƒCƒxƒ“ƒg */
+public: /* ãƒã‚¦ã‚¹ã‚¤ãƒ™ãƒ³ãƒˆ */
 	UFUNCTION()
 	void OnClicked();
 	void NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
@@ -34,10 +34,10 @@ public:
 	void SetStageObject(UStageObject* S) { Stage = S; }
 	UStageObject* GetStageObject() const { return Stage; }
 
-	// ƒGƒ“ƒWƒ“‚©‚ç“Æ—§‚µ‚½XVƒNƒ‰ƒX
+	// ã‚¨ãƒ³ã‚¸ãƒ³ã‹ã‚‰ç‹¬ç«‹ã—ãŸæ›´æ–°ã‚¯ãƒ©ã‚¹
 	virtual void OnUpdate(float DeltaSec) override;
 	
-private: /* ƒAƒjƒ[ƒVƒ‡ƒ“ */
+private: /* ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ */
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
 	UWidgetAnimation* Clear;
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
@@ -46,14 +46,14 @@ private: /* ƒAƒjƒ[ƒVƒ‡ƒ“ */
 	UWidgetAnimation* CanSelect;
 
 private:
-	// ƒXƒe[ƒWƒIƒuƒWƒFƒNƒg
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 	UStageObject* Stage = nullptr;
 
-	// –îˆóƒEƒBƒWƒFƒbƒg
+	// çŸ¢å°ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆ
 	UPROPERTY(meta = (BindWidget))
 	UStageArrowWidget* ArrowWidget = nullptr;
 
-	// ƒ{ƒ^ƒ“
+	// ãƒœã‚¿ãƒ³
 	UPROPERTY(meta = (BindWidget))
 	UButton* StageButton = nullptr;
 };

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -9,7 +9,7 @@
 #include "PumpkinBomb.generated.h"
 
 /// <summary>
-/// ƒpƒ“ƒvƒLƒ“ƒGƒlƒ~[‚ª”­¶‚³‚¹‚éAƒvƒŒƒCƒ„[‚ÉŒü‚©‚Á‚Ä•ú•¨üã‚É”ò‚ñ‚Å‚¢‚­’e
+/// ãƒ‘ãƒ³ãƒ—ã‚­ãƒ³ã‚¨ãƒãƒŸãƒ¼ãŒç™ºç”Ÿã•ã›ã‚‹ã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«å‘ã‹ã£ã¦æ”¾ç‰©ç·šä¸Šã«é£›ã‚“ã§ã„ãå¼¾
 /// </summary>
 UCLASS()
 class CARDACTION_API APumpkinBomb : public AEnemyAttackBase
@@ -34,41 +34,41 @@ public:
 		bool bFromSweep,
 		const FHitResult& SweepResult);
 
-	// ˆÚ“®‚É•K—v‚Èƒpƒ‰ƒ[ƒ^‚Ìİ’è
+	// ç§»å‹•ã«å¿…è¦ãªãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®è¨­å®š
 	void Setup(FVector Position);
 
 public:
-	// ”š”­ƒGƒtƒFƒNƒg
+	// çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Effect")
 	UParticleSystem* ExplosionParticle = nullptr;
 
-public: /* ˆÚ“® */
-	// ‰½•b‚Å—‰º‚·‚é‚©
+public: /* ç§»å‹• */
+	// ä½•ç§’ã§è½ä¸‹ã™ã‚‹ã‹
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Move")
 	float FallSec = 0.5f;
-	// •ú•¨ü‚ÌÅ‚“_
+	// æ”¾ç‰©ç·šã®æœ€é«˜ç‚¹
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Move")
 	float ZPoint = 300.f;
-	// d—Í‰Á‘¬“x
+	// é‡åŠ›åŠ é€Ÿåº¦
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Move")
 	float Gravity = 980.f;
 
 private:
-	// “–‚½‚è”»’è
+	// å½“ãŸã‚Šåˆ¤å®š
 	UPROPERTY(VisibleAnywhere, Category = "Component")
 	USphereComponent* SphereComp = nullptr;
 
-	// –Ú•W’n“_
+	// ç›®æ¨™åœ°ç‚¹
 	UPROPERTY(VisibleAnywhere, Category = "Move")
 	FVector TargetPosition = FVector::Zero();
-	// ŠJn’n“_
+	// é–‹å§‹åœ°ç‚¹
 	UPROPERTY(VisibleAnywhere, Category = "Move")
 	FVector StartPosition = FVector::Zero();
-	// ‰‘¬“x
+	// åˆé€Ÿåº¦
 	UPROPERTY(VisibleAnywhere, Category = "Move")
 	FVector InitialVelocity = FVector::Zero();
 
-	// Œo‰ßŠÔ
+	// çµŒéæ™‚é–“
 	UPROPERTY(VisibleAnywhere, Category = "Move")
 	float ElapsedSec = 0.f;
 };

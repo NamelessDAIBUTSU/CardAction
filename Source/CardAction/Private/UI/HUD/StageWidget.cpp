@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "UI/HUD/StageWidget.h"
@@ -54,7 +54,7 @@ void UStageWidget::OnUpdate(float DeltaSec)
 
 void UStageWidget::OnClicked()
 {
-	// ‘I‘ð‰Â”\‚¶‚á‚È‚¢ê‡‚Í‰½‚àˆ—‚µ‚È‚¢
+	// é¸æŠžå¯èƒ½ã˜ã‚ƒãªã„å ´åˆã¯ä½•ã‚‚å‡¦ç†ã—ãªã„
 	if (Stage == nullptr || Stage->GetStageCondition() != EStageCondition::CanSelect)
 		return;
 
@@ -69,21 +69,21 @@ void UStageWidget::OnClicked()
 	if (MapManager == nullptr)
 		return;
 
-	// Œ»Ý‚ÌƒXƒe[ƒW‚ÌXV
+	// ç¾åœ¨ã®ã‚¹ãƒ†ãƒ¼ã‚¸ã®æ›´æ–°
 	if (UMapObject* CurrentMap = MapManager->GetCurrentMap())
 		CurrentMap->SetCurrentStage(Stage);
 
-	// ‘I‘ð‚µ‚½ƒXƒe[ƒW‚Ö‚Ì‘JˆÚˆ—
+	// é¸æŠžã—ãŸã‚¹ãƒ†ãƒ¼ã‚¸ã¸ã®é·ç§»å‡¦ç†
 	FadeSystem->FadeOutAndOpenLevel(MapManager->GetCurrentLevelName());
 }
 
 void UStageWidget::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
 {
-	// ‘I‘ð‰Â”\‚¶‚á‚È‚¢ê‡‚Í‰½‚àˆ—‚µ‚È‚¢
+	// é¸æŠžå¯èƒ½ã˜ã‚ƒãªã„å ´åˆã¯ä½•ã‚‚å‡¦ç†ã—ãªã„
 	if (Stage == nullptr || Stage->GetStageCondition() != EStageCondition::CanSelect)
 		return;
 
-	// –îˆóƒAƒCƒRƒ“‚Ì•\Ž¦ƒAƒjƒ[ƒVƒ‡ƒ“
+	// çŸ¢å°ã‚¢ã‚¤ã‚³ãƒ³ã®è¡¨ç¤ºã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
 	if (ArrowWidget)
 	{
 		ArrowWidget->PlayIdleAnim();
@@ -92,11 +92,11 @@ void UStageWidget::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointe
 
 void UStageWidget::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
 {
-	// ‘I‘ð‰Â”\‚¶‚á‚È‚¢ê‡‚Í‰½‚àˆ—‚µ‚È‚¢
+	// é¸æŠžå¯èƒ½ã˜ã‚ƒãªã„å ´åˆã¯ä½•ã‚‚å‡¦ç†ã—ãªã„
 	if (Stage == nullptr || Stage->GetStageCondition() != EStageCondition::CanSelect)
 		return;
 
-	// –îˆóƒAƒCƒRƒ“‚Ì”ñ•\Ž¦ƒAƒjƒ[ƒVƒ‡ƒ“
+	// çŸ¢å°ã‚¢ã‚¤ã‚³ãƒ³ã®éžè¡¨ç¤ºã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
 	if (ArrowWidget)
 	{
 		ArrowWidget->PlayHideAnim();

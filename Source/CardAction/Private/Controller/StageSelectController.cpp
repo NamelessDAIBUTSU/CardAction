@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Controller/StageSelectController.h"
@@ -13,7 +13,7 @@ void AStageSelectController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ƒ}ƒbƒvƒEƒBƒWƒFƒbƒg‚Ì¶¬
+	// ãƒãƒƒãƒ—ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®ç”Ÿæˆ
 	if (MapWidgetClass)
 	{
 		MapWidget = CreateWidget<UMapWidget>(GetWorld(), MapWidgetClass);

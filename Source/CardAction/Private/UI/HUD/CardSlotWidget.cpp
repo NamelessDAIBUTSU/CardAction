@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "UI/HUD/CardSlotWidget.h"
@@ -8,22 +8,22 @@
 
 void UCardSlotWidget::NativeConstruct()
 {
-	// ƒJ[ƒhƒEƒBƒWƒFƒbƒg‚Ì¶¬
+	// ã‚«ãƒ¼ãƒ‰ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®ç”Ÿæˆ
 	if (CardWidgetClass)
 	{
 		CardWidget = CreateWidget<UCardWidget>(GetWorld(), CardWidgetClass);
 		if (CardWidget)
 		{
-			// ‰Šú‰»
+			// åˆæœŸåŒ–
 			FCardWidgetOption Option;
-			// ƒXƒP[ƒ‹ƒAƒbƒv‚È‚µ
+			// ã‚¹ã‚±ãƒ¼ãƒ«ã‚¢ãƒƒãƒ—ãªã—
 			Option.bCanMouseOver = false;
 			CardWidget->Initialize(nullptr, Option);
 
-			// ‰Šú”ñ•\¦
+			// åˆæœŸéè¡¨ç¤º
 			CardWidget->SetVisibility(ESlateVisibility::Hidden);
 
-			// ƒJ[ƒh‚ğƒ{ƒbƒNƒX‚É”z’u
+			// ã‚«ãƒ¼ãƒ‰ã‚’ãƒœãƒƒã‚¯ã‚¹ã«é…ç½®
 			if (CardBox)
 			{
 				if (USizeBoxSlot* BoxSlot = Cast<USizeBoxSlot>(CardBox->AddChild(CardWidget)))
@@ -35,15 +35,15 @@ void UCardSlotWidget::NativeConstruct()
 	}
 }
 
-// ƒXƒƒbƒg‚ÉƒJ[ƒhî•ñ‚ğİ’è
+// ã‚¹ãƒ­ãƒƒãƒˆã«ã‚«ãƒ¼ãƒ‰æƒ…å ±ã‚’è¨­å®š
 void UCardSlotWidget::SetupCardSlot(UCardData* Data)
 {
 	if (CardWidget)
 	{
-		// ƒJ[ƒhƒf[ƒ^‚ğ“n‚·
+		// ã‚«ãƒ¼ãƒ‰ãƒ‡ãƒ¼ã‚¿ã‚’æ¸¡ã™
 		CardWidget->SetupCardData(Data);
 
-		// •\¦İ’è
+		// è¡¨ç¤ºè¨­å®š
 		if (Data == nullptr)
 		{
 			CardWidget->SetVisibility(ESlateVisibility::Hidden);
@@ -55,7 +55,7 @@ void UCardSlotWidget::SetupCardSlot(UCardData* Data)
 	}
 }
 
-// ƒJ[ƒh‘I‘ğƒAƒjƒ[ƒVƒ‡ƒ“Ä¶
+// ã‚«ãƒ¼ãƒ‰é¸æŠã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å†ç”Ÿ
 void UCardSlotWidget::PlaySelectAnim()
 {
 	if (bIsSelected == false && SelectAnim)
@@ -64,7 +64,7 @@ void UCardSlotWidget::PlaySelectAnim()
 		bIsSelected = true;
 	}
 }
-// ƒJ[ƒh‘I‘ğ‰ğœƒAƒjƒ[ƒVƒ‡ƒ“Ä¶
+// ã‚«ãƒ¼ãƒ‰é¸æŠè§£é™¤ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å†ç”Ÿ
 void UCardSlotWidget::PlayUnSelectAnim()
 {
 	if (bIsSelected && UnSelectAnim)
@@ -74,7 +74,7 @@ void UCardSlotWidget::PlayUnSelectAnim()
 	}
 }
 
-// Œø‰Ê”­“®
+// åŠ¹æœç™ºå‹•
 void UCardSlotWidget::ExecuteEffect()
 {
 	if (CardWidget)
@@ -83,7 +83,7 @@ void UCardSlotWidget::ExecuteEffect()
 	}
 }
 
-// ƒJ[ƒhƒEƒBƒWƒFƒbƒg‚ÌƒAƒjƒ[ƒVƒ‡ƒ“‚ğƒfƒtƒHƒ‹ƒg‚É–ß‚·
+// ã‚«ãƒ¼ãƒ‰ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã«æˆ»ã™
 void UCardSlotWidget::PlayDefaultAnimation()
 {
 	if (CardWidget)

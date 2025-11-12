@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Map/MapObject.h"
@@ -11,12 +11,12 @@ void UMapObject::Initialize(UMapData* Data)
 
     MapData = Data;
 
-    // ƒ}ƒbƒvƒTƒCƒY‚ğƒ‰ƒ“ƒ_ƒ€‚ÉŒˆ‚ß‚é
+    // ãƒãƒƒãƒ—ã‚µã‚¤ã‚ºã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«æ±ºã‚ã‚‹
     int Width = FMath::RandRange(Data->MinWidth, Data->MaxWidth);
     Size = FVector2D(Width, Data->Height);
 }
 
-// w’èˆÊ’u‚ÌƒXƒe[ƒW‚ğæ“¾
+// æŒ‡å®šä½ç½®ã®ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’å–å¾—
 UStageObject* UMapObject::GetStage(FVector2D Pos)
 {
     for (UStageObject* Stage : StageList)

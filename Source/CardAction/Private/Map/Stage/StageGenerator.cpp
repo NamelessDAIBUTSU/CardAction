@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Map/Stage/StageGenerator.h"
@@ -7,7 +7,7 @@
 
 UStageGenerator::UStageGenerator()
 {
-	// ¶¬‰Â”\ƒOƒŠƒbƒhƒf[ƒ^‚Ìæ“¾
+	// ç”Ÿæˆå¯èƒ½ã‚°ãƒªãƒƒãƒ‰ãƒ‡ãƒ¼ã‚¿ã®å–å¾—
 	static ConstructorHelpers::FObjectFinder<UGridDataList> GridDataAsset(TEXT("/Game/CardAction/Grid/DA_GridDataList.DA_GridDataList"));
 	if (GridDataAsset.Succeeded())
 	{
@@ -20,7 +20,7 @@ void UStageGenerator::Initialize(UMapObject* Map)
 	TargetMap = Map;
 }
 
-// Œq‚°‚éƒXƒe[ƒW¶¬
+// ç¹‹ã’ã‚‹ã‚¹ãƒ†ãƒ¼ã‚¸ç”Ÿæˆ
 bool UStageGenerator::GenerateChainedStage(UStageObject* PreStage)
 {
 	if (TargetMap == nullptr)
@@ -28,40 +28,40 @@ bool UStageGenerator::GenerateChainedStage(UStageObject* PreStage)
 
 	bool bIsSuccess = false;
 
-	// ‘O‚ÌƒXƒe[ƒW‚ª‘¶İ‚µ‚È‚¢ê‡A‰‚ß‚ÌƒXƒe[ƒW‚ğ¶¬
+	// å‰ã®ã‚¹ãƒ†ãƒ¼ã‚¸ãŒå­˜åœ¨ã—ãªã„å ´åˆã€åˆã‚ã®ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’ç”Ÿæˆ
 	if (PreStage == nullptr)
 	{
 		FName UniqueName = MakeUniqueObjectName(this, UStageObject::StaticClass());
 		UStageObject* FirstStage = NewObject<UStageObject>(this, UStageObject::StaticClass(), UniqueName);
 		if (FirstStage)
 		{
-			// ‰ŠúˆÊ’u(0, 0)‚ğİ’è
+			// åˆæœŸä½ç½®(0, 0)ã‚’è¨­å®š
 			FirstStage->SetPos(FVector2D(0.f, 0.f));
 
 			PreStage = FirstStage;
 
-			// ƒ}ƒbƒv‚ÉƒXƒe[ƒW’Ç‰Á
+			// ãƒãƒƒãƒ—ã«ã‚¹ãƒ†ãƒ¼ã‚¸è¿½åŠ 
 			TargetMap->AddStageList(FirstStage);
 
-			// Œ»İ‚ÌƒXƒe[ƒW‚Éİ’è
+			// ç¾åœ¨ã®ã‚¹ãƒ†ãƒ¼ã‚¸ã«è¨­å®š
 			TargetMap->SetCurrentStage(FirstStage);
 			FirstStage->SetStageCondition(EStageCondition::CanSelect);
 
-			// ƒXƒe[ƒWî•ñ‚ğƒ‰ƒ“ƒ_ƒ€‚Éİ’è
+			// ã‚¹ãƒ†ãƒ¼ã‚¸æƒ…å ±ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«è¨­å®š
 			GenerateStageInfo(FirstStage);
 		}
 	}
 
-	// ‚È‚¢‘z’è‚¾‚¯‚Çˆê‰ƒ`ƒFƒbƒN
+	// ãªã„æƒ³å®šã ã‘ã©ä¸€å¿œãƒã‚§ãƒƒã‚¯
 	if (PreStage == nullptr)
 		return false;
 
-	// ‚·‚Å‚ÉŒq‚°‚½ƒXƒe[ƒW‚ª‘¶İ‚·‚éê‡”²‚¯‚é
+	// ã™ã§ã«ç¹‹ã’ãŸã‚¹ãƒ†ãƒ¼ã‚¸ãŒå­˜åœ¨ã™ã‚‹å ´åˆæŠœã‘ã‚‹
 	if (PreStage->GetChainedStageList().IsEmpty() == false)
 		return false;
 
-	// ƒ}ƒbƒv•-1‚Ü‚Å—ˆ‚½ê‡‚Íƒ{ƒXƒXƒe[ƒW‚ÉŒq‚°‚Ä”²‚¯‚é
-	// #MEMO : 0ƒIƒŠƒWƒ“‚ÅAƒ{ƒXƒXƒe[ƒW‚ª‚ ‚é‚©‚ç-2‚·‚é
+	// ãƒãƒƒãƒ—å¹…-1ã¾ã§æ¥ãŸå ´åˆã¯ãƒœã‚¹ã‚¹ãƒ†ãƒ¼ã‚¸ã«ç¹‹ã’ã¦æŠœã‘ã‚‹
+	// #MEMO : 0ã‚ªãƒªã‚¸ãƒ³ã§ã€ãƒœã‚¹ã‚¹ãƒ†ãƒ¼ã‚¸ãŒã‚ã‚‹ã‹ã‚‰-2ã™ã‚‹
 	int PrePosX = PreStage->GetPos().X;
 	int MapSizeX = TargetMap->GetSize().X;
 	if (PrePosX == (MapSizeX - 2))
@@ -75,18 +75,18 @@ bool UStageGenerator::GenerateChainedStage(UStageObject* PreStage)
 		return true;
 	}
 
-	// Œq‚°‚éƒXƒe[ƒW”‚ğƒ‰ƒ“ƒ_ƒ€‚Éæ“¾
+	// ç¹‹ã’ã‚‹ã‚¹ãƒ†ãƒ¼ã‚¸æ•°ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«å–å¾—
 	int32 Min = MIN_STAGE_CHAIN_NUM;
 	int32 Max = MAX_STAGE_CHAIN_NUM;
 
-	// ‚‚³‚ªãŒÀ or ‰ºŒÀ‚Ü‚Å—ˆ‚Ä‚¢‚½‚çÅ‘å‚ğ2ŒÂ‚É‚·‚é
+	// é«˜ã•ãŒä¸Šé™ or ä¸‹é™ã¾ã§æ¥ã¦ã„ãŸã‚‰æœ€å¤§ã‚’2å€‹ã«ã™ã‚‹
 	int HalfSize = (TargetMap->GetSize().Y - 1) / 2;
 	if (HalfSize == PreStage->GetPos().Y || HalfSize == PreStage->GetPos().Y * -1.f)
 	{
 		Max = MAX_STAGE_CHAIN_NUM - 1;
 	}
 
-	// Å‰‚ÌƒXƒe[ƒW‚Å‚ ‚ê‚ÎAÅ’á‚ğ2ŒÂ‚É‚·‚é
+	// æœ€åˆã®ã‚¹ãƒ†ãƒ¼ã‚¸ã§ã‚ã‚Œã°ã€æœ€ä½ã‚’2å€‹ã«ã™ã‚‹
 	if (PreStage->GetPos().IsZero())
 	{
 		Min = 2;
@@ -97,21 +97,21 @@ bool UStageGenerator::GenerateChainedStage(UStageObject* PreStage)
 	TArray<int32> IndexBuffer;
 	FVector2D Pos;
 	Pos.X = PreStage->GetPos().X + 1;
-	// Œq‚°‚éƒXƒe[ƒW‚ğ¶¬
+	// ç¹‹ã’ã‚‹ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’ç”Ÿæˆ
 	for (int i = 0; i < ChainNum; ++i)
 	{
-		// ˆê‚Â‚µ‚©Œq‚°‚éƒXƒe[ƒW‚ª‚È‚¢ê‡A^‰¡‚ÉŒq‚°‚é
+		// ä¸€ã¤ã—ã‹ç¹‹ã’ã‚‹ã‚¹ãƒ†ãƒ¼ã‚¸ãŒãªã„å ´åˆã€çœŸæ¨ªã«ç¹‹ã’ã‚‹
 		if (ChainNum == 1)
 		{
 			Pos.Y = PreStage->GetPos().Y;
 		}
-		// ‚»‚êˆÈŠO‚Ìê‡Aƒ‰ƒ“ƒ_ƒ€‚É‚‚³‚ğæ“¾‚µ‚ÄŒq‚°‚é
+		// ãã‚Œä»¥å¤–ã®å ´åˆã€ãƒ©ãƒ³ãƒ€ãƒ ã«é«˜ã•ã‚’å–å¾—ã—ã¦ç¹‹ã’ã‚‹
 		else
 		{
 			int32 HeightMin = PreStage->GetPos().Y - 1;
 			int32 HeightMax = PreStage->GetPos().Y + 1;
 
-			// ‚‚³‚ªãŒÀ or ‰ºŒÀ‚Ü‚Å—ˆ‚Ä‚¢‚½‚çŠO‚·
+			// é«˜ã•ãŒä¸Šé™ or ä¸‹é™ã¾ã§æ¥ã¦ã„ãŸã‚‰å¤–ã™
 			if ((TargetMap->GetSize().Y - 1) / 2 == PreStage->GetPos().Y)
 			{
 				HeightMax -= 1;
@@ -123,26 +123,26 @@ bool UStageGenerator::GenerateChainedStage(UStageObject* PreStage)
 
 			int32 RandomHeight = FMath::RandRange(HeightMin, HeightMax);
 
-			// ‚·‚Å‚É’Š‘IÏ‚İ‚Å‚ ‚ê‚ÎÄ’Š‘I
+			// ã™ã§ã«æŠ½é¸æ¸ˆã¿ã§ã‚ã‚Œã°å†æŠ½é¸
 			while (IndexBuffer.Find(RandomHeight) != INDEX_NONE)
 			{
 				RandomHeight = FMath::RandRange(HeightMin, HeightMax);
 			}
 
-			// ƒTƒCƒYŠm’è
+			// ã‚µã‚¤ã‚ºç¢ºå®š
 			Pos.Y = RandomHeight;
 
-			// Ä’Š‘I—p‚ÉƒCƒ“ƒfƒbƒNƒXŠÇ—
+			// å†æŠ½é¸ç”¨ã«ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ç®¡ç†
 			IndexBuffer.Add(RandomHeight);
 		}
 
-		// ‚·‚Å‚É‚»‚ÌˆÊ’u‚ÉƒXƒe[ƒW‚ª¶¬‚³‚ê‚Ä‚¢‚½‚çŒq‚°‚é‚¾‚¯
+		// ã™ã§ã«ãã®ä½ç½®ã«ã‚¹ãƒ†ãƒ¼ã‚¸ãŒç”Ÿæˆã•ã‚Œã¦ã„ãŸã‚‰ç¹‹ã’ã‚‹ã ã‘
 		if (UStageObject* Stage = TargetMap->GetStage(Pos))
 		{
 			PreStage->AddChainedStage(Stage);
 			Stage->AddPreStage(PreStage);
 		}
-		// ‚È‚©‚Á‚½‚çV‹K‚ÅƒXƒe[ƒW¶¬
+		// ãªã‹ã£ãŸã‚‰æ–°è¦ã§ã‚¹ãƒ†ãƒ¼ã‚¸ç”Ÿæˆ
 		else
 		{
 			FName UniqueName = MakeUniqueObjectName(this, UStageObject::StaticClass());
@@ -154,16 +154,16 @@ bool UStageGenerator::GenerateChainedStage(UStageObject* PreStage)
 
 				ChainedStage->SetPos(Pos);
 
-				// ƒ}ƒbƒv‚ÉƒXƒe[ƒW’Ç‰Á
+				// ãƒãƒƒãƒ—ã«ã‚¹ãƒ†ãƒ¼ã‚¸è¿½åŠ 
 				TargetMap->AddStageList(ChainedStage);
 
-				// ƒXƒe[ƒWî•ñ‚ğƒ‰ƒ“ƒ_ƒ€‚Éİ’è
+				// ã‚¹ãƒ†ãƒ¼ã‚¸æƒ…å ±ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«è¨­å®š
 				GenerateStageInfo(ChainedStage);
 			}
 		}
 	}
 
-	// V‹K¶¬‚ÌŠeƒXƒe[ƒW‚ÅŒq‚ª‚Á‚Ä‚¢‚éƒXƒe[ƒW‚ğ¶¬‚·‚é
+	// æ–°è¦ç”Ÿæˆã®å„ã‚¹ãƒ†ãƒ¼ã‚¸ã§ç¹‹ãŒã£ã¦ã„ã‚‹ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’ç”Ÿæˆã™ã‚‹
 	for (UStageObject* ChainedStage : PreStage->GetChainedStageList())
 	{
 		bIsSuccess |= GenerateChainedStage(ChainedStage);
@@ -172,30 +172,30 @@ bool UStageGenerator::GenerateChainedStage(UStageObject* PreStage)
 	return bIsSuccess;
 }
 
-// ƒ{ƒXƒXƒe[ƒW¶¬
+// ãƒœã‚¹ã‚¹ãƒ†ãƒ¼ã‚¸ç”Ÿæˆ
 void UStageGenerator::GenerateBossStage()
 {
 	if (TargetMap == nullptr)
 		return;
 
-	// ¶¬
+	// ç”Ÿæˆ
 	FName UniqueName = MakeUniqueObjectName(this, UStageObject::StaticClass());
 	BossStage = NewObject<UStageObject>(this, UStageObject::StaticClass(), UniqueName);
 	if (BossStage)
 	{
 		BossStage->SetStageType(EStageType::Boss);
 
-		// 0ƒIƒŠƒWƒ“‚Ì‚½‚ß-1
+		// 0ã‚ªãƒªã‚¸ãƒ³ã®ãŸã‚-1
 		BossStage->SetPos(FVector2D(TargetMap->GetSize().X - 1, 0.f));
 
 		TargetMap->AddStageList(BossStage);
 
-		// ƒXƒe[ƒWî•ñ‚ğƒ‰ƒ“ƒ_ƒ€‚Éİ’è
+		// ã‚¹ãƒ†ãƒ¼ã‚¸æƒ…å ±ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«è¨­å®š
 		GenerateStageInfo(BossStage);
 	}
 }
 
-// ƒXƒe[ƒWî•ñ¶¬
+// ã‚¹ãƒ†ãƒ¼ã‚¸æƒ…å ±ç”Ÿæˆ
 void UStageGenerator::GenerateStageInfo(UStageObject* TargetStage)
 {
 	if (GenGridDataList == nullptr || TargetMap == nullptr || TargetStage == nullptr)
@@ -205,17 +205,17 @@ void UStageGenerator::GenerateStageInfo(UStageObject* TargetStage)
 	if (GridDataList.IsEmpty())
 		return;
 
-	// ¶¬‚Å‚«‚éƒOƒŠƒbƒh‚ªæ“¾‚Å‚«‚é‚Ü‚ÅƒCƒ“ƒfƒbƒNƒX‚ğƒ‰ƒ“ƒ_ƒ€æ“¾
+	// ç”Ÿæˆã§ãã‚‹ã‚°ãƒªãƒƒãƒ‰ãŒå–å¾—ã§ãã‚‹ã¾ã§ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’ãƒ©ãƒ³ãƒ€ãƒ å–å¾—
 	int Index = FMath::RandRange(0, GridDataList.Num() - 1);
 	while (TargetMap->GetMapNum() < GridDataList[Index]->MinGenMapNum || GridDataList[Index]->MaxGenMapNum < TargetMap->GetMapNum())
 	{
 		Index = FMath::RandRange(0, GridDataList.Num() - 1);
 	}
 
-	// ƒXƒe[ƒW‚Éİ’è
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã«è¨­å®š
 	TargetStage->SetGridData(GridDataList[Index]);
 
-	// oŒ»‚³‚¹‚é“GƒNƒ‰ƒX‚ğƒ‰ƒ“ƒ_ƒ€‚Éİ’è
+	// å‡ºç¾ã•ã›ã‚‹æ•µã‚¯ãƒ©ã‚¹ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«è¨­å®š
 	TargetStage->SetupEnemyClass(TargetMap);
 }
 

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -14,34 +14,34 @@ class CARDACTION_API ADeckManager : public AActor
 	GENERATED_BODY()
 	
 public:
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	void Initialzie(UInitDeckData* InitDeckData);
 
-	// ƒJ[ƒh‚Ì’Ç‰Á
+	// ã‚«ãƒ¼ãƒ‰ã®è¿½åŠ 
 	void AddToDeck(UCardData* NewCard);
-	// ƒJ[ƒh‚Ìœ‹
+	// ã‚«ãƒ¼ãƒ‰ã®é™¤å»
 	void RemoveFromDeck(UCardData* RemoveCard);
 
-	// ƒJ[ƒh‚ğˆø‚­
+	// ã‚«ãƒ¼ãƒ‰ã‚’å¼•ã
 	TArray<UCardData*> DrawCards();
 
-	// ƒVƒƒƒbƒtƒ‹‚³‚ê‚½ƒfƒbƒL‚ğì¬
+	// ã‚·ãƒ£ãƒƒãƒ•ãƒ«ã•ã‚ŒãŸãƒ‡ãƒƒã‚­ã‚’ä½œæˆ
 	void CreateShuffledDeck();
 
 private:
-	// ƒVƒƒƒbƒtƒ‹
+	// ã‚·ãƒ£ãƒƒãƒ•ãƒ«
 	void ShuffleArray(TArray<UCardData*>& Array);
 
 private:
-	// ƒfƒbƒL
+	// ãƒ‡ãƒƒã‚­
 	UPROPERTY(VisibleAnywhere, Category = "Card")
 	TArray<UCardData*> Deck;
 
-	// ˆø‚­‚½‚ß‚ÉƒVƒƒƒbƒtƒ‹‚µ‚½ƒfƒbƒL
+	// å¼•ããŸã‚ã«ã‚·ãƒ£ãƒƒãƒ•ãƒ«ã—ãŸãƒ‡ãƒƒã‚­
 	UPROPERTY(VisibleAnywhere, Category = "Card")
 	TArray<UCardData*> ShuffledDeck;
 
-	// Œ»İ‚Ìƒhƒ[ƒCƒ“ƒfƒbƒNƒX
+	// ç¾åœ¨ã®ãƒ‰ãƒ­ãƒ¼ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 	UPROPERTY(VisibleAnywhere, Category = "Card")
 	int DrawIndex = 0;
 };

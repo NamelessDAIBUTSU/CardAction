@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Enemy/PumpkinEnemy/PumpkinEnemy.h"
@@ -9,10 +9,10 @@ void APumpkinEnemy::BeginPlay()
 	Super::BeginPlay();
 }
 
-// ‰ñ“]‰Â”\‚©
+// å›žè»¢å¯èƒ½ã‹
 bool APumpkinEnemy::CanRotate()
 {
-	// UŒ‚ƒ‚ƒ“ƒ^[ƒWƒ…Ä¶’†‚Í‰ñ“]‚ð§Œä
+	// æ”»æ’ƒãƒ¢ãƒ³ã‚¿ãƒ¼ã‚¸ãƒ¥å†ç”Ÿä¸­ã¯å›žè»¢ã‚’åˆ¶å¾¡
 	if (GetMesh())
 	{
 		if (GetMesh()->GetAnimInstance())

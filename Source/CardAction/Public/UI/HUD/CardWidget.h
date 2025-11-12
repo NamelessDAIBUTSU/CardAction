@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -11,23 +11,23 @@
 #include <Components/Image.h>
 #include "CardWidget.generated.h"
 
-// •\¦‰ÓŠ‚É‚æ‚Á‚Äˆ—‚ªˆá‚¤‚Ì‚ÅƒIƒvƒVƒ‡ƒ“\‘¢‘Ì
+// è¡¨ç¤ºç®‡æ‰€ã«ã‚ˆã£ã¦å‡¦ç†ãŒé•ã†ã®ã§ã‚ªãƒ—ã‚·ãƒ§ãƒ³æ§‹é€ ä½“
 USTRUCT()
 struct CARDACTION_API FCardWidgetOption
 {
 	GENERATED_BODY()
 
 public:
-	// ‘I‘ğ‚Ìˆ—ƒfƒŠƒQ[ƒg
+	// é¸æŠæ™‚ã®å‡¦ç†ãƒ‡ãƒªã‚²ãƒ¼ãƒˆ
 	FOnSelectCard SelectCardDelegate;
-	// ‘I‘ğ‰ğœ‚Ìˆ—ƒfƒŠƒQ[ƒg
+	// é¸æŠè§£é™¤æ™‚ã®å‡¦ç†ãƒ‡ãƒªã‚²ãƒ¼ãƒˆ
 	FOnUnSelectCard UnSelectCardDelegate;
 
-	// ƒ}ƒEƒXƒI[ƒo[‰Â”\‚©
+	// ãƒã‚¦ã‚¹ã‚ªãƒ¼ãƒãƒ¼å¯èƒ½ã‹
 	bool bCanMouseOver = true;
-	// ƒ}ƒEƒXƒI[ƒo[‚ÅŠg‘å‚·‚é‚©
+	// ãƒã‚¦ã‚¹ã‚ªãƒ¼ãƒãƒ¼ã§æ‹¡å¤§ã™ã‚‹ã‹
 	bool bChangeScale = true;
-	// ƒ}ƒEƒXƒI[ƒo[‚Åƒc[ƒ‹ƒ`ƒbƒv‚ğ•\¦‚·‚é‚©
+	// ãƒã‚¦ã‚¹ã‚ªãƒ¼ãƒãƒ¼ã§ãƒ„ãƒ¼ãƒ«ãƒãƒƒãƒ—ã‚’è¡¨ç¤ºã™ã‚‹ã‹
 	bool bShowToolTip = true;
 };
 
@@ -41,65 +41,65 @@ protected: /* UUserWidget */
 	virtual void NativeOnInitialized() override;
 
 public:
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	void Initialize(UCardData* Data, const FCardWidgetOption& WidgetOption);
 
-	// ƒJ[ƒhƒf[ƒ^‚Ìİ’è
+	// ã‚«ãƒ¼ãƒ‰ãƒ‡ãƒ¼ã‚¿ã®è¨­å®š
 	void SetupCardData(UCardData* Data);
 
-	// ƒJ[ƒhƒf[ƒ^‚Ìæ“¾
+	// ã‚«ãƒ¼ãƒ‰ãƒ‡ãƒ¼ã‚¿ã®å–å¾—
 	UCardData* GetCardData() const { return CardData; }
 
-	// ƒ}ƒEƒXƒCƒxƒ“ƒg
+	// ãƒã‚¦ã‚¹ã‚¤ãƒ™ãƒ³ãƒˆ
 	UFUNCTION()
 	void OnCardClicked();
 	void NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
 	void NativeOnMouseLeave(const FPointerEvent& InMouseEvent) override;
 
-	// Œø‰Ê”­“®
+	// åŠ¹æœç™ºå‹•
 	void ExecuteEffect();
 
-	// ‘I‘ğ”Ô†ƒeƒLƒXƒg‚Ìİ’è
+	// é¸æŠç•ªå·ãƒ†ã‚­ã‚¹ãƒˆã®è¨­å®š
 	void SetupSelectNum();
 
-	// ƒfƒtƒHƒ‹ƒgƒAƒjƒ[ƒVƒ‡ƒ“‚É–ß‚·
+	// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã«æˆ»ã™
 	void PlayDefaultAnimation();
 
 public:
 
 
 private: /* Widget */
-	// “–‚½‚è”»’è—pƒ{ƒ^ƒ“
+	// å½“ãŸã‚Šåˆ¤å®šç”¨ãƒœã‚¿ãƒ³
 	UPROPERTY(meta = (BindWidget))
 	UButton* CardButton = nullptr;
 
-	// ƒJ[ƒhƒx[ƒX
+	// ã‚«ãƒ¼ãƒ‰ãƒ™ãƒ¼ã‚¹
 	UPROPERTY(meta = (BindWidget))
 	UImage* CardBase = nullptr;
-	// ƒJ[ƒhƒCƒ‰ƒXƒg
+	// ã‚«ãƒ¼ãƒ‰ã‚¤ãƒ©ã‚¹ãƒˆ
 	UPROPERTY(meta = (BindWidget))
 	UImage* CardImage = nullptr;
 
-	// ƒJ[ƒhƒ^ƒCƒvƒAƒCƒRƒ“
+	// ã‚«ãƒ¼ãƒ‰ã‚¿ã‚¤ãƒ—ã‚¢ã‚¤ã‚³ãƒ³
 	UPROPERTY(meta = (BindWidget))
 	UImage* CardTypeIcon = nullptr;
-	// ‘®«ƒ^ƒCƒvƒAƒCƒRƒ“
+	// å±æ€§ã‚¿ã‚¤ãƒ—ã‚¢ã‚¤ã‚³ãƒ³
 	UPROPERTY(meta = (BindWidget))
 	UImage* ElementTypeIcon = nullptr;
 
-	// –¼‘OƒeƒLƒXƒg
+	// åå‰ãƒ†ã‚­ã‚¹ãƒˆ
 	UPROPERTY(meta = (BindWidget))
 	UTextBlock* NameText = nullptr;
 
-	// ƒ_ƒ[ƒWƒeƒLƒXƒg
+	// ãƒ€ãƒ¡ãƒ¼ã‚¸ãƒ†ã‚­ã‚¹ãƒˆ
 	UPROPERTY(meta = (BindWidget))
 	UTextBlock* DamageText = nullptr;
 
-	// ‘I‘ğ”Ô†ƒeƒLƒXƒg
+	// é¸æŠç•ªå·ãƒ†ã‚­ã‚¹ãƒˆ
 	UPROPERTY(meta = (BindWidget))
 	UTextBlock* SelectNum = nullptr;
 
-private: /* ƒAƒjƒ[ƒVƒ‡ƒ“ */
+private: /* ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ */
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
 	UWidgetAnimation* SelectAnim;
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
@@ -114,13 +114,13 @@ private: /* ƒAƒjƒ[ƒVƒ‡ƒ“ */
 	UWidgetAnimation* DefaultAnim;
 
 private:
-	// ƒJ[ƒhƒf[ƒ^
+	// ã‚«ãƒ¼ãƒ‰ãƒ‡ãƒ¼ã‚¿
 	UPROPERTY(VisibleAnywhere, Category = "Data")
 	UCardData* CardData = nullptr;
 
-	// •\¦ƒIƒvƒVƒ‡ƒ“
+	// è¡¨ç¤ºã‚ªãƒ—ã‚·ãƒ§ãƒ³
 	FCardWidgetOption Option;
 
-	// ‘I‘ğ’†‚©
+	// é¸æŠä¸­ã‹
 	bool bSelected = false;
 };

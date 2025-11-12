@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -18,15 +18,15 @@ public:
 	UBattlePhase_Action() { BattlePhase = EBattlePhase::Action; }
 
 public: /* UBattlePhaseBase */
-	// ƒtƒF[ƒYŠJn
+	// ãƒ•ã‚§ãƒ¼ã‚ºé–‹å§‹æ™‚
 	virtual void OnBegin() override;
-	// ƒtƒF[ƒY’†
+	// ãƒ•ã‚§ãƒ¼ã‚ºä¸­
 	virtual void OnTick(float DeltaSec) override;
-	// ƒtƒF[ƒYI—¹
+	// ãƒ•ã‚§ãƒ¼ã‚ºçµ‚äº†æ™‚
 	virtual void OnExit() override;
 
 public:
-	// c‚èŠÔ‚ğ®”‚Åæ“¾
+	// æ®‹ã‚Šæ™‚é–“ã‚’æ•´æ•°ã§å–å¾—
 	int GetCurrentRemainSec();
 
 private:

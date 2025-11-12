@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "System/Phase/BattlePhase_Result.h"
@@ -8,10 +8,10 @@
 #include <System/FadeSystem.h>
 
 
-// ƒtƒF[ƒYŠJn
+// ãƒ•ã‚§ãƒ¼ã‚ºé–‹å§‹æ™‚
 void UBattlePhase_Result::OnBegin()
 {
-	// ƒXƒe[ƒWƒNƒŠƒAƒEƒBƒWƒFƒbƒg‚Ì•\¦‚ÆƒAƒjƒ[ƒVƒ‡ƒ“
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¯ãƒªã‚¢ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®è¡¨ç¤ºã¨ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
 	AMyPlayerController* PlayerController = Cast<AMyPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
 	if (PlayerController == nullptr)
 		return;
@@ -36,14 +36,14 @@ void UBattlePhase_Result::OnTick(float DeltaSec)
 	if (StageClearWidget == nullptr)
 		return;
 
-	// ƒXƒe[ƒWƒNƒŠƒAƒEƒBƒWƒFƒbƒg‚ÌOutAnim‚ªI—¹‚µ‚½‚çƒXƒe[ƒW‘I‘ğƒŒƒxƒ‹‚ÉˆÚ“®‚·‚é
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¯ãƒªã‚¢ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®OutAnimãŒçµ‚äº†ã—ãŸã‚‰ã‚¹ãƒ†ãƒ¼ã‚¸é¸æŠãƒ¬ãƒ™ãƒ«ã«ç§»å‹•ã™ã‚‹
 	if (StageClearWidget->IsOutAnimFinished())
 	{
 		RequestNextPhase = EBattlePhase::End;
 	}
 }
 
-// ƒtƒF[ƒhƒAƒEƒg‚µ‚ÄƒXƒe[ƒW‘I‘ğƒŒƒxƒ‹‚É‘JˆÚ
+// ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆã—ã¦ã‚¹ãƒ†ãƒ¼ã‚¸é¸æŠãƒ¬ãƒ™ãƒ«ã«é·ç§»
 void UBattlePhase_Result::OnExit()
 {
 	if (GetWorld()->GetGameInstance() == nullptr)

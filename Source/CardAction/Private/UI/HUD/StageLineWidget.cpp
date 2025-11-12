@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "UI/HUD/StageLineWidget.h"
@@ -8,7 +8,7 @@ void UStageLineWidget::SetPostStage(UStageObject* Post)
 	PostStage = Post;
 }
 
-// ƒAƒjƒ[ƒVƒ‡ƒ“İ’è
+// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³è¨­å®š
 void UStageLineWidget::SetupAnim()
 {
 	if (PostStage == nullptr)

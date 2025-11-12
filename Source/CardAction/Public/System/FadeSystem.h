@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -23,15 +23,15 @@ public:
 	void FadeIn(float FadeSec = 1.f);
 	void FadeOut(float FadeSec = 1.f);
 
-	// ƒtƒF[ƒh’†‚©
+	// ãƒ•ã‚§ãƒ¼ãƒ‰ä¸­ã‹
 	bool IsFade();
 	bool IsFadeIn();
 	bool IsFadeOut();
 
-	// ƒtƒF[ƒhXV
+	// ãƒ•ã‚§ãƒ¼ãƒ‰æ›´æ–°
 	void UpdateFade(float DeltaSec);
 
-	// ƒŒƒxƒ‹“Ç‚İ‚İŒã‚ÌƒR[ƒ‹ƒoƒbƒN
+	// ãƒ¬ãƒ™ãƒ«èª­ã¿è¾¼ã¿å¾Œã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 	UFUNCTION()
 	void OnPostLoadLevel(UWorld* LoadedWorld);
 
@@ -39,9 +39,9 @@ private:
 	UPROPERTY();
 	UFadeWidget* FadeWidget;
 
-	// –ˆƒtƒŒ[ƒ€XV—p‚ÌƒfƒŠƒQ[ƒgƒnƒ“ƒhƒ‹
+	// æ¯ãƒ•ãƒ¬ãƒ¼ãƒ æ›´æ–°ç”¨ã®ãƒ‡ãƒªã‚²ãƒ¼ãƒˆãƒãƒ³ãƒ‰ãƒ«
 	FDelegateHandle TickHandle;
 
-	// ƒŒƒxƒ‹Ø‚è‘Ö‚¦—p‚ÌƒfƒŠƒQ[ƒg
+	// ãƒ¬ãƒ™ãƒ«åˆ‡ã‚Šæ›¿ãˆæ™‚ç”¨ã®ãƒ‡ãƒªã‚²ãƒ¼ãƒˆ
 	FCoreUObjectDelegates WorldDelegate;
 };

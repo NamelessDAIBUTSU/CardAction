@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -20,24 +20,24 @@ protected:
 	virtual void NativeConstruct() override {}
 
 public:
-	// ƒEƒBƒWƒFƒbƒg‚Ìİ’è
+	// ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã®è¨­å®š
 	void Setup(class AEnemyBase* Enemy);
 
-	// ¶€ƒŒƒCƒAƒEƒg•ÏX
+	// ç”Ÿæ­»ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆå¤‰æ›´
 	void ChangeLayout(bool IsDead);
 	
 private:
-	// ¶€ƒŒƒCƒAƒEƒgƒAƒjƒ[ƒVƒ‡ƒ“
+	// ç”Ÿæ­»ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
 	UWidgetAnimation* AliveLayoutAnim;
 	UPROPERTY(meta = (BindWidgetAnim), Transient)
 	UWidgetAnimation* DeadLayoutAnim;
 
-	// ƒAƒCƒRƒ“ƒCƒ[ƒWƒEƒBƒWƒFƒbƒg
+	// ã‚¢ã‚¤ã‚³ãƒ³ã‚¤ãƒ¡ãƒ¼ã‚¸ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆ
 	UPROPERTY(meta = (BindWidget))
 	UImage* IconImage;
 
-	// “G‚Ì–¼‘OƒeƒLƒXƒg
+	// æ•µã®åå‰ãƒ†ã‚­ã‚¹ãƒˆ
 	UPROPERTY(meta = (BindWidget))
 	UTextBlock* EnemyNameText;
 };

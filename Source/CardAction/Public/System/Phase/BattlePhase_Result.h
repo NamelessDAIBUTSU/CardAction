@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -18,11 +18,11 @@ public:
 	UBattlePhase_Result() { BattlePhase = EBattlePhase::Result; }
 
 public: /* UBattlePhaseBase */
-	// ƒtƒF[ƒYŠJn
+	// ãƒ•ã‚§ãƒ¼ã‚ºé–‹å§‹æ™‚
 	virtual void OnBegin() override;
-	// ƒtƒF[ƒY’†
+	// ãƒ•ã‚§ãƒ¼ã‚ºä¸­
 	virtual void OnTick(float DeltaSec) override;
-	// ƒtƒF[ƒYI—¹
+	// ãƒ•ã‚§ãƒ¼ã‚ºçµ‚äº†æ™‚
 	virtual void OnExit() override;
 
 };

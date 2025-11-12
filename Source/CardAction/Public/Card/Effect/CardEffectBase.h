@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -15,6 +15,6 @@ class CARDACTION_API UCardEffectBase : public UObject
 	GENERATED_BODY()
 	
 public:
-	// Œø‰Ê”­“®
+	// åŠ¹æžœç™ºå‹•
 	virtual void ExecuteEffect() PURE_VIRTUAL(ExecuteEffect, );
 };

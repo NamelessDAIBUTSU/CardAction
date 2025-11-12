@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Camera/GridCamera.h"
@@ -11,7 +11,7 @@ void AGridCamera::BeginPlay()
 {
 }
 
-// ƒOƒŠƒbƒhî•ñ‚©‚ç‚‚³‚ğ’²®‚·‚éŠÖ”
+// ã‚°ãƒªãƒƒãƒ‰æƒ…å ±ã‹ã‚‰é«˜ã•ã‚’èª¿æ•´ã™ã‚‹é–¢æ•°
 void AGridCamera::AdjustCameraToGrid()
 {
 	if (AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this))
@@ -21,13 +21,13 @@ void AGridCamera::AdjustCameraToGrid()
 			if (MyGameMode->GridManager == nullptr)
 				return;
 
-			// ƒJƒƒ‰‚ÌˆÊ’u‚ğZo
+			// ã‚«ãƒ¡ãƒ©ã®ä½ç½®ã‚’ç®—å‡º
 			FVector2D GridSize = MyGameMode->GridManager->GetGridSize();
 			float XPos = ((GridSize.Y + 1.5f) * GRID_CELL_UNIT + 0.f) * -1.f;
 			float YPos = ((GridSize.X - 1) * 0.5f * GRID_CELL_UNIT + 0.f);
 			FVector CameraPosition = FVector(XPos, YPos, 0.f);
 
-			// ƒJƒƒ‰‚Ì‚‚³‚ğƒOƒŠƒbƒhƒTƒCƒY‚É‰‚¶‚Ä•Ï‰»
+			// ã‚«ãƒ¡ãƒ©ã®é«˜ã•ã‚’ã‚°ãƒªãƒƒãƒ‰ã‚µã‚¤ã‚ºã«å¿œã˜ã¦å¤‰åŒ–
 			float Height = BaseHeight + (GridSize.X + 1) * HeightOffset;
 
 			SetActorLocation(FVector(CameraPosition.X, CameraPosition.Y, Height));

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "System/Phase/BattlePhase_Action.h"
@@ -8,7 +8,7 @@
 #include <Character/MyPlayerController.h>
 
 
-// ƒtƒF[ƒYŠJn
+// ãƒ•ã‚§ãƒ¼ã‚ºé–‹å§‹æ™‚
 void UBattlePhase_Action::OnBegin() 
 { 
 	AMyPlayerController* PlayerController = Cast<AMyPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
@@ -17,18 +17,18 @@ void UBattlePhase_Action::OnBegin()
 	if (PlayerController->MainHUDWidget == nullptr)
 		return;
 
-	// ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒYˆÈŠO‚Å”ñ•\¦‚É‚·‚éƒEƒBƒWƒFƒbƒg‚ğ•\¦
+	// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºä»¥å¤–ã§éè¡¨ç¤ºã«ã™ã‚‹ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã‚’è¡¨ç¤º
 	PlayerController->MainHUDWidget->SetVisibleExceptActionPhase(true);
 }
 
-// ƒtƒF[ƒY’†
+// ãƒ•ã‚§ãƒ¼ã‚ºä¸­
 void UBattlePhase_Action::OnTick(float DeltaSec)
 {
 	if (RequestNextPhase != EBattlePhase::None)
 		return;
 
-	// ƒtƒF[ƒYØ‚è‘Ö‚¦”»’è
-	// ŠÔ‚ÅƒJ[ƒh‘I‘ğ‚Ö
+	// ãƒ•ã‚§ãƒ¼ã‚ºåˆ‡ã‚Šæ›¿ãˆåˆ¤å®š
+	// æ™‚é–“ã§ã‚«ãƒ¼ãƒ‰é¸æŠã¸
 	ElapsedSec += DeltaSec;
 	if (ElapsedSec >= PhaseEndSec)
 	{
@@ -36,7 +36,7 @@ void UBattlePhase_Action::OnTick(float DeltaSec)
 		return;
 	}
 
-	// “GŸr–Å‚ÅƒŠƒUƒ‹ƒg‚Ö
+	// æ•µæ®²æ»…ã§ãƒªã‚¶ãƒ«ãƒˆã¸
 	AGameModeBase* GameMode = UGameplayStatics::GetGameMode(this);
 	if (AMyGameMode* MyGameMode = Cast<AMyGameMode>(GameMode))
 	{
@@ -44,7 +44,7 @@ void UBattlePhase_Action::OnTick(float DeltaSec)
 		if (GridManager == nullptr)
 			return;
 
-		// “G‚ª‘S–Å‚µ‚Ä‚¢‚½‚çAƒŠƒUƒ‹ƒgƒtƒF[ƒY‚Ö‚ÌØ‚è‘Ö‚¦ƒŠƒNƒGƒXƒg
+		// æ•µãŒå…¨æ»…ã—ã¦ã„ãŸã‚‰ã€ãƒªã‚¶ãƒ«ãƒˆãƒ•ã‚§ãƒ¼ã‚ºã¸ã®åˆ‡ã‚Šæ›¿ãˆãƒªã‚¯ã‚¨ã‚¹ãƒˆ
 		if (GridManager->IsExistEnemyOnGrid() == false)
 		{
 			RequestNextPhase = EBattlePhase::Result;
@@ -61,11 +61,11 @@ void UBattlePhase_Action::OnExit()
 	if (PlayerController->MainHUDWidget == nullptr)
 		return;
 
-	// ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒYˆÈŠO‚Å”ñ•\¦‚É‚·‚éƒEƒBƒWƒFƒbƒg‚ğÁ‚·
+	// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºä»¥å¤–ã§éè¡¨ç¤ºã«ã™ã‚‹ã‚¦ã‚£ã‚¸ã‚§ãƒƒãƒˆã‚’æ¶ˆã™
 	PlayerController->MainHUDWidget->SetVisibleExceptActionPhase(false);
 }
 
-// c‚èŠÔ‚ğ®”‚Åæ“¾
+// æ®‹ã‚Šæ™‚é–“ã‚’æ•´æ•°ã§å–å¾—
 int UBattlePhase_Action::GetCurrentRemainSec()
 {
 	float RemainSec = PhaseEndSec - ElapsedSec;

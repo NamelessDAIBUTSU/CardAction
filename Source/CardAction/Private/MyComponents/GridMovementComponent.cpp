@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "MyComponents/GridMovementComponent.h"
@@ -22,14 +22,14 @@ void UGridMovementComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// üŒ`ˆÚ“®XV
+	// ç·šå½¢ç§»å‹•æ›´æ–°
 	UpdateGridMove(DeltaTime);
 }
 
-// ˆÚ“®ƒŠƒNƒGƒXƒg
+// ç§»å‹•ãƒªã‚¯ã‚¨ã‚¹ãƒˆ
 void UGridMovementComponent::RequestMoveToDirection(FCoord Coord, float GoalSecond)
 {
-	// ˆÚ“®’†‚ÍƒŠƒNƒGƒXƒg‚Å‚«‚È‚¢
+	// ç§»å‹•ä¸­ã¯ãƒªã‚¯ã‚¨ã‚¹ãƒˆã§ããªã„
 	if (bIsMoving)
 		return;
 
@@ -37,7 +37,7 @@ void UGridMovementComponent::RequestMoveToDirection(FCoord Coord, float GoalSeco
 	if (MyGameMode == nullptr)
 		return;
 
-	// ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒYˆÈŠO‚Å‚Íˆ—‚ğ‚µ‚È‚¢
+	// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºä»¥å¤–ã§ã¯å‡¦ç†ã‚’ã—ãªã„
 	if (MyGameMode->GetCurrentButtlePhase() != EBattlePhase::Action)
 		return;
 
@@ -55,34 +55,34 @@ void UGridMovementComponent::RequestMoveToDirection(FCoord Coord, float GoalSeco
 
 	TargetCoord = Coord;
 
-	// ƒRƒ“ƒgƒ[ƒ‰‚ÌYaw‰ñ“]‚ğæ“¾
+	// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã®Yawå›è»¢ã‚’å–å¾—
 	const FRotator Rotation = Controller->GetControlRotation();
 	const FRotator YawRotation(0.f, Rotation.Yaw, 0.f);
 
-	// ‘O•ûŒü/‰E•ûŒü‚ğæ“¾
+	// å‰æ–¹å‘/å³æ–¹å‘ã‚’å–å¾—
 	const FVector UpDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 	const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 
-	// “’…’n“_‚ğæ“¾
+	// åˆ°ç€åœ°ç‚¹ã‚’å–å¾—
 	TargetLocation = GridManager->ConvertToWorldPosition(TargetCoord);
 	TargetLocation.Z = PawnOwner->GetActorLocation().Z;
 
-	// is•ûŒü‚É‰ñ“]
+	// é€²è¡Œæ–¹å‘ã«å›è»¢
 	FVector Dist = TargetLocation - PawnOwner->GetActorLocation();
 	FRotator NextRotation = Dist.Rotation();
 	NextRotation.Pitch = 0.f;
 	PawnOwner->SetActorRotation(NextRotation);
 
-	// Œü‚«•ÏXƒtƒ‰ƒO‚ª—§‚Á‚Ä‚¢‚È‚¢‚È‚çAƒOƒŠƒbƒhˆÚ“®
+	// å‘ãå¤‰æ›´ãƒ•ãƒ©ã‚°ãŒç«‹ã£ã¦ã„ãªã„ãªã‚‰ã€ã‚°ãƒªãƒƒãƒ‰ç§»å‹•
 	if (bIsTurningMode == false)
 	{
-		// is•ûŒü‚ÌƒOƒŠƒbƒh‚ªis‰Â”\ó‘Ô‚©
+		// é€²è¡Œæ–¹å‘ã®ã‚°ãƒªãƒƒãƒ‰ãŒé€²è¡Œå¯èƒ½çŠ¶æ…‹ã‹
 		if (GridManager->IsAccessableGridCell(TargetLocation) == false)
 		{
 			return;
 		}
 
-		// –ˆƒtƒŒ[ƒ€‚ÌˆÚ“®—Ê‚ğ•Û‘¶
+		// æ¯ãƒ•ãƒ¬ãƒ¼ãƒ ã®ç§»å‹•é‡ã‚’ä¿å­˜
 		GoalSec = GoalSecond;
 		if (FMath::IsNearlyZero(GoalSec))
 		{
@@ -93,37 +93,37 @@ void UGridMovementComponent::RequestMoveToDirection(FCoord Coord, float GoalSeco
 			MoveSpeed = Dist / GoalSec;
 		}
 
-		// 1ƒtƒŒ[ƒ€‘O‚ÌÀ•W‚ğ•Û‘¶
+		// 1ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®åº§æ¨™ã‚’ä¿å­˜
 		CoordCache = GridManager->ConvertToGridCoord(PawnOwner->GetActorLocation());
 
-		// ‚Ù‚©‚ÌƒAƒNƒ^[‚ÌˆÚ“®‚Æ”í‚ç‚È‚¢‚æ‚¤‚ÉAˆÚ“®æ—\’èƒZƒ‹‚É“o˜^
+		// ã»ã‹ã®ã‚¢ã‚¯ã‚¿ãƒ¼ã®ç§»å‹•ã¨è¢«ã‚‰ãªã„ã‚ˆã†ã«ã€ç§»å‹•å…ˆäºˆå®šã‚»ãƒ«ã«ç™»éŒ²
 		GridManager->SetMoveTargetCell(TargetCoord, true);
 
-		// XV—p‚Ì•Ï”‚ğƒŠƒZƒbƒg
+		// æ›´æ–°ç”¨ã®å¤‰æ•°ã‚’ãƒªã‚»ãƒƒãƒˆ
 		ElapsedSec = 0.f;
 
-		// ˆÚ“®’†ƒtƒ‰ƒO‚ğ—§‚Ä‚é
+		// ç§»å‹•ä¸­ãƒ•ãƒ©ã‚°ã‚’ç«‹ã¦ã‚‹
 		bIsMoving = true;
 	}
 }
 
 void UGridMovementComponent::OnMoveToDirection(const FInputActionValue& Value)
 {
-	// ˆÚ“®’†‚ÍˆÚ“®I—¹”»’è‚Ì‚İ
+	// ç§»å‹•ä¸­ã¯ç§»å‹•çµ‚äº†åˆ¤å®šã®ã¿
 	if (IsFinishGridMove() == false)
 		return;
 
-	// ˆÚ“®—Ê‚Ìæ“¾
+	// ç§»å‹•é‡ã®å–å¾—
 	const FVector2D MovementVector = Value.Get<FVector2D>();
 
-	// ’·‰Ÿ‚µ‚É‚æ‚é‚‘¬ˆÚ“®§Œä
+	// é•·æŠ¼ã—ã«ã‚ˆã‚‹é«˜é€Ÿç§»å‹•åˆ¶å¾¡
 	if (DirectionCache.Equals(MovementVector))
 		return;
 
-	// ˆÚ“®•ûŒü‚ÌƒLƒƒƒbƒVƒ…
+	// ç§»å‹•æ–¹å‘ã®ã‚­ãƒ£ãƒƒã‚·ãƒ¥
 	DirectionCache = MovementVector;
 
-	// is•ûŒü‚Ìæ“¾
+	// é€²è¡Œæ–¹å‘ã®å–å¾—
 	FVector2D Dir;
 	if (FMath::Abs(MovementVector.X) < FMath::Abs(MovementVector.Y))
 	{
@@ -133,15 +133,15 @@ void UGridMovementComponent::OnMoveToDirection(const FInputActionValue& Value)
 	{
 		Dir = FVector2D(MovementVector.X, 0.f);
 	}
-	// ³‹K‰»
+	// æ­£è¦åŒ–
 	Dir = Dir.GetSafeNormal();
 
-	// ˆÚ“®ƒŠƒNƒGƒXƒg
+	// ç§»å‹•ãƒªã‚¯ã‚¨ã‚¹ãƒˆ
 	FCoord Coord = CurrentCoord + Dir;
 	RequestMoveToDirection(Coord, 0.1f);
 }
 
-// ˆÚ“®•ûŒüƒLƒƒƒbƒVƒ…‚Ìíœ
+// ç§»å‹•æ–¹å‘ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã®å‰Šé™¤
 void UGridMovementComponent::OnResetDirectionCache(const FInputActionValue& Value)
 {
 	DirectionCache = FVector2D::Zero();
@@ -149,14 +149,14 @@ void UGridMovementComponent::OnResetDirectionCache(const FInputActionValue& Valu
 
 void UGridMovementComponent::OnChangeTurnMode(const FInputActionValue& Value)
 {
-	// Œü‚«‚¾‚¯•ÏX‚·‚éƒtƒ‰ƒO‚ğXV
+	// å‘ãã ã‘å¤‰æ›´ã™ã‚‹ãƒ•ãƒ©ã‚°ã‚’æ›´æ–°
 	bIsTurningMode = Value.Get<bool>();
 }
 
-// ƒOƒŠƒbƒhˆÚ“®‚ªI—¹‚µ‚½‚©
+// ã‚°ãƒªãƒƒãƒ‰ç§»å‹•ãŒçµ‚äº†ã—ãŸã‹
 bool UGridMovementComponent::IsFinishGridMove()
 {
-	// ˆÚ“®’†‚¶‚á‚È‚¢
+	// ç§»å‹•ä¸­ã˜ã‚ƒãªã„
 	if (bIsMoving == false)
 		return true;
 
@@ -164,17 +164,17 @@ bool UGridMovementComponent::IsFinishGridMove()
 	if (Owner == nullptr)
 		return true;
 
-	// ˆÚ“®I—¹
+	// ç§»å‹•çµ‚äº†
 	if (TargetLocation.Equals(Owner->GetActorLocation()))
 	{
 		return true;
 	}
 
-	// ˆÚ“®’†
+	// ç§»å‹•ä¸­
 	return false;
 }
 
-// ˆÚ“®XV
+// ç§»å‹•æ›´æ–°
 void UGridMovementComponent::UpdateGridMove(float DeltaSec)
 {
 	if (bIsMoving == false)
@@ -193,11 +193,11 @@ void UGridMovementComponent::UpdateGridMove(float DeltaSec)
 		return;
 
 
-	// ˆÚ“®
+	// ç§»å‹•
 	FVector CurrentLocation = PawnOwner->GetActorLocation();
 	CurrentLocation += MoveSpeed * DeltaSec;
 	
-	// ˆÚ“®•â³
+	// ç§»å‹•è£œæ­£
 	ElapsedSec += DeltaSec;
 	if (ElapsedSec >= GoalSec)
 	{
@@ -205,27 +205,27 @@ void UGridMovementComponent::UpdateGridMove(float DeltaSec)
 	}
 	PawnOwner->SetActorLocation(CurrentLocation);
 
-	// Œ»İ‚ÌÀ•W‚ğXV
+	// ç¾åœ¨ã®åº§æ¨™ã‚’æ›´æ–°
 	FCoord NextCoord = GridManager->ConvertToGridCoord(CurrentLocation);
 	SetCoord(NextCoord);
 
-	// ƒZƒ‹‚ª•Ï‚í‚Á‚½‚çƒOƒŠƒbƒhã‚ÌˆÊ’u‚àXV
+	// ã‚»ãƒ«ãŒå¤‰ã‚ã£ãŸã‚‰ã‚°ãƒªãƒƒãƒ‰ä¸Šã®ä½ç½®ã‚‚æ›´æ–°
 	if (CoordCache != NextCoord)
 	{
 		GridManager->RemoveActorFromCell(PawnOwner, CoordCache);
 		GridManager->AddActorOnCell(PawnOwner, NextCoord);
 	}
 
-	// À•WƒLƒƒƒbƒVƒ…‚ÌXV
+	// åº§æ¨™ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã®æ›´æ–°
 	CoordCache = NextCoord;
 
-	// ˆÚ“®‚ªI—¹‚µ‚½‚ç
+	// ç§»å‹•ãŒçµ‚äº†ã—ãŸã‚‰
 	if (IsFinishGridMove())
 	{
-		// ƒtƒ‰ƒO‚ğ~‚ë‚·
+		// ãƒ•ãƒ©ã‚°ã‚’é™ã‚ã™
 		bIsMoving = false;
 
-		// ˆÚ“®æ—\’èƒZƒ‹‚Ì‰ğœ
+		// ç§»å‹•å…ˆäºˆå®šã‚»ãƒ«ã®è§£é™¤
 		GridManager->SetMoveTargetCell(TargetCoord, false);
 	}
 }

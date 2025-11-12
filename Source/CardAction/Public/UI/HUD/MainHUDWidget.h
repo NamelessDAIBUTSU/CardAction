@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -23,80 +23,80 @@ class CARDACTION_API UMainHUDWidget : public UUserWidget
 	GENERATED_BODY()
 
 protected: /* UUserWidget */
-    // ‰Šú‰»
+    // åˆæœŸåŒ–
     virtual void NativeConstruct() override;
 
 public:
     void OnUpdate(float DeltaSec);
 
-    // ƒAƒNƒVƒ‡ƒ“ƒtƒF[ƒYˆÈŠO‚Å”ñ•\¦‚É‚·‚éUI‚Ì•\¦§Œä
+    // ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãƒ•ã‚§ãƒ¼ã‚ºä»¥å¤–ã§éè¡¨ç¤ºã«ã™ã‚‹UIã®è¡¨ç¤ºåˆ¶å¾¡
     void SetVisibleExceptActionPhase(bool Visible);
 
-    // ŠeWidget‚Ì‰Šú‰»
+    // å„Widgetã®åˆæœŸåŒ–
     void InitializeWidgets();
 
 private:
-    // ŠeWidget‚Ì¶¬ & ”z’u
+    // å„Widgetã®ç”Ÿæˆ & é…ç½®
     void CreateWidgets();
 
 
-public: /* ¶¬‚·‚éWidgetƒNƒ‰ƒX */
-    // CanvasPanel‚ğƒoƒCƒ“ƒh
+public: /* ç”Ÿæˆã™ã‚‹Widgetã‚¯ãƒ©ã‚¹ */
+    // CanvasPanelã‚’ãƒã‚¤ãƒ³ãƒ‰
     UPROPERTY(meta = (BindWidget))
     UCanvasPanel* MainCanvas;
 
-    // ƒXƒe[ƒWƒNƒŠƒA
+    // ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¯ãƒªã‚¢
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
     TSubclassOf<UUserWidget> StageClearWidgetClass;
 
-    // ƒQ[ƒ€ƒI[ƒo[
+    // ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
     TSubclassOf<UUserWidget> GameOverWidgetClass;
 
-    // èD
+    // æ‰‹æœ­
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
     TSubclassOf<UUserWidget> HandCardsWidgetClass;
 
-    // ƒJ[ƒh‘I‘ğ
+    // ã‚«ãƒ¼ãƒ‰é¸æŠ
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
     TSubclassOf<UUserWidget> CardSelectWidgetClass;
 
-    // ƒGƒlƒ~[ƒLƒƒƒ‰ƒoƒi[
+    // ã‚¨ãƒãƒŸãƒ¼ã‚­ãƒ£ãƒ©ãƒãƒŠãƒ¼
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
     TSubclassOf<UUserWidget> EnemyCharaBannerWidgetClass;
 
-    // §ŒÀŠÔ
+    // åˆ¶é™æ™‚é–“
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
     TSubclassOf<UUserWidget> ActionTimeWidgetClass;
 
-public: /* ƒCƒ“ƒXƒ^ƒ“ƒX‚Ìƒ|ƒCƒ“ƒ^ */
-    // ƒCƒ“ƒXƒ^ƒ“ƒX‰»‚³‚¹‚½HUD‚ÌƒŠƒXƒg
+public: /* ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿ */
+    // ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–ã•ã›ãŸHUDã®ãƒªã‚¹ãƒˆ
     TArray<UHUDBase*> HUDList;
 
-    // ƒXƒe[ƒWƒNƒŠƒA
+    // ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¯ãƒªã‚¢
     UPROPERTY()
     UStageClearWidget* StageClearWidget = nullptr;
-    // ƒQ[ƒ€ƒI[ƒo[
+    // ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼
     UPROPERTY()
     UUserWidget* GameOverWidget = nullptr;
-    // èD
+    // æ‰‹æœ­
     UPROPERTY()
     UHandCardsWidget* HandCardsWidget = nullptr;
-    // ƒJ[ƒh‘I‘ğ
+    // ã‚«ãƒ¼ãƒ‰é¸æŠ
     UPROPERTY()
     UCardSelectWidget* CardSelectWidget = nullptr;
-    // ƒGƒlƒ~[ƒLƒƒƒ‰ƒoƒi[
+    // ã‚¨ãƒãƒŸãƒ¼ã‚­ãƒ£ãƒ©ãƒãƒŠãƒ¼
     UPROPERTY(meta = (BindWidget))
     USizeBox* EnemyCharaBannerBox;
     UPROPERTY()
     UEnemyCharaBannerListWidget* EnemyCharaBannerWidget = nullptr;
-    // §ŒÀŠÔ
+    // åˆ¶é™æ™‚é–“
     UPROPERTY()
     UActionTimeWidget* ActionTimeWidget;
 
 public: /* Delegate */
-    // ƒJ[ƒh‘I‘ğ—pƒfƒŠƒQ[ƒg
+    // ã‚«ãƒ¼ãƒ‰é¸æŠç”¨ãƒ‡ãƒªã‚²ãƒ¼ãƒˆ
     FOnSelectCard SelectCardDelegate;
-    // ƒJ[ƒh‘I‘ğ‰ğœ—pƒfƒŠƒQ[ƒg
+    // ã‚«ãƒ¼ãƒ‰é¸æŠè§£é™¤ç”¨ãƒ‡ãƒªã‚²ãƒ¼ãƒˆ
     FOnUnSelectCard UnSelectCardDelegate;
 };

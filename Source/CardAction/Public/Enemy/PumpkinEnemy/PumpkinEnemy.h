@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -22,11 +22,11 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	// ‰ñ“]‰Â”\‚©
+	// å›è»¢å¯èƒ½ã‹
 	virtual bool CanRotate() override;
 
 public:
-	// ¶¬‚·‚éƒpƒ“ƒvƒLƒ“”š’e
+	// ç”Ÿæˆã™ã‚‹ãƒ‘ãƒ³ãƒ—ã‚­ãƒ³çˆ†å¼¾
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack")
 	TSubclassOf<AEnemyAttackBase> AttackClass;
 };

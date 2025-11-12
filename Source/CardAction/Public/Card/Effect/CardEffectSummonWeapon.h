@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "CoreMinimal.h"
 #include "Card/Effect/CardEffectBase.h"
 #include "Weapon/WeaponBase.h"
@@ -10,11 +10,11 @@ class CARDACTION_API UCardEffectSummonWeapon : public UCardEffectBase
 	GENERATED_BODY()
 
 public:
-	// Œø‰Ê”­“®
+	// åŠ¹æœç™ºå‹•
 	virtual void ExecuteEffect() override;
 
 public:
-	// •Ší
+	// æ­¦å™¨
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
 	TSubclassOf<AWeaponActorBase> WeaponClass;
 };

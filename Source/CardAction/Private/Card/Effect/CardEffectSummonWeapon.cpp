@@ -1,4 +1,4 @@
-#include "Card/Effect/CardEffectSummonWeapon.h"
+ï»¿#include "Card/Effect/CardEffectSummonWeapon.h"
 #include <Kismet/GameplayStatics.h>
 #include <Character/MyCharacter.h>
 #include <System/MyGameMode.h>
@@ -6,7 +6,7 @@
 
 void UCardEffectSummonWeapon::ExecuteEffect()
 {
-	// ƒvƒŒƒCƒ„[‚É•Ší‚ğ‘•”õ‚³‚¹‚é
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«æ­¦å™¨ã‚’è£…å‚™ã•ã›ã‚‹
 	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	if (PlayerController == nullptr)
 		return ;
@@ -14,18 +14,18 @@ void UCardEffectSummonWeapon::ExecuteEffect()
 	if (Pawn == nullptr)
 		return ;
 
-	// ƒvƒŒƒCƒ„[ƒLƒƒƒ‰ƒNƒ^[‚É‘•”õ‚³‚¹‚é
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã«è£…å‚™ã•ã›ã‚‹
 	AMyCharacter* Player = Cast<AMyCharacter>(Pawn);
 	if (Player && WeaponClass)
 	{
-		// •Ší‚ğ¶¬
+		// æ­¦å™¨ã‚’ç”Ÿæˆ
 		AWeaponActorBase* WeaponActor = GetWorld()->SpawnActor<AWeaponActorBase>(WeaponClass, Player->GetActorLocation(), Player->GetActorRotation());
 		if (WeaponActor)
 		{
-			// Š—LÒ‚ğİ’è
+			// æ‰€æœ‰è€…ã‚’è¨­å®š
 			WeaponActor->SetWeaponOwner(Player);
 
-			// ¶¬‚ÌÀ•W‚ğ•Û‘¶
+			// ç”Ÿæˆæ™‚ã®åº§æ¨™ã‚’ä¿å­˜
 			if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
 			{
 				if (MyGM->GridManager == nullptr)

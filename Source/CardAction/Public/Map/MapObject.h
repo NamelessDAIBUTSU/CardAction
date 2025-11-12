@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -16,53 +16,53 @@ class CARDACTION_API UMapObject : public UObject
 	GENERATED_BODY()
 	
 public:
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	void Initialize(UMapData* Data);
 
-	// ƒ}ƒbƒv‚ğƒNƒŠƒA‚µ‚½‚©
+	// ãƒãƒƒãƒ—ã‚’ã‚¯ãƒªã‚¢ã—ãŸã‹
 	bool IsClear() { return false; }
 
-	// ƒ}ƒbƒvƒTƒCƒY
+	// ãƒãƒƒãƒ—ã‚µã‚¤ã‚º
 	FVector2D GetSize() const { return Size; }
 
-	// w’èˆÊ’u‚ÌƒXƒe[ƒW‚ğæ“¾
+	// æŒ‡å®šä½ç½®ã®ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’å–å¾—
 	class UStageObject* GetStage(FVector2D Pos);
 
-	// ƒXƒe[ƒW‚Ìæ“¾
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã®å–å¾—
 	const TArray<UStageObject*>& GetStageList() const { return StageList; }
 
-	// ƒXƒe[ƒWƒŠƒXƒg‚É’Ç‰Á
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ãƒªã‚¹ãƒˆã«è¿½åŠ 
 	void AddStageList(class UStageObject* Stage);
 
-	// Œ»İ‚ÌƒXƒe[ƒW
+	// ç¾åœ¨ã®ã‚¹ãƒ†ãƒ¼ã‚¸
 	void SetCurrentStage(UStageObject* Stage) { CurrentStage = Stage; }
 	UStageObject* GetCurrentStage() { return CurrentStage; }
 
-	// ƒ}ƒbƒvƒf[ƒ^
+	// ãƒãƒƒãƒ—ãƒ‡ãƒ¼ã‚¿
 	UMapData* GetMapData() { return MapData; }
 
-	// ƒ}ƒbƒv”Ô†
+	// ãƒãƒƒãƒ—ç•ªå·
 	int GetMapNum() const { return MapNum; }
 	void SetMapNum(int Num) { MapNum = Num; }
 
 private:
-	// ƒ}ƒbƒvƒf[ƒ^
+	// ãƒãƒƒãƒ—ãƒ‡ãƒ¼ã‚¿
 	UPROPERTY();
 	UMapData* MapData = nullptr;
 
-	// Œ»İ‚ÌƒXƒe[ƒW
+	// ç¾åœ¨ã®ã‚¹ãƒ†ãƒ¼ã‚¸
 	UPROPERTY();
 	class UStageObject* CurrentStage = nullptr;
 
-	// ‘SƒXƒe[ƒW
+	// å…¨ã‚¹ãƒ†ãƒ¼ã‚¸
 	UPROPERTY();
 	TArray<UStageObject*> StageList;
 
-	// ‰½ƒ}ƒbƒv–Ú
+	// ä½•ãƒãƒƒãƒ—ç›®
 	UPROPERTY();
 	int MapNum = 0;
 
-	// ƒ}ƒbƒv‚Ì‚‚³E•
+	// ãƒãƒƒãƒ—ã®é«˜ã•ãƒ»å¹…
 	UPROPERTY();
 	FVector2D Size;
 };

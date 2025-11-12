@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "AI/Task/BTTask_PlayMontage.h"
@@ -20,22 +20,22 @@ EBTNodeResult::Type UBTTask_PlayMontage::ExecuteTask(UBehaviorTreeComponent& Own
 	UAnimInstance* AnimInstance = Mesh->GetAnimInstance();
 	if (AnimInstance && AnimMontage)
 	{
-		// ƒ‚ƒ“ƒ^[ƒWƒ…Ä¶
+		// ãƒ¢ãƒ³ã‚¿ãƒ¼ã‚¸ãƒ¥å†ç”Ÿ
 		AnimInstance->Montage_Play(AnimMontage, PlayRate);
 
-		// I—¹ƒR[ƒ‹ƒoƒbƒN‚ğƒoƒCƒ“ƒh
+		// çµ‚äº†ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ã‚’ãƒã‚¤ãƒ³ãƒ‰
 		FOnMontageEnded EndDelegate;
 		EndDelegate.BindUObject(this, &UBTTask_PlayMontage::OnMontageEnded, &OwnerComp);
 		AnimInstance->Montage_SetEndDelegate(EndDelegate, AnimMontage);
 
-		// ‚Ü‚¾Š®—¹‚µ‚Ä‚¢‚È‚¢‚Ì‚Å InProgress ‚ğ•Ô‚·
+		// ã¾ã å®Œäº†ã—ã¦ã„ãªã„ã®ã§ InProgress ã‚’è¿”ã™
 		return EBTNodeResult::InProgress;
 	}
 
 	return EBTNodeResult::Failed;
 }
 
-// ƒ‚ƒ“ƒ^[ƒWƒ…I—¹‚ÉSucceeded‚ğ•Ô‚·‚½‚ß‚ÌƒR[ƒ‹ƒoƒbƒN
+// ãƒ¢ãƒ³ã‚¿ãƒ¼ã‚¸ãƒ¥çµ‚äº†æ™‚ã«Succeededã‚’è¿”ã™ãŸã‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 void UBTTask_PlayMontage::OnMontageEnded(UAnimMontage* Montage, bool bInterrupted, UBehaviorTreeComponent* OwnerComp)
 {
 	if (OwnerComp)

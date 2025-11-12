@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Enemy/EnemyManager.h"
@@ -21,10 +21,10 @@ void AEnemyManager::Tick(float DeltaTime)
 
 }
 
-// ƒGƒlƒ~[‚Ì“o˜^ / ‰ðœ
+// ã‚¨ãƒãƒŸãƒ¼ã®ç™»éŒ² / è§£é™¤
 void AEnemyManager::RegistEnemy(AEnemyBase* Enemy)
 {
-	// “o˜^Ï‚Ý‚Ìê‡‚Í”²‚¯‚é
+	// ç™»éŒ²æ¸ˆã¿ã®å ´åˆã¯æŠœã‘ã‚‹
 	if (EnemyList.Find(Enemy) != INDEX_NONE)
 		return;
 
@@ -32,11 +32,11 @@ void AEnemyManager::RegistEnemy(AEnemyBase* Enemy)
 }
 void AEnemyManager::UnRegistEnemy(AEnemyBase* Enemy)
 {
-	// “o˜^‚³‚ê‚Ä‚¢‚È‚¢ê‡‚Í”²‚¯‚é
+	// ç™»éŒ²ã•ã‚Œã¦ã„ãªã„å ´åˆã¯æŠœã‘ã‚‹
 	if (EnemyList.Find(Enemy) == INDEX_NONE)
 		return;
 
-	// ‚Ç‚±‚©‚Ìƒ‹[ƒv‚Åˆø‚Á‚©‚©‚é‚Æ–ï‰î‚È‚Ì‚Å‹t‡‚Å
+	// ã©ã“ã‹ã®ãƒ«ãƒ¼ãƒ—ã§å¼•ã£ã‹ã‹ã‚‹ã¨åŽ„ä»‹ãªã®ã§é€†é †ã§
 	for (int i = EnemyList.Num() - 1; i >= 0; --i)
 	{
 		if (EnemyList[i] == Enemy)
@@ -47,13 +47,13 @@ void AEnemyManager::UnRegistEnemy(AEnemyBase* Enemy)
 	}
 }
 
-// ƒGƒlƒ~[‚Ì‘S‰ðœ
+// ã‚¨ãƒãƒŸãƒ¼ã®å…¨è§£é™¤
 void AEnemyManager::UnRegistAllEnemies()
 {
 	EnemyList.Empty();
 }
 
-// ƒGƒlƒ~[‚ª1l‚Å‚à¶‚«‚Ä‚¢‚é‚©
+// ã‚¨ãƒãƒŸãƒ¼ãŒ1äººã§ã‚‚ç”Ÿãã¦ã„ã‚‹ã‹
 bool AEnemyManager::IsAliveAnyEnemy()
 {
 	for (int i = EnemyList.Num() - 1; i >= 0; --i)
@@ -67,7 +67,7 @@ bool AEnemyManager::IsAliveAnyEnemy()
 	return false;
 }
 
-// ‘SƒGƒlƒ~[‚ªŠJŽn‰Â”\ó‘Ô‚©
+// å…¨ã‚¨ãƒãƒŸãƒ¼ãŒé–‹å§‹å¯èƒ½çŠ¶æ…‹ã‹
 bool AEnemyManager::IsAllEnemyReady()
 {
 	for (int i = EnemyList.Num() - 1; i >= 0; --i)
@@ -81,7 +81,7 @@ bool AEnemyManager::IsAllEnemyReady()
 	return true;
 }
 
-// Žw’èÀ•W‚ÌƒGƒlƒ~[‚ðŽæ“¾
+// æŒ‡å®šåº§æ¨™ã®ã‚¨ãƒãƒŸãƒ¼ã‚’å–å¾—
 AEnemyBase* AEnemyManager::GetEnemy(FCoord Coord)
 {
 	for (int i = EnemyList.Num() - 1; i >= 0; --i)

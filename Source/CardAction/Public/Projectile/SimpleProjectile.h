@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -24,7 +24,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 private:
-    // “®“IƒIƒuƒWƒFƒNƒg‚Æ‚ÌÚG
+    // å‹•çš„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã®æ¥è§¦
     UFUNCTION()
     void OnOverlap(UPrimitiveComponent* OverlappedComp,
         AActor* OtherActor,
@@ -33,24 +33,24 @@ private:
         bool bFromSweep,
         const FHitResult& SweepResult);
 
-    // Ã“IƒIƒuƒWƒFƒNƒg‚Æ‚ÌÚG
+    // é™çš„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã®æ¥è§¦
     UFUNCTION()
     void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor,
         UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
 public:
-    // ƒRƒŠƒWƒ‡ƒ“
+    // ã‚³ãƒªã‚¸ãƒ§ãƒ³
     UPROPERTY(VisibleAnywhere, Category = "Components")
     class USphereComponent* CollisionComp;
 
-    // ˆÚ“®§Œä
+    // ç§»å‹•åˆ¶å¾¡
     UPROPERTY(VisibleAnywhere, Category = "Components")
     class UProjectileMovementComponent* ProjectileMovement;
 
-    // Œ©‚½–Ú
+    // è¦‹ãŸç›®
     UPROPERTY(VisibleAnywhere, Category = "Components")
     class UStaticMeshComponent* MeshComp;
 
-    // ƒ_ƒ[ƒW
+    // ãƒ€ãƒ¡ãƒ¼ã‚¸
     int Damage = 0;
 };
