@@ -6,9 +6,9 @@
 #include "Enemy/EnemyAttackBase.h"
 #include "ElectricThunder.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// エレクトリックアイの攻撃クラス
+/// </summary>
 UCLASS()
 class CARDACTION_API AElectricThunder : public AEnemyAttackBase
 {

@@ -6,9 +6,9 @@
 #include "Weapon/WeaponBase.h"
 #include "Weapon_ThrowKnife.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// 武器：直線に飛ぶナイフ。オミット予定
+/// </summary>
 UCLASS()
 class CARDACTION_API AWeapon_ThrowKnife : public AWeaponActorBase
 {

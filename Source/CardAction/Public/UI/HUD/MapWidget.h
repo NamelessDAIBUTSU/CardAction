@@ -12,9 +12,9 @@
 #include <Map/MapData.h>
 #include "MapWidget.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// ウィジェット：マップウィジェット。ステージウィジェットを管理
+/// </summary>
 UCLASS()
 class CARDACTION_API UMapWidget : public UHUDBase
 {

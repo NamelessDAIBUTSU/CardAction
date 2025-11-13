@@ -10,9 +10,9 @@
 #include <Components/TextBlock.h>
 #include "StageWidget.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// ウィジェット：ステージウィジェット
+/// </summary>
 UCLASS()
 class CARDACTION_API UStageWidget : public UHUDBase
 {

@@ -8,7 +8,9 @@
 #include "Components/SizeBox.h"
 #include "CardSelectWidget.generated.h"
 
-
+/// <summary>
+/// ウィジェット：カード選択ウィジェット
+/// </summary>
 UCLASS()
 class CARDACTION_API UCardSelectWidget : public UHUDBase
 {

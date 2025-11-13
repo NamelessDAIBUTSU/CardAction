@@ -7,9 +7,9 @@
 #include <UI/FadeWidget.h>
 #include "FadeSystem.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// フェードシステム
+/// </summary>
 UCLASS()
 class CARDACTION_API UFadeSystem : public UGameInstanceSubsystem
 {

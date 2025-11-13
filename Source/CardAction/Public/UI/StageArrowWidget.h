@@ -6,9 +6,9 @@
 #include "Blueprint/UserWidget.h"
 #include "StageArrowWidget.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// ウィジェット：ステージ選択中用矢印ウィジェット
+/// </summary>
 UCLASS()
 class CARDACTION_API UStageArrowWidget : public UUserWidget
 {

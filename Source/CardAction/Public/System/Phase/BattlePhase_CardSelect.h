@@ -6,9 +6,9 @@
 #include "System/Phase/BattlePhaseBase.h"
 #include "BattlePhase_CardSelect.generated.h"
 
-/**
- *
- */
+/// <summary>
+/// カード選択フェーズ
+/// </summary>
 UCLASS()
 class CARDACTION_API UBattlePhase_CardSelect : public UBattlePhaseBase
 {

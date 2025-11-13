@@ -12,6 +12,9 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnEnemyDead, AEnemyBase*, DeadEnemy);
 
+/// <summary>
+/// 敵の基本クラス
+/// </summary>
 UCLASS()
 class CARDACTION_API AEnemyBase : public ACharacter, public IGridMoveCompInterface
 {

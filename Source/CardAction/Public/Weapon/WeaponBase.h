@@ -8,9 +8,9 @@
 #include "Util/CoordDef.h"
 #include "WeaponBase.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// 武器の基本クラス
+/// </summary>
 UCLASS()
 class CARDACTION_API AWeaponActorBase : public AActor
 {

@@ -6,9 +6,9 @@
 #include "Animation/AnimNotifies/AnimNotify.h"
 #include "AnimNotify_SetIsReady.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// アニメーション通知：ゲーム開始フラグを立てる
+/// </summary>
 UCLASS()
 class CARDACTION_API UAnimNotify_SetIsReady : public UAnimNotify
 {

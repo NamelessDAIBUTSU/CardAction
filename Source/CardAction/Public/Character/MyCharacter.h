@@ -12,6 +12,9 @@
 #include "Interface/GridMoveCompInterface.h"
 #include "MyCharacter.generated.h"
 
+/// <summary>
+/// プレイヤークラス
+/// </summary>
 UCLASS(Blueprintable)
 class AMyCharacter : public ACharacter, public IGridMoveCompInterface
 {

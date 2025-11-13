@@ -7,6 +7,9 @@
 #include "Util/CoordDef.h"
 #include "GridCellData.generated.h"
 
+/// <summary>
+/// グリッドセルの情報構造体
+/// </summary>
 USTRUCT(BlueprintType)
 struct CARDACTION_API FGridCellData
 {

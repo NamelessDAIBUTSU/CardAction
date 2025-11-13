@@ -7,9 +7,9 @@
 #include <Components/Button.h>
 #include "StageClearWidget.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// ウィジェット：ステージクリアウィジェット
+/// </summary>
 UCLASS()
 class CARDACTION_API UStageClearWidget : public UHUDBase
 {

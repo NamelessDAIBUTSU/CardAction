@@ -7,9 +7,9 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BTDecorator_BoolValue.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// デコレーター：ブラックボードのBool値を見て評価する
+/// </summary>
 UCLASS()
 class CARDACTION_API UBTDecorator_BoolValue : public UBTDecorator
 {

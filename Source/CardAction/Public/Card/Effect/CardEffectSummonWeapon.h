@@ -4,6 +4,9 @@
 #include "Weapon/WeaponBase.h"
 #include "CardEffectSummonWeapon.generated.h"
 
+/// <summary>
+/// カード効果：武器を生成
+/// </summary>
 UCLASS(BlueprintType)
 class CARDACTION_API UCardEffectSummonWeapon : public UCardEffectBase
 {

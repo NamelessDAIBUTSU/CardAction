@@ -9,9 +9,9 @@
 #include <Grid/GridData.h>
 #include "StageObject.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// ステージの実体
+/// </summary>
 UCLASS()
 class CARDACTION_API UStageObject : public UObject
 {

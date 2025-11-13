@@ -14,9 +14,9 @@
 #include "ActionTimeWidget.h"
 #include "MainHUDWidget.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// ウィジェット：HUDの管理クラスウィジェット
+/// </summary>
 UCLASS()
 class CARDACTION_API UMainHUDWidget : public UUserWidget
 {

@@ -8,9 +8,9 @@
 #include "Effect/CardEffectBase.h"
 #include "CardData.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// カードデータ
+/// </summary>
 UCLASS()
 class CARDACTION_API UCardData : public UDataAsset
 {
@@ -98,6 +98,9 @@ public:
 	UTexture2D* IconTexture;
 };
 
+/// <summary>
+/// カードデータを扱うためのUtilデータクラス
+/// </summary>
 UCLASS()
 class CARDACTION_API UCardUtilData : public UDataAsset
 {

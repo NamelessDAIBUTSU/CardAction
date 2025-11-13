@@ -7,14 +7,15 @@
 #include <Util/CoordDef.h>
 #include "GridMovementComponent.generated.h"
 
-
+/// <summary>
+/// グリッド移動コンポーネント
+/// </summary>
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class CARDACTION_API UGridMovementComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
-	// Sets default values for this component's properties
 	UGridMovementComponent();
 
 protected: /* UObject */

@@ -6,9 +6,9 @@
 #include "Blueprint/UserWidget.h"
 #include "HUDBase.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// ウィジェット：HUDの基本クラス
+/// </summary>
 UCLASS(abstract)
 class CARDACTION_API UHUDBase : public UUserWidget
 {

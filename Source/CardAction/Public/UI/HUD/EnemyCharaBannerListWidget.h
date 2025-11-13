@@ -8,9 +8,9 @@
 #include <Components/VerticalBox.h>
 #include "EnemyCharaBannerListWidget.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// ウィジェット：敵のバナーをリスト管理するウィジェット
+/// </summary>
 UCLASS()
 class CARDACTION_API UEnemyCharaBannerListWidget : public UHUDBase
 {

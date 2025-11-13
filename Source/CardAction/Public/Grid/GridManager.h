@@ -10,6 +10,9 @@
 #include "Util/CoordDef.h"
 #include "GridManager.generated.h"
 
+/// <summary>
+/// グリッド空間の情報を管理するマネージャー
+/// </summary>
 UCLASS()
 class CARDACTION_API AGridManager : public AActor
 {

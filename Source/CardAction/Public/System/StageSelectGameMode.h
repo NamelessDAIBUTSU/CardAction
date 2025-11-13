@@ -7,6 +7,9 @@
 #include <UI/HUD/MapWidget.h>
 #include "StageSelectGameMode.generated.h"
 
+/// <summary>
+/// マップ選択レベルでのゲームモード
+/// </summary>
 UCLASS()
 class CARDACTION_API AStageSelectGameMode : public AGameModeBase
 {

@@ -31,6 +31,9 @@ public:
 	bool bShowToolTip = true;
 };
 
+/// <summary>
+/// ウィジェット：カードウィジェット
+/// </summary>
 UCLASS()
 class CARDACTION_API UCardWidget : public UHUDBase
 {

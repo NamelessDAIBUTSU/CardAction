@@ -6,9 +6,9 @@
 #include "BehaviorTree/BTTaskNode.h"
 #include "BTTask_PlayMontage.generated.h"
 
-/**
- * 
- */
+ /// <summary>
+ /// タスク：アニメーションモンタージュを再生（現状、攻撃時想定）
+ /// </summary>
 UCLASS()
 class CARDACTION_API UBTTask_PlayMontage : public UBTTaskNode
 {

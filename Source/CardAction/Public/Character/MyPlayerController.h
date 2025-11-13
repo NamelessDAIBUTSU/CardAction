@@ -8,13 +8,16 @@
 #include <UI/HUD/MainHUDWidget.h>
 #include "MyPlayerController.generated.h"
 
-/** Forward declaration to improve compiling times */
+
 class UNiagaraSystem;
 class UInputMappingContext;
 class UInputAction;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
+/// <summary>
+/// プレイヤーコントローラー
+/// </summary>
 UCLASS()
 class AMyPlayerController : public APlayerController
 {

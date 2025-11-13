@@ -7,9 +7,9 @@
 #include <Components/TextBlock.h>
 #include "ActionTimeWidget.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// ウィジェット：アクションフェーズの制限時間
+/// </summary>
 UCLASS()
 class CARDACTION_API UActionTimeWidget : public UHUDBase
 {

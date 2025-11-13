@@ -14,6 +14,9 @@ class AEnemyManager;
 class UBattlePhaseBase;
 class AMyCharacter;
 
+/// <summary>
+/// 戦闘レベルでのゲームモード
+/// </summary>
 UCLASS()
 class CARDACTION_API AMyGameMode : public AGameMode
 {

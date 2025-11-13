@@ -5,6 +5,9 @@
 #include "CoreMinimal.h"
 #include "CoordDef.generated.h"
 
+/// <summary>
+/// グリッド座標用の型。int32版FVector2D。
+/// </summary>
 USTRUCT(BlueprintType)
 struct CARDACTION_API FCoord
 {

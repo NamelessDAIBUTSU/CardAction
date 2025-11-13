@@ -6,9 +6,9 @@
 #include "Animation/AnimNotifies/AnimNotify.h"
 #include "AnimNotify_SpawnEThunder.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// アニメーション通知：エレクトリックサンダー生成
+/// </summary>
 UCLASS()
 class CARDACTION_API UAnimNotify_SpawnEThunder : public UAnimNotify
 {

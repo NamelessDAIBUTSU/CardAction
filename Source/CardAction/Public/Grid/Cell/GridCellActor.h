@@ -8,6 +8,9 @@
 #include "Grid/Cell/GridCellData.h"
 #include "GridCellActor.generated.h"
 
+/// <summary>
+/// グリッドセルクラス
+/// </summary>
 UCLASS()
 class CARDACTION_API AGridCellActor : public AActor
 {

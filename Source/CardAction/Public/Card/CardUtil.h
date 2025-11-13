@@ -8,9 +8,9 @@
 #include "Card/CardTypeDef.h"
 #include "CardUtil.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// カードUtilを扱うためのシングルトンクラス
+/// </summary>
 UCLASS()
 class CARDACTION_API UCardUtil : public UGameInstanceSubsystem
 {

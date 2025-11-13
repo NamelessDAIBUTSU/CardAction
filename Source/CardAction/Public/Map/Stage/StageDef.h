@@ -13,7 +13,9 @@
 #define STAGE_WIDGET_VERTICAL_MERGIN 32
 
 
-// ステージの種類
+/// <summary>
+/// ステージの種類
+/// </summary>
 UENUM(BlueprintType)
 enum class EStageType : uint8
 {
@@ -22,7 +24,9 @@ enum class EStageType : uint8
     Bonus    UMETA(DisplayName = "Bonus"),
 };
 
-// ステージ状況
+/// <summary>
+/// ステージ状況
+/// </summary>
 UENUM(BlueprintType)
 enum class EStageCondition : uint8
 {

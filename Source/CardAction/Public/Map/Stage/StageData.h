@@ -7,9 +7,9 @@
 #include "Map/Stage/StageDef.h"
 #include "StageData.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// ステージデータのデータアセット
+/// </summary>
 UCLASS()
 class CARDACTION_API UStageData : public UDataAsset
 {

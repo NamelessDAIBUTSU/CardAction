@@ -7,9 +7,9 @@
 #include <UI/HUD/MapWidget.h>
 #include "StageSelectController.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// ステージ選択画面でのプレイヤーコントローラー
+/// </summary>
 UCLASS()
 class CARDACTION_API AStageSelectController : public APlayerController
 {

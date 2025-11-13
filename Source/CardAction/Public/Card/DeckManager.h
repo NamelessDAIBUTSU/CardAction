@@ -8,6 +8,9 @@
 #include "InitDeckData.h"
 #include "DeckManager.generated.h"
 
+/// <summary>
+/// デッキ管理クラス
+/// </summary>
 UCLASS()
 class CARDACTION_API ADeckManager : public AActor
 {

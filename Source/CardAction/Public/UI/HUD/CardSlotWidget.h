@@ -8,9 +8,9 @@
 #include <Components/TextBlock.h>
 #include "CardSlotWidget.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// ウィジェット：カードスロットウィジェット
+/// </summary>
 UCLASS()
 class CARDACTION_API UCardSlotWidget : public UHUDBase
 {

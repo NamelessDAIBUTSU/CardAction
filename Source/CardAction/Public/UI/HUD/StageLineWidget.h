@@ -7,9 +7,9 @@
 #include <Map/Stage/StageObject.h>
 #include "StageLineWidget.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// ウィジェット：ステージ間の線ウィジェット
+/// </summary>
 UCLASS()
 class CARDACTION_API UStageLineWidget : public UUserWidget
 {

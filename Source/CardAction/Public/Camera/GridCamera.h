@@ -6,9 +6,9 @@
 #include "Camera/CameraActor.h"
 #include "GridCamera.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// 固定見下ろし用グリッドカメラ
+/// </summary>
 UCLASS()
 class CARDACTION_API AGridCamera : public ACameraActor
 {

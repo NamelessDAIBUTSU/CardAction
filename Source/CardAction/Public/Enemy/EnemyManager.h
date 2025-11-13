@@ -7,6 +7,9 @@
 #include "GameFramework/Actor.h"
 #include "EnemyManager.generated.h"
 
+/// <summary>
+/// グリッド上に存在する敵の情報を取得するための管理クラス
+/// </summary>
 UCLASS()
 class CARDACTION_API AEnemyManager : public AActor
 {

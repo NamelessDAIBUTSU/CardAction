@@ -6,7 +6,9 @@
 // ゲームクリアに必要なマップ数
 #define NEED_CLEAR_MAP_NUM 4
 
-// マップの種類
+/// <summary>
+/// マップの種類
+/// </summary>
 UENUM(BlueprintType)
 enum class EMapType : uint8
 {

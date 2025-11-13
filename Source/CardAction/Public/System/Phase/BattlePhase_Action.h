@@ -6,9 +6,9 @@
 #include "System/Phase/BattlePhaseBase.h"
 #include "BattlePhase_Action.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// アクションフェーズ
+/// </summary>
 UCLASS()
 class CARDACTION_API UBattlePhase_Action : public UBattlePhaseBase
 {

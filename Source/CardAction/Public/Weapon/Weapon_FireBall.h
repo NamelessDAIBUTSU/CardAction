@@ -7,9 +7,9 @@
 #include "Particles/ParticleSystemComponent.h"
 #include "Weapon_FireBall.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// 武器：ファイアボール。変数を変更することで、属性別のボールを飛ばせるクラス。
+/// </summary>
 UCLASS()
 class CARDACTION_API AWeapon_FireBall : public AWeaponActorBase
 {

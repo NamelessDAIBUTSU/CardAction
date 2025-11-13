@@ -20,7 +20,9 @@ enum class EHPBarType : uint8
 DECLARE_DELEGATE_RetVal(int, FOnGetMaxHP);
 DECLARE_DELEGATE_RetVal(int, FOnGetCurrentHP);
 
-
+/// <summary>
+/// ウィジェット：キャラ上部のHPバーウィジェット
+/// </summary>
 UCLASS()
 class CARDACTION_API UHPBar : public UHUDBase
 {

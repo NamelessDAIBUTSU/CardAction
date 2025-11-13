@@ -8,7 +8,9 @@
 #include <Grid/GridData.h>
 #include "StageGenerator.generated.h"
 
-// ステージの内部情報を生成するジェネレータ
+/// <summary>
+/// ステージの内部情報を生成するジェネレータ
+/// </summary>
 UCLASS()
 class CARDACTION_API UStageGenerator : public UObject
 {

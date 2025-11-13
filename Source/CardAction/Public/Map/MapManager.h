@@ -9,6 +9,9 @@
 #include "Map/MapObject.h"
 #include "MapManager.generated.h"
 
+/// <summary>
+/// マップ情報を管理するマネージャー
+/// </summary>
 UCLASS()
 class CARDACTION_API UMapManager : public UGameInstanceSubsystem
 {

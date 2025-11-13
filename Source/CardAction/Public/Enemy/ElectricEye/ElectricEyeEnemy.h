@@ -7,9 +7,9 @@
 #include <Enemy/EnemyAttackBase.h>
 #include "ElectricEyeEnemy.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// 敵：エレクトリックアイ
+/// </summary>
 UCLASS()
 class CARDACTION_API AElectricEyeEnemy : public AEnemyBase
 {

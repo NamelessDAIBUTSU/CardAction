@@ -7,9 +7,9 @@
 #include "Util/CoordDef.h"
 #include "BTTask_GridMove.generated.h"
 
-/**
- * 周囲のどこかへ1マス移動
- */
+ /// <summary>
+ /// タスク：周囲のどこかへ1マス移動
+ /// </summary>
 UCLASS()
 class CARDACTION_API UBTTask_GridMove : public UBTTaskNode
 {

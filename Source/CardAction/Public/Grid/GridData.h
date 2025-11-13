@@ -8,7 +8,9 @@
 #include "Map/MapDef.h"
 #include "GridData.generated.h"
 
-// 1行のグリッドデータ
+/// <summary>
+/// 1行のグリッドデータ
+/// </summary>
 USTRUCT(BlueprintType)
 struct FGridRow
 {
@@ -19,7 +21,10 @@ struct FGridRow
 	TArray<TSubclassOf<AGridCellActor>> RowCells;
 };
 
-// 全体のグリッドデータ
+
+/// <summary>
+/// グリッド情報のデータアセット
+/// </summary>
 UCLASS(BlueprintType)
 class CARDACTION_API UGridData : public UDataAsset
 {
@@ -49,7 +54,9 @@ public:
 	int MaxGenMapNum = NEED_CLEAR_MAP_NUM - 1;
 };
 
-// グリッドデータリスト
+/// <summary>
+/// グリッドデータリストのデータアセット
+/// </summary>
 UCLASS(BlueprintType)
 class CARDACTION_API UGridDataList : public UDataAsset
 {

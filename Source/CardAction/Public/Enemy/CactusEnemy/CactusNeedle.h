@@ -6,9 +6,9 @@
 #include "Enemy/EnemyAttackBase.h"
 #include "CactusNeedle.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// カクタスの攻撃クラス
+/// </summary>
 UCLASS()
 class CARDACTION_API ACactusNeedle : public AEnemyAttackBase
 {

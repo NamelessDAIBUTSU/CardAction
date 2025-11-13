@@ -8,9 +8,9 @@
 #include <Components/TextBlock.h>
 #include "CharaBannerWidget.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// ウィジェット：プレイヤー / 敵のバナーウィジェット
+/// </summary>
 UCLASS()
 class CARDACTION_API UCharaBannerWidget : public UHUDBase
 {

@@ -6,9 +6,9 @@
 #include "BehaviorTree/BTTaskNode.h"
 #include "BTTask_MoveCountUp.generated.h"
 
-/**
- * 
- */
+ /// <summary>
+ /// タスク：セル移動回数をカウントアップ
+ /// </summary>
 UCLASS()
 class CARDACTION_API UBTTask_MoveCountUp : public UBTTaskNode
 {

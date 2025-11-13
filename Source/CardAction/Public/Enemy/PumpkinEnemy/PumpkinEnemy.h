@@ -7,9 +7,9 @@
 #include <Enemy/EnemyAttackBase.h>
 #include "PumpkinEnemy.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// 敵：パンプキンエネミー
+/// </summary>
 UCLASS()
 class CARDACTION_API APumpkinEnemy : public AEnemyBase
 {

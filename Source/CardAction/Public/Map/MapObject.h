@@ -7,9 +7,9 @@
 #include "Map/MapData.h"
 #include "MapObject.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// マップの実体
+/// </summary>
 UCLASS()
 class CARDACTION_API UMapObject : public UObject
 {

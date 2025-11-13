@@ -6,6 +6,9 @@
 #include "BehaviorTree/BTTaskNode.h"
 #include "BTTask_WaitSec.generated.h"
 
+ /// <summary>
+ /// タスク：指定秒数だけ待機
+ /// </summary>
 USTRUCT()
 struct FWaitTaskMemory
 {

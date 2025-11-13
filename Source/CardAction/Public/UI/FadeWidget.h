@@ -16,6 +16,9 @@ enum class EFadeType : uint8
 	FadeOut UMETA(DisplayName = "FadeOut"),
 };
 
+/// <summary>
+/// ウィジェット：フェードウィジェット
+/// </summary>
 UCLASS()
 class CARDACTION_API UFadeWidget : public UUserWidget
 {

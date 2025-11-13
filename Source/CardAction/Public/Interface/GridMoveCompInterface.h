@@ -7,7 +7,9 @@
 #include <MyComponents/GridMovementComponent.h>
 #include "GridMoveCompInterface.generated.h"
 
-// This class does not need to be modified.
+/// <summary>
+/// グリッド移動コンポーネントを取得するためのインタフェース
+/// </summary>
 UINTERFACE(MinimalAPI)
 class UGridMoveCompInterface : public UInterface
 {

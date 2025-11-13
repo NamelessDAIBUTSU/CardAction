@@ -6,9 +6,9 @@
 #include "Weapon/WeaponBase.h"
 #include "SimpleGun.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// オミット予定
+/// </summary>
 UCLASS()
 class CARDACTION_API ASimpleGun : public AWeaponActorBase
 {

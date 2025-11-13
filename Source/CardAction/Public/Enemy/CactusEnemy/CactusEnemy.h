@@ -5,6 +5,9 @@
 #include <Enemy/EnemyAttackBase.h>
 #include "CactusEnemy.generated.h"
 
+/// <summary>
+/// 敵：カクタス
+/// </summary>
 UCLASS()
 class CARDACTION_API ACactusEnemy : public AEnemyBase
 {

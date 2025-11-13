@@ -6,9 +6,9 @@
 #include "Weapon/WeaponBase.h"
 #include "Weapon_ShortSword.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// 武器：目の前の1マスを攻撃するソード。
+/// </summary>
 UCLASS()
 class CARDACTION_API AWeapon_ShortSword : public AWeaponActorBase
 {

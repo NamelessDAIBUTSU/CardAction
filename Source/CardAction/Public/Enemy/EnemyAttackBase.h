@@ -7,6 +7,9 @@
 #include "Util/CoordDef.h"
 #include "EnemyAttackBase.generated.h"
 
+/// <summary>
+/// 敵の攻撃クラスの基本クラス
+/// </summary>
 UCLASS(abstract)
 class CARDACTION_API AEnemyAttackBase : public AActor
 {

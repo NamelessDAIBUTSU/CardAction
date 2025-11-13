@@ -11,9 +11,9 @@
 
 #include "HandCardsWidget.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// ウィジェット：手札ウィジェット
+/// </summary>
 UCLASS()
 class CARDACTION_API UHandCardsWidget : public UHUDBase
 {

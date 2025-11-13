@@ -6,9 +6,9 @@
 #include "UObject/NoExportTypes.h"
 #include "CardEffectBase.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// カード効果の基本クラス
+/// </summary>
 UCLASS(Blueprintable, Abstract)
 class CARDACTION_API UCardEffectBase : public UObject
 {

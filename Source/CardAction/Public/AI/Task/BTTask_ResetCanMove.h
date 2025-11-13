@@ -6,9 +6,9 @@
 #include "BehaviorTree/BTTaskNode.h"
 #include "BTTask_ResetCanMove.generated.h"
 
-/**
- * 
- */
+ /// <summary>
+ /// タスク：移動可能フラグをリセット
+ /// </summary>
 UCLASS()
 class CARDACTION_API UBTTask_ResetCanMove : public UBTTaskNode
 {

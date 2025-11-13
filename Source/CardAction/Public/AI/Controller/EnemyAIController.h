@@ -6,9 +6,9 @@
 #include "AIController.h"
 #include "EnemyAIController.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// 敵AIコントローラー
+/// </summary>
 UCLASS()
 class CARDACTION_API AEnemyAIController : public AAIController
 {

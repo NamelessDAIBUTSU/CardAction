@@ -8,7 +8,9 @@
 #include "BattlePhaseDef.h"
 #include "BattlePhaseBase.generated.h"
 
-
+/// <summary>
+/// フェーズクラスの基本クラス
+/// </summary>
 UCLASS(abstract)
 class CARDACTION_API UBattlePhaseBase : public UObject
 {

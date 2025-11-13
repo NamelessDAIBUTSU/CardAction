@@ -6,9 +6,9 @@
 #include "BehaviorTree/BTTaskNode.h"
 #include "BTTask_SetRandomFloat.generated.h"
 
-/**
- * 
- */
+ /// <summary>
+ /// タスク：Min, Maxを指定して、ランダムなfloatの値を設定する
+ /// </summary>
 UCLASS()
 class CARDACTION_API UBTTask_SetRandomFloat : public UBTTaskNode
 {

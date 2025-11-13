@@ -6,9 +6,9 @@
 #include "BehaviorTree/BTService.h"
 #include "BTService_CheckDistToTarget.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// サービス：ターゲットアクターとの距離によって攻撃可能か判定する
+/// </summary>
 UCLASS()
 class CARDACTION_API UBTService_CheckDistToTarget : public UBTService
 {

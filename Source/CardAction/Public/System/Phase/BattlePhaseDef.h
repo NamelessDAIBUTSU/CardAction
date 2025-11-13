@@ -3,6 +3,9 @@
 #include "CoreMinimal.h"
 #include "BattlePhaseDef.generated.h"
 
+/// <summary>
+/// バトルフェーズの種類
+/// </summary>
 UENUM(BlueprintType)
 enum class EBattlePhase : uint8
 {

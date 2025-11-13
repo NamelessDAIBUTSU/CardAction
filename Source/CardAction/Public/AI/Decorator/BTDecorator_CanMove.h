@@ -6,9 +6,9 @@
 #include "BehaviorTree/BTDecorator.h"
 #include "BTDecorator_CanMove.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// デコレーター：AEnemyBaseの移動可能フラグをみて評価する
+/// </summary>
 UCLASS()
 class CARDACTION_API UBTDecorator_CanMove : public UBTDecorator
 {

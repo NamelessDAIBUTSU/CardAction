@@ -6,9 +6,9 @@
 #include "BehaviorTree/BTService.h"
 #include "BTService_UpdateTargetActor.generated.h"
 
-/**
- * 
- */
+/// <summary>
+/// サービス：ターゲットアクター（プレイヤー）変数を更新する
+/// </summary>
 UCLASS()
 class CARDACTION_API UBTService_UpdateTargetActor : public UBTService
 {
