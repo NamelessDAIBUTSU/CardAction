@@ -33,6 +33,8 @@ void UDeckManager::AddToDeck(UCardData* NewCard)
 
 	// DataAssetを複製して独立したインスタンスにする
 	UCardData* Instance = DuplicateObject<UCardData>(NewCard, GetTransientPackage());
+	if (Instance == nullptr)
+		return;
 
 	// ユニークIDの生成
 	Instance->UniqueID = FName(*FGuid::NewGuid().ToString());
