@@ -3,7 +3,18 @@
 
 #include "Card/DeckManager.h"
 
-void ADeckManager::Initialzie(UInitDeckData* InitDeckData)
+void UDeckManager::Initialize(FSubsystemCollectionBase& Collection)
+{
+	Super::Initialize(Collection);
+}
+
+void UDeckManager::Deinitialize()
+{
+	Super::Deinitialize();
+}
+
+// デッキ初期化
+void UDeckManager::SetupDeck(UInitDeckData* InitDeckData)
 {
 	if (InitDeckData == nullptr)
 		return;
@@ -15,7 +26,7 @@ void ADeckManager::Initialzie(UInitDeckData* InitDeckData)
 }
 
 // カードの追加
-void ADeckManager::AddToDeck(UCardData* NewCard)
+void UDeckManager::AddToDeck(UCardData* NewCard)
 {
 	if (NewCard == nullptr)
 		return;
@@ -29,13 +40,13 @@ void ADeckManager::AddToDeck(UCardData* NewCard)
 }
 
 // カードの除去
-void ADeckManager::RemoveFromDeck(UCardData* RemoveCard)
+void UDeckManager::RemoveFromDeck(UCardData* RemoveCard)
 {
 	Deck.Remove(RemoveCard);
 }
 
 // カードを引く
-TArray<UCardData*> ADeckManager::DrawCards()
+TArray<UCardData*> UDeckManager::DrawCards()
 {
 	TArray<UCardData*> DrawCards;
 	DrawCards.Reserve(DRAW_CARDS_NUM);
@@ -62,7 +73,7 @@ TArray<UCardData*> ADeckManager::DrawCards()
 }
 
 // シャッフルされたデッキを作成
-void ADeckManager::CreateShuffledDeck()
+void UDeckManager::CreateShuffledDeck()
 {
 	ShuffledDeck = Deck;
 
@@ -70,7 +81,7 @@ void ADeckManager::CreateShuffledDeck()
 }
 
 // シャッフル
-void ADeckManager::ShuffleArray(TArray<UCardData*>& Array)
+void UDeckManager::ShuffleArray(TArray<UCardData*>& Array)
 {
 	for (int32 i = Array.Num() - 1; i > 0; --i)
 	{

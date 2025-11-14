@@ -6,7 +6,6 @@
 
 void UCardEffectSummonWeapon::ExecuteEffect()
 {
-	// プレイヤーに武器を装備させる
 	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
 	if (PlayerController == nullptr)
 		return ;
@@ -14,7 +13,6 @@ void UCardEffectSummonWeapon::ExecuteEffect()
 	if (Pawn == nullptr)
 		return ;
 
-	// プレイヤーキャラクターに装備させる
 	AMyCharacter* Player = Cast<AMyCharacter>(Pawn);
 	if (Player && WeaponClass)
 	{
@@ -31,6 +29,7 @@ void UCardEffectSummonWeapon::ExecuteEffect()
 				if (MyGM->GridManager == nullptr)
 					return;
 
+				// 生成したワールド座標 -> グリッド座標に変換
 				FCoord SpawnCoord = MyGM->GridManager->ConvertToGridCoord(Player->GetActorLocation());
 				WeaponActor->SetSpawnCoord(SpawnCoord);
 			}

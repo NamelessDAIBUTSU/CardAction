@@ -5,6 +5,11 @@
 #include <System/MyGameMode.h>
 #include <Kismet/GameplayStatics.h>
 #include "Enemy/EnemyManager.h"
+#include <Card/DeckManager.h>
+
+void UBattlePhase_Entry::OnBegin()
+{
+}
 
 void UBattlePhase_Entry::OnTick(float DeltaSec)
 {

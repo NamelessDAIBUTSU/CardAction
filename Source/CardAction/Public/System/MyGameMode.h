@@ -9,7 +9,6 @@
 #include "MyGameMode.generated.h"
 
 class AGridManager;
-class ADeckManager;
 class AEnemyManager;
 class UBattlePhaseBase;
 class AMyCharacter;
@@ -50,12 +49,6 @@ public:
 	TSubclassOf<AGridManager> GridManagerClass;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Grid")
 	AGridManager* GridManager;
-
-	// デッキマネージャー
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Card")
-	TSubclassOf<ADeckManager> DeckManagerClass;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Card")
-	ADeckManager* DeckManager;
 
 	// エネミーマネージャー
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy")

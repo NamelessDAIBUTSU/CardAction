@@ -91,15 +91,10 @@ void AMyGameMode::StartPlay()
 		MyPC->SetViewTargetWithBlend(Camera, 0.0f);
 	}
 
-	// デッキマネージャー生成
-	if (DeckManagerClass)
+	// デッキマネージャー初期化
+	if (UDeckManager* DeckManager = GetWorld()->GetGameInstance()->GetSubsystem<UDeckManager>())
 	{
-		DeckManager = GetWorld()->SpawnActor<ADeckManager>(DeckManagerClass, FVector(), FRotator());
-		if (DeckManager)
-		{
-			// デッキの初期化
-			DeckManager->Initialzie(InitDeckData);
-		}
+		DeckManager->SetupDeck(InitDeckData);
 	}
 
 	// 各種Widgetの初期化

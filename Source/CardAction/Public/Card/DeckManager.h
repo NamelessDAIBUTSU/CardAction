@@ -3,22 +3,26 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
 #include "CardData.h"
 #include "InitDeckData.h"
+#include "Subsystems/GameInstanceSubsystem.h"
 #include "DeckManager.generated.h"
 
 /// <summary>
 /// デッキ管理クラス
 /// </summary>
 UCLASS()
-class CARDACTION_API ADeckManager : public AActor
+class CARDACTION_API UDeckManager : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
 	
+public: /* UGameInstanceSubsystem */
+	virtual void Initialize(FSubsystemCollectionBase& Collection) override;
+	virtual void Deinitialize() override;
+
 public:
-	// 初期化
-	void Initialzie(UInitDeckData* InitDeckData);
+	// デッキ初期化
+	void SetupDeck(UInitDeckData* InitDeckData);
 
 	// カードの追加
 	void AddToDeck(UCardData* NewCard);

@@ -19,7 +19,7 @@ public:
 
 public:
 	// フェーズ開始時
-	virtual void OnBegin() override{}
+	virtual void OnBegin() override;
 	// フェーズ中
 	virtual void OnTick(float DeltaSec) override;
 	// フェーズ終了時

@@ -20,21 +20,15 @@ void UBattlePhase_CardSelect::OnBegin()
 	if (CardSelectWidget == nullptr)
 		return;
 
-	// デッキマネージャーからドロー
-	if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
+	// カード選択ウィジェットにドローしたカードを追加
+	if (UDeckManager* DeckManager = GetWorld()->GetGameInstance()->GetSubsystem<UDeckManager>())
 	{
-		ADeckManager* DeckManager = MyGM->DeckManager;
-		if (DeckManager == nullptr)
-			return;
-
-		// カードウィジェットの追加
 		TArray<UCardData*> DrawCards = DeckManager->DrawCards();
 		CardSelectWidget->CreateCardWidgets(DrawCards);
 	}
 
 	// 表示アニメーション
 	CardSelectWidget->PlayInAnim();
-
 }
 
 void UBattlePhase_CardSelect::OnTick(float DeltaSec)
