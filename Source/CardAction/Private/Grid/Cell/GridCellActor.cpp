@@ -250,6 +250,14 @@ bool AGridCellActor::IsExistPlayerOnCell()
     return CellData.GridCoord == Player->GetCurrentCoord();
 }
 
+// 空のセルか
+bool AGridCellActor::IsEmptyGridCell()
+{
+    return CellData.GridCellType == EGridCellType::None;
+}
+
+
+
 // 攻撃予測の追加
 void AGridCellActor::AddAttackSign()
 {

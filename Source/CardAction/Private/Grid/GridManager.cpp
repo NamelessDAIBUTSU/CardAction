@@ -312,6 +312,17 @@ bool AGridManager::IsExistPlayerOnGridCell(FCoord Coord)
 	return false;
 }
 
+// 空セルか
+bool AGridManager::IsEmptyGridCell(FCoord Coord)
+{
+	if (AGridCellActor* TargetCell = GetGridCellActor(Coord))
+	{
+		return TargetCell->IsEmptyGridCell();
+	}
+
+	return false;
+}
+
 // グリッド座標 → ワールド座標に変換
 FVector AGridManager::ConvertToWorldPosition(FCoord Coord)
 {

@@ -54,6 +54,9 @@ public:
 	// セル上にプレイヤーが存在するか
 	bool IsExistPlayerOnCell();
 
+	// 空のセルか
+	bool IsEmptyGridCell();
+
 	// 移動先予定のセルか
 	bool IsMoveTargetCell() const { return bIsMoveTargetCell; }
 	void SetMoveTargetCell(bool Val) { bIsMoveTargetCell = Val; }

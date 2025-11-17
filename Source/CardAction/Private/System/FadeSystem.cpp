@@ -39,7 +39,8 @@ void UFadeSystem::Initialize(FSubsystemCollectionBase& Collection)
 		FTickerDelegate::CreateWeakLambda(this, [this](float DeltaTime)
 			{
 				UpdateFade(DeltaTime);
-				return true; // trueを返すと継続実行
+				// trueを返すと継続実行
+				return true;
 			})
 	);
 }

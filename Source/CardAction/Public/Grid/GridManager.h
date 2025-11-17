@@ -64,6 +64,9 @@ public: /* 敵 */
 	// セル上にプレイヤーが存在するか
 	bool IsExistPlayerOnGridCell(FCoord Coord);
 
+	// 空セルか
+	bool IsEmptyGridCell(FCoord Coord);
+
 public: /* Util */
 	// グリッド座標 → ワールド座標に変換
 	FVector ConvertToWorldPosition(FCoord Coord);
