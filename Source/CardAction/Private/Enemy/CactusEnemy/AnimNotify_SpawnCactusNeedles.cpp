@@ -44,7 +44,7 @@ void UAnimNotify_SpawnCactusNeedles::Notify(USkeletalMeshComponent* MeshComp, UA
         }
 
         // プレイヤーが乗っていない かつ アクセスできない場合、生成しない
-        if (GridManager->IsExistPlayerOnGridCell(SpawnCoord) == false && GridManager->IsAccessableGridCell(SpawnCoord) == false)
+        if (GridManager->IsExistPlayerOnCell(SpawnCoord) == false && GridManager->IsCellAccessible(SpawnCoord) == false)
             continue;
 
         // 生成する位置を取得

@@ -110,12 +110,12 @@ FVector AGridManager::GetPlayerSpawnPosition()
 }
 
 // アクセス可能なグリッドセルか
-bool AGridManager::IsAccessableGridCell(FVector CheckPosition)
+bool AGridManager::IsCellAccessible(FVector CheckPosition)
 {
 	FCoord Coord = ConvertToGridCoord(CheckPosition);
-	return IsAccessableGridCell(Coord);
+	return IsCellAccessible(Coord);
 }
-bool AGridManager::IsAccessableGridCell(FCoord Coord)
+bool AGridManager::IsCellAccessible(FCoord Coord)
 {
 	AGridCellActor* GridCell = GetGridCellActor(Coord);
 	if (GridCell == nullptr)
@@ -210,7 +210,7 @@ void AGridManager::RemoveActorFromCell(AActor* Actor, FCoord Coord)
 }
 
 // セル上のアクターにダメージ判定
-void AGridManager::ExecuteAttackToGridCell(AActor* AttackedActor, float Damage, FCoord Coord)
+void AGridManager::ExecuteAttackToCell(AActor* AttackedActor, float Damage, FCoord Coord)
 {
 	if (IsInGrid(Coord) == false)
 		return;
@@ -291,7 +291,7 @@ bool AGridManager::IsExistEnemyOnGrid()
 }
 
 // グリッドマス上に敵が存在するか
-bool AGridManager::IsExistEnemyOnGridCell(FCoord Coord)
+bool AGridManager::IsExistEnemyOnCell(FCoord Coord)
 {
 	if (AGridCellActor* TargetCell = GetGridCellActor(Coord))
 	{
@@ -302,7 +302,7 @@ bool AGridManager::IsExistEnemyOnGridCell(FCoord Coord)
 }
 
 // セル上にプレイヤーが存在するか
-bool AGridManager::IsExistPlayerOnGridCell(FCoord Coord)
+bool AGridManager::IsExistPlayerOnCell(FCoord Coord)
 {
 	if (AGridCellActor* TargetCell = GetGridCellActor(Coord))
 	{
@@ -313,11 +313,54 @@ bool AGridManager::IsExistPlayerOnGridCell(FCoord Coord)
 }
 
 // 空セルか
-bool AGridManager::IsEmptyGridCell(FCoord Coord)
+bool AGridManager::IsEmptyCell(FCoord Coord)
 {
 	if (AGridCellActor* TargetCell = GetGridCellActor(Coord))
 	{
 		return TargetCell->IsEmptyGridCell();
+	}
+
+	return false;
+}
+
+// 指定方向の次のセルが空のセル or グリッド外か
+bool AGridManager::IsNextCellAccessible(FVector Dir, FCoord Coord)
+{
+	FCoord NextCoord = FCoord::Zero();
+
+	// 縦方向
+	if (FMath::IsNearlyZero(Dir.X) == false)
+	{
+		// 上
+		if (Dir.X > 0)
+		{
+			NextCoord = FCoord(Coord.X, Coord.Y - 1);
+		}
+		// 下
+		else
+		{
+			NextCoord = FCoord(Coord.X, Coord.Y + 1);
+		}
+	}
+	// 横方向
+	else if (FMath::IsNearlyZero(Dir.Y) == false)
+	{
+		// 右
+		if (Dir.Y > 0)
+		{
+			NextCoord = FCoord(Coord.X + 1, Coord.Y);
+		}
+		// 左
+		else
+		{
+			NextCoord = FCoord(Coord.X - 1, Coord.Y);
+		}
+	}
+
+	// グリッド内 かつ 空セルじゃない
+	if (AGridCellActor* TargetCell = GetGridCellActor(NextCoord))
+	{
+		return IsEmptyCell(NextCoord) == false;
 	}
 
 	return false;

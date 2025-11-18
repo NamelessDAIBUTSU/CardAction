@@ -57,7 +57,7 @@ void APumpkinBomb::Tick(float DeltaTime)
 			GridManager->RemoveAttackSign(TargetCell->CellData.GridCoord);
 
 			// ダメージ処理
-			GridManager->ExecuteAttackToGridCell(this, Damage, TargetCell->CellData.GridCoord);
+			GridManager->ExecuteAttackToCell(this, Damage, TargetCell->CellData.GridCoord);
 		}
 
 		// 自身の削除

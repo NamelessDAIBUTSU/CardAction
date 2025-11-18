@@ -21,8 +21,11 @@ public:
 	~AWeaponActorBase();
 
 public:
+	// 初期化
+	virtual void Initialize() {}
+
 	// プレイヤーによる攻撃アクション時
-	virtual void OnAttack() {};
+	virtual void OnAttack() {}
 
 	// 所有者の設定
 	void SetWeaponOwner(class AMyCharacter* Player) { WeaponOwner = Player; }

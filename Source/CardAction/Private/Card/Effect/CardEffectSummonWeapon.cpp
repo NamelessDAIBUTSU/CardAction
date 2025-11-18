@@ -30,9 +30,12 @@ void UCardEffectSummonWeapon::ExecuteEffect()
 					return;
 
 				// 生成したワールド座標 -> グリッド座標に変換
-				FCoord SpawnCoord = MyGM->GridManager->ConvertToGridCoord(Player->GetActorLocation());
+				FCoord SpawnCoord = MyGM->GridManager->ConvertToGridCoord(WeaponActor->GetActorLocation());
 				WeaponActor->SetSpawnCoord(SpawnCoord);
 			}
+
+			// 初期化
+			WeaponActor->Initialize();
 		}
 	}
 }

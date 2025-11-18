@@ -75,7 +75,7 @@ void AWeapon_ThrowKnife::OnOverlap(UPrimitiveComponent* OverlappedComp,
 
 
     // 敵がいるマスか先に取得しておく
-    bool bIsExistEnemyOnGridCell = GridManager->IsExistEnemyOnGridCell(Coord);
+    bool bIsExistEnemyOnGridCell = GridManager->IsExistEnemyOnCell(Coord);
     // 敵が死亡モーション中なら消さない
     if (AEnemyBase* Enemy = EnemyManager->GetEnemy(Coord))
     {
@@ -83,7 +83,7 @@ void AWeapon_ThrowKnife::OnOverlap(UPrimitiveComponent* OverlappedComp,
     }
 
     // ダメージ判定追加
-    GridManager->ExecuteAttackToGridCell(this, Damage, Coord);
+    GridManager->ExecuteAttackToCell(this, Damage, Coord);
 
     // 敵マスの場合、自身の削除
     if (bIsExistEnemyOnGridCell)

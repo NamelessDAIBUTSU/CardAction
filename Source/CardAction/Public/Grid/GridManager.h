@@ -42,13 +42,22 @@ public: /* セル関連処理 */
 	void RemoveActorFromCell(AActor* Actor, FCoord Coord);
 
 	// セル上のアクターにダメージ判定
-	void ExecuteAttackToGridCell(AActor* AttackedActor, float Damage, FCoord Coord);
+	void ExecuteAttackToCell(AActor* AttackedActor, float Damage, FCoord Coord);
 
 	// セル上のアクター情報更新
 	void RefleshActorInfoOnCell(AActor* MoveActor, FCoord FromCoord, FCoord ToCoord);
 
 	// 移動先予定セルを登録/解除
 	void SetMoveTargetCell(FCoord Coord, bool Value);
+
+	// セル上にプレイヤーが存在するか
+	bool IsExistPlayerOnCell(FCoord Coord);
+
+	// 空セルか
+	bool IsEmptyCell(FCoord Coord);
+
+	// 指定方向の次のセルが空のセル or グリッド外か
+	bool IsNextCellAccessible(FVector Dir, FCoord Coord);
 
 public: /* 敵 */
 	// 攻撃予測を追加
@@ -59,13 +68,8 @@ public: /* 敵 */
 	// グリッド上に敵が存在するか
 	bool IsExistEnemyOnGrid();
 	// グリッドマス上に敵が存在するか
-	bool IsExistEnemyOnGridCell(FCoord Coord);
+	bool IsExistEnemyOnCell(FCoord Coord);
 
-	// セル上にプレイヤーが存在するか
-	bool IsExistPlayerOnGridCell(FCoord Coord);
-
-	// 空セルか
-	bool IsEmptyGridCell(FCoord Coord);
 
 public: /* Util */
 	// グリッド座標 → ワールド座標に変換
@@ -78,8 +82,8 @@ public: /* Util */
 	// プレイヤーと指定座標が同線上にいるか
 	bool IsPlayerSameLine(FCoord Coord);
 	// アクセス可能なグリッドセルか
-	bool IsAccessableGridCell(FVector CheckPosition);
-	bool IsAccessableGridCell(FCoord Coord);
+	bool IsCellAccessible(FVector CheckPosition);
+	bool IsCellAccessible(FCoord Coord);
 
 	// グリッドセルを取得
 	AGridCellActor* GetGridCellActor(FCoord Coord);

@@ -79,7 +79,7 @@ EBTNodeResult::Type UBTTask_GridMove::ExecuteTask(UBehaviorTreeComponent& OwnerC
 		// ループ回避用のカウント
 		Count++;
 
-	} while (GridManager->IsAccessableGridCell(TargetCoord) == false);
+	} while (GridManager->IsCellAccessible(TargetCoord) == false);
 
 	// グリッド移動命令
 	GridMoveComp->RequestMoveToDirection(TargetCoord, GoalSec);

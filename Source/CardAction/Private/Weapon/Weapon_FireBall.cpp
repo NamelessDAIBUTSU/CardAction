@@ -128,7 +128,7 @@ void AWeapon_FireBall::OnOverlap(UPrimitiveComponent* OverlappedComp,
 
 
     // 敵がいるマスか先に取得しておく
-    bool bIsExistEnemyOnGridCell = GridManager->IsExistEnemyOnGridCell(Coord);
+    bool bIsExistEnemyOnGridCell = GridManager->IsExistEnemyOnCell(Coord);
 
     // 敵が死亡モーション中なら当たり判定を取らない
     if (AEnemyBase* Enemy = EnemyManager->GetEnemy(Coord))
@@ -137,7 +137,7 @@ void AWeapon_FireBall::OnOverlap(UPrimitiveComponent* OverlappedComp,
     }
 
     // ダメージ処理
-    GridManager->ExecuteAttackToGridCell(this, Damage, Coord);
+    GridManager->ExecuteAttackToCell(this, Damage, Coord);
 
     // 敵マスの場合、自身の削除
     if (bIsExistEnemyOnGridCell)

@@ -55,7 +55,7 @@ void AElectricThunder::OnAttack()
 			return;
 
 		// ダメージ処理
-		GridManager->ExecuteAttackToGridCell(this, Damage, CurrentCoord);
+		GridManager->ExecuteAttackToCell(this, Damage, CurrentCoord);
 
 		// 攻撃予測の削除
 		GridManager->RemoveAttackSign(CurrentCoord);

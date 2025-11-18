@@ -77,7 +77,7 @@ void UGridMovementComponent::RequestMoveToDirection(FCoord Coord, float GoalSeco
 	if (bIsTurningMode == false)
 	{
 		// 進行方向のグリッドが進行可能状態か
-		if (GridManager->IsAccessableGridCell(TargetLocation) == false)
+		if (GridManager->IsCellAccessible(TargetLocation) == false)
 		{
 			return;
 		}

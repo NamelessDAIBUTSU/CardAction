@@ -47,7 +47,7 @@ void UAnimNotify_SpawnEThunder::Notify(USkeletalMeshComponent* MeshComp, UAnimSe
             int32 RandomX = FMath::RandRange(0, (int)GridSize.X - 1);
             int32 RandomY = FMath::RandRange(0, (int)GridSize.Y - 1);
             SpawnCoord = FCoord(RandomX, RandomY);
-        } while ((GridManager->IsEmptyGridCell(SpawnCoord) || GridManager->IsExistEnemyOnGridCell(SpawnCoord)) && Count < 10);
+        } while ((GridManager->IsEmptyCell(SpawnCoord) || GridManager->IsExistEnemyOnCell(SpawnCoord)) && Count < 10);
         FVector SpawnLocation = GridManager->ConvertToWorldPosition(SpawnCoord);
 
         // スポーン

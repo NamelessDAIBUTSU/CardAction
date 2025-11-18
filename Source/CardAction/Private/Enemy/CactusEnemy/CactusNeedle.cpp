@@ -55,7 +55,7 @@ void ACactusNeedle::Tick(float DeltaTime)
 			if (MyGameMode->GridManager)
 			{
 				// ダメージ判定を追加
-				MyGameMode->GridManager->ExecuteAttackToGridCell(this, Damage, CurrentCoord);
+				MyGameMode->GridManager->ExecuteAttackToCell(this, Damage, CurrentCoord);
 
 				// 攻撃予兆を削除
 				MyGameMode->GridManager->RemoveAttackSign(CurrentCoord);
