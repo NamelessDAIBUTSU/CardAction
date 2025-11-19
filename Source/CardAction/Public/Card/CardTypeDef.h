@@ -33,6 +33,7 @@ enum class EAttackElementType : uint8
     Fire        UMETA(DisplayName = "Fire"),    // 火属性
     Thunder     UMETA(DisplayName = "Thunder"), // 雷属性
     Water       UMETA(DisplayName = "Water"),   // 水属性
+    Wind        UMETA(DisplayName = "Wind"),    // 風属性
 };
 
 // レアリティ
