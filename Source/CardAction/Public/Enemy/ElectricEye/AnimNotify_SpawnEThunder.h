@@ -18,5 +18,5 @@ public:
 	void Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation);
 
 private:
-	int SpawnEThunderNum = 2;
+	int SpawnEThunderNum = 3;
 };
