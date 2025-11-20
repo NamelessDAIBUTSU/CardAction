@@ -31,8 +31,6 @@ bool UCardSelectWidget::Initialize()
     CardBoxArray.Add(CardBox3);
     CardBoxArray.Add(CardBox4);
     CardBoxArray.Add(CardBox5);
-    CardBoxArray.Add(CardBox6);
-    CardBoxArray.Add(CardBox7);
 
     return true;
 }
@@ -171,6 +169,8 @@ void UCardSelectWidget::CreateCardWidgets(const TArray<UCardData*>& CardDataArra
                 });
 
             CardWidget->Initialize(CardDataArray[i], Option);
+
+            CardWidget->SetRenderScale(FVector2D(1.2f));
         }
 
         // サイズボックスに追加

@@ -68,10 +68,6 @@ public:
 	USizeBox* CardBox4;
 	UPROPERTY(meta = (BindWidget))
 	USizeBox* CardBox5;
-	UPROPERTY(meta = (BindWidget))
-	USizeBox* CardBox6;
-	UPROPERTY(meta = (BindWidget))
-	USizeBox* CardBox7;
 	TArray<USizeBox*> CardBoxArray;
 
 	// カードウィジェットクラス
