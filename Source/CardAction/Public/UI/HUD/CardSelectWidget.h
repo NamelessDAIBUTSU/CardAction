@@ -16,6 +16,9 @@ class CARDACTION_API UCardSelectWidget : public UHUDBase
 {
 	GENERATED_BODY()
 	
+protected:
+	virtual void NativeConstruct() override;
+
 public:
 	// 初期化
 	virtual bool Initialize() override;
@@ -50,6 +53,10 @@ public:
 	// 選択中カードの選択番号テキストをリフレッシュする
 	void OnRefleshSelectNumText(UUMGSequencePlayer& Player);
 
+private:
+	// カード詳細ウィジェットの生成
+	void CreateCardDetailWidget();
+
 public:
 	// 決定ボタン
 	UPROPERTY(meta = (BindWidget))
@@ -74,7 +81,19 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSubclassOf<UUserWidget> CardWidgetClass;
 
+	// カード詳細パネルの配置ボックス
+	UPROPERTY(meta = (BindWidget))
+	USizeBox* CardDetailPanelBox;
+
+	// カード詳細ウィジェットクラス
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<UUserWidget> CardDetailPanelWidgetClass;
+
 private:
+	// カード詳細ウィジェット
+	UPROPERTY()
+	class UCardDetailPanelWidget* CardDetailPanelWidget = nullptr;
+
 	// 選択中のカード
 	TArray<UCardData*> SelectCards;
 

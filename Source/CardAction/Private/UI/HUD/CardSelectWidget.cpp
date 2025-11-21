@@ -8,6 +8,15 @@
 #include <Components/SizeBoxSlot.h>
 #include <Kismet/GameplayStatics.h>
 #include <Character/MyPlayerController.h>
+#include <UI/HUD/CardDetailPanelWidget.h>
+
+void UCardSelectWidget::NativeConstruct()
+{
+    Super::NativeConstruct();
+
+    // カード詳細ウィジェットを生成
+    CreateCardDetailWidget();
+}
 
 // 初期化
 bool UCardSelectWidget::Initialize()
@@ -31,6 +40,7 @@ bool UCardSelectWidget::Initialize()
     CardBoxArray.Add(CardBox3);
     CardBoxArray.Add(CardBox4);
     CardBoxArray.Add(CardBox5);
+
 
     return true;
 }
@@ -211,5 +221,21 @@ void UCardSelectWidget::OnRefleshSelectNumText(UUMGSequencePlayer& Player)
         {
             CardWidget->SetupSelectNum();
         }
+    }
+}
+
+// カード詳細ウィジェットの生成
+void UCardSelectWidget::CreateCardDetailWidget()
+{
+    if (CardDetailPanelWidgetClass == nullptr || CardDetailPanelBox == nullptr)
+        return;
+
+    CardDetailPanelWidget = CreateWidget<UCardDetailPanelWidget>(GetWorld(), CardDetailPanelWidgetClass);
+    if (CardDetailPanelWidget == nullptr)
+        return;
+
+    // サイズボックスに追加
+    if (USizeBoxSlot* BoxSlot = Cast<USizeBoxSlot>(CardDetailPanelBox->AddChild(CardDetailPanelWidget)))
+    {
     }
 }
