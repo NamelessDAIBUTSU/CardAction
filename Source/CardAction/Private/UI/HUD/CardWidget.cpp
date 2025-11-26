@@ -198,10 +198,13 @@ void UCardWidget::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointer
         PlayAnimation(MouseOverAnim);
     }
 
-    // ツールチップ表示
-    if (Option.bShowToolTip)
+    // 詳細パネルに反映
+    if (Option.bReflectToDetailPanel)
     {
-
+        if (Option.MouseOverCardDelegate.IsBound())
+        {
+            Option.MouseOverCardDelegate.Execute(CardData);
+        }
     }
 }
 
@@ -216,12 +219,6 @@ void UCardWidget::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
     {
         StopAnimation(MouseOverAnim);
         PlayAnimation(MouseReleaseAnim);
-    }
-
-    // ツールチップ非表示
-    if (Option.bShowToolTip)
-    {
-
     }
 }
 

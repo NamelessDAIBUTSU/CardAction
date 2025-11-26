@@ -82,16 +82,16 @@ FSlateColor UCardUtil::GetRarityColor(ECardRarityType Rarity)
 		Color = FSlateColor(FLinearColor(1.f, 1.f, 1.f));
 		break;
 	case ECardRarityType::Rare:
-		Color = FSlateColor(FColor(0, 0, 200));
+		Color = FSlateColor(FLinearColor(0.f, 0.f, 1.f));
 		break;
 	case ECardRarityType::Epic:
-		Color = FSlateColor(FColor(150, 0.f, 255));
+		Color = FSlateColor(FLinearColor(1.f, 0.f, 1.f));
 		break;
 	case ECardRarityType::Legendary:
 		Color = FSlateColor(FLinearColor::Yellow);
 		break;
 	case ECardRarityType::Mithic:
-		Color = FSlateColor(FColor::Silver);
+		Color = FSlateColor(FColor::Emerald);
 		break;
 	default:
 		break;
@@ -111,7 +111,7 @@ FSlateColor UCardUtil::GetElementColor(EAttackElementType Element)
 		Color = FSlateColor(FLinearColor(1.f, 0.f, 0.f));
 		break;
 	case EAttackElementType::Water:
-		Color = FSlateColor(FColor(0, 30, 200));
+		Color = FSlateColor(FLinearColor(0.f, 0.f, 1.f));
 		break;
 	case EAttackElementType::Thunder:
 		Color = FSlateColor(FLinearColor(1.f, 1.f, 0.f));

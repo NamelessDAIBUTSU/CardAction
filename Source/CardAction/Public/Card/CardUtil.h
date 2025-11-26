@@ -32,6 +32,19 @@ public:
 	// カードタイプに紐づくアイコン画像取得
 	UTexture2D* GetCardTypeIconTexture(ECardType CardType);
 
+	// Enumに対応する表示文字列を取得する
+	template<class EnumType>
+	static FString CardEnumToString(EnumType Element)
+	{
+		return StaticEnum<EnumType>()->GetDisplayValueAsText(Element).ToString();
+	}
+
+	// レア度に対応するカラーを取得
+	static FSlateColor GetRarityColor(ECardRarityType Rarity);
+
+	// 属性に対応するカラーを取得
+	static FSlateColor GetElementColor(EAttackElementType Element);
+
 public:
 	// Utilデータアセット
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

@@ -29,20 +29,20 @@ enum class EWeaponType : uint8
 UENUM(BlueprintType)
 enum class EAttackElementType : uint8
 {
-    None        UMETA(DisplayName = "None"),    // 無属性
-    Fire        UMETA(DisplayName = "Fire"),    // 火属性
-    Thunder     UMETA(DisplayName = "Thunder"), // 雷属性
-    Water       UMETA(DisplayName = "Water"),   // 水属性
-    Wind        UMETA(DisplayName = "Wind"),    // 風属性
+    None        UMETA(DisplayName = "無属性"),     // 無属性
+    Fire        UMETA(DisplayName = "火属性"),     // 火属性
+    Thunder     UMETA(DisplayName = "雷属性"),     // 雷属性
+    Water       UMETA(DisplayName = "水属性"),     // 水属性
+    Wind        UMETA(DisplayName = "風属性"),     // 風属性
 };
 
 // レアリティ
 UENUM(BlueprintType)
 enum class ECardRarityType : uint8
 {
-    Common      UMETA(DisplayName = "Common"),
-    Rare        UMETA(DisplayName = "Rare"),
-    Epic        UMETA(DisplayName = "Epic"),
-    Legendary   UMETA(DisplayName = "Legendary"),
-    Mithic      UMETA(DisplayName = "Mithic")
+    Common      UMETA(DisplayName = "コモン"),
+    Rare        UMETA(DisplayName = "レア"),
+    Epic        UMETA(DisplayName = "エピック"),
+    Legendary   UMETA(DisplayName = "レジェンダリー"),
+    Mithic      UMETA(DisplayName = "ミシック")
 };

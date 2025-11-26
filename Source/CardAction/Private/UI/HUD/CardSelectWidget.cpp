@@ -177,6 +177,19 @@ void UCardSelectWidget::CreateCardWidgets(const TArray<UCardData*>& CardDataArra
 
                     SelectCards.RemoveSingle(CardData);
                 });
+            // マウスオーバー時、詳細パネルに反映
+            Option.MouseOverCardDelegate.BindLambda([this](UCardData* CardData)
+                {
+                    if (IsValid(this) == false)
+                        return;
+                    if (CardData == nullptr)
+                        return;
+
+                    if (CardDetailPanelWidget)
+                    {
+                        CardDetailPanelWidget->Setup(CardData);
+                    }
+                });
 
             CardWidget->Initialize(CardDataArray[i], Option);
 

@@ -3,6 +3,9 @@
 #include "Delegates/DelegateCombinations.h"
 #include "Card/CardData.h"
 
+// カードにマウスオーバーした時のデリゲート
+DECLARE_DELEGATE_OneParam(FOnMouseOverCard, UCardData*);
+
 // カードを選択した時のデリゲート
 DECLARE_DELEGATE_OneParam(FOnSelectCard, UCardData*);
 // カード選択状態を解除するデリゲート

@@ -23,12 +23,15 @@ public:
 	// 選択解除時の処理デリゲート
 	FOnUnSelectCard UnSelectCardDelegate;
 
+	// マウスオーバー時の処理デリゲート
+	FOnMouseOverCard MouseOverCardDelegate;
+
 	// マウスオーバー可能か
 	bool bCanMouseOver = true;
 	// マウスオーバーで拡大するか
 	bool bChangeScale = true;
-	// マウスオーバーでツールチップを表示するか
-	bool bShowToolTip = true;
+	// マウスオーバーで詳細パネルに反映するか
+	bool bReflectToDetailPanel = true;
 };
 
 /// <summary>

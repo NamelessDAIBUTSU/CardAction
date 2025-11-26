@@ -365,21 +365,3 @@ void AMyCharacter::StartInvincible()
 	// 終了時のコールバック設定
 	GetWorldTimerManager().SetTimer(InvincibleTimer, this, &AMyCharacter::EndInvincible, 2.0f, false);
 }
-
-//// 無敵時間の更新
-//void AMyCharacter::UpdateInvincible(float DeltaSec)
-//{
-//	if (bIsInvincible == false)
-//		return;
-//
-//	ElapsedSec += DeltaSec;
-//
-//	// 無敵時間終了
-//	if (ElapsedSec >= InvincibleSec)
-//	{
-//		bIsInvincible = false;
-//
-//		// 点滅演出終了
-//		StopBlinkEffect();
-//	}
-//}

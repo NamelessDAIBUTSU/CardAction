@@ -57,14 +57,11 @@ void AEnemyBase::BeginPlay()
 	Super::BeginPlay();
 
 	// 生成時はBTを止める
-	AAIController* A = Cast<AAIController>(GetController());
-	if (A)
+	AAIController* AICtrl = Cast<AAIController>(GetController());
+	if (AICtrl && AICtrl->BrainComponent)
 	{
-		if (A && A->BrainComponent)
-		{
-			// BrainComponent に対して BT 停止
-			A->BrainComponent->StopLogic("ExternalStop");
-		}
+		// BrainComponent に対して BT 停止
+		AICtrl->BrainComponent->StopLogic("ExternalStop");
 	}
 
 	if (AMyGameMode* MyGM = Cast<AMyGameMode>(UGameplayStatics::GetGameMode(this)))
