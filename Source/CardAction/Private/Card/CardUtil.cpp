@@ -82,7 +82,7 @@ FSlateColor UCardUtil::GetRarityColor(ECardRarityType Rarity)
 		Color = FSlateColor(FLinearColor(1.f, 1.f, 1.f));
 		break;
 	case ECardRarityType::Rare:
-		Color = FSlateColor(FColor(0, 0, 200));
+		Color = FSlateColor(FColor(10, 20, 100));
 		break;
 	case ECardRarityType::Epic:
 		Color = FSlateColor(FColor(150, 0.f, 255));

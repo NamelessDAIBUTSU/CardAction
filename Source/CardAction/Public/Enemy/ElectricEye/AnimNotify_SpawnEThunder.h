@@ -17,6 +17,7 @@ class CARDACTION_API UAnimNotify_SpawnEThunder : public UAnimNotify
 public:
 	void Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation);
 
-private:
+public:
+	UPROPERTY(EditAnywhere)
 	int SpawnEThunderNum = 3;
 };
